@@ -79,12 +79,13 @@ public class UnitController : MonoBehaviour
         }
 
         targetObj = GetTarget.GetTargetObj(group == UnitGroup.Player ? UnitGroup.Enemy : UnitGroup.Player, myPos);
-        if(targetObj != null)
+        if (targetObj != null)
             targetPos = targetObj.transform.position;
 
         if (Vector3.Distance(targetPos, transform.position) <= range && targetObj != null)
         {
             isMoving = false;
+            Attack();
         }
         else
         {
