@@ -7,7 +7,9 @@ public class UnitStats
     public GameObject unitObj;
     public float maxHp;
     public float atk;
+    public float atkRate;
     public float moveSpeed;
+    public float range;
 }
 
 [CreateAssetMenu(fileName = "UnitData", menuName = "Scriptable Objects/UnitData")]
