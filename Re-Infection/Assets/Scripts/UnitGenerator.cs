@@ -8,11 +8,11 @@ public class UnitGenerator : MonoBehaviour
     [SerializeField] UnitManager unitManager;
 
     float generateInterbal; // 生成後の経過時間
-    float generateTime = 2.0f;     // 生成する間隔
+    float generateTime = 5.0f;     // 生成する間隔
 
-    UnitGroup generateGroup = UnitGroup.Enemy;  // 生成するユニットの陣営
+    UnitGroup generateGroup = UnitGroup.Player;  // 生成するユニットの陣営
 
-    Vector3 playerUnitGenaretePos = new Vector3(0, -3, 0);  // プレイヤーユニットの生成座標
+    Vector3 playerUnitGenaretePos = new Vector3(0, -1.5f, 0);  // プレイヤーユニットの生成座標
     Vector3 enemyUnitGeneratePos = new Vector3(0, 6, 0);    // エネミーユニットの生成座標
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -20,34 +20,41 @@ public class UnitGenerator : MonoBehaviour
     {
         generateInterbal = 0;
 
-        for(int i = 0; i < 2; i++)
-            GenerateUnit();
+        //for (int i = 0; i < 2; i++)
+        //    GenerateUnit();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //generateInterbal += Time.deltaTime;
+        generateInterbal += Time.deltaTime;
 
-        //if(generateInterbal > generateTime)
-        //{
-        //    generateInterbal = 0;
+        if (generateInterbal > generateTime)
+        {
+            generateInterbal = 0;
 
-        //    GenerateUnit();
-        //}
+            GenerateUnit();
+        }
     }
 
     // エネミー生成
     void GenerateUnit()
     {
         var rnd_Idx = Random.Range(0, unitData.stats.Count);    // ランダムなユニットのインデックスを生成
+        var rndXpos = Random.Range(-1.7f, 1.7f);
 
         // 対応するインデックスのユニットオブジェクトを生成
         GameObject unit = null;
         if (generateGroup == UnitGroup.Player)
+        {
+            playerUnitGenaretePos.x = rndXpos;
             unit = Instantiate(unitData.stats[rnd_Idx].unitObj, playerUnitGenaretePos, Quaternion.identity);
+        }
         else
+        {
+            enemyUnitGeneratePos.x = rndXpos;
             unit = Instantiate(unitData.stats[rnd_Idx].unitObj, enemyUnitGeneratePos, Quaternion.identity);
+        }
 
         // 生成したオブジェクトにUnitControllerコンポーネントを付与&代入
         UnitController uc = unit.AddComponent<UnitController>();

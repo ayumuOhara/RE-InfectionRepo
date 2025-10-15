@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using TMPro;
 
 // ユニットの所属しているグループ
 public enum UnitGroup
@@ -12,6 +14,7 @@ public enum UnitGroup
 public class UnitController : MonoBehaviour
 {
     GameObject targetObj;   // 敵オブジェクト
+    GameObject damageTextPrefab;
 
     public Vector3 kingPos { get; private set; }    // 王様の座標
     public Vector3 targetPos { get; private set; }  // 敵の座標
@@ -63,6 +66,8 @@ public class UnitController : MonoBehaviour
         kingPos = GameObject.Find("King").transform.position;
         myPos = transform.position;
         isMoving = true;
+
+        damageTextPrefab = Resources.Load("DamageText").GameObject();
     }
 
     // Update is called once per frame
@@ -72,15 +77,20 @@ public class UnitController : MonoBehaviour
 
         if (isMoving)
         {
-            if (group == UnitGroup.Player)
-                MovePlayerUnit();
-            if (group == UnitGroup.Enemy)
-                MoveEnemyUnit();
+            targetObj = GetTarget.GetTargetObj(group == UnitGroup.Player ? UnitGroup.Enemy : UnitGroup.Player, myPos);
+            if (targetObj != null)
+            {
+                targetPos = targetObj.transform.position;
+                MoveToTarget();
+            }
+            else
+            {
+                if (group == UnitGroup.Player)
+                    MovePlayerUnit();
+                if (group == UnitGroup.Enemy)
+                    MoveEnemyUnit();
+            }
         }
-
-        targetObj = GetTarget.GetTargetObj(group == UnitGroup.Player ? UnitGroup.Enemy : UnitGroup.Player, myPos);
-        if (targetObj != null)
-            targetPos = targetObj.transform.position;
 
         if (Vector3.Distance(targetPos, transform.position) <= range && targetObj != null)
         {
@@ -106,11 +116,25 @@ public class UnitController : MonoBehaviour
         transform.position = myPos;
     }
 
+    void MoveToTarget()
+    {
+        moveDirection = (targetPos - myPos).normalized;
+        myPos += moveDirection * moveSpeed * Time.deltaTime;
+        transform.position = myPos;
+    }
+
     // ダメージ処理
     public void TakeDamage(float damage)
     {
         currentHp -= damage;
-        Debug.Log($"{damage}ダメージを受けた！");
+
+        var unitPos = Camera.main.WorldToScreenPoint(transform.position);
+        unitPos.y += 0.5f;
+        GameObject textObj = Instantiate(damageTextPrefab, GameObject.Find("UI").transform, false);
+        textObj.transform.position = unitPos;
+
+        TextMeshProUGUI damageText = textObj.GetComponent<TextMeshProUGUI>();
+        damageText.text = damage.ToString();
     }
 
     // 攻撃

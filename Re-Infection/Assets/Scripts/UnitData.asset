@@ -15,19 +15,19 @@ MonoBehaviour:
   stats:
   - unitObj: {fileID: 1252300943239936, guid: d2690c8899a6ae243a8544e1f1375df1, type: 3}
     maxHp: 30
-    atk: 2
+    atk: 5
     atkRate: 1
-    moveSpeed: 0.5
+    moveSpeed: 0.3
     range: 0.6
   - unitObj: {fileID: 1252300943239936, guid: 6e6be874236849d46b1820300c738420, type: 3}
     maxHp: 50
-    atk: 1
+    atk: 3
     atkRate: 1
-    moveSpeed: 0.25
+    moveSpeed: 0.2
     range: 0.6
   - unitObj: {fileID: 1252300943239936, guid: 2b15f4e230d03a3419730a69a588dd52, type: 3}
-    maxHp: 10
-    atk: 1
+    maxHp: 20
+    atk: 2
     atkRate: 1
-    moveSpeed: 0.5
+    moveSpeed: 0.3
     range: 2
