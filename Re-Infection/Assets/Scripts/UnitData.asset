@@ -16,18 +16,42 @@ MonoBehaviour:
   - unitObj: {fileID: 1252300943239936, guid: d2690c8899a6ae243a8544e1f1375df1, type: 3}
     maxHp: 30
     atk: 5
-    atkRate: 1
+    atkRate: 2
     moveSpeed: 0.3
     range: 0.6
   - unitObj: {fileID: 1252300943239936, guid: 6e6be874236849d46b1820300c738420, type: 3}
     maxHp: 50
     atk: 3
-    atkRate: 1
-    moveSpeed: 0.2
+    atkRate: 2.5
+    moveSpeed: 0.3
     range: 0.6
   - unitObj: {fileID: 1252300943239936, guid: 2b15f4e230d03a3419730a69a588dd52, type: 3}
-    maxHp: 20
-    atk: 2
-    atkRate: 1
+    maxHp: 15
+    atk: 3
+    atkRate: 2
+    moveSpeed: 0.25
+    range: 3
+  - unitObj: {fileID: 1450178541376546, guid: abc4602540b9c5245b0c4cf5bfbfa86b, type: 3}
+    maxHp: 30
+    atk: 5
+    atkRate: 2
     moveSpeed: 0.3
+    range: 0.6
+  - unitObj: {fileID: 1450178541376546, guid: 2c1329a7c9cbc294098ecdd208a800a8, type: 3}
+    maxHp: 50
+    atk: 3
+    atkRate: 2.5
+    moveSpeed: 0.3
+    range: 0.6
+  - unitObj: {fileID: 1450178541376546, guid: b6db6d6259535b249878f2637522e7e8, type: 3}
+    maxHp: 15
+    atk: 3
+    atkRate: 2
+    moveSpeed: 0.25
     range: 2
+  - unitObj: {fileID: 0}
+    maxHp: 0
+    atk: 0
+    atkRate: 0
+    moveSpeed: 0
+    range: 0

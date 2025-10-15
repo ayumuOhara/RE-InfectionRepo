@@ -18,7 +18,6 @@ public class DamageTextAnimation : MonoBehaviour
     void Update()
     {
         var journeyFraction = (Time.time - startTime) / animDuration;
-        Debug.Log(journeyFraction.ToString());
         transform.localPosition = Vector3.Lerp(startPos, startPos + endPos, journeyFraction);
 
         if(journeyFraction > 1)

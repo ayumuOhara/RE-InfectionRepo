@@ -40,7 +40,7 @@ public class UnitGenerator : MonoBehaviour
     // エネミー生成
     void GenerateUnit()
     {
-        var rnd_Idx = Random.Range(0, unitData.stats.Count);    // ランダムなユニットのインデックスを生成
+        var rnd_Idx = generateGroup == UnitGroup.Player ? Random.Range(0, 3) : Random.Range(3, 6);
         var rndXpos = Random.Range(-1.7f, 1.7f);
 
         // 対応するインデックスのユニットオブジェクトを生成

@@ -16,9 +16,11 @@ public class UnitController : MonoBehaviour
     GameObject targetObj;   // 敵オブジェクト
     GameObject damageTextPrefab;
 
-    public Vector3 kingPos { get; private set; }    // 王様の座標
-    public Vector3 targetPos { get; private set; }  // 敵の座標
-    public Vector3 myPos { get; private set; }      // 自身の座標
+    const float UNIT_SCALE = 0.4f;
+    Vector3 myScale = new Vector3(UNIT_SCALE, UNIT_SCALE, UNIT_SCALE); // ユニットのサイズ
+    public Vector3 kingPos { get; private set; }     // 王様の座標
+    public Vector3 targetPos { get; private set; }   // 敵の座標
+    public Vector3 myPos { get; private set; }       // 自身の座標
 
     Vector3 moveDirection;  // 移動方向
 
@@ -65,6 +67,8 @@ public class UnitController : MonoBehaviour
     {
         kingPos = GameObject.Find("King").transform.position;
         myPos = transform.position;
+        transform.localScale = myScale;
+
         isMoving = true;
 
         damageTextPrefab = Resources.Load("DamageText").GameObject();
