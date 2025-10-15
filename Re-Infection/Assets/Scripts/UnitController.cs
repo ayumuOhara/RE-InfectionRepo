@@ -14,7 +14,8 @@ public enum UnitGroup
 public class UnitController : MonoBehaviour
 {
     GameObject targetObj;   // 敵オブジェクト
-    GameObject damageTextPrefab;
+    [SerializeField] GameObject damageTextPrefab;　// ダメージ数表示テキスト
+    [SerializeField] Sprite corpseSprite;          // 死体スプライト
 
     const float UNIT_SCALE = 0.4f;
     Vector3 myScale = new Vector3(UNIT_SCALE, UNIT_SCALE, UNIT_SCALE); // ユニットのサイズ
@@ -41,6 +42,9 @@ public class UnitController : MonoBehaviour
     // 初期化
     public void SetUnitStats(UnitStats original, UnitGroup group)
     {
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = original.unitSprite;
+
         this.group = group;
 
         // データを複製
@@ -70,40 +74,42 @@ public class UnitController : MonoBehaviour
         transform.localScale = myScale;
 
         isMoving = true;
-
-        damageTextPrefab = Resources.Load("DamageText").GameObject();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Dead();
-
-        if (isMoving)
+        if (!isDead)
         {
-            targetObj = GetTarget.GetTargetObj(group == UnitGroup.Player ? UnitGroup.Enemy : UnitGroup.Player, myPos);
-            if (targetObj != null)
+            if (isMoving)
             {
+                targetObj = GetTarget.GetTargetObj(group == UnitGroup.Player ? UnitGroup.Enemy : UnitGroup.Player, myPos);
+                if (targetObj != null)
+                {
+                    targetPos = targetObj.transform.position;
+                    MoveToTarget();
+                }
+                else
+                {
+                    if (group == UnitGroup.Player)
+                        MovePlayerUnit();
+                    if (group == UnitGroup.Enemy)
+                        MoveEnemyUnit();
+                }
+            }
+
+            if (Vector3.Distance(targetPos, transform.position) <= range && targetObj != null)
+            {
+                targetObj = GetTarget.GetTargetObj(group == UnitGroup.Player ? UnitGroup.Enemy : UnitGroup.Player, myPos);
                 targetPos = targetObj.transform.position;
-                MoveToTarget();
+
+                isMoving = false;
+                Attack();
             }
             else
             {
-                if (group == UnitGroup.Player)
-                    MovePlayerUnit();
-                if (group == UnitGroup.Enemy)
-                    MoveEnemyUnit();
+                isMoving = true;
             }
-        }
-
-        if (Vector3.Distance(targetPos, transform.position) <= range && targetObj != null)
-        {
-            isMoving = false;
-            Attack();
-        }
-        else
-        {
-            isMoving = true;
         }
     }
 
@@ -132,13 +138,17 @@ public class UnitController : MonoBehaviour
     {
         currentHp -= damage;
 
-        var unitPos = Camera.main.WorldToScreenPoint(transform.position);
-        unitPos.y += 0.5f;
-        GameObject textObj = Instantiate(damageTextPrefab, GameObject.Find("UI").transform, false);
+        var unitPos = Camera.main.WorldToScreenPoint(transform.position);   // ユニットのワールド座標をスクリーン座標に変換
+        unitPos.y += 0.3f;
+        GameObject textObj = Instantiate(damageTextPrefab, GameObject.Find("UI").transform, false); // ユニットの少し上にダメージテキストを生成
         textObj.transform.position = unitPos;
 
+        // ダメージを表示する
         TextMeshProUGUI damageText = textObj.GetComponent<TextMeshProUGUI>();
         damageText.text = damage.ToString();
+
+        if (isDead)
+            Dead();
     }
 
     // 攻撃
@@ -157,10 +167,17 @@ public class UnitController : MonoBehaviour
     // 死亡処理
     void Dead()
     {
-        if (!isDead) return;
-
         UnitManager um = GameObject.Find("UnitManager").GetComponent<UnitManager>();
         um.RemoveUnitList(gameObject, group);
-        Destroy(gameObject);
+
+        if (group == UnitGroup.Enemy)
+        {
+            SpriteRenderer spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+            spriteRenderer.sprite = corpseSprite;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }

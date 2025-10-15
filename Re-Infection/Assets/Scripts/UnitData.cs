@@ -4,7 +4,7 @@ using System.Collections.Generic;
 [System.Serializable]
 public class UnitStats
 {
-    public GameObject unitObj;
+    public Sprite unitSprite;
     public float maxHp;
     public float atk;
     public float atkRate;

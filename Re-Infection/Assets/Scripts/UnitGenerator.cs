@@ -5,23 +5,19 @@ public class UnitGenerator : MonoBehaviour
 {
     [SerializeField] UnitData unitData;
 
+    [SerializeField] GameObject unitObj;
     [SerializeField] UnitManager unitManager;
 
     float generateInterbal; // 生成後の経過時間
     float generateTime = 5.0f;     // 生成する間隔
 
-    UnitGroup generateGroup = UnitGroup.Player;  // 生成するユニットの陣営
-
-    Vector3 playerUnitGenaretePos = new Vector3(0, -1.5f, 0);  // プレイヤーユニットの生成座標
     Vector3 enemyUnitGeneratePos = new Vector3(0, 5.5f, 0);    // エネミーユニットの生成座標
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         generateInterbal = 0;
-
-        //for (int i = 0; i < 2; i++)
-        //    GenerateUnit();
+        GenerateUnit();
     }
 
     // Update is called once per frame
@@ -40,31 +36,19 @@ public class UnitGenerator : MonoBehaviour
     // エネミー生成
     void GenerateUnit()
     {
-        var rnd_Idx = generateGroup == UnitGroup.Player ? Random.Range(0, 3) : Random.Range(3, 6);
+        var rnd_Idx = Random.Range(3, unitData.stats.Count - 1);
         var rndXpos = Random.Range(-1.7f, 1.7f);
 
         // 対応するインデックスのユニットオブジェクトを生成
         GameObject unit = null;
-        if (generateGroup == UnitGroup.Player)
-        {
-            playerUnitGenaretePos.x = rndXpos;
-            unit = Instantiate(unitData.stats[rnd_Idx].unitObj, playerUnitGenaretePos, Quaternion.identity);
-        }
-        else
-        {
-            enemyUnitGeneratePos.x = rndXpos;
-            unit = Instantiate(unitData.stats[rnd_Idx].unitObj, enemyUnitGeneratePos, Quaternion.identity);
-        }
+        enemyUnitGeneratePos.x = rndXpos;
+        unit = Instantiate(unitObj, enemyUnitGeneratePos, Quaternion.identity);
 
-        // 生成したオブジェクトにUnitControllerコンポーネントを付与&代入
-        UnitController uc = unit.AddComponent<UnitController>();
-        // 生成したユニットに生成したインデックスのユニットのスタッツを代入
-        uc.SetUnitStats(unitData.stats[rnd_Idx], generateGroup);
+        UnitController uc = unit.GetComponent<UnitController>();
+        uc.SetUnitStats(unitData.stats[rnd_Idx], UnitGroup.Enemy);
 
         // ユニットを管理するUnitManagerに生成したユニットの陣営に対応するリストに格納
-        unitManager.AddUnitList(unit, generateGroup);
-
-        // 次回生成するユニットの陣営を切り替え
-        generateGroup = (generateGroup == UnitGroup.Enemy ? UnitGroup.Player : UnitGroup.Enemy);
+        UnitManager um = GameObject.Find("UnitManager").GetComponent<UnitManager>();
+        um.AddUnitList(unit, UnitGroup.Enemy);
     }
 }
