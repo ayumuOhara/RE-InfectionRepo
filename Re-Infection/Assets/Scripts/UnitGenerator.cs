@@ -13,7 +13,7 @@ public class UnitGenerator : MonoBehaviour
     UnitGroup generateGroup = UnitGroup.Player;  // 生成するユニットの陣営
 
     Vector3 playerUnitGenaretePos = new Vector3(0, -1.5f, 0);  // プレイヤーユニットの生成座標
-    Vector3 enemyUnitGeneratePos = new Vector3(0, 6, 0);    // エネミーユニットの生成座標
+    Vector3 enemyUnitGeneratePos = new Vector3(0, 5.5f, 0);    // エネミーユニットの生成座標
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
