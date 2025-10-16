@@ -14,17 +14,11 @@ public class WaveSpawner : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        StartCoroutine(SpawnLevel());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        StartCoroutine(SpawnLevels());
     }
 
     // レベル生成コルーチン
-    IEnumerator SpawnLevel()
+    IEnumerator SpawnLevels()
     {
         // 全てのウェーブを行うまでループ
         while (currentWaveIdx < waveData.Length)
