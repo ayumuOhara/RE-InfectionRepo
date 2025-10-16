@@ -58,7 +58,7 @@ public class UnitController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-        kingPos = GameObject.Find("King").transform.position;
+        //kingPos = GameObject.Find("King").transform.position;
         myPos = transform.position;
         transform.localScale = myScale;
 
@@ -113,8 +113,7 @@ public class UnitController : MonoBehaviour
 
     void MoveEnemyUnit()
     {
-        moveDirection = (kingPos - myPos).normalized;
-        myPos += moveDirection * moveSpeed * Time.deltaTime;
+        myPos += Vector3.down * moveSpeed * Time.deltaTime;
         transform.position = myPos;
     }
 
