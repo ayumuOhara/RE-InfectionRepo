@@ -24,6 +24,12 @@ public class UnitManager : MonoBehaviour
             enemyUnitList.Remove(unitObj);
     }
 
+    // ユニットのリストを取得
+    public List<GameObject> GetUnitList(UnitGroup group)
+    {
+        return group == UnitGroup.Player ? playerUnitList : enemyUnitList;
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {

@@ -62,7 +62,7 @@ public class UnitController : MonoBehaviour
         maxHp = stats.maxHp;
         atk = stats.atk;
         atkRate = stats.atkRate;
-        moveSpeed = stats.moveSpeed;
+        moveSpeed = stats.moveSpeed * 0.1f;
         range = stats.range;
     }
 
@@ -101,7 +101,10 @@ public class UnitController : MonoBehaviour
             if (Vector3.Distance(targetPos, transform.position) <= range && targetObj != null)
             {
                 targetObj = GetTarget.GetTargetObj(group == UnitGroup.Player ? UnitGroup.Enemy : UnitGroup.Player, myPos);
-                targetPos = targetObj.transform.position;
+                if (targetObj != null)
+                {
+                    targetPos = targetObj.transform.position;
+                }
 
                 isMoving = false;
                 Attack();
@@ -159,8 +162,11 @@ public class UnitController : MonoBehaviour
         {
             atkInterbal = 0;
 
-            UnitController target = targetObj.GetComponent<UnitController>();
-            target.TakeDamage(atk);
+            if (targetObj != null)
+            {
+                UnitController target = targetObj.GetComponent<UnitController>();
+                target.TakeDamage(atk);
+            }
         }
     }
 
