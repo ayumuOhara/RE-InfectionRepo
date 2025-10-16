@@ -40,24 +40,13 @@ public class UnitController : MonoBehaviour
     bool isMoving = true;   // 移動フラグ
 
     // 初期化
-    public void SetUnitStats(UnitStats original, UnitGroup group)
+    public void SetUnitStats(UnitStats stats, UnitGroup group)
     {
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = original.unitSprite;
+        spriteRenderer.sprite = stats.unitSprite;
 
         this.group = group;
 
-        // データを複製
-        var stats = new UnitStats()
-        {
-            maxHp = original.maxHp,
-            atk = original.atk,
-            atkRate = original.atkRate,
-            moveSpeed = original.moveSpeed,
-            range = original.range,
-        };
-
-        // 複製したデータを代入
         currentHp = stats.maxHp;
         maxHp = stats.maxHp;
         atk = stats.atk;

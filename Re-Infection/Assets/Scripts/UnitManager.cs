@@ -6,6 +6,12 @@ public class UnitManager : MonoBehaviour
     public List<GameObject> playerUnitList { get; private set; } = new List<GameObject>();    // プレイヤーユニット格納リスト
     public List<GameObject> enemyUnitList { get; private set; } = new List<GameObject>();     // エネミーユニット格納リスト
 
+    // 敵の数を返す
+    public int EnemyCnt => enemyUnitList.Count;
+
+    // 敵が全滅したか返す
+    public bool IsAllEnemyDefeated => enemyUnitList.Count <= 0;
+
     // ユニットをリストに追加
     public void AddUnitList(GameObject unitObj, UnitGroup group)
     {

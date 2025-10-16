@@ -4497,8 +4497,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WaveSpawner
   waveData:
-  - {fileID: 11400000, guid: db020bc26a8e6084983291006e062299, type: 2}
+  - {fileID: 11400000, guid: bb04900f178d24b4eae5d0a1bca8bfbf, type: 2}
+  - {fileID: 11400000, guid: bb04900f178d24b4eae5d0a1bca8bfbf, type: 2}
+  unitManager: {fileID: 771487440}
   unitObj: {fileID: 6379689990235951777, guid: 206dd7b120d2598459d6433f407e1710, type: 3}
+  spawnPos: {x: 0, y: 5.5, z: 0}
 --- !u!4 &1750744199
 Transform:
   m_ObjectHideFlags: 0

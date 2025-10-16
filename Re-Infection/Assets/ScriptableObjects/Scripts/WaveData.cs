@@ -11,7 +11,7 @@ public class LevelStats
 [CreateAssetMenu(fileName = "WaveLevel", menuName = "Scriptable Objects/WaveLevel")]
 public class Level : ScriptableObject
 {
-    public LevelStats[] level;
+    public LevelStats[] levelStats;
 }
 
 [CreateAssetMenu(fileName = "Wave", menuName = "Scriptable Objects/Wave")]
