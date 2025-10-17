@@ -25,7 +25,7 @@ public class UnitController : MonoBehaviour
 
     Vector3 moveDirection;  // 移動方向
 
-    float atkInterbal = 0;  // 攻撃後の経過時間
+    float atkTimer = 0;  // 攻撃後の経過時間
 
     // ユニットのステータス
     public UnitGroup group { get; private set; }   // 味方か敵か
@@ -145,10 +145,10 @@ public class UnitController : MonoBehaviour
     // 攻撃
     void Attack()
     {
-        atkInterbal += Time.deltaTime;
-        if (atkInterbal > atkRate)
+        atkTimer += Time.deltaTime;
+        if (atkTimer > atkRate)
         {
-            atkInterbal = 0;
+            atkTimer = 0;
 
             if (targetObj != null)
             {
@@ -164,10 +164,17 @@ public class UnitController : MonoBehaviour
         UnitManager um = GameObject.Find("UnitManager").GetComponent<UnitManager>();
         um.RemoveUnitList(gameObject, group);
 
+        var rnd = Random.Range(1, 5);
+
         if (group == UnitGroup.Enemy)
         {
-            SpriteRenderer spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-            spriteRenderer.sprite = corpseSprite;
+            if(rnd != 1)
+                Destroy(gameObject);
+            else
+            {
+                SpriteRenderer spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+                spriteRenderer.sprite = corpseSprite;
+            }
         }
         else
         {

@@ -7,7 +7,7 @@ public class LevelStats
     public int spawnCnt;        // èoåªÇ∑ÇÈêî
 }
 
-[CreateAssetMenu(fileName = "WaveLevel", menuName = "Scriptable Objects/WaveLevel")]
+[CreateAssetMenu(fileName = "WaveLevel_", menuName = "Scriptable Objects/WaveLevel")]
 public class WaveLevel : ScriptableObject
 {
     public LevelStats[] levelStats;
