@@ -22,14 +22,10 @@ public class VirusSkillDragger : MonoBehaviour, IBeginDragHandler, IDragHandler,
     // ドラッグ終了待機
     public static TaskCompletionSource<PointerEventData> dragEndTcs;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        dragEndTcs = new TaskCompletionSource<PointerEventData>();
-    }
-
     public void OnBeginDrag(PointerEventData eventData)
     {
+        dragEndTcs = new TaskCompletionSource<PointerEventData>();
+
         if (dragObj == null)
         {
             dragObj = Instantiate(virusAreaPrefab);

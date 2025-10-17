@@ -27,15 +27,16 @@ public class UnitController : MonoBehaviour
 
     float atkTimer = 0;  // 攻撃後の経過時間
 
-    // ユニットのステータス
+    // ユニットのスタッツ
     public UnitGroup group { get; private set; }   // 味方か敵か
+    public Sprite unitSprite { get; private set; }     // ユニットのスプライト
     public float currentHp { get; private set; }   // 現在HP
     public float maxHp { get; private set; }       // 最大HP
     public float atk { get; private set; }         // 攻撃力
     public float atkRate { get; private set; }     // 攻撃間隔
     public float moveSpeed { get; private set; }   // 移動速度
     public float range { get; private set; }       // 攻撃距離
-    bool isDead => currentHp <= 0;                 // 死亡フラグ
+    public bool isDead => currentHp <= 0;                 // 死亡フラグ
 
     bool isMoving = true;   // 移動フラグ
 
@@ -44,6 +45,7 @@ public class UnitController : MonoBehaviour
     {
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = stats.unitSprite;
+        unitSprite = stats.unitSprite;
 
         this.group = group;
 
@@ -164,21 +166,27 @@ public class UnitController : MonoBehaviour
         UnitManager um = GameObject.Find("UnitManager").GetComponent<UnitManager>();
         um.RemoveUnitList(gameObject, group);
 
-        var rnd = Random.Range(1, 5);
-
         if (group == UnitGroup.Enemy)
         {
-            if(rnd != 1)
-                Destroy(gameObject);
-            else
-            {
-                SpriteRenderer spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-                spriteRenderer.sprite = corpseSprite;
-            }
+            SpriteRenderer spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+            spriteRenderer.sprite = corpseSprite;
         }
         else
         {
             Destroy(gameObject);
         }
+    }
+
+    // 感染
+    public void Infection()
+    {
+        currentHp = maxHp;
+
+        SpriteRenderer spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = unitSprite;
+
+        UnitManager um = GameObject.Find("UnitManager").GetComponent<UnitManager>();
+        group = UnitGroup.Player;
+        um.AddUnitList(gameObject, group);
     }
 }

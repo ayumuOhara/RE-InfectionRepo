@@ -2,22 +2,16 @@ using UnityEngine;
 
 public class InfectioningUnit : MonoBehaviour
 {
-    [SerializeField] CircleCollider2D infectionArea;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private async void OnTriggerEnter2D(Collider2D collision)
     {
-        
-    }
+        await WaitEndDrag.WaitDragEndAsync();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+        UnitController uc = collision.gameObject.GetComponent<UnitController>();
+        if (uc.isDead && uc.group == UnitGroup.Enemy)
+        {
+            uc.Infection();
+        }
 
-    void HitCheck()
-    {
-        
+        gameObject.SetActive(false);
     }
 }
