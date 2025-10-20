@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using Mono.Cecil.Cil;
 
 [System.Serializable]
 public class Stage
@@ -81,7 +80,5 @@ public class WaveSpawner : MonoBehaviour
         GameObject obj = Instantiate(unitObj, spawnPos, Quaternion.identity);
         UnitController uc = obj.GetComponent<UnitController>();
         uc.SetUnitStats(unitStats, UnitGroup.Enemy);    // 生成したユニットにステータスを代入
-
-        unitManager.AddUnitList(obj, UnitGroup.Enemy);  // UnitManagerのリストに追加
     }
 }

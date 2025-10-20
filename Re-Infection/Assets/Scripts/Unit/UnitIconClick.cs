@@ -41,9 +41,5 @@ public class UnitIconClick : MonoBehaviour, IPointerClickHandler
         // 対応するインデックスのユニットのステータスを渡す
         UnitController uc = unit.GetComponent<UnitController>();
         uc.SetUnitStats(unitStats, UnitGroup.Player);
-
-        // ユニットを管理するUnitManagerに生成したユニットの陣営に対応するリストに格納
-        UnitManager um = GameObject.Find("UnitManager").GetComponent<UnitManager>();
-        um.AddUnitList(unit, UnitGroup.Player);
     }
 }

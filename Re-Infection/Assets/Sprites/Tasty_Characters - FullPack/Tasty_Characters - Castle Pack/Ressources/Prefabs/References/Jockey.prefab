@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4421900341329478}
   - component: {fileID: 212327661687109368}
   m_Layer: 0
-  m_Name: CharaRef_03
+  m_Name: Jockey
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

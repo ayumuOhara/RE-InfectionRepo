@@ -8,7 +8,7 @@ public static class GetTarget
         UnitManager unitManager = GameObject.Find("UnitManager").GetComponent<UnitManager>();
 
         // 取得したい陣営のリスト格納用変数
-        List<GameObject> targetUnitList = new List<GameObject>();
+        List<UnitController> targetUnitList = new List<UnitController>();
 
         // 目的の陣営のユニットリストを代入
         if(targetGroup == UnitGroup.Player)
@@ -20,16 +20,16 @@ public static class GetTarget
 
         GameObject nearestObj = null;
 
-        foreach(GameObject targetUnit in targetUnitList)
+        foreach(UnitController targetUnit in targetUnitList)
         {
             if (nearestObj == null)
             {
-                nearestObj = targetUnit;
+                nearestObj = targetUnit.gameObject;
             }
             else
             {
                 // 現在のnearestObjがtargetUnitより距離が近かったらそのままにし、targetUnitの方が近い場合、targetUnitを代入
-                nearestObj = Vector3.Distance(nearestObj.transform.position, myPos) < Vector3.Distance(targetUnit.transform.position, myPos) ? nearestObj : targetUnit;
+                nearestObj = Vector3.Distance(nearestObj.transform.position, myPos) < Vector3.Distance(targetUnit.gameObject.transform.position, myPos) ? nearestObj : targetUnit.gameObject;
             }
         }
 
