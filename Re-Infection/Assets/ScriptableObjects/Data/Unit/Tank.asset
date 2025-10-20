@@ -15,7 +15,7 @@ MonoBehaviour:
   unitSprite: {fileID: 21300008, guid: f5f1c19ce87450f4b97f8b363746558d, type: 3}
   maxHp: 150
   atk: 10
-  atkRate: 4
+  atkInterbal: 4
   moveSpeed: 2
   range: 0.6
   summonCost: 1

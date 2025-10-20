@@ -75,7 +75,7 @@ public class WaveSpawner : MonoBehaviour
     // ÉÜÉjÉbÉgê∂ê¨
     void SpawnUnit(UnitStats unitStats)
     {
-        spawnPos.x = Random.Range(-1.7f, 1.7f);
+        spawnPos.x = Random.Range(-2f, 2f);
 
         GameObject obj = Instantiate(unitObj, spawnPos, Quaternion.identity);
         UnitController uc = obj.GetComponent<UnitController>();

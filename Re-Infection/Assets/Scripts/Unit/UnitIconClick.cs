@@ -10,7 +10,7 @@ public class UnitIconClick : MonoBehaviour, IPointerClickHandler
 
     CostManager costManager;
 
-    Vector3 spawnPos = new Vector3(0, -1.5f, 0);  // プレイヤーユニットの生成座標
+    Vector3 spawnPos = new Vector3(0, -1.0f, 0);  // プレイヤーユニットの生成座標
 
     void Start()
     {

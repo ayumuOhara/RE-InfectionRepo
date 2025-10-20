@@ -16,5 +16,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 86dd4ebfb57654b49bbdfd1f077aeb34, type: 2}
   - {fileID: 11400000, guid: 6d52b58fd7946e0458512b2267df7a7b, type: 2}
   - {fileID: 11400000, guid: 919b494a59fae6548a63b38fef9f112e, type: 2}
-  spawnInterbal: 20
+  spawnInterbal: 5
   rewardCost: 0

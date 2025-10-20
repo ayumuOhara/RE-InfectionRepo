@@ -12,7 +12,16 @@ public class DeadState : IUnitState
 
     public void Enter()
     {
+        unitController.unitManager.RemoveUnitList(unitController, unitController.group);
+        unitController.InstanceObjHeadUp(unitController.deadIconPrefab);
 
+        if (unitController.group == UnitGroup.Enemy)
+        {
+            SpriteRenderer sr = unitController.gameObject.GetComponent<SpriteRenderer>();
+            sr.sprite = unitController.corpseSprite;
+
+            unitController.unitManager.AddCorpseList(unitController);
+        }
     }
 
     public void Update()
@@ -21,12 +30,6 @@ public class DeadState : IUnitState
     }
 
     public void Exit()
-    {
-
-    }
-
-    // éÄñSèàóù
-    void Dead()
     {
 
     }

@@ -1,11 +1,11 @@
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 using UnityEngine.EventSystems;
 
 public class MoveState : IUnitState
 {
     UnitController unitController;
+    Vector3 myPos;
+    Vector3 castlePos;
 
     public MoveState(UnitController controller)
     {
@@ -14,15 +14,25 @@ public class MoveState : IUnitState
 
     public void Enter()
     {
-
+        myPos = unitController.gameObject.transform.position;
+        if(castlePos == null)
+            castlePos = GameObject.Find("CastleWall").transform.position;
     }
 
     public void Update()
     {
-        if(unitController.group == UnitGroup.Player)
-            unitController.gameObject.transform.position += Vector3.up * unitController.moveSpeed * Time.deltaTime;
-        if(unitController.group == UnitGroup.Enemy)
-            unitController.gameObject.transform.position += Vector3.down * unitController.moveSpeed * Time.deltaTime;
+        if (unitController.targetObj != null)
+        {
+            Vector3 moveDirection = unitController.targetObj.transform.position - myPos;
+            myPos += moveDirection.normalized * unitController.moveSpeed * Time.deltaTime;
+        }
+        else
+        {
+            if (unitController.group == UnitGroup.Enemy)
+                myPos += Vector3.down * unitController.moveSpeed * Time.deltaTime;
+        }
+
+        unitController.gameObject.transform.position = myPos;
     }
 
     public void Exit()

@@ -25,6 +25,8 @@ public class UnitStateMachine
 
     public void Transition(IUnitState state)
     {
+        if (CurrentState == state) return;
+
         CurrentState.Exit();
         CurrentState = state;
         state.Enter();

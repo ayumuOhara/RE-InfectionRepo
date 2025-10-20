@@ -13,10 +13,10 @@ public class UnitManager : MonoBehaviour
     // 敵の数を返す
     public int EnemyCnt => enemyUnitList.Count;
 
-    // プレイヤーユニットが全滅したか返す
+    // プレイヤーユニットがいないか返す
     public bool IsAllUnitDefeated => playerUnitList.Count <= 0;
 
-    // 敵が全滅したか返す
+    // 敵がいないか返す
     public bool IsAllEnemyDefeated => enemyUnitList.Count <= 0;
 
     // ユニットをリストに追加

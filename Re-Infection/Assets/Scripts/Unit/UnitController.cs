@@ -16,11 +16,12 @@ public class UnitController : MonoBehaviour
     public UnitManager unitManager { get; private set; }
     UnitStateManager unitStateManager;
 
-    public GameObject targetObj { get; private set; }   // 敵オブジェクト
+    // 一番近いターゲットオブジェクト
+    public GameObject targetObj => GetTarget.GetTargetObj(group == UnitGroup.Player ? UnitGroup.Enemy : UnitGroup.Player, transform.position);
 
-    [SerializeField] GameObject damageTextPrefab;　// ダメージ数表示テキスト
-    [SerializeField] GameObject deadIconPrefab;    // 死亡時アイコン
-    [SerializeField] Sprite corpseSprite;          // 死体スプライト
+    [SerializeField] GameObject damageTextPrefab;       　// ダメージ数表示テキスト
+    [SerializeField] public GameObject deadIconPrefab;    // 死亡時アイコン
+    [SerializeField] public Sprite corpseSprite;          // 死体スプライト
 
     const float UNIT_SCALE = 0.4f;
     Vector3 myScale = new Vector3(UNIT_SCALE, UNIT_SCALE, UNIT_SCALE); // ユニットのサイズ
@@ -31,9 +32,11 @@ public class UnitController : MonoBehaviour
     public float currentHp { get; private set; }   // 現在HP
     public float maxHp { get; private set; }       // 最大HP
     public float atk { get; private set; }         // 攻撃力
-    public float atkRate { get; private set; }     // 攻撃間隔
+    public float atkInterbal { get; private set; }     // 攻撃間隔
     public float moveSpeed { get; private set; }   // 移動速度
     public float range { get; private set; }       // 攻撃距離
+
+    public bool isDead => currentHp <= 0;
 
     // 初期化
     public void SetUnitStats(UnitStats stats, UnitGroup group)
@@ -47,7 +50,7 @@ public class UnitController : MonoBehaviour
         currentHp = stats.maxHp;
         maxHp = stats.maxHp;
         atk = stats.atk;
-        atkRate = stats.atkRate;
+        atkInterbal = stats.atkInterbal;
         moveSpeed = stats.moveSpeed * 0.1f;
         range = stats.range;
     }
@@ -75,13 +78,21 @@ public class UnitController : MonoBehaviour
     {
         currentHp -= damage;
 
-        var unitPos = Camera.main.WorldToScreenPoint(transform.position);   // ユニットのワールド座標をスクリーン座標に変換
-        unitPos.y += 0.3f;
-        GameObject textObj = Instantiate(damageTextPrefab, GameObject.Find("UI").transform, false); // ユニットの少し上にダメージテキストを生成
-        textObj.transform.position = unitPos;
-
+        GameObject textObj = InstanceObjHeadUp(damageTextPrefab);
+        
         // ダメージを表示する
         TextMeshProUGUI damageText = textObj.GetComponent<TextMeshProUGUI>();
         damageText.text = damage.ToString();
+    }
+    
+    // 頭上にUIプレファブを生成
+    public GameObject InstanceObjHeadUp(GameObject prefabUI)
+    {
+        var unitPos = Camera.main.WorldToScreenPoint(transform.position);   // ユニットのワールド座標をスクリーン座標に変換
+        unitPos.y += 0.3f;
+        GameObject prefab = Instantiate(prefabUI, GameObject.Find("UI").transform, false); // ユニットの少し上にPrefabを生成
+        prefab.transform.position = unitPos;
+
+        return prefab;
     }
 }
