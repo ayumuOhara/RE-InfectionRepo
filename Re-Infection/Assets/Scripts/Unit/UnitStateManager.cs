@@ -4,6 +4,8 @@ public class UnitStateManager
 {
     UnitController unitController;
 
+    IUnitAIDecider unitAI;
+
     UnitStateMachine unitStateMachine;
     public UnitStateMachine StateMachine => unitStateMachine;
 
@@ -12,49 +14,30 @@ public class UnitStateManager
         unitController = controller;
         unitStateMachine = new UnitStateMachine(unitController);
         unitStateMachine.Initialize(unitStateMachine.idleState);
+
+        if(unitController.group == UnitGroup.Player)
+            unitAI = new PlayerUnitDecider(controller);
+        if(unitController.group == UnitGroup.Enemy)
+            unitAI = new EnemyUnitDecider(controller);
     }
 
-    // 敵がいないかどうか
-    public bool isAllTargetDefeated =>
-        unitController.group == UnitGroup.Player ? unitController.unitManager.IsAllEnemyDefeated : unitController.unitManager.IsAllUnitDefeated;
-    
-    // 敵が射程範囲内かどうか
-    public bool isTargetInRange => Vector3.Distance(unitController.targetObj.transform.position, unitController.gameObject.transform.position) <= unitController.range;
-
-    // 拠点が射程内かどうか(エネミー専用)
-    //public bool isBaseInRange => Vector3.Distance(base.transform.position, unitController.transform.position);
-
-    // ステート遷移管理
+    // ステート遷移管理AI
     public void StateTransition()
     {
-        if (unitController.isDead)
-            unitStateMachine.Transition(unitStateMachine.deadState);
-
-        switch (unitStateMachine.CurrentState)
+        switch (unitAI.UnitDecider())
         {
-            case IdleState:
-                if (isAllTargetDefeated)
-                    unitStateMachine.Transition(unitStateMachine.moveState);
-                else if (!isTargetInRange)
-                    unitStateMachine.Transition(unitStateMachine.moveState);
-                else if (isTargetInRange)
-                    unitStateMachine.Transition(unitStateMachine.attackState);
+            case UnitDicision.Idle:
+                unitStateMachine.Transition(unitStateMachine.idleState);
                 break;
-            case MoveState:
-                if (isAllTargetDefeated)
-                    unitStateMachine.Transition(unitStateMachine.idleState);
-                else if (isTargetInRange)
-                    unitStateMachine.Transition(unitStateMachine.attackState);
+            case UnitDicision.MoveToTarget:
+            case UnitDicision.MoveToCastle:
+                unitStateMachine.Transition(unitStateMachine.moveState);
                 break;
-            case AttackState:
-                if (isAllTargetDefeated)
-                    unitStateMachine.Transition(unitStateMachine.idleState);
-                else if (!isTargetInRange)
-                    unitStateMachine.Transition(unitStateMachine.moveState);
+            case UnitDicision.Attack:
+                unitStateMachine.Transition(unitStateMachine.attackState);
                 break;
-            case DeadState:
-                if (!unitController.isDead)
-                    unitStateMachine.Transition(unitStateMachine.idleState);
+            case UnitDicision.Dead:
+                unitStateMachine.Transition(unitStateMachine.deadState);
                 break;
         }
     }

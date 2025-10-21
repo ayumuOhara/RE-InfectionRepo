@@ -18,12 +18,18 @@ public class UnitController : MonoBehaviour
 
     // 一番近いターゲットオブジェクト
     public GameObject targetObj => GetTarget.GetTargetObj(group == UnitGroup.Player ? UnitGroup.Enemy : UnitGroup.Player, transform.position);
+    // ターゲットとの距離
+    public float targetDistance => Vector3.Distance(targetObj.transform.position, transform.position);
+    // 拠点オブジェクト
+    public GameObject castleObj { get; private set; }
+    // 拠点との距離
+    public float castleDistance => Vector3.Distance(castleObj.transform.position, transform.position);
 
     [SerializeField] GameObject damageTextPrefab;       　// ダメージ数表示テキスト
     [SerializeField] public GameObject deadIconPrefab;    // 死亡時アイコン
     [SerializeField] public Sprite corpseSprite;          // 死体スプライト
 
-    const float UNIT_SCALE = 0.4f;
+    const float UNIT_SCALE = 0.3f;
     Vector3 myScale = new Vector3(UNIT_SCALE, UNIT_SCALE, UNIT_SCALE); // ユニットのサイズ
 
     // ユニットのスタッツ
@@ -60,6 +66,7 @@ public class UnitController : MonoBehaviour
     {
         transform.localScale = myScale;
 
+        castleObj = GameObject.Find("CastleWall").gameObject;
         unitManager = GameObject.Find("UnitManager").GetComponent<UnitManager>();
         unitManager.AddUnitList(this, group);
 

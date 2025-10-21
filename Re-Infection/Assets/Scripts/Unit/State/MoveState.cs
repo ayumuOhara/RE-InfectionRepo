@@ -29,7 +29,10 @@ public class MoveState : IUnitState
         else
         {
             if (unitController.group == UnitGroup.Enemy)
-                myPos += Vector3.down * unitController.moveSpeed * Time.deltaTime;
+            {
+                Vector3 moveDirection = unitController.castleObj.transform.position - myPos;
+                myPos += moveDirection.normalized * unitController.moveSpeed * Time.deltaTime;
+            }
         }
 
         unitController.gameObject.transform.position = myPos;
