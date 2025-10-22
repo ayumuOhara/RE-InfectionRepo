@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 public class UnitManager : MonoBehaviour
 {
+    [SerializeField] WaveSpawner waveSpawner;
+
     public List<UnitController> playerUnitList { get; private set; } = new List<UnitController>();    // プレイヤーユニット格納リスト
     public List<UnitController> enemyUnitList { get; private set; } = new List<UnitController>();     // エネミーユニット格納リスト
     public List<UnitController> corpseUnitList { get; private set; } = new List<UnitController>();    // 死体ユニット格納リスト
@@ -34,7 +36,10 @@ public class UnitManager : MonoBehaviour
         if (group == UnitGroup.Player)
             playerUnitList.Remove(unitObj);
         if (group == UnitGroup.Enemy)
+        {
             enemyUnitList.Remove(unitObj);
+            waveSpawner.DecreaseEnemySum();
+        }
     }
 
     // ユニットのリストを返す
@@ -64,7 +69,7 @@ public class UnitManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-        Application.targetFrameRate = 60;
+        
     }
 
     // Update is called once per frame

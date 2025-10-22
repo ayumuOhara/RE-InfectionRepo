@@ -27,8 +27,6 @@ public class UnitStateMachine
     {
         if (CurrentState == state) return;
 
-        Debug.Log($"NextState : {state}");
-
         CurrentState.Exit();
         CurrentState = state;
         state.Enter();
@@ -36,7 +34,6 @@ public class UnitStateMachine
 
     public void Update()
     {
-        Debug.Log($"CurrentState : {CurrentState}");
         CurrentState?.Update();
     }
 }

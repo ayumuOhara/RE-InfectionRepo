@@ -22,6 +22,10 @@ public class DeadState : IUnitState
 
             unitController.unitManager.AddCorpseList(unitController);
         }
+        else
+        {
+            unitController.gameObject.SetActive(false);
+        }
     }
 
     public void Update()

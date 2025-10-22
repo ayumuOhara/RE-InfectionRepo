@@ -7,7 +7,6 @@ public class PlayerUnitDecider : IUnitAIDecider
     public PlayerUnitDecider(UnitController controller)
     {
         unitController = controller;
-        Debug.Log("プレイヤーAIを使用します");
     }
 
     public UnitDicision UnitDecider()

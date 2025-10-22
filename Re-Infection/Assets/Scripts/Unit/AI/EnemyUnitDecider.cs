@@ -1,5 +1,4 @@
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 public class EnemyUnitDecider : IUnitAIDecider
 {
@@ -8,7 +7,6 @@ public class EnemyUnitDecider : IUnitAIDecider
     public EnemyUnitDecider(UnitController controller)
     {
         unitController = controller;
-        Debug.Log("エネミーAIを使用します");
     }
 
     public UnitDicision UnitDecider()

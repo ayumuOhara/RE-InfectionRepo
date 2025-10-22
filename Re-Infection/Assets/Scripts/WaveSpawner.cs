@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 
 [System.Serializable]
 public class Stage
@@ -11,11 +12,20 @@ public class Stage
 public class WaveSpawner : MonoBehaviour
 {
     [SerializeField] Stage[] stages;            // ステージのデータ
-    [SerializeField] UnitManager unitManager;
+    [SerializeField] CostManager costManager;
     [SerializeField] GameObject unitObj;
     [SerializeField] Vector3 spawnPos;          // スポーン座標
+    [SerializeField] TextMeshProUGUI currentWaveText;
+    [SerializeField] TextMeshProUGUI rewardCostText;
+    [SerializeField] TextMeshProUGUI currentEnemyCntText;
 
-    int currentWaveIdx = 0; // 現在のウェーブ
+    int currentWaveIdx = 0;      // 現在のウェーブ
+    int currentWaveEnemySum = 0; // 現在のウェーブの敵の残りの合計数
+
+    // ウェーブ内の敵を全て倒したか
+    public bool isAllEnemyDefeatedInWave => currentWaveEnemySum <= 0;
+    // ステージクリアフラグ
+    public bool isStageCompleted => currentWaveIdx >= stages[0].waveData.Length;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -26,13 +36,18 @@ public class WaveSpawner : MonoBehaviour
     // レベル生成コルーチン
     IEnumerator SpawnLevels()
     {
-        // 全てのウェーブを行うまでループ
-        while (currentWaveIdx < stages[0].waveData.Length)
+        while (true)
         {
             var currentWave = stages[0].waveData[currentWaveIdx]; // 現在のウェーブのデータ取得
 
+            currentWaveEnemySum = currentWave.waveEnemySum;
+
+            currentEnemyCntText.text = $"{currentWaveEnemySum} / {currentWave.waveEnemySum}";
+            currentWaveText.text = "Wave " + (currentWaveIdx + 1);
+            rewardCostText.text = "+" + currentWave.rewardCost;
+
             // ウェーブ内の全てのレベルを生成するまでループ
-            for(int level = 0; level < currentWave.waveLevels.Length; level++)
+            for (int level = 0; level < currentWave.waveLevels.Length; level++)
             {
                 if(level != 0)
                     yield return new WaitForSeconds(stages[0].waveData[currentWaveIdx].spawnInterbal);
@@ -52,7 +67,7 @@ public class WaveSpawner : MonoBehaviour
 
             // 敵全滅待機
             Debug.Log("ウェーブ内の敵が全滅するまで待機");
-            yield return new WaitUntil(() => unitManager.IsAllEnemyDefeated);
+            yield return new WaitUntil(() => isAllEnemyDefeatedInWave);
 
             // 全滅後、ウェーブを進行し、ウェーブのレベルをリセット
             currentWaveIdx++;
@@ -61,12 +76,11 @@ public class WaveSpawner : MonoBehaviour
             if (currentWaveIdx < stages[0].waveData.Length)
             {
                 Debug.Log("全ての敵が全滅したので次のウェーブへ移行");
+                costManager.AddCost(currentWave.rewardCost);
                 yield return new WaitForSeconds(3.0f);
             }
             else
             {
-                Debug.Log("ウェーブを全て完了しました");
-                Debug.Log("ステージクリア");
                 yield break;
             }
         }
@@ -80,5 +94,12 @@ public class WaveSpawner : MonoBehaviour
         GameObject obj = Instantiate(unitObj, spawnPos, Quaternion.identity);
         UnitController uc = obj.GetComponent<UnitController>();
         uc.SetUnitStats(unitStats, UnitGroup.Enemy);    // 生成したユニットにステータスを代入
+    }
+
+    // ウェーブの敵の残りの合計数を減らす
+    public void DecreaseEnemySum()
+    {
+        currentWaveEnemySum--;
+        currentEnemyCntText.text = $"{currentWaveEnemySum} / {stages[0].waveData[currentWaveIdx].waveEnemySum}";
     }
 }

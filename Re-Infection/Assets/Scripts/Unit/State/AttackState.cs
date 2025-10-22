@@ -21,8 +21,16 @@ public class AttackState : IUnitState
 
         if (atkTimer >= unitController.atkInterbal)
         {
-            UnitController uc = unitController.targetObj.GetComponent<UnitController>();
-            uc.TakeDamage(unitController.atk);
+            if(unitController.targetObj != null)
+            {
+                UnitController uc = unitController.targetObj.GetComponent<UnitController>();
+                uc.TakeDamage(unitController.atk);
+            }
+            else if(unitController.castleObj != null && unitController.group == UnitGroup.Enemy)
+            {
+                CastleWallManager cm = unitController.castleObj.GetComponent<CastleWallManager>();
+                cm.TakeDamage(unitController.atk);
+            }
 
             atkTimer = 0;
         }
