@@ -13,6 +13,4 @@ public class UnitStats : ScriptableObject
     public float range;                 // 射程距離
     public int summonCost;              // 召喚コスト
     public float infecitonTime;         // 感染するまでの時間
-    public float infectioningLifeTime;  // 感染後の生存可能時間
-    public float deleteTime;            // 死体が消滅するまでの時間
 }
