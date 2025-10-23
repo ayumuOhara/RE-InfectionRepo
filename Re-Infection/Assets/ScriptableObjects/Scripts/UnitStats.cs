@@ -3,7 +3,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "UnitStats", menuName = "Scriptable Objects/UnitStats")]
 public class UnitStats : ScriptableObject
 {
+    public int unitId;                  // ユニット番号
     public Sprite unitSprite;           // ユニットのスプライト
+    public string unitName;             // ユニット名
     public float maxHp;                 // 最大HP
     public float atk;                   // 攻撃力
     public float atkInterbal;           // 攻撃速度
