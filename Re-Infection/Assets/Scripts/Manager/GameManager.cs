@@ -5,7 +5,6 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] WaveSpawner waveSpawner;
     [SerializeField] CastleWallManager castleWallManager;
-    [SerializeField] StageUIManager stageUIManager;
     [SerializeField] UnitManager unitManager;
 
     [SerializeField] Image resultUI;
@@ -42,6 +41,5 @@ public class GameManager : MonoBehaviour
             resultUI.gameObject.SetActive(true);
             failedUI.gameObject.SetActive(true);
         }
-
     }
 }

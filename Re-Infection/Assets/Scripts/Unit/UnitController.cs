@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using TMPro;
+using UnityEngine.UI;
 
 // ユニットの所属しているグループ
 public enum UnitGroup
@@ -25,6 +26,8 @@ public class UnitController : MonoBehaviour
     // 拠点との距離
     public float castleDistance => Vector3.Distance(castleObj.transform.position, transform.position);
 
+    [SerializeField] public GameObject unitUI;            // ユニット専用UIオブジェクト
+    [SerializeField] public Image infectionRateGauge;     // 感染度ゲージ
     [SerializeField] GameObject damageTextPrefab;       　// ダメージ数表示テキスト
     [SerializeField] public GameObject deadIconPrefab;    // 死亡時アイコン
     [SerializeField] public Sprite corpseSprite;          // 死体スプライト
@@ -41,7 +44,8 @@ public class UnitController : MonoBehaviour
     public float atkInterbal { get; private set; }     // 攻撃間隔
     public float moveSpeed { get; private set; }   // 移動速度
     public float range { get; private set; }       // 攻撃距離
-
+    public float infecitonTime { get; private set; }  // 感染するまでの時間
+    public bool isInfection { get; private set; }   // 一度感染したか
     public bool isDead => currentHp <= 0;
 
     // 初期化
@@ -59,6 +63,7 @@ public class UnitController : MonoBehaviour
         atkInterbal = stats.atkInterbal;
         moveSpeed = stats.moveSpeed * 0.1f;
         range = stats.range;
+        infecitonTime = stats.infecitonTime;
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -80,6 +85,19 @@ public class UnitController : MonoBehaviour
         unitStateManager.StateMachine.Update();
     }
 
+    // 感染
+    public void Infection()
+    {
+        if(isInfection) return;
+
+        if(unitStateManager.StateMachine.CurrentState == unitStateManager.StateMachine.deadState)
+        {
+            StartCoroutine(unitStateManager.StateMachine.deadState.Infectioning());
+            group = UnitGroup.Player;
+            isInfection = true;
+        }
+    }
+
     // ダメージ処理
     public void TakeDamage(float damage)
     {
@@ -90,6 +108,16 @@ public class UnitController : MonoBehaviour
         // ダメージを表示する
         TextMeshProUGUI damageText = textObj.GetComponent<TextMeshProUGUI>();
         damageText.text = damage.ToString();
+    }
+
+    // 回復
+    public void HealHelth(float value)
+    {
+        currentHp += value;
+        if(currentHp >= maxHp)
+        {
+            currentHp = maxHp;
+        }
     }
     
     // 頭上にUIプレファブを生成

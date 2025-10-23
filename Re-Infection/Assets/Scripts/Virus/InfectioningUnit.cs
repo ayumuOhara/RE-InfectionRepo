@@ -19,12 +19,18 @@ public class InfectioningUnit : MonoBehaviour
         await WaitEndDrag.WaitDragEndAsync();
         targetUnits = new List<UnitController>(unitManager.GetCorpseList());
 
-        foreach (UnitController target in targetUnits)
+        if (targetUnits.Count <= 0 || targetUnits == null)
         {
-            if (Vector3.Distance(target.gameObject.transform.position, transform.position) < virusStats.infectionRange)
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            foreach (UnitController target in targetUnits)
             {
-                //target.Infection();
-                Debug.Log("Š´õŠ®—¹");
+                if (Vector3.Distance(target.gameObject.transform.position, transform.position) < virusStats.infectionRange)
+                {
+                    target.Infection();
+                }
             }
         }
 

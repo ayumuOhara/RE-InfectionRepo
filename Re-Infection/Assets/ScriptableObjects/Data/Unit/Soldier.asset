@@ -19,3 +19,6 @@ MonoBehaviour:
   moveSpeed: 2
   range: 0.6
   summonCost: 1
+  infecitonTime: 10
+  infectioningLifeTime: 60
+  deleteTime: 30

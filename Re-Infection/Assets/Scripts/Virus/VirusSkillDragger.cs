@@ -1,6 +1,8 @@
+using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public static class WaitEndDrag
 {
@@ -14,6 +16,7 @@ public static class WaitEndDrag
 public class VirusSkillDragger : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] GameObject virusAreaPrefab;
+    UnitManager unitManager;
     GameObject dragObj;
 
     bool isDragging = false;    // ドラッグ中フラグ
@@ -21,6 +24,12 @@ public class VirusSkillDragger : MonoBehaviour, IBeginDragHandler, IDragHandler,
 
     // ドラッグ終了待機
     public static TaskCompletionSource<PointerEventData> dragEndTcs;
+
+    void Awake()
+    {
+        if (unitManager == null)
+            unitManager = GameObject.Find("UnitManager").GetComponent<UnitManager>();
+    }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -33,6 +42,7 @@ public class VirusSkillDragger : MonoBehaviour, IBeginDragHandler, IDragHandler,
         }
 
         dragObj.SetActive(true);
+
         _ = WaitEndDrag.WaitDragEndAsync();
     }
 

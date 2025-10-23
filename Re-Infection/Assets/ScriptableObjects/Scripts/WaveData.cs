@@ -5,8 +5,10 @@ using System.Collections.Generic;
 public class WaveData : ScriptableObject
 {
     public WaveLevel[] waveLevels;   // ウェーブでスポーンさせるレベルのリスト
-    public float spawnInterbal;  // スポーンする時間
-    public int rewardCost;       // ウェーブクリア後に獲得できるコスト
+    public float spawnInterbal;      // スポーンする時間
+    public int rewardCost;           // ウェーブクリア後に獲得できるコスト
+    public bool bossWave;            // ボスウェーブか
+
     public int waveEnemySum => SpawnEnemySum(); // ウェーブ内の敵の合計数
 
     // ウェーブ内の敵の合計数を返す

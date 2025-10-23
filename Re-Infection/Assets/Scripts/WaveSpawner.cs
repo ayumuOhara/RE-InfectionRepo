@@ -77,6 +77,7 @@ public class WaveSpawner : MonoBehaviour
             {
                 Debug.Log("全ての敵が全滅したので次のウェーブへ移行");
                 costManager.AddCost(currentWave.rewardCost);
+                rewardCostText.text = "+" + currentWave.rewardCost;
                 yield return new WaitForSeconds(3.0f);
             }
             else

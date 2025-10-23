@@ -4,4 +4,5 @@ using UnityEngine;
 public class VirusStats : ScriptableObject
 {
     public float infectionRange;
+    public float coolTime;
 }

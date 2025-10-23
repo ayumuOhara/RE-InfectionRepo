@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: VirusStats
   m_EditorClassIdentifier: Assembly-CSharp::VirusStats
   infectionRange: 1
+  coolTime: 30
