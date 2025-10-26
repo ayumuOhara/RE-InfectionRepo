@@ -11,13 +11,12 @@ public class Stage
 
 public class WaveSpawner : MonoBehaviour
 {
+    InGameUIManager gameUIManager; // UI管理マネージャ
+    CostManager costManager;
+
     [SerializeField] Stage[] stages;            // ステージのデータ
-    [SerializeField] CostManager costManager;
     [SerializeField] GameObject unitObj;
     [SerializeField] Vector3 spawnPos;          // スポーン座標
-    [SerializeField] TextMeshProUGUI currentWaveText;
-    [SerializeField] TextMeshProUGUI rewardCostText;
-    [SerializeField] TextMeshProUGUI currentEnemyCntText;
 
     int currentWaveIdx = 0;      // 現在のウェーブ
     int currentWaveEnemySum = 0; // 現在のウェーブの敵の残りの合計数
@@ -26,6 +25,12 @@ public class WaveSpawner : MonoBehaviour
     public bool isAllEnemyDefeatedInWave => currentWaveEnemySum <= 0;
     // ステージクリアフラグ
     public bool isStageCompleted => currentWaveIdx >= stages[0].waveData.Length;
+
+    void Awake()
+    {
+        gameUIManager = GameObject.Find("InGameUIManager").GetComponent<InGameUIManager>();
+        costManager = GameObject.Find("CostManager").GetComponent<CostManager>();
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -42,9 +47,9 @@ public class WaveSpawner : MonoBehaviour
 
             currentWaveEnemySum = currentWave.waveEnemySum;
 
-            currentEnemyCntText.text = $"{currentWaveEnemySum} / {currentWave.waveEnemySum}";
-            currentWaveText.text = "Wave " + (currentWaveIdx + 1);
-            rewardCostText.text = "+" + currentWave.rewardCost;
+            gameUIManager.WaveEnemyCntText(currentWaveEnemySum, currentWave.waveEnemySum);
+            gameUIManager.CurrentWaveText(currentWaveIdx);
+            gameUIManager.WaveRewardText(currentWave.rewardCost);
 
             // ウェーブ内の全てのレベルを生成するまでループ
             for (int level = 0; level < currentWave.waveLevels.Length; level++)
@@ -77,7 +82,7 @@ public class WaveSpawner : MonoBehaviour
             {
                 Debug.Log("全ての敵が全滅したので次のウェーブへ移行");
                 costManager.AddCost(currentWave.rewardCost);
-                rewardCostText.text = "+" + currentWave.rewardCost;
+                gameUIManager.WaveRewardText(currentWave.rewardCost);
                 yield return new WaitForSeconds(3.0f);
             }
             else
@@ -101,6 +106,6 @@ public class WaveSpawner : MonoBehaviour
     public void DecreaseEnemySum()
     {
         currentWaveEnemySum--;
-        currentEnemyCntText.text = $"{currentWaveEnemySum} / {stages[0].waveData[currentWaveIdx].waveEnemySum}";
+        gameUIManager.WaveEnemyCntText(currentWaveEnemySum, stages[0].waveData[currentWaveIdx].waveEnemySum);
     }
 }

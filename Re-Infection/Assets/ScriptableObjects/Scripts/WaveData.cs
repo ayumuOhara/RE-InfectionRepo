@@ -9,19 +9,20 @@ public class WaveData : ScriptableObject
     public int rewardCost;           // ウェーブクリア後に獲得できるコスト
     public bool bossWave;            // ボスウェーブか
 
-    public int waveEnemySum => SpawnEnemySum(); // ウェーブ内の敵の合計数
-
     // ウェーブ内の敵の合計数を返す
-    int SpawnEnemySum()
+    public int waveEnemySum
     {
-        int sum = 0;
-        foreach (WaveLevel waveLevel in waveLevels)
+        get
         {
-            foreach(LevelStats levelStats in waveLevel.levelStats)
+            int sum = 0;
+            foreach (WaveLevel waveLevel in waveLevels)
             {
-                sum += levelStats.spawnCnt;
+                foreach (LevelStats levelStats in waveLevel.levelStats)
+                {
+                    sum += levelStats.spawnCnt;
+                }
             }
+            return sum;
         }
-        return sum;
     }
 }

@@ -3,13 +3,16 @@ using System.Collections.Generic;
 
 public class InfectioningUnit : MonoBehaviour
 {
-    [SerializeField] VirusStats virusStats;
     UnitManager unitManager;
+
+    [SerializeField] VirusStats virusStats;
     List<UnitController> targetUnits = new List<UnitController>();
+
+    const float VISUAL_RANGE = 1.7f;
 
     private void Awake()
     {
-        transform.localScale = new Vector3(virusStats.infectionRange * 1.4f, virusStats.infectionRange * 1.4f);
+        transform.localScale = new Vector3(virusStats.infectionRange * VISUAL_RANGE, virusStats.infectionRange * VISUAL_RANGE);
 
         unitManager = GameObject.Find("UnitManager").GetComponent<UnitManager>();
     }

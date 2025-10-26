@@ -3,20 +3,17 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] WaveSpawner waveSpawner;
-    [SerializeField] CastleWallManager castleWallManager;
-    [SerializeField] UnitManager unitManager;
-
-    [SerializeField] Image resultUI;
-    [SerializeField] Image clearUI;
-    [SerializeField] Image failedUI;
+    public WaveSpawner waveSpawner {  get; private set; }
+    public CastleWallManager castleWallManager {  get; private set; }
+    public UnitManager unitManager {  get; private set; }
 
     void Awake()
     {
         Application.targetFrameRate = 120;
-        resultUI.gameObject.SetActive(false);
-        clearUI.gameObject.SetActive(false);
-        failedUI.gameObject.SetActive(false);
+
+        waveSpawner = GameObject.Find("WaveSpawner").GetComponent<WaveSpawner>();
+        castleWallManager = GameObject.Find("CastleWall").GetComponent <CastleWallManager>();
+        unitManager = GameObject.Find("UnitManager").GetComponent<UnitManager>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -28,18 +25,6 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (waveSpawner.isStageCompleted)
-        {
-            Debug.Log("Stage Completed !!");
-            resultUI.gameObject.SetActive(true);
-            clearUI.gameObject.SetActive(true);
-        }
 
-        if (castleWallManager.isBreak)
-        {
-            Debug.Log("Stage Failed ...");
-            resultUI.gameObject.SetActive(true);
-            failedUI.gameObject.SetActive(true);
-        }
     }
 }
