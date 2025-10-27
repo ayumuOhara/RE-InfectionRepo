@@ -62,14 +62,12 @@ public class UnitManager : MonoBehaviour
         return corpseUnitList;
     }
 
-    public void WaveEnd()
+    // プレイヤーのユニットを全て除外
+    public void AllPlayerUnitDestroy()
     {
-        List<GameObject> unitObjs = new List<GameObject>();
+        foreach (UnitController unit in playerUnitList)
+            Destroy(unit.gameObject);
 
-        while(playerUnitList.Count > 0)
-            RemoveUnitList(playerUnitList[0], UnitGroup.Player);
-
-        foreach (GameObject unit in unitObjs)
-            Destroy(unit);
+        playerUnitList.Clear();
     }
 }

@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 
 [System.Serializable]
 public class Stage
@@ -89,7 +90,7 @@ public class WaveSpawner : MonoBehaviour
             {
                 Debug.Log("全ての敵が全滅したので次のウェーブへ移行");
                 Reward(currentWave);
-                unitManager.WaveEnd();
+                unitManager.AllPlayerUnitDestroy();
                 yield return new WaitForSeconds(3.0f);
             }
         }
@@ -108,7 +109,16 @@ public class WaveSpawner : MonoBehaviour
     // ウェーブクリア報酬
     void Reward(WaveData currentWave)
     {
-        costManager.AddCost(currentWave.rewardCost);
+        var units = unitManager.GetUnitList(UnitGroup.Player);
+
+        var unitCnt = 0;
+        foreach (var unit in units)
+        {
+            if (!unit.isInfection)
+                unitCnt++;
+        }
+
+        costManager.AddCost(currentWave.rewardCost + unitCnt);
         gameUIManager.WaveRewardText(currentWave.rewardCost);
     }
 
