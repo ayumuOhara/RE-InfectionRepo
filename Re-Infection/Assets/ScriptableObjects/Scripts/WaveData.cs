@@ -9,7 +9,7 @@ public class WaveData : ScriptableObject
     public int rewardCost;           // ウェーブクリア後に獲得できるコスト
     public bool bossWave;            // ボスウェーブか
 
-    // ウェーブ内の敵の合計数を返す
+    // ウェーブ内の敵の数
     public int waveEnemySum
     {
         get
@@ -24,5 +24,7 @@ public class WaveData : ScriptableObject
             }
             return sum;
         }
+
+        private set { }
     }
 }

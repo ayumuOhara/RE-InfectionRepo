@@ -886,7 +886,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 176127838}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 603382}
+        m_TargetAssemblyTypeName: InGameUIManager, Assembly-CSharp
+        m_MethodName: OnLoadScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: MainScene
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &176127838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1357,7 +1369,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 243482435}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 603382}
+        m_TargetAssemblyTypeName: InGameUIManager, Assembly-CSharp
+        m_MethodName: OnLoadScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: TitleScene
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &243482435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3328,7 +3352,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f6cec876e9f43646ab1a4a742e33bf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnitManager
-  waveSpawner: {fileID: 1750744198}
 --- !u!4 &771487441
 Transform:
   m_ObjectHideFlags: 0
@@ -4511,7 +4534,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -405.20923, y: 1193.8022}
+  m_AnchoredPosition: {x: -405.20923, y: 1201}
   m_SizeDelta: {x: 250, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1059563277
@@ -5708,7 +5731,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1334299552}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 603382}
+        m_TargetAssemblyTypeName: InGameUIManager, Assembly-CSharp
+        m_MethodName: OnLoadScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: MainScene
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1334299552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6355,8 +6390,8 @@ RectTransform:
   m_Children:
   - {fileID: 1188110957}
   - {fileID: 1059563276}
-  - {fileID: 946179839}
   - {fileID: 2144471215}
+  - {fileID: 946179839}
   - {fileID: 1977669769}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7222,6 +7257,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: bb04900f178d24b4eae5d0a1bca8bfbf, type: 2}
     - {fileID: 11400000, guid: 133d3c4662c463446b1a4bffbb200186, type: 2}
     - {fileID: 11400000, guid: d604835c5fd244d48af241e6c58d1eb5, type: 2}
+    - {fileID: 11400000, guid: af4b30a72c0c0b24793b128dbd8c56cf, type: 2}
   unitObj: {fileID: 6379689990235951777, guid: 206dd7b120d2598459d6433f407e1710, type: 3}
   spawnPos: {x: 0, y: 5, z: 0}
 --- !u!4 &1750744199
@@ -8563,7 +8599,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -490, y: 1100}
+  m_AnchoredPosition: {x: -490, y: 1107.1978}
   m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2144471216

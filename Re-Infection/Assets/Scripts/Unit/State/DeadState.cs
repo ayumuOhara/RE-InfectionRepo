@@ -14,14 +14,12 @@ public class DeadState : IUnitState
 
     public void Enter()
     {
-        unitController.unitManager.RemoveUnitList(unitController, unitController.group);
-        unitController.InstanceObjHeadUp(unitController.deadIconPrefab);
+        Dead();
 
-        if (unitController.group == UnitGroup.Enemy)
+        if (unitController.group == UnitGroup.Enemy && !unitController.bossUnit)
         {
             if (unitController.isInfection)
             {
-                unitController.unitManager.RemoveCorpseList(unitController);
                 unitController.gameObject.SetActive(false);
             }
 
@@ -43,11 +41,22 @@ public class DeadState : IUnitState
 
     public void Exit()
     {
+        // •œŠˆ‚Ìˆ—
         unitController.unitManager.RemoveCorpseList(unitController);
         unitController.unitManager.AddUnitList(unitController, UnitGroup.Player);
 
         SpriteRenderer sr = unitController.gameObject.GetComponent<SpriteRenderer>();
         sr.sprite = unitController.unitSprite;
+    }
+
+    // €–S
+    void Dead()
+    {
+        unitController.unitManager.RemoveUnitList(unitController, unitController.group);
+        unitController.InstanceObjHeadUp(unitController.deadIconPrefab);
+        
+        if(unitController.group == UnitGroup.Enemy)
+            unitController.waveSpawner.DecreaseEnemySum();
     }
 
     // ŠÔ‚É’B‚µ‚½‚çŠ´õ‚³‚¹‚é

@@ -13,6 +13,7 @@ public class WaveSpawner : MonoBehaviour
 {
     InGameUIManager gameUIManager; // UI管理マネージャ
     CostManager costManager;
+    UnitManager unitManager;
 
     [SerializeField] Stage[] stages;            // ステージのデータ
     [SerializeField] GameObject unitObj;
@@ -30,6 +31,7 @@ public class WaveSpawner : MonoBehaviour
     {
         gameUIManager = GameObject.Find("InGameUIManager").GetComponent<InGameUIManager>();
         costManager = GameObject.Find("CostManager").GetComponent<CostManager>();
+        unitManager = GameObject.Find("UnitManager").GetComponent<UnitManager>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -78,16 +80,17 @@ public class WaveSpawner : MonoBehaviour
             currentWaveIdx++;
 
             // 最終ウェーブの場合、即終了する
-            if (currentWaveIdx < stages[0].waveData.Length)
+            if (currentWave.bossWave)
             {
-                Debug.Log("全ての敵が全滅したので次のウェーブへ移行");
-                costManager.AddCost(currentWave.rewardCost);
-                gameUIManager.WaveRewardText(currentWave.rewardCost);
-                yield return new WaitForSeconds(3.0f);
+                yield break;
+
             }
             else
             {
-                yield break;
+                Debug.Log("全ての敵が全滅したので次のウェーブへ移行");
+                Reward(currentWave);
+                unitManager.WaveEnd();
+                yield return new WaitForSeconds(3.0f);
             }
         }
     }
@@ -100,6 +103,13 @@ public class WaveSpawner : MonoBehaviour
         GameObject obj = Instantiate(unitObj, spawnPos, Quaternion.identity);
         UnitController uc = obj.GetComponent<UnitController>();
         uc.SetUnitStats(unitStats, UnitGroup.Enemy);    // 生成したユニットにステータスを代入
+    }
+
+    // ウェーブクリア報酬
+    void Reward(WaveData currentWave)
+    {
+        costManager.AddCost(currentWave.rewardCost);
+        gameUIManager.WaveRewardText(currentWave.rewardCost);
     }
 
     // ウェーブの敵の残りの合計数を減らす

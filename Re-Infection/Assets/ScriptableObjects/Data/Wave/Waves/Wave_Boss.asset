@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a13b8b7d745f9774ca90705af610f89e, type: 3}
-  m_Name: Wave_3
+  m_Name: Wave_Boss
   m_EditorClassIdentifier: Assembly-CSharp::WaveData
   waveLevels:
-  - {fileID: 11400000, guid: f73acad2b02bed544a1455a0e42ce54f, type: 2}
-  - {fileID: 11400000, guid: 885aa11e86302a544af0558acb5b4b66, type: 2}
-  - {fileID: 11400000, guid: 31ef8d26bea859847b73620c8d4ec8b6, type: 2}
-  spawnInterbal: 15
+  - {fileID: 11400000, guid: 5ecdcd78af41a9d479a87fdd01da7924, type: 2}
+  - {fileID: 11400000, guid: 9794fbfd8abb3ab4f9e4b611211de6e0, type: 2}
+  - {fileID: 11400000, guid: 858731dd3e8690241b752d2bf057827f, type: 2}
+  spawnInterbal: 20
   rewardCost: 0
+  bossWave: 1

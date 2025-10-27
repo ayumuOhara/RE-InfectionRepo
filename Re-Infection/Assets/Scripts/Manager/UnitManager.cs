@@ -1,10 +1,9 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Unity.Burst.Intrinsics;
 
 public class UnitManager : MonoBehaviour
 {
-    [SerializeField] WaveSpawner waveSpawner;
-
     public List<UnitController> playerUnitList { get; private set; } = new List<UnitController>();    // プレイヤーユニット格納リスト
     public List<UnitController> enemyUnitList { get; private set; } = new List<UnitController>();     // エネミーユニット格納リスト
     public List<UnitController> corpseUnitList { get; private set; } = new List<UnitController>();    // 死体ユニット格納リスト
@@ -22,24 +21,21 @@ public class UnitManager : MonoBehaviour
     public bool IsAllEnemyDefeated => enemyUnitList.Count <= 0;
 
     // ユニットをリストに追加
-    public void AddUnitList(UnitController unitObj, UnitGroup group)
+    public void AddUnitList(UnitController unit, UnitGroup group)
     {
         if(group == UnitGroup.Player)
-            playerUnitList.Add(unitObj);
+            playerUnitList.Add(unit);
         if(group == UnitGroup.Enemy)
-            enemyUnitList.Add(unitObj);
+            enemyUnitList.Add(unit);
     }
 
     // ユニットをリストから削除
-    public void RemoveUnitList(UnitController unitObj, UnitGroup group)
+    public void RemoveUnitList(UnitController unit, UnitGroup group)
     {
         if (group == UnitGroup.Player)
-            playerUnitList.Remove(unitObj);
+            playerUnitList.Remove(unit);
         if (group == UnitGroup.Enemy)
-        {
-            enemyUnitList.Remove(unitObj);
-            waveSpawner.DecreaseEnemySum();
-        }
+            enemyUnitList.Remove(unit);
     }
 
     // ユニットのリストを返す
@@ -49,15 +45,15 @@ public class UnitManager : MonoBehaviour
     }
 
     // 死体リストに追加
-    public void AddCorpseList(UnitController unitObj)
+    public void AddCorpseList(UnitController unit)
     {
-        corpseUnitList.Add(unitObj);
+        corpseUnitList.Add(unit);
     }
 
     // 死体リストから削除
-    public void RemoveCorpseList(UnitController unitObj)
+    public void RemoveCorpseList(UnitController unit)
     {
-        corpseUnitList.Remove(unitObj);
+        corpseUnitList.Remove(unit);
     }
 
     // 死体のリストを返す
@@ -66,9 +62,14 @@ public class UnitManager : MonoBehaviour
         return corpseUnitList;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void WaveEnd()
     {
+        List<GameObject> unitObjs = new List<GameObject>();
 
+        while(playerUnitList.Count > 0)
+            RemoveUnitList(playerUnitList[0], UnitGroup.Player);
+
+        foreach (GameObject unit in unitObjs)
+            Destroy(unit);
     }
 }

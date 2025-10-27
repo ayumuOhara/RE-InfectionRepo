@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class InGameUIManager : MonoBehaviour
 {
@@ -52,7 +53,7 @@ public class InGameUIManager : MonoBehaviour
     // 敵の合計数テキスト
     public void WaveEnemyCntText(int currentCnt, int maxCnt)
     {
-        currentEnemyCntText.text = $"{currentCnt} / {currentCnt}";
+        currentEnemyCntText.text = $"{currentCnt} / {maxCnt}";
     }
 
     // 現在のウェーブテキスト
@@ -65,5 +66,11 @@ public class InGameUIManager : MonoBehaviour
     public void WaveRewardText(int value)
     {
         rewardCostText.text = "+" + value;
+    }
+
+    // シーンロード
+    public void OnLoadScene(string name)
+    {
+        SceneManager.LoadSceneAsync(name);
     }
 }

@@ -15,6 +15,7 @@ public enum UnitGroup
 public class UnitController : MonoBehaviour
 {
     public UnitManager unitManager { get; private set; }
+    public WaveSpawner waveSpawner { get; private set; }
     UnitStateManager unitStateManager;
 
     // 一番近いターゲットオブジェクト
@@ -46,6 +47,7 @@ public class UnitController : MonoBehaviour
     public float range { get; private set; }       // 攻撃距離
     public float infecitonTime { get; private set; }  // 感染するまでの時間
     public bool isInfection { get; private set; }   // 一度感染したか
+    public bool bossUnit { get; private set; }      // ボスか
     public bool isDead => currentHp <= 0;
 
     // 初期化
@@ -64,6 +66,7 @@ public class UnitController : MonoBehaviour
         moveSpeed = stats.moveSpeed * 0.1f;
         range = stats.range;
         infecitonTime = stats.infecitonTime;
+        bossUnit = stats.bossUnit;
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -74,6 +77,7 @@ public class UnitController : MonoBehaviour
         castleObj = GameObject.Find("CastleWall").gameObject;
         unitManager = GameObject.Find("UnitManager").GetComponent<UnitManager>();
         unitManager.AddUnitList(this, group);
+        waveSpawner = GameObject.Find("WaveSpawner").GetComponent<WaveSpawner>();
 
         unitStateManager = new UnitStateManager(this);
     }

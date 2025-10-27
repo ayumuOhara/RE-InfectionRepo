@@ -13,4 +13,5 @@ public class UnitStats : ScriptableObject
     public float range;                 // 射程距離
     public int summonCost;              // 召喚コスト
     public float infecitonTime;         // 感染するまでの時間
+    public bool bossUnit;               // ボスか
 }

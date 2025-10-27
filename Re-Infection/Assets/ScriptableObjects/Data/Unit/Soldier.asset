@@ -19,8 +19,6 @@ MonoBehaviour:
   atk: 10
   atkInterbal: 2
   moveSpeed: 2
-  range: 0.6
+  range: 0.5
   summonCost: 1
   infecitonTime: 10
-  infectioningLifeTime: 60
-  deleteTime: 30
