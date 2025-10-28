@@ -18,3 +18,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 919b494a59fae6548a63b38fef9f112e, type: 2}
   spawnInterbal: 10
   rewardCost: 10
+  bossWave: 0

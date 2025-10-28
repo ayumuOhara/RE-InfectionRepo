@@ -15,10 +15,11 @@ MonoBehaviour:
   unitId: 0
   unitSprite: {fileID: 21300008, guid: f5f1c19ce87450f4b97f8b363746558d, type: 3}
   unitName: "\u91CD\u88C5\u5175"
-  maxHp: 140
-  atk: 7
-  atkInterbal: 6
+  maxHp: 150
+  atk: 10
+  atkInterbal: 7
   moveSpeed: 2
   range: 0.1
   summonCost: 1
   infecitonTime: 10
+  bossUnit: 0

@@ -23,6 +23,8 @@ public class WaveSpawner : MonoBehaviour
     int currentWaveIdx = 0;      // 現在のウェーブ
     int currentWaveEnemySum = 0; // 現在のウェーブの敵の残りの合計数
 
+    const int NEXT_WAVE_START_CNT = 3;
+
     // ウェーブ内の敵を全て倒したか
     public bool isAllEnemyDefeatedInWave => currentWaveEnemySum <= 0;
     // ステージクリアフラグ
@@ -53,6 +55,21 @@ public class WaveSpawner : MonoBehaviour
             gameUIManager.WaveEnemyCntText(currentWaveEnemySum, currentWave.waveEnemySum);
             gameUIManager.CurrentWaveText(currentWaveIdx);
             gameUIManager.WaveRewardText(currentWave.rewardCost);
+
+            float waveStartTimer = NEXT_WAVE_START_CNT;
+            while(waveStartTimer > 0)
+            {
+                gameUIManager.OnDisplayNextWaveUI();
+                waveStartTimer -= Time.deltaTime;
+                gameUIManager.CountDownText((int)waveStartTimer + 1);
+                float amount = (float)waveStartTimer / NEXT_WAVE_START_CNT;
+                gameUIManager.NextWaveTimerGauge(amount);
+
+                yield return null;
+            }
+            gameUIManager.WaveStartText();
+            yield return new WaitForSeconds(0.75f);
+            gameUIManager.OffDisplayNextWaveUI();
 
             // ウェーブ内の全てのレベルを生成するまでループ
             for (int level = 0; level < currentWave.waveLevels.Length; level++)
@@ -91,7 +108,6 @@ public class WaveSpawner : MonoBehaviour
                 Debug.Log("全ての敵が全滅したので次のウェーブへ移行");
                 Reward(currentWave);
                 unitManager.AllPlayerUnitDestroy();
-                yield return new WaitForSeconds(3.0f);
             }
         }
     }
