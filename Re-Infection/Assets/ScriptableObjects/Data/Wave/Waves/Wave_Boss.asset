@@ -15,6 +15,6 @@ MonoBehaviour:
   waveLevels:
   - {fileID: 11400000, guid: 5ecdcd78af41a9d479a87fdd01da7924, type: 2}
   - {fileID: 11400000, guid: 9794fbfd8abb3ab4f9e4b611211de6e0, type: 2}
-  spawnInterbal: 20
+  spawnInterbal: 40
   rewardCost: 0
   bossWave: 1

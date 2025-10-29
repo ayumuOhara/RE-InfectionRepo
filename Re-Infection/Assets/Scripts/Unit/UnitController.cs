@@ -83,7 +83,7 @@ public class UnitController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         unitStateManager.StateTransition();
         unitStateManager.StateMachine.Update();

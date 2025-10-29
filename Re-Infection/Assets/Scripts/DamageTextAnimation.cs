@@ -15,7 +15,7 @@ public class DamageTextAnimation : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         var journeyFraction = (Time.time - startTime) / animDuration;
         transform.localPosition = Vector3.Lerp(startPos, startPos + endPos, journeyFraction);

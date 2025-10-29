@@ -10,6 +10,7 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] Canvas resultUI;
     [SerializeField] Canvas clearUI;
     [SerializeField] Canvas failedUI;
+    [SerializeField] Canvas retireUI;
 
     [SerializeField] Canvas nextWaveUI;
 
@@ -29,10 +30,11 @@ public class InGameUIManager : MonoBehaviour
         clearUI.enabled = false;
         failedUI.enabled = false;
         nextWaveUI.enabled = false;
+        retireUI.enabled = false;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (gameManager.waveSpawner.isStageCompleted)
         {
@@ -95,6 +97,30 @@ public class InGameUIManager : MonoBehaviour
     public void WaveRewardText(int value)
     {
         rewardCostText.text = "+" + value;
+    }
+
+    // リタイアボタン(確認)
+    public void OnRetireVerified()
+    {
+        retireUI.enabled = true;
+
+        if(!gameManager.timeManager.isPause)
+            gameManager.timeManager.GamePause();
+    }
+
+    // リタイアキャンセル
+    public void OnRetireCanceled()
+    {
+        retireUI.enabled = false;
+
+        if (gameManager.timeManager.isPause)
+            gameManager.timeManager.GamePause();
+    }
+
+    // リタイアボタン(決定)
+    public void OnRetireDecision()
+    {
+        SceneManager.LoadSceneAsync("MainScene");
     }
 
     // シーンロード

@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour
     public WaveSpawner waveSpawner {  get; private set; }
     public CastleWallManager castleWallManager {  get; private set; }
     public UnitManager unitManager {  get; private set; }
+    public CostManager costManager { get; private set; }
+    public TimeManager timeManager { get; private set; }
 
     void Awake()
     {
@@ -14,6 +16,8 @@ public class GameManager : MonoBehaviour
         waveSpawner = GameObject.Find("WaveSpawner").GetComponent<WaveSpawner>();
         castleWallManager = GameObject.Find("CastleWall").GetComponent <CastleWallManager>();
         unitManager = GameObject.Find("UnitManager").GetComponent<UnitManager>();
+        costManager = GameObject.Find("CostManager").GetComponent<CostManager>();
+        timeManager = GameObject.Find("TimeManager").GetComponent<TimeManager>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

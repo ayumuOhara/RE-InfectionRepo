@@ -8,30 +8,31 @@ public class UnitIconClick : MonoBehaviour, IPointerClickHandler
     [SerializeField] UnitStats unitStats;
     [SerializeField] GameObject unitObj;
 
-    CostManager costManager;
+    GameManager gameManager;
 
     Vector3 spawnPos = new Vector3(0, -1.0f, 0);  // プレイヤーユニットの生成座標
 
     void Start()
     {
-        costManager = GameObject.Find("CostManager").GetComponent<CostManager>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (eventData.button == PointerEventData.InputButton.Left)
-        {
-            if (costManager.EnoughCost(unitStats.summonCost))
-                GenerateUnit();
-            else
-                Debug.Log("コストが足りません");
-        }
+        if(!gameManager.timeManager.isPause)
+            if (eventData.button == PointerEventData.InputButton.Left)
+            {
+                if (gameManager.costManager.EnoughCost(unitStats.summonCost))
+                    GenerateUnit();
+                else
+                    Debug.Log("コストが足りません");
+            }
     }
 
     // ユニット生成
     void GenerateUnit()
     {
-        costManager.RemoveCost(unitStats.summonCost);
+        gameManager.costManager.RemoveCost(unitStats.summonCost);
 
         spawnPos.x = Random.Range(-1.7f, 1.7f);
 
