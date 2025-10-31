@@ -15,7 +15,7 @@ public class PlayerUnitDecider : IUnitAIDecider
             return UnitDicision.Dead;
         else
             if (unitController.targetObj != null)
-                if (unitController.targetDistance <= unitController.range)  // “G‚Æ‚Ì‹——£‚ªŽË’ö“à‚©
+                if (GetTarget.TargetInRange(unitController.targetObj.transform.position, unitController.gameObject.transform.position, unitController.range))  // “G‚Æ‚Ì‹——£‚ªŽË’ö“à‚©
                     return UnitDicision.Attack; // UŒ‚‚·‚é
                 else
                     return UnitDicision.MoveToTarget; // ƒ^[ƒQƒbƒg‚Ü‚ÅˆÚ“®

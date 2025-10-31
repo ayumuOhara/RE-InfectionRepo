@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
 public class InfectioningUnit : MonoBehaviour
@@ -6,7 +7,6 @@ public class InfectioningUnit : MonoBehaviour
     UnitManager unitManager;
 
     [SerializeField] VirusStats virusStats;
-    List<UnitController> targetUnits = new List<UnitController>();
 
     const float VISUAL_RANGE = 1.7f;
 
@@ -20,7 +20,7 @@ public class InfectioningUnit : MonoBehaviour
     async void OnEnable()
     {
         await WaitEndDrag.WaitDragEndAsync();
-        targetUnits = new List<UnitController>(unitManager.GetCorpseList());
+        var targetUnits = new List<UnitController>(unitManager.GetCorpseList());
 
         if (targetUnits.Count <= 0 || targetUnits == null)
         {
@@ -28,15 +28,25 @@ public class InfectioningUnit : MonoBehaviour
         }
         else
         {
-            foreach (UnitController target in targetUnits)
+            StartCoroutine(AllTargetInfection(targetUnits));
+        }
+    }
+
+    // 取得したターゲットを感染
+    IEnumerator AllTargetInfection(List<UnitController> targetUnits)
+    {
+        foreach (UnitController target in targetUnits)
+        {
+            // 範囲内にいるターゲット全てに感染
+            if (GetTarget.TargetInRange(target.gameObject.transform.position, transform.position, virusStats.infectionRange))
             {
-                if (Vector3.Distance(target.gameObject.transform.position, transform.position) < virusStats.infectionRange)
-                {
-                    target.Infection();
-                }
+                target.Infection();
             }
+
+            yield return null;
         }
 
+        // 処理終了後、非アクティブ化
         gameObject.SetActive(false);
     }
 }

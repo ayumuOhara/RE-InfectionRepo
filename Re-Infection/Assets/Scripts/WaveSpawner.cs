@@ -52,6 +52,7 @@ public class WaveSpawner : MonoBehaviour
 
             currentWaveEnemySum = currentWave.waveEnemySum;
 
+            // UI変更
             gameUIManager.WaveEnemyCntText(currentWaveEnemySum, currentWave.waveEnemySum);
             gameUIManager.CurrentWaveText(currentWaveIdx);
             gameUIManager.WaveRewardText(currentWave.rewardCost);
@@ -59,12 +60,7 @@ public class WaveSpawner : MonoBehaviour
             float waveStartTimer = NEXT_WAVE_START_CNT;
             while(waveStartTimer > 0)
             {
-                gameUIManager.OnDisplayNextWaveUI();
-                waveStartTimer -= Time.deltaTime;
-                gameUIManager.CountDownText((int)waveStartTimer + 1);
-                float amount = (float)waveStartTimer / NEXT_WAVE_START_CNT;
-                gameUIManager.NextWaveTimerGauge(amount);
-
+                StartCntDown(waveStartTimer);
                 yield return null;
             }
             gameUIManager.WaveStartText();
@@ -120,6 +116,16 @@ public class WaveSpawner : MonoBehaviour
         GameObject obj = Instantiate(unitObj, spawnPos, Quaternion.identity);
         UnitController uc = obj.GetComponent<UnitController>();
         uc.SetUnitStats(unitStats, UnitGroup.Enemy);    // 生成したユニットにステータスを代入
+    }
+
+    // ウェーブ開始カウントダウン
+    void StartCntDown(float waveStartTimer)
+    {
+        gameUIManager.OnDisplayNextWaveUI();
+        waveStartTimer -= Time.deltaTime;
+        gameUIManager.CountDownText((int)waveStartTimer + 1);
+        float amount = (float)waveStartTimer / NEXT_WAVE_START_CNT;
+        gameUIManager.NextWaveTimerGauge(amount);
     }
 
     // ウェーブクリア報酬

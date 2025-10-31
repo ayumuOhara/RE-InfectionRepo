@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public static class GetTarget
 {
@@ -34,5 +35,11 @@ public static class GetTarget
         }
 
         return nearestObj;
+    }
+
+    // ターゲットが範囲内かどうか
+    public static bool TargetInRange(Vector3 targetPos, Vector3 pos, float range)
+    {
+        return Vector3.Distance(targetPos, pos) < range;
     }
 }

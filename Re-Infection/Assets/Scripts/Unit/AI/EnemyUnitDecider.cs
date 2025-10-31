@@ -15,11 +15,11 @@ public class EnemyUnitDecider : IUnitAIDecider
             return UnitDicision.Dead;
         else
             if (unitController.targetObj != null)
-                if (unitController.targetDistance <= unitController.range)  // “G‚Æ‚Ì‹——£‚ªŽË’ö“à‚©
+                if (GetTarget.TargetInRange(unitController.targetPos, unitController.myPos, unitController.range))  // “G‚Æ‚Ì‹——£‚ªŽË’ö“à‚©
                     return UnitDicision.Attack; // UŒ‚‚·‚é
                 else
                     return UnitDicision.MoveToTarget; // ƒ^[ƒQƒbƒg‚Ü‚ÅˆÚ“®
-            else if (unitController.castleDistance <= unitController.range) // ‹’“_‚Æ‚Ì‹——£‚ªŽË’ö“à‚©
+            else if (GetTarget.TargetInRange(unitController.castlePos, unitController.myPos, unitController.range)) // ‹’“_‚Æ‚Ì‹——£‚ªŽË’ö“à‚©
                 return UnitDicision.Attack; // UŒ‚‚·‚é
             else
                 return UnitDicision.MoveToCastle; // ‹’“_‚Ü‚ÅˆÚ“®

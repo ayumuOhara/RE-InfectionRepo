@@ -20,12 +20,14 @@ public class UnitController : MonoBehaviour
 
     // 一番近いターゲットオブジェクト
     public GameObject targetObj => GetTarget.GetTargetObj(group == UnitGroup.Player ? UnitGroup.Enemy : UnitGroup.Player, transform.position);
-    // ターゲットとの距離
-    public float targetDistance => Vector3.Distance(targetObj.transform.position, transform.position);
     // 拠点オブジェクト
     public GameObject castleObj { get; private set; }
-    // 拠点との距離
-    public float castleDistance => Vector3.Distance(castleObj.transform.position, transform.position);
+    // 自機座標(参照用)
+    public Vector3 myPos => transform.position;
+    // ターゲットオブジェクト座標
+    public Vector3 targetPos => targetObj.transform.position;
+    // 拠点オブジェクト座標
+    public Vector3 castlePos => castleObj.transform.position;
 
     [SerializeField] public GameObject unitUI;            // ユニット専用UIオブジェクト
     [SerializeField] public Image infectionRateGauge;     // 感染度ゲージ
@@ -108,8 +110,12 @@ public class UnitController : MonoBehaviour
         currentHp -= damage;
 
         GameObject textObj = InstanceObjHeadUp(damageTextPrefab);
-        
-        // ダメージを表示する
+        DrawDamage(textObj, damage);
+    }
+
+    // ダメージ表示
+    void DrawDamage(GameObject textObj, float damage)
+    {
         TextMeshProUGUI damageText = textObj.GetComponent<TextMeshProUGUI>();
         damageText.text = damage.ToString();
     }
