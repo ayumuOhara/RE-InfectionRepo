@@ -1,5 +1,6 @@
-using UnityEngine;
+Ôªøusing UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class DragIconController : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
@@ -7,16 +8,34 @@ public class DragIconController : MonoBehaviour, IBeginDragHandler, IDragHandler
     private Canvas canvas;
     private CanvasGroup canvasGroup;
     private Vector3 originalPosition;
+    private Image image;
+
+    public Color originalColor;
 
     void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
         canvas = GetComponentInParent<Canvas>();
         canvasGroup = GetComponent<CanvasGroup>();
+        image = GetComponent<Image>();
+
+        Image img = GetComponent<Image>();
+        if (img != null)
+        {
+            originalColor = img.color;
+        }
+       
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (!canvasGroup.interactable || DroppedSpriteRegistry.IsDropped(image.sprite))
+        {
+            canvasGroup.blocksRaycasts = true;
+            eventData.pointerDrag = null;
+           
+        }
+
         originalPosition = rectTransform.localPosition;
         canvasGroup.alpha = 0.6f;
         canvasGroup.blocksRaycasts = false;
@@ -28,7 +47,7 @@ public class DragIconController : MonoBehaviour, IBeginDragHandler, IDragHandler
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             canvas.transform as RectTransform,
             eventData.position,
-            null, // Å© OverlayÇ»ÇÁnull
+            null, // ‚Üê Overlay„Å™„Çânull
             out localPoint
         );
 
