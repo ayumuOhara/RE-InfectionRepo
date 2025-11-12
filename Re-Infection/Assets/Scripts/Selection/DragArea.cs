@@ -6,8 +6,6 @@ public class DropArea : MonoBehaviour, IDropHandler
 {
     [SerializeField] private Transform dropTargetParent;
 
-    public UnitStats currentUnitStats; //ドロップされたユニットのステータス
-
     public void OnDrop(PointerEventData eventData)
     {
         GameObject dropped = eventData.pointerDrag;
@@ -75,6 +73,7 @@ public class DropArea : MonoBehaviour, IDropHandler
             cloneGroup.interactable = false;
             cloneGroup.blocksRaycasts = false;
         }
+
         //UnitStatsを保持
         DragIconController droppedController = dropped.GetComponent<DragIconController>();
         if (droppedController!=null)
@@ -86,6 +85,7 @@ public class DropArea : MonoBehaviour, IDropHandler
         {
             currentUnitStats = null;
         }
+        
         // 🚫 同じSpriteを持つPrefabをすべてドラッグ禁止＆グレーアウト
         foreach (var drag in allDrags)
         {
