@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 684407857099160218}
   - component: {fileID: -622204109037465243}
   m_Layer: 5
-  m_Name: IconImage
+  m_Name: IconImage_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -61,14 +61,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9622642, g: 0.90323347, b: 0.022694906, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -5851231116886232993, guid: 47f4c9a1d571e2145bebbbc207d9195b, type: 3}
+  m_Sprite: {fileID: 21300004, guid: 5cf1b4629c7cb104e98d369448084abd, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -90,6 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c964ab10504994b81e67eee8bde5ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DragIconController
+  originalColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!61 &684407857099160218
 BoxCollider2D:
   m_ObjectHideFlags: 0
