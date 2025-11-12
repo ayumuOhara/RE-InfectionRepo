@@ -4,19 +4,13 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 
-[System.Serializable]
-public class Stage
-{
-    public WaveData[] waveData;       // ステージのウェーブデータ
-}
-
 public class WaveSpawner : MonoBehaviour
 {
     InGameUIManager gameUIManager; // UI管理マネージャ
     CostManager costManager;
     UnitManager unitManager;
 
-    [SerializeField] Stage[] stages;            // ステージのデータ
+    [SerializeField] Stage stage;            // ステージのデータ
     [SerializeField] GameObject unitObj;
     [SerializeField] Vector3 spawnPos;          // スポーン座標
 
@@ -28,7 +22,7 @@ public class WaveSpawner : MonoBehaviour
     // ウェーブ内の敵を全て倒したか
     public bool isAllEnemyDefeatedInWave => currentWaveEnemySum <= 0;
     // ステージクリアフラグ
-    public bool isStageCompleted => currentWaveIdx >= stages[0].waveData.Length;
+    public bool isStageCompleted => currentWaveIdx >= stage.waveData.Length;
 
     void Awake()
     {
@@ -48,13 +42,14 @@ public class WaveSpawner : MonoBehaviour
     {
         while (true)
         {
-            var currentWave = stages[0].waveData[currentWaveIdx]; // 現在のウェーブのデータ取得
+            var currentWave = stage.waveData[currentWaveIdx]; // 現在のウェーブのデータ取得
 
             currentWaveEnemySum = currentWave.waveEnemySum;
 
             // UI変更
-            gameUIManager.WaveEnemyCntText(currentWaveEnemySum, currentWave.waveEnemySum);
+            gameUIManager.WaveEnemyCntText(currentWaveEnemySum);
             gameUIManager.CurrentWaveText(currentWaveIdx);
+            gameUIManager.CurrentWaveProgress(currentWaveEnemySum, currentWaveEnemySum);
             gameUIManager.WaveRewardText(currentWave.rewardCost);
 
             float waveStartTimer = NEXT_WAVE_START_CNT;
@@ -76,7 +71,7 @@ public class WaveSpawner : MonoBehaviour
             for (int level = 0; level < currentWave.waveLevels.Length; level++)
             {
                 if(level != 0)
-                    yield return new WaitForSeconds(stages[0].waveData[currentWaveIdx].spawnInterbal);
+                    yield return new WaitForSeconds(stage.waveData[currentWaveIdx].spawnInterbal);
 
                 var currentLevel = currentWave.waveLevels[level];  // 現在のレベルのデータ取得
 
@@ -143,6 +138,7 @@ public class WaveSpawner : MonoBehaviour
     public void DecreaseEnemySum()
     {
         currentWaveEnemySum--;
-        gameUIManager.WaveEnemyCntText(currentWaveEnemySum, stages[0].waveData[currentWaveIdx].waveEnemySum);
+        gameUIManager.WaveEnemyCntText(currentWaveEnemySum);
+        gameUIManager.CurrentWaveProgress(currentWaveEnemySum, stage.waveData[currentWaveIdx].waveEnemySum);
     }
 }

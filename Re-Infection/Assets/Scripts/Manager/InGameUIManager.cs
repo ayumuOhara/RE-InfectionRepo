@@ -17,6 +17,7 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI currentWaveText;
     [SerializeField] TextMeshProUGUI rewardCostText;
     [SerializeField] TextMeshProUGUI currentEnemyCntText;
+    [SerializeField] Image currentWaveProgress;
 
     [SerializeField] TextMeshProUGUI cntDownText;
     [SerializeField] Image cntDownGauge;
@@ -52,15 +53,21 @@ public class InGameUIManager : MonoBehaviour
     }
 
     // 敵の合計数テキスト
-    public void WaveEnemyCntText(int currentCnt, int maxCnt)
+    public void WaveEnemyCntText(int value)
     {
-        currentEnemyCntText.text = $"{currentCnt} / {maxCnt}";
+        currentEnemyCntText.text = $"残り {value} 体";
     }
 
     // 現在のウェーブテキスト
     public void CurrentWaveText(int value)
     {
-        currentWaveText.text = "Wave " + (value + 1);
+        currentWaveText.text = "ウェーブ " + (value + 1);
+    }
+
+    // 現在のウェーブの進行度
+    public void CurrentWaveProgress(int value, int max)
+    {
+        currentWaveProgress.fillAmount = (float)value / max;
     }
 
     // 次ウェーブのUIを表示
