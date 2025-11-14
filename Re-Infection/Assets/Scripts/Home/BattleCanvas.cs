@@ -5,16 +5,14 @@ using UnityEngine.UI;
 
 public class BattleCanvas : MonoBehaviour
 {
+    public StageDataManager stageDataManager;
     public ScrollChecker scrollChecker;
 
     public Image[] stageImage; //ステートの画像スプライト配列
     public GameObject[] lookImage; //ステージのロック中の表示にスプライト
 
-
     public TextMeshProUGUI conditionsText; //ステージの解放条件を表示するテキスト
     public Button sortieButton; //出撃ボタン
-
-    public bool[] isStageClear; //ステージクリアフラグ配列
 
     int stageNumber = 0; //現在表示しているステージ番号
 
@@ -29,29 +27,38 @@ public class BattleCanvas : MonoBehaviour
 
         //最初にステージ1を表示
         scrollChecker.scrollSnap.GoToPanel(0);
-        isStageClear[0] = true; //ステージ1は最初から解放済み
+
     }
 
     // Update is called once per frame
     void Update()
     {
-       stageNumber = scrollChecker.GetStagePage(); //現在のステージ番号を取得
+        stageNumber = scrollChecker.GetStagePage(); //現在のステージ番号を取得
 
-        //そのステージがクリア済みか
-        if (isStageClear[stageNumber] == false)
+        //ステージ1のときは必ず出撃可能
+        if (stageNumber == 0)
+        {
+            lookImage[stageNumber].SetActive(false);
+            stageImage[stageNumber].color = new Color(1f, 1f, 1f, 1f);
+            conditionsText.gameObject.SetActive(false);
+            sortieButton.interactable = true;
+            return;
+        }
+        //前のステージがクリア済みか
+        if (stageDataManager.stage[stageNumber - 1].isClear == false)
         {
             lookImage[stageNumber].SetActive(true);
             conditionsText.text = $"ステージ{stageNumber}クリアで解放";
             conditionsText.gameObject.SetActive(true);
             sortieButton.interactable = false;
         }
-        else if (isStageClear[stageNumber] == true)//クリア済みなら
+        else if (stageDataManager.stage[stageNumber - 1].isClear == true)//クリア済みなら
         {
             lookImage[stageNumber].SetActive(false);
             stageImage[stageNumber].color = new Color(1f, 1f, 1f, 1f);
             conditionsText.gameObject.SetActive(false);
             sortieButton.interactable = true;
-           
+
         }
         else
         {
