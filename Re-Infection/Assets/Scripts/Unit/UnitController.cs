@@ -126,6 +126,11 @@ public class UnitController : MonoBehaviour
         DrawDamage(textObj, damage);
     }
 
+    public void DestroyUnit()
+    {
+        Destroy(gameObject);
+    }
+
     // ダメージ表示
     void DrawDamage(GameObject textObj, float damage)
     {
