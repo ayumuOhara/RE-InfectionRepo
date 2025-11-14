@@ -66,7 +66,7 @@ public class UnitManager : MonoBehaviour
     public void AllPlayerUnitDestroy()
     {
         foreach (UnitController unit in playerUnitList)
-            Destroy(unit.gameObject);
+            Destroy(unit);
 
         playerUnitList.Clear();
     }

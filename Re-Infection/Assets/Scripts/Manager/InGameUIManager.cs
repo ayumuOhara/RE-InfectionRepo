@@ -11,13 +11,15 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] Canvas clearUI;
     [SerializeField] Canvas failedUI;
     [SerializeField] Canvas retireUI;
-
     [SerializeField] Canvas nextWaveUI;
 
     [SerializeField] TextMeshProUGUI currentWaveText;
     [SerializeField] TextMeshProUGUI rewardCostText;
     [SerializeField] TextMeshProUGUI currentEnemyCntText;
     [SerializeField] Image currentWaveProgress;
+
+    [SerializeField] TextMeshProUGUI bossNameText;
+    [SerializeField] TextMeshProUGUI bossHealthText;
 
     [SerializeField] TextMeshProUGUI cntDownText;
     [SerializeField] Image cntDownGauge;
@@ -34,22 +36,20 @@ public class InGameUIManager : MonoBehaviour
         retireUI.enabled = false;
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    // ステージクリア処理
+    public void StageClear()
     {
-        if (gameManager.waveSpawner.isStageCompleted)
-        {
-            Debug.Log("Stage Completed !!");
-            resultUI.enabled = true;
-            clearUI.enabled = true;
-        }
+        Debug.Log("Stage Completed !!");
+        resultUI.enabled = true;
+        clearUI.enabled = true;
+    }
 
-        if (gameManager.castleWallManager.isBreak)
-        {
-            Debug.Log("Stage Failed ...");
-            resultUI.enabled = true;
-            failedUI.enabled = true;
-        }
+    // ステージ失敗処理
+    public void StageFailed()
+    {
+        Debug.Log("Stage Failed ...");
+        resultUI.enabled = true;
+        failedUI.enabled = true;
     }
 
     // 敵の合計数テキスト
@@ -58,10 +58,34 @@ public class InGameUIManager : MonoBehaviour
         currentEnemyCntText.text = $"残り {value} 体";
     }
 
+    // 敵の合計数テキスト表示
+    public void VisibleWaveEnemyCntText()
+    {
+        currentEnemyCntText.enabled = true;
+    }
+
+    // 敵の合計数テキスト非表示
+    public void InvisibleWaveEnemyCntText()
+    {
+        currentEnemyCntText.enabled = false;
+    }
+
     // 現在のウェーブテキスト
     public void CurrentWaveText(int value)
     {
         currentWaveText.text = "ウェーブ " + (value + 1);
+    }
+
+    // 現在のウェーブテキスト表示
+    public void VisibleCurrentWaveText()
+    {
+        currentWaveText.enabled = true;
+    }
+
+    // 現在のウェーブテキスト非表示
+    public void InvisibleCurrentWaveText()
+    {
+        currentWaveText.enabled = false;
     }
 
     // 現在のウェーブの進行度
@@ -104,6 +128,48 @@ public class InGameUIManager : MonoBehaviour
     public void WaveRewardText(int value)
     {
         rewardCostText.text = "+" + value;
+    }
+
+    // ボスの名前表示
+    public void VisibleBossNameText()
+    {
+        bossNameText.enabled = true;
+    }
+
+    // ボスの名前非表示
+    public void InvisibleBossNameText()
+    {
+        bossNameText.enabled = false;
+    }
+
+    // ボスの名前表記
+    public void BossNameText(string name)
+    {
+        bossNameText.text = name;
+    }
+
+    // ボスHP表示
+    public void VisibleBossHealth()
+    {
+        bossHealthText.enabled = true;
+    }
+
+    // ボスHP非表示
+    public void InvisibleBossHealth()
+    {
+        bossHealthText.enabled = false;
+    }
+
+    // ボスHP変動表記
+    public void BossHealthText(int value)
+    {
+        bossHealthText.text = value.ToString();
+    }
+
+    // ボスHPバー表記
+    public void BossHealthProgress(float progress)
+    {
+        currentWaveProgress.fillAmount = progress;
     }
 
     // リタイアボタン(確認)

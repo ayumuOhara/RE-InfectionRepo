@@ -14,4 +14,5 @@ public class UnitStats : ScriptableObject
     public int summonCost;              // 召喚コスト
     public float infecitonTime;         // 感染するまでの時間
     public bool bossUnit;               // ボスか
+    public AudioClip attackSe;          // 攻撃音
 }

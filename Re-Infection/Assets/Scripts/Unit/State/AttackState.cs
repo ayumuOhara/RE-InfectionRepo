@@ -21,6 +21,8 @@ public class AttackState : IUnitState
 
         if (atkTimer >= unitController.atkInterbal)
         {
+            unitController.unitAudio.PlayOneShot(unitController.attackSe);
+
             if(unitController.targetObj != null)
             {
                 UnitController uc = unitController.targetObj.GetComponent<UnitController>();

@@ -29,6 +29,8 @@ public class UnitController : MonoBehaviour
     // 拠点オブジェクト座標
     public Vector3 castlePos => castleObj.transform.position;
 
+    public AudioSource unitAudio;
+
     [SerializeField] public GameObject unitUI;            // ユニット専用UIオブジェクト
     [SerializeField] public Image infectionRateGauge;     // 感染度ゲージ
     [SerializeField] GameObject damageTextPrefab;       　// ダメージ数表示テキスト
@@ -40,6 +42,7 @@ public class UnitController : MonoBehaviour
 
     // ユニットのスタッツ
     public UnitGroup group { get; private set; }   // 味方か敵か
+    public string unitName { get; private set; }   // ユニット名
     public Sprite unitSprite { get; private set; }     // ユニットのスプライト
     public float currentHp { get; private set; }   // 現在HP
     public float maxHp { get; private set; }       // 最大HP
@@ -50,7 +53,11 @@ public class UnitController : MonoBehaviour
     public float infecitonTime { get; private set; }  // 感染するまでの時間
     public bool isInfection { get; private set; }   // 一度感染したか
     public bool bossUnit { get; private set; }      // ボスか
+    public AudioClip attackSe { get; private set; }
     public bool isDead => currentHp <= 0;
+
+    // HPの割合
+    public float HealthRate => currentHp / maxHp;
 
     // 初期化
     public void SetUnitStats(UnitStats stats, UnitGroup group)
@@ -61,6 +68,7 @@ public class UnitController : MonoBehaviour
 
         this.group = group;
 
+        unitName = stats.unitName;
         currentHp = stats.maxHp;
         maxHp = stats.maxHp;
         atk = stats.atk;
@@ -69,6 +77,7 @@ public class UnitController : MonoBehaviour
         range = stats.range;
         infecitonTime = stats.infecitonTime;
         bossUnit = stats.bossUnit;
+        attackSe = stats.attackSe;
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -108,6 +117,10 @@ public class UnitController : MonoBehaviour
     public void TakeDamage(float damage)
     {
         currentHp -= damage;
+        if(currentHp < 0)
+        {
+            currentHp = 0;
+        }
 
         GameObject textObj = InstanceObjHeadUp(damageTextPrefab);
         DrawDamage(textObj, damage);

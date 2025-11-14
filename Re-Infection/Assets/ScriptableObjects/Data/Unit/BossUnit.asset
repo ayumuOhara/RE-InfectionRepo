@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UnitStats
   unitId: 0
   unitSprite: {fileID: 21300112, guid: f5f1c19ce87450f4b97f8b363746558d, type: 3}
-  unitName: GreatSwordman
+  unitName: "\u30BD\u30FC\u30C9\u30DE\u30B9\u30BF\u30FC"
   maxHp: 10000
   atk: 20
   atkInterbal: 3
@@ -23,3 +23,4 @@ MonoBehaviour:
   summonCost: 1
   infecitonTime: 30
   bossUnit: 1
+  attackSe: {fileID: 8300000, guid: 2d8453f490e1200449b96971babc9d72, type: 3}

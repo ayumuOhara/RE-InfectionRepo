@@ -9,7 +9,6 @@ public class Stage : ScriptableObject
     public bool isClear;              // ステージクリアフラグ
 
     private List<UnitStats> spawnUnits;
-
     // スポーンするユニットの種類
     public List<UnitStats> SpawnUnits
     {
