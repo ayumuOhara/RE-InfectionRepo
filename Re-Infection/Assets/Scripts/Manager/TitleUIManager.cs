@@ -11,6 +11,9 @@ public class TitleUIManager : MonoBehaviour
     [SerializeField] Slider loadingBar;
     [SerializeField] TextMeshProUGUI loadingProgressText;
 
+    [SerializeField] AudioSource titleAudio;
+    [SerializeField] AudioClip buttonSe;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -26,6 +29,8 @@ public class TitleUIManager : MonoBehaviour
     // シーンロード
     public void OnLoadScene(string name)
     {
+        titleAudio.PlayOneShot(buttonSe);
+
         startButton.gameObject.SetActive(false);
         loadingBar.gameObject.SetActive(true);
         StartCoroutine(LoadAsyncScene(name));
