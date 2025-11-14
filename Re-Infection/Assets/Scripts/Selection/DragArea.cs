@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -98,9 +99,17 @@ public class DropArea : MonoBehaviour, IDropHandler
         GameObject clone = Instantiate(dropped, dropTargetParent);
         clone.tag = "CloneOnly";
         clone.SetActive(true);
-        clone.transform.localScale = new Vector3(0.8f, 0.8f, 1f);
+        clone.transform.localScale = new Vector3(1.3f,1.3f, 1f);
         clone.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
         Destroy(clone.GetComponent<DragIconController>());
+
+        UnitIconClick iconClick = clone.GetComponent<UnitIconClick>();
+        if (iconClick != null)
+        {
+            iconClick.slotIndex = slotIndex;
+            iconClick.unitStats = currentUnitStats;
+
+        }
 
         CanvasGroup cloneGroup = clone.GetComponent<CanvasGroup>();
         if (cloneGroup != null)
