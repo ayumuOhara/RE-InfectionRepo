@@ -98,6 +98,7 @@ public class DropArea : MonoBehaviour, IDropHandler
         GameObject clone = Instantiate(dropped, dropTargetParent);
         clone.tag = "CloneOnly";
         clone.SetActive(true);
+        clone.transform.localScale = new Vector3(0.8f, 0.8f, 1f);
         clone.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
         Destroy(clone.GetComponent<DragIconController>());
 
