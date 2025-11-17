@@ -40,6 +40,5 @@ public class UnitIconClick : MonoBehaviour, IPointerClickHandler
         UnitController uc = Instantiate(unitObj, spawnPos, Quaternion.identity).GetComponent<UnitController>();
         uc.transform.position = spawnPos;
         uc.SetUnitStats(unitStats, UnitGroup.Player);
-        gameManager.unitManager.AddUnitList(uc, UnitGroup.Player);
     }
 }
