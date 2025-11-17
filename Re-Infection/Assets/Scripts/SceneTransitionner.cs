@@ -1,6 +1,8 @@
 using System.Collections;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -30,6 +32,10 @@ public class SceneTransitionner : MonoBehaviour
     // ローディング処理
     IEnumerator LoadAsyncScene(string name)
     {
+        EventSystem eventSystem = EventSystem.current;
+        Button button = eventSystem.currentSelectedGameObject.GetComponent<Button>();
+        button.enabled = false;
+
         var rndIdx = Random.Range(0, transitionData.transitionList.Count);
 
         Image obj = Instantiate(transitionData.transitionList[rndIdx], transitionTransform);

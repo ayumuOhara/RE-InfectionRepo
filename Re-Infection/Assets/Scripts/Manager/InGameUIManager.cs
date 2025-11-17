@@ -1,5 +1,7 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -16,6 +18,7 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] Canvas nextWaveUI;
 
     [SerializeField] TextMeshProUGUI currentWaveText;
+    [SerializeField] GameObject rewardIcon;
     [SerializeField] TextMeshProUGUI rewardCostText;
     [SerializeField] TextMeshProUGUI currentEnemyCntText;
     [SerializeField] Image currentWaveProgress;
@@ -26,11 +29,17 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI cntDownText;
     [SerializeField] Image cntDownGauge;
 
+    AudioSource SeAudio;
+    [SerializeField] AudioClip lordSe;
+    [SerializeField] AudioClip decideSe;
+    [SerializeField] AudioClip cancelSe;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        
+        SeAudio = GetComponent<AudioSource>();
+
         resultUI.enabled = false;
         clearUI.enabled = false;
         failedUI.enabled = false;
@@ -132,6 +141,12 @@ public class InGameUIManager : MonoBehaviour
         rewardCostText.text = "+" + value;
     }
 
+    // ウェーブクリア時の報酬コスト非表示
+    public void InvisibleRewardIcon()
+    {
+        rewardIcon.SetActive(false);
+    }
+
     // ボスの名前表示
     public void VisibleBossNameText()
     {
@@ -177,18 +192,21 @@ public class InGameUIManager : MonoBehaviour
     // リタイアボタン(確認)
     public void OnRetireVerified()
     {
+        SeAudio.PlayOneShot(decideSe);
         retireUI.enabled = true;
     }
 
     // リタイアキャンセル
     public void OnRetireCanceled()
     {
+        SeAudio.PlayOneShot(cancelSe);
         retireUI.enabled = false;
     }
 
     // シーンロード
     public void OnLoadScene(string name)
     {
+        SeAudio.PlayOneShot(lordSe);
         SceneTransitionner transitonner = Instantiate(transitionUIprefab).GetComponent<SceneTransitionner>();
         transitonner.OnLoadScene(name);
     }

@@ -4,12 +4,18 @@ using UnityEngine.UI;
 public class TitleManager : MonoBehaviour
 {
     [SerializeField] Canvas transitionUIprefab;
-    [SerializeField] Button startButton;
+    [SerializeField] AudioClip startSe;
+
+    private void Awake()
+    {
+        Application.targetFrameRate = 120;
+    }
 
     // シーンロード
     public void OnLoadScene(string name)
     {
-        startButton.enabled = false;
+        AudioSource source = GetComponent<AudioSource>();
+        source.PlayOneShot(startSe);
 
         SceneTransitionner transitonner = Instantiate(transitionUIprefab).GetComponent<SceneTransitionner>();
         transitonner.OnLoadScene(name);

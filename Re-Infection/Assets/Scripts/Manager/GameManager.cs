@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -12,8 +13,6 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        Application.targetFrameRate = 120;
-
         waveSpawner = GameObject.Find("WaveSpawner").GetComponent<WaveSpawner>();
         castleWallManager = GameObject.Find("CastleWall").GetComponent <CastleWallManager>();
         unitManager = GameObject.Find("UnitManager").GetComponent<UnitManager>();
