@@ -182,6 +182,7 @@ public class WaveSpawner : MonoBehaviour
         uc.transform.position = spawnPos;
         uc.SetUnitStats(unitStats, UnitGroup.Enemy);    // 生成したユニットにステータスを代入
 
+        // ボスユニット代入
         if (unitStats.bossUnit)
             bossUnit = uc;
     }
@@ -205,6 +206,8 @@ public class WaveSpawner : MonoBehaviour
     // ウェーブの敵の残りの合計数を減らす
     public void DecreaseEnemySum()
     {
+        if (stage.waveData[currentWaveIdx].bossWave) return;
+
         currentWaveEnemySum--;
         gameUIManager.WaveEnemyCntText(currentWaveEnemySum);
         gameUIManager.CurrentWaveProgress(currentWaveEnemySum, stage.waveData[currentWaveIdx].waveEnemySum);
@@ -220,6 +223,7 @@ public class WaveSpawner : MonoBehaviour
             gameUIManager.BossNameText(currentWave.waveLevels[0].levelStats[0].unitStats.unitName);
             gameUIManager.BossHealthText((int)currentWave.waveLevels[0].levelStats[0].unitStats.maxHp);
             gameUIManager.BossHealthProgress(currentWave.waveLevels[0].levelStats[0].unitStats.maxHp / currentWave.waveLevels[0].levelStats[0].unitStats.maxHp);
+            gameUIManager.InvisibleRewardIcon();
         }
         else
         {
