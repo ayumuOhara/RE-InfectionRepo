@@ -7,6 +7,8 @@ public class InGameUIManager : MonoBehaviour
 {
     GameManager gameManager;
 
+    [SerializeField] Canvas transitionUIprefab;
+
     [SerializeField] Canvas resultUI;
     [SerializeField] Canvas clearUI;
     [SerializeField] Canvas failedUI;
@@ -176,29 +178,18 @@ public class InGameUIManager : MonoBehaviour
     public void OnRetireVerified()
     {
         retireUI.enabled = true;
-
-        if(!gameManager.timeManager.isPause)
-            gameManager.timeManager.GamePause();
     }
 
     // リタイアキャンセル
     public void OnRetireCanceled()
     {
         retireUI.enabled = false;
-
-        if (gameManager.timeManager.isPause)
-            gameManager.timeManager.GamePause();
-    }
-
-    // リタイアボタン(決定)
-    public void OnRetireDecision()
-    {
-        SceneManager.LoadSceneAsync("MainScene");
     }
 
     // シーンロード
     public void OnLoadScene(string name)
     {
-        SceneManager.LoadSceneAsync(name);
+        SceneTransitionner transitonner = Instantiate(transitionUIprefab).GetComponent<SceneTransitionner>();
+        transitonner.OnLoadScene(name);
     }
 }

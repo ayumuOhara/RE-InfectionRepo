@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0d4d8fae4265014d92ed332bf48fa04, type: 3}
+  m_Name: TransitionAnimation
+  m_EditorClassIdentifier: Assembly-CSharp::Transitions
+  transitionList:
+  - {fileID: 3373773343345359229, guid: 62331b674c8baad4a9d05eea80791c4d, type: 3}
+  - {fileID: 3036700777567189904, guid: bb4e0d62ff27bc541ba7b51cfe6e7fb1, type: 3}

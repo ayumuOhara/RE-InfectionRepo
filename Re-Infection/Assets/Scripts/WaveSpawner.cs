@@ -1,11 +1,14 @@
 using UnityEngine;
 using System.Collections;
+using TMPro;
 
 public class WaveSpawner : MonoBehaviour
 {
     InGameUIManager gameUIManager; // UI管理マネージャ
     CostManager costManager;
     UnitManager unitManager;
+
+    [SerializeField] TextMeshProUGUI startText;
 
     [SerializeField] Stage stage;            // ステージのデータ
     [SerializeField] GameObject unitObj;
@@ -38,35 +41,26 @@ public class WaveSpawner : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        var currentWave = stage.waveData[currentWaveIdx]; // 現在のウェーブのデータ取得
+        SetWaveUI(currentWave);
+
+        startText.enabled = false;
         StartCoroutine(Wave());
     }
 
     // ウェーブ進行コルーチン
     IEnumerator Wave()
     {
+        startText.enabled = true;
+        yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
+        startText.gameObject.SetActive(false);
+
         isSessionClear = false;
 
         while (true)
         {
             var currentWave = stage.waveData[currentWaveIdx]; // 現在のウェーブのデータ取得
-            ChangeUIEnabled(currentWave);
-
-            if (currentWave.bossWave)
-            {
-                gameUIManager.BossNameText(currentWave.waveLevels[0].levelStats[0].unitStats.unitName);
-                gameUIManager.BossHealthText((int)currentWave.waveLevels[0].levelStats[0].unitStats.maxHp);
-                gameUIManager.BossHealthProgress(currentWave.waveLevels[0].levelStats[0].unitStats.maxHp / currentWave.waveLevels[0].levelStats[0].unitStats.maxHp);
-            }
-            else
-            {
-                currentWaveEnemySum = currentWave.waveEnemySum;
-
-                // UI変更
-                gameUIManager.WaveEnemyCntText(currentWaveEnemySum);
-                gameUIManager.CurrentWaveText(currentWaveIdx);
-                gameUIManager.CurrentWaveProgress(currentWaveEnemySum, currentWaveEnemySum);
-                gameUIManager.WaveRewardText(currentWave.rewardCost);
-            }
+            SetWaveUI(currentWave);
 
             yield return StartCoroutine(WaveStart());
             yield return StartCoroutine(SpawnLevels(currentWave));
@@ -214,5 +208,28 @@ public class WaveSpawner : MonoBehaviour
         currentWaveEnemySum--;
         gameUIManager.WaveEnemyCntText(currentWaveEnemySum);
         gameUIManager.CurrentWaveProgress(currentWaveEnemySum, stage.waveData[currentWaveIdx].waveEnemySum);
+    }
+
+    // ウェーブUI初期化
+    void SetWaveUI(WaveData currentWave)
+    {
+        ChangeUIEnabled(currentWave);
+
+        if (currentWave.bossWave)
+        {
+            gameUIManager.BossNameText(currentWave.waveLevels[0].levelStats[0].unitStats.unitName);
+            gameUIManager.BossHealthText((int)currentWave.waveLevels[0].levelStats[0].unitStats.maxHp);
+            gameUIManager.BossHealthProgress(currentWave.waveLevels[0].levelStats[0].unitStats.maxHp / currentWave.waveLevels[0].levelStats[0].unitStats.maxHp);
+        }
+        else
+        {
+            currentWaveEnemySum = currentWave.waveEnemySum;
+
+            // UI変更
+            gameUIManager.WaveEnemyCntText(currentWaveEnemySum);
+            gameUIManager.CurrentWaveText(currentWaveIdx);
+            gameUIManager.CurrentWaveProgress(currentWaveEnemySum, currentWaveEnemySum);
+            gameUIManager.WaveRewardText(currentWave.rewardCost);
+        }
     }
 }

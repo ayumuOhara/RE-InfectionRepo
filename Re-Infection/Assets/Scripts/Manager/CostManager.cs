@@ -5,12 +5,14 @@ public class CostManager : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI costText;
 
+    [SerializeField] int startCost;
+
     public int currentCost { get; private set; } = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        AddCost(10);
+        AddCost(startCost);
     }
 
     // Update is called once per frame
