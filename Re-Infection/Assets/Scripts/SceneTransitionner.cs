@@ -35,9 +35,6 @@ public class SceneTransitionner : MonoBehaviour
         Image obj = Instantiate(transitionData.transitionList[rndIdx], transitionTransform);
         obj.rectTransform.localPosition = Vector3.zero;
 
-        Animator animator = obj.gameObject.GetComponent<Animator>();
-        animator.SetTrigger("Start");
-
         yield return new WaitForSeconds(1.0f);
 
         AsyncOperation ope = SceneManager.LoadSceneAsync(name);
@@ -48,6 +45,7 @@ public class SceneTransitionner : MonoBehaviour
         }
         yield return new WaitForSeconds(0.1f);
 
+        Animator animator = obj.gameObject.GetComponent<Animator>();
         animator.SetTrigger("End");
 
         yield return new WaitForSeconds(1.0f);
