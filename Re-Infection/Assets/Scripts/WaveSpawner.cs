@@ -8,6 +8,9 @@ public class WaveSpawner : MonoBehaviour
     CostManager costManager;
     UnitManager unitManager;
 
+    [SerializeField] Animator clearAnimator;
+    [SerializeField] AudioClip[] clearSe;
+
     [SerializeField] TextMeshProUGUI startText;
 
     [SerializeField] Stage stage;            // ステージのデータ
@@ -41,6 +44,7 @@ public class WaveSpawner : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        clearAnimator.GetComponent<Canvas>().enabled = false;
         var currentWave = stage.waveData[currentWaveIdx]; // 現在のウェーブのデータ取得
         SetWaveUI(currentWave);
 
@@ -80,7 +84,7 @@ public class WaveSpawner : MonoBehaviour
             // 最終ウェーブの場合、即終了する
             if (currentWave.bossWave)
             {
-                isSessionClear = true;
+                StartCoroutine(StageClear());
                 yield break;
             }
             else
@@ -131,6 +135,29 @@ public class WaveSpawner : MonoBehaviour
         gameUIManager.WaveStartText();
         yield return new WaitForSeconds(0.75f);
         gameUIManager.OffDisplayNextWaveUI();
+
+        yield break;
+    }
+
+    // ステージクリアコルーチン
+    IEnumerator StageClear()
+    {
+        gameUIManager.BossHealthProgress(0);
+        Time.timeScale = 0.5f;
+
+        AudioSource audio =  GetComponent<AudioSource>();
+        foreach(var se in clearSe)
+            audio.PlayOneShot(se);
+
+        clearAnimator.GetComponent<Canvas>().enabled = true;
+        clearAnimator.SetTrigger("Clear");
+
+        yield return new WaitForSeconds(1.5f);
+
+        clearAnimator.GetComponent<Canvas>().enabled = false;
+        Time.timeScale = 1.0f;
+        isSessionClear = true;
+        yield break;
     }
 
     // レベル生成コルーチン
@@ -154,6 +181,9 @@ public class WaveSpawner : MonoBehaviour
                 }
             }
         }
+
+
+        yield break;
     }
 
     // ボスUI更新コルーチン
@@ -171,6 +201,9 @@ public class WaveSpawner : MonoBehaviour
         }
 
         gameUIManager.BossHealthText((int)bossUnit.currentHp);
+
+
+        yield break;
     }
 
     // ユニット生成
