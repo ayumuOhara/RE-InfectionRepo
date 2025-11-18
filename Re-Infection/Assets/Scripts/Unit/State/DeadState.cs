@@ -20,7 +20,7 @@ public class DeadState : IUnitState
         {
             if (unitController.isInfection)
             {
-                unitController.gameObject.SetActive(false);
+                unitController.DestroyUnit();
             }
 
             SpriteRenderer sr = unitController.gameObject.GetComponent<SpriteRenderer>();
@@ -30,7 +30,7 @@ public class DeadState : IUnitState
         }
         else
         {
-            unitController.gameObject.SetActive(false);
+            unitController.DestroyUnit();
         }
     }
 

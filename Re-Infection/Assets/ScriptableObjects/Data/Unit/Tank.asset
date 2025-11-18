@@ -23,3 +23,4 @@ MonoBehaviour:
   summonCost: 1
   infecitonTime: 10
   bossUnit: 0
+  attackSe: {fileID: 8300000, guid: dab120b7a12444d42b8454c3420e7830, type: 3}

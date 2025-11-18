@@ -52,11 +52,9 @@ public class UnitIconClick : MonoBehaviour, IPointerClickHandler
 
         spawnPos.x = Random.Range(-1.7f, 1.7f);
 
-        // ユニットオブジェクトを生成
-        GameObject unit = Instantiate(unitObj, spawnPos, Quaternion.identity);
-
         // 対応するインデックスのユニットのステータスを渡す
-        UnitController uc = unit.GetComponent<UnitController>();
+        UnitController uc = Instantiate(unitObj, spawnPos, Quaternion.identity).GetComponent<UnitController>();
+        uc.transform.position = spawnPos;
         uc.SetUnitStats(unitStats, UnitGroup.Player);
     }
 }

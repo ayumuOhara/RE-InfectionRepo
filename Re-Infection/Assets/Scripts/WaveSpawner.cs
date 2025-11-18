@@ -1,14 +1,6 @@
 using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
-
-[System.Serializable]
-public class Stage
-{
-    public WaveData[] waveData;       // ステージのウェーブデータ
-}
 
 public class WaveSpawner : MonoBehaviour
 {
@@ -16,19 +8,31 @@ public class WaveSpawner : MonoBehaviour
     CostManager costManager;
     UnitManager unitManager;
 
-    [SerializeField] Stage[] stages;            // ステージのデータ
+    [SerializeField] Animator clearAnimator;
+    [SerializeField] AudioClip[] clearSe;
+
+    [SerializeField] TextMeshProUGUI startText;
+
+    [SerializeField] Stage stage;            // ステージのデータ
     [SerializeField] GameObject unitObj;
-    [SerializeField] Vector3 spawnPos;          // スポーン座標
+    [SerializeField] Vector3 spawnPos;       // スポーン座標
 
     int currentWaveIdx = 0;      // 現在のウェーブ
     int currentWaveEnemySum = 0; // 現在のウェーブの敵の残りの合計数
 
     const int NEXT_WAVE_START_CNT = 3;
 
+    UnitController bossUnit;
+
     // ウェーブ内の敵を全て倒したか
     public bool isAllEnemyDefeatedInWave => currentWaveEnemySum <= 0;
-    // ステージクリアフラグ
-    public bool isStageCompleted => currentWaveIdx >= stages[0].waveData.Length;
+
+    // ボスユニットを倒したか
+    bool isBossDefeated => bossUnit.isDead;
+
+    // 周回をクリアしたか
+    bool isSessionClear = false;
+    public bool IsSessionClear => isSessionClear;
 
     void Awake()
     {
@@ -40,72 +44,53 @@ public class WaveSpawner : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        StartCoroutine(SpawnLevels());
+        clearAnimator.GetComponent<Canvas>().enabled = false;
+        var currentWave = stage.waveData[currentWaveIdx]; // 現在のウェーブのデータ取得
+        SetWaveUI(currentWave);
+
+        startText.enabled = false;
+        StartCoroutine(Wave());
     }
 
-    // レベル生成コルーチン
-    IEnumerator SpawnLevels()
+    // ウェーブ進行コルーチン
+    IEnumerator Wave()
     {
+        startText.enabled = true;
+        yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
+        startText.gameObject.SetActive(false);
+
+        isSessionClear = false;
+
         while (true)
         {
-            var currentWave = stages[0].waveData[currentWaveIdx]; // 現在のウェーブのデータ取得
+            var currentWave = stage.waveData[currentWaveIdx]; // 現在のウェーブのデータ取得
+            SetWaveUI(currentWave);
 
-            currentWaveEnemySum = currentWave.waveEnemySum;
+            yield return StartCoroutine(WaveStart());
+            yield return StartCoroutine(SpawnLevels(currentWave));
 
-            // UI変更
-            gameUIManager.WaveEnemyCntText(currentWaveEnemySum, currentWave.waveEnemySum);
-            gameUIManager.CurrentWaveText(currentWaveIdx);
-            gameUIManager.WaveRewardText(currentWave.rewardCost);
-
-            float waveStartTimer = NEXT_WAVE_START_CNT;
-            while(waveStartTimer > 0)
+            if(currentWave.bossWave)
             {
-                gameUIManager.OnDisplayNextWaveUI();
-                waveStartTimer -= Time.deltaTime;
-                gameUIManager.CountDownText((int)waveStartTimer + 1);
-                float amount = (float)waveStartTimer / NEXT_WAVE_START_CNT;
-                gameUIManager.NextWaveTimerGauge(amount);
-
-                yield return null;
+                Debug.Log("ボスが撃破されるまで待機");
+                StartCoroutine(BossUI());
+                yield return new WaitUntil(() => isBossDefeated);
             }
-            gameUIManager.WaveStartText();
-            yield return new WaitForSeconds(0.75f);
-            gameUIManager.OffDisplayNextWaveUI();
-
-            // ウェーブ内の全てのレベルを生成するまでループ
-            for (int level = 0; level < currentWave.waveLevels.Length; level++)
+            else
             {
-                if(level != 0)
-                    yield return new WaitForSeconds(stages[0].waveData[currentWaveIdx].spawnInterbal);
-
-                var currentLevel = currentWave.waveLevels[level];  // 現在のレベルのデータ取得
-
-                // レベル内のユニットを全て生成
-                foreach (LevelStats Lstats in currentLevel.levelStats)
-                {
-                    for (int i = 0; i < Lstats.spawnCnt; i++)
-                    {
-                        SpawnUnit(Lstats.unitStats);
-                        yield return null;
-                    }
-                }
+                Debug.Log("ウェーブ内の敵が全滅するまで待機");
+                yield return new WaitUntil(() => isAllEnemyDefeatedInWave);
             }
-
-            // 敵全滅待機
-            Debug.Log("ウェーブ内の敵が全滅するまで待機");
-            yield return new WaitUntil(() => isAllEnemyDefeatedInWave);
-
-            // 全滅後、ウェーブを進行し、ウェーブのレベルをリセット
-            currentWaveIdx++;
 
             // 最終ウェーブの場合、即終了する
             if (currentWave.bossWave)
             {
+                StartCoroutine(StageClear());
                 yield break;
-
             }
             else
             {
+                // 全滅後、ウェーブを進行
+                currentWaveIdx++;
                 Debug.Log("全ての敵が全滅したので次のウェーブへ移行");
                 Reward(currentWave);
                 unitManager.AllPlayerUnitDestroy();
@@ -113,14 +98,126 @@ public class WaveSpawner : MonoBehaviour
         }
     }
 
+    // ボスUIとウェーブUIの表示切替
+    void ChangeUIEnabled(WaveData currentWave)
+    {
+        if (currentWave.bossWave)
+        {
+            gameUIManager.VisibleBossNameText();
+            gameUIManager.VisibleBossHealth();
+            gameUIManager.InvisibleWaveEnemyCntText();
+            gameUIManager.InvisibleCurrentWaveText();
+        }
+        else
+        {
+            gameUIManager.InvisibleBossNameText();
+            gameUIManager.InvisibleBossHealth();
+            gameUIManager.VisibleWaveEnemyCntText();
+            gameUIManager.VisibleCurrentWaveText();
+        }
+    }
+
+    // ウェーブ開始コルーチン
+    IEnumerator WaveStart()
+    {
+        float waveStartTimer = NEXT_WAVE_START_CNT;
+        while (waveStartTimer > 0)
+        {
+            gameUIManager.OnDisplayNextWaveUI();
+            waveStartTimer -= Time.deltaTime;
+            gameUIManager.CountDownText((int)waveStartTimer + 1);
+            float amount = (float)waveStartTimer / NEXT_WAVE_START_CNT;
+            gameUIManager.NextWaveTimerGauge(amount);
+
+            yield return null;
+        }
+
+        gameUIManager.WaveStartText();
+        yield return new WaitForSeconds(0.75f);
+        gameUIManager.OffDisplayNextWaveUI();
+
+        yield break;
+    }
+
+    // ステージクリアコルーチン
+    IEnumerator StageClear()
+    {
+        gameUIManager.BossHealthProgress(0);
+        Time.timeScale = 0.5f;
+
+        AudioSource audio =  GetComponent<AudioSource>();
+        foreach(var se in clearSe)
+            audio.PlayOneShot(se);
+
+        clearAnimator.GetComponent<Canvas>().enabled = true;
+        clearAnimator.SetTrigger("Clear");
+
+        yield return new WaitForSeconds(1.5f);
+
+        clearAnimator.GetComponent<Canvas>().enabled = false;
+        Time.timeScale = 1.0f;
+        isSessionClear = true;
+        yield break;
+    }
+
+    // レベル生成コルーチン
+    IEnumerator SpawnLevels(WaveData currentWave)
+    {
+        // ウェーブ内の全てのレベルを生成するまでループ
+        for (int level = 0; level < currentWave.waveLevels.Length; level++)
+        {
+            if (level != 0)
+                yield return new WaitForSeconds(stage.waveData[currentWaveIdx].spawnInterbal);
+
+            var currentLevel = currentWave.waveLevels[level];  // 現在のレベルのデータ取得
+
+            // レベル内のユニットを全て生成
+            foreach (LevelStats Lstats in currentLevel.levelStats)
+            {
+                for (int i = 0; i < Lstats.spawnCnt; i++)
+                {
+                    SpawnUnit(Lstats.unitStats);
+                    yield return null;
+                }
+            }
+        }
+
+
+        yield break;
+    }
+
+    // ボスUI更新コルーチン
+    IEnumerator BossUI()
+    {
+        Debug.Log("ボスUI表示コルーチン呼び出し");
+
+        gameUIManager.BossNameText(bossUnit.unitName);
+
+        while (!isBossDefeated)
+        {
+            gameUIManager.BossHealthText((int)bossUnit.currentHp);
+            gameUIManager.BossHealthProgress(bossUnit.HealthRate);
+            yield return null;
+        }
+
+        gameUIManager.BossHealthText((int)bossUnit.currentHp);
+
+
+        yield break;
+    }
+
     // ユニット生成
     void SpawnUnit(UnitStats unitStats)
     {
         spawnPos.x = Random.Range(-2f, 2f);
 
-        GameObject obj = Instantiate(unitObj, spawnPos, Quaternion.identity);
-        UnitController uc = obj.GetComponent<UnitController>();
+        UnitController uc = Instantiate(unitObj, spawnPos, Quaternion.identity).GetComponent<UnitController>();
+        uc.transform.position = spawnPos;
         uc.SetUnitStats(unitStats, UnitGroup.Enemy);    // 生成したユニットにステータスを代入
+
+        // ボスユニット代入
+        if (unitStats.bossUnit)
+            bossUnit = uc;
     }
 
     // ウェーブクリア報酬
@@ -142,7 +239,34 @@ public class WaveSpawner : MonoBehaviour
     // ウェーブの敵の残りの合計数を減らす
     public void DecreaseEnemySum()
     {
+        if (stage.waveData[currentWaveIdx].bossWave) return;
+
         currentWaveEnemySum--;
-        gameUIManager.WaveEnemyCntText(currentWaveEnemySum, stages[0].waveData[currentWaveIdx].waveEnemySum);
+        gameUIManager.WaveEnemyCntText(currentWaveEnemySum);
+        gameUIManager.CurrentWaveProgress(currentWaveEnemySum, stage.waveData[currentWaveIdx].waveEnemySum);
+    }
+
+    // ウェーブUI初期化
+    void SetWaveUI(WaveData currentWave)
+    {
+        ChangeUIEnabled(currentWave);
+
+        if (currentWave.bossWave)
+        {
+            gameUIManager.BossNameText(currentWave.waveLevels[0].levelStats[0].unitStats.unitName);
+            gameUIManager.BossHealthText((int)currentWave.waveLevels[0].levelStats[0].unitStats.maxHp);
+            gameUIManager.BossHealthProgress(currentWave.waveLevels[0].levelStats[0].unitStats.maxHp / currentWave.waveLevels[0].levelStats[0].unitStats.maxHp);
+            gameUIManager.InvisibleRewardIcon();
+        }
+        else
+        {
+            currentWaveEnemySum = currentWave.waveEnemySum;
+
+            // UI変更
+            gameUIManager.WaveEnemyCntText(currentWaveEnemySum);
+            gameUIManager.CurrentWaveText(currentWaveIdx);
+            gameUIManager.CurrentWaveProgress(currentWaveEnemySum, currentWaveEnemySum);
+            gameUIManager.WaveRewardText(currentWave.rewardCost);
+        }
     }
 }
