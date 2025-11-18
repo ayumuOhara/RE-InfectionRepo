@@ -1,10 +1,60 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class DropArea : MonoBehaviour, IDropHandler
 {
     [SerializeField] private Transform dropTargetParent;
+    public UnitStats currentUnitStats;
+    public int slotIndex; // このDropAreaが何番目の枠か
+
+    void Start()
+    {
+        if (UnitDataCarrier.Instance != null &&
+            UnitDataCarrier.Instance.selectedUnits.Count > slotIndex &&
+            UnitDataCarrier.Instance.selectedUnits[slotIndex] != null)
+        {
+            UnitStats unit = UnitDataCarrier.Instance.selectedUnits[slotIndex];
+            currentUnitStats = unit;
+
+            //表示復元
+            GameObject restored = new GameObject("RestoredUnit");
+            restored.transform.SetParent(dropTargetParent);
+            restored.AddComponent<RectTransform>().anchoredPosition = Vector2.zero;
+
+            Image img = restored.AddComponent<Image>();
+            img.sprite = unit.unitSprite;
+
+            CanvasGroup cg = restored.AddComponent<CanvasGroup>();
+            cg.alpha = 1f;
+            cg.interactable = false;
+            cg.blocksRaycasts = false;
+
+            // 🔒 ドラッグ元アイコンを無効化
+            DragIconController[] allDrags = FindObjectsOfType<DragIconController>();
+            foreach (var drag in allDrags)
+            {
+                if (drag.unitStats == unit)
+                {
+                    Image dragImg = drag.GetComponent<Image>();
+                    CanvasGroup dragCg = drag.GetComponent<CanvasGroup>();
+
+                    if (dragImg != null && dragCg != null)
+                    {
+                        dragCg.interactable = false;
+                        dragCg.blocksRaycasts = false;
+
+                        // グレーアウト
+                        Color original = dragImg.color;
+                        float gray = (original.r + original.g + original.b) / 3f;
+                        dragImg.color = new Color(gray, gray, gray, original.a);
+                    }
+                }
+            }
+
+        }
+    }
 
     public void OnDrop(PointerEventData eventData)
     {
@@ -14,7 +64,6 @@ public class DropArea : MonoBehaviour, IDropHandler
         Image droppedImage = dropped.GetComponent<Image>();
         Sprite droppedSprite = droppedImage != null ? droppedImage.sprite : null;
 
-        // 🔁 既存の表示があれば削除し、元のPrefabを再許可
         Sprite previousSprite = null;
         if (dropTargetParent.childCount > 0)
         {
@@ -28,7 +77,6 @@ public class DropArea : MonoBehaviour, IDropHandler
             Destroy(previous.gameObject);
         }
 
-        // 🔓 元のPrefabを再許可
         DragIconController[] allDrags = FindObjectsOfType<DragIconController>();
         if (previousSprite != null)
         {
@@ -41,30 +89,27 @@ public class DropArea : MonoBehaviour, IDropHandler
                 {
                     cg.interactable = true;
                     cg.blocksRaycasts = true;
+
                     DragIconController controller = drag.GetComponent<DragIconController>();
-                    if (controller != null)
-                    {
-                        img.color = controller.originalColor;
-                    }
-                    else
-                    {
-                        img.color = Color.white;
-                    }
+                    img.color = controller != null ? controller.originalColor : Color.white;
                 }
             }
-
-            DroppedSpriteRegistry.Unregister(previousSprite);
         }
 
-        // ✅ 新しいSpriteを登録
-        DroppedSpriteRegistry.Register(droppedSprite);
-
-        // 🧱 複製生成＆表示
         GameObject clone = Instantiate(dropped, dropTargetParent);
         clone.tag = "CloneOnly";
         clone.SetActive(true);
+        clone.transform.localScale = new Vector3(1.3f,1.3f, 1f);
         clone.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
         Destroy(clone.GetComponent<DragIconController>());
+
+        UnitIconClick iconClick = clone.GetComponent<UnitIconClick>();
+        if (iconClick != null)
+        {
+            iconClick.slotIndex = slotIndex;
+            iconClick.unitStats = currentUnitStats;
+
+        }
 
         CanvasGroup cloneGroup = clone.GetComponent<CanvasGroup>();
         if (cloneGroup != null)
@@ -74,7 +119,21 @@ public class DropArea : MonoBehaviour, IDropHandler
             cloneGroup.blocksRaycasts = false;
         }
 
-        // 🚫 同じSpriteを持つPrefabをすべてドラッグ禁止＆グレーアウト
+        DragIconController droppedController = dropped.GetComponent<DragIconController>();
+        if (droppedController != null)
+        {
+            currentUnitStats = droppedController.unitStats;
+
+            // リストの長さを確保
+            while (UnitDataCarrier.Instance.selectedUnits.Count <= slotIndex)
+            {
+                UnitDataCarrier.Instance.selectedUnits.Add(null);
+            }
+
+            // 指定枠に保存
+            UnitDataCarrier.Instance.selectedUnits[slotIndex] = currentUnitStats;
+        }
+
         foreach (var drag in allDrags)
         {
             if (drag.CompareTag("CloneOnly")) continue;
@@ -84,12 +143,12 @@ public class DropArea : MonoBehaviour, IDropHandler
 
             if (img != null && cg != null && img.sprite == droppedSprite)
             {
-                cg.interactable = false; // ← 禁止！
+                cg.interactable = false;
                 cg.blocksRaycasts = false;
 
                 Color original = img.color;
                 float gray = (original.r + original.g + original.b) / 3f;
-                img.color = new Color(gray, gray, gray, original.a); // ← グレーアウト！
+                img.color = new Color(gray, gray, gray, original.a);
             }
         }
     }

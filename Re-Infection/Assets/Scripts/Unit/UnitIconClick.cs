@@ -5,9 +5,10 @@ using System.Collections.Generic;
 
 public class UnitIconClick : MonoBehaviour, IPointerClickHandler
 {
-    [SerializeField] UnitStats unitStats;
+    [SerializeField] public UnitStats unitStats;
     [SerializeField] GameObject unitObj;
-
+    [SerializeField] public int slotIndex;
+    [SerializeField] Image iconImage;
     GameManager gameManager;
 
     Vector3 spawnPos = new Vector3(0, -1.0f, 0);  // プレイヤーユニットの生成座標
@@ -15,6 +16,21 @@ public class UnitIconClick : MonoBehaviour, IPointerClickHandler
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
+        //slotIndexが有効ならUnitDataCarrierから該当ユニットを取得
+        if(UnitDataCarrier.Instance!=null&&
+            UnitDataCarrier.Instance.selectedUnits.Count>slotIndex&&
+            UnitDataCarrier.Instance.selectedUnits[slotIndex] != null)
+        {
+            unitStats = UnitDataCarrier.Instance.selectedUnits[slotIndex];
+
+            Debug.Log($"Slot{slotIndex}に選択されたユニット:{unitStats.unitName}");
+        }
+
+        if (unitStats != null && iconImage != null)
+        {
+            iconImage.sprite = unitStats.unitSprite;
+        }
     }
 
     public void OnPointerClick(PointerEventData eventData)
