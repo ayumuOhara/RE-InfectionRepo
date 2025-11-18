@@ -256,7 +256,7 @@ public class WaveSpawner : MonoBehaviour
             gameUIManager.BossNameText(currentWave.waveLevels[0].levelStats[0].unitStats.unitName);
             gameUIManager.BossHealthText((int)currentWave.waveLevels[0].levelStats[0].unitStats.maxHp);
             gameUIManager.BossHealthProgress(currentWave.waveLevels[0].levelStats[0].unitStats.maxHp / currentWave.waveLevels[0].levelStats[0].unitStats.maxHp);
-            gameUIManager.InvisibleRewardIcon();
+            gameUIManager.CloseRewardLabel();
         }
         else
         {

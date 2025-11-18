@@ -18,7 +18,7 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] Canvas nextWaveUI;
 
     [SerializeField] TextMeshProUGUI currentWaveText;
-    [SerializeField] GameObject rewardIcon;
+    [SerializeField] Image rewardLabel;
     [SerializeField] TextMeshProUGUI rewardCostText;
     [SerializeField] TextMeshProUGUI currentEnemyCntText;
     [SerializeField] Image currentWaveProgress;
@@ -141,10 +141,10 @@ public class InGameUIManager : MonoBehaviour
         rewardCostText.text = "+" + value;
     }
 
-    // ウェーブクリア時の報酬コスト非表示
-    public void InvisibleRewardIcon()
+    // ボスウェーブ時の報酬コストUIを仕舞う
+    public void CloseRewardLabel()
     {
-        rewardIcon.SetActive(false);
+        rewardLabel.GetComponent<Animator>().SetTrigger("Close");
     }
 
     // ボスの名前表示
