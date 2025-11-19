@@ -12,7 +12,8 @@ public class InGameUIManager : MonoBehaviour
 
     [SerializeField] Canvas transitionUIprefab;
 
-    [SerializeField] Canvas masterCanvas;
+    [SerializeField] Canvas masterUI;
+    [SerializeField] Canvas combatUI;
     [SerializeField] Canvas resultUI;
     [SerializeField] Canvas clearUI;
     [SerializeField] Canvas failedUI;
@@ -57,13 +58,19 @@ public class InGameUIManager : MonoBehaviour
     // 全UI表示
     public void VisibleAllUI()
     {
-        masterCanvas.enabled = true;
+        masterUI.enabled = true;
     }
 
     // 全UI非表示
     public void InvisibleAllUI()
     {
-        masterCanvas.enabled = false;
+        masterUI.enabled = false;
+    }
+
+    // 戦闘UIを非表示
+    public void InvisibleCombatUI()
+    {
+        combatUI.enabled = false;
     }
 
     // ステージクリア処理
@@ -86,6 +93,7 @@ public class InGameUIManager : MonoBehaviour
     // ステージ失敗処理
     public IEnumerator SessionFailed()
     {
+        combatUI.enabled = false;
         GetComponent<AudioSource>().Pause();
         FindAnyObjectByType<GameManager>().GetComponent<AudioSource>().Pause();
 
