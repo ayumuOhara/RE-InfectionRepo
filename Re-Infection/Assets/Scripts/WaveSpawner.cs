@@ -167,6 +167,7 @@ public class WaveSpawner : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
 
         Time.timeScale = 1.0f;
+        gameUIManager.InvisibleCombatUI();
         gameUIManager.VisibleAllUI();
         isSessionClear = true;
 

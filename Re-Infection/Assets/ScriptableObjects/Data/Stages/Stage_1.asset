@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Stage_1
   m_EditorClassIdentifier: Assembly-CSharp::Stage
   waveData:
+  - {fileID: 11400000, guid: af4b30a72c0c0b24793b128dbd8c56cf, type: 2}
   - {fileID: 11400000, guid: bb04900f178d24b4eae5d0a1bca8bfbf, type: 2}
   - {fileID: 11400000, guid: 133d3c4662c463446b1a4bffbb200186, type: 2}
   - {fileID: 11400000, guid: d604835c5fd244d48af241e6c58d1eb5, type: 2}
-  - {fileID: 11400000, guid: af4b30a72c0c0b24793b128dbd8c56cf, type: 2}
   isClear: 0
