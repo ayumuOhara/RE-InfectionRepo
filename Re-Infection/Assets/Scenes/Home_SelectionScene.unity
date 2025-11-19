@@ -6293,10 +6293,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HomeTab
   shopButton: {fileID: 1251878302}
   battleButton: {fileID: 981118438}
-  organizationButton: {fileID: 1788002216}
+  selectionButton: {fileID: 0}
   shopCanvas: {fileID: 325302035}
   battleCanvas: {fileID: 1262412672}
-  organizationCanvas: {fileID: 670263544}
+  selectionCanvas: {fileID: 0}
 --- !u!1 &1206817214
 GameObject:
   m_ObjectHideFlags: 0
@@ -10174,7 +10174,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1874665137
 RectTransform:
   m_ObjectHideFlags: 0
