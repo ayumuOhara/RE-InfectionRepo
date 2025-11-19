@@ -151,8 +151,7 @@ public class WaveSpawner : MonoBehaviour
     {
         gameUIManager.InvisibleAllUI();
         gameUIManager.BossHealthProgress(0);
-        var vol = FindAnyObjectByType<GameManager>().GetComponent<AudioSource>().volume;
-        FindAnyObjectByType<GameManager>().GetComponent<AudioSource>().volume = 0;
+        FindAnyObjectByType<GameManager>().GetComponent<AudioSource>().Pause();
 
         Time.timeScale = 0.4f;
 
@@ -162,10 +161,10 @@ public class WaveSpawner : MonoBehaviour
 
         yield return new WaitForSeconds(1.0f);
 
-        gameUIManager.StageClear();
         Time.timeScale = 1.0f;
         gameUIManager.VisibleAllUI();
         isSessionClear = true;
+
         yield break;
     }
 

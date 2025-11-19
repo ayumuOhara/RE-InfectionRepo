@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -36,6 +37,7 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] AudioClip cancelSe;
     [SerializeField] AudioClip stageClearSe;
     [SerializeField] AudioClip stageFailedSe;
+    [SerializeField] AudioClip resultBgm;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -63,21 +65,34 @@ public class InGameUIManager : MonoBehaviour
     }
 
     // ステージクリア処理
-    public void StageClear()
+    public IEnumerator SessionClear()
     {
-        Debug.Log("Stage Completed !!");
+        GetComponent<AudioSource>().Pause();
+
         resultUI.enabled = true;
         clearUI.enabled = true;
         GetComponent<AudioSource>().PlayOneShot(stageClearSe);
+
+        yield return new WaitForSeconds(2.5f);
+
+        GetComponent<AudioSource>().clip = resultBgm;
+        GetComponent<AudioSource>().Play();
     }
 
     // ステージ失敗処理
-    public void StageFailed()
+    public IEnumerator SessionFailed()
     {
+        GetComponent<AudioSource>().Pause();
+
         Debug.Log("Stage Failed ...");
         resultUI.enabled = true;
         failedUI.enabled = true;
         GetComponent<AudioSource>().PlayOneShot(stageFailedSe);
+
+        yield return new WaitForSeconds(2.5f);
+
+        GetComponent<AudioSource>().clip = resultBgm;
+        GetComponent<AudioSource>().Play();
     }
 
     // 敵の合計数テキスト

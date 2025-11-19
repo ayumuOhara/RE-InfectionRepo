@@ -19,7 +19,7 @@ MonoBehaviour:
   atk: 8
   atkInterbal: 1.5
   moveSpeed: 2.5
-  range: 0.3
+  range: 0.35
   summonCost: 1
   infecitonTime: 10
   bossUnit: 0
