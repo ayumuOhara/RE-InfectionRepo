@@ -9,7 +9,6 @@ public class WaveSpawner : MonoBehaviour
     CostManager costManager;
     UnitManager unitManager;
 
-    [SerializeField] Animator clearAnimator;
     [SerializeField] AudioClip[] clearSe;
 
     [SerializeField] TextMeshProUGUI startText;
@@ -49,7 +48,6 @@ public class WaveSpawner : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        clearAnimator.GetComponent<Canvas>().enabled = false;
         var currentWave = stage.waveData[currentWaveIdx]; // 現在のウェーブのデータ取得
         SetWaveUI(currentWave);
 
@@ -151,20 +149,22 @@ public class WaveSpawner : MonoBehaviour
     // ステージクリアコルーチン
     IEnumerator StageClear()
     {
+        gameUIManager.InvisibleAllUI();
         gameUIManager.BossHealthProgress(0);
-        Time.timeScale = 0.5f;
+        var vol = FindAnyObjectByType<GameManager>().GetComponent<AudioSource>().volume;
+        FindAnyObjectByType<GameManager>().GetComponent<AudioSource>().volume = 0;
+
+        Time.timeScale = 0.4f;
 
         AudioSource audio =  GetComponent<AudioSource>();
         foreach(var se in clearSe)
             audio.PlayOneShot(se);
 
-        clearAnimator.GetComponent<Canvas>().enabled = true;
-        clearAnimator.SetTrigger("Clear");
+        yield return new WaitForSeconds(1.0f);
 
-        yield return new WaitForSeconds(1.5f);
-
-        clearAnimator.GetComponent<Canvas>().enabled = false;
+        gameUIManager.StageClear();
         Time.timeScale = 1.0f;
+        gameUIManager.VisibleAllUI();
         isSessionClear = true;
         yield break;
     }

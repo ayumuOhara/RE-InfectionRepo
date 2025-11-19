@@ -30,6 +30,7 @@ public class CastleWallManager : MonoBehaviour
         if (currentHp <= 0)
         {
             currentHp = 0;
+            FindAnyObjectByType<InGameUIManager>().StageFailed();
         }
         currentHpText.text = currentHp.ToString("F0");
     }

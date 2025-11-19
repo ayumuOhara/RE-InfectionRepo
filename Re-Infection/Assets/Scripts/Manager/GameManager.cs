@@ -30,13 +30,6 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (waveSpawner.IsSessionClear)
-        {
-            inGameUIManager.StageClear();
-        }
-        if (castleWallManager.isBreak)
-        {
-            inGameUIManager.StageFailed();
-        }
+
     }
 }

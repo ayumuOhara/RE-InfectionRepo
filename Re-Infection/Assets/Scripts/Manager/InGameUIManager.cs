@@ -11,6 +11,7 @@ public class InGameUIManager : MonoBehaviour
 
     [SerializeField] Canvas transitionUIprefab;
 
+    [SerializeField] Canvas masterCanvas;
     [SerializeField] Canvas resultUI;
     [SerializeField] Canvas clearUI;
     [SerializeField] Canvas failedUI;
@@ -33,6 +34,8 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] AudioClip lordSe;
     [SerializeField] AudioClip decideSe;
     [SerializeField] AudioClip cancelSe;
+    [SerializeField] AudioClip stageClearSe;
+    [SerializeField] AudioClip stageFailedSe;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -47,12 +50,25 @@ public class InGameUIManager : MonoBehaviour
         retireUI.enabled = false;
     }
 
+    // 全UI表示
+    public void VisibleAllUI()
+    {
+        masterCanvas.enabled = true;
+    }
+
+    // 全UI非表示
+    public void InvisibleAllUI()
+    {
+        masterCanvas.enabled = false;
+    }
+
     // ステージクリア処理
     public void StageClear()
     {
         Debug.Log("Stage Completed !!");
         resultUI.enabled = true;
         clearUI.enabled = true;
+        GetComponent<AudioSource>().PlayOneShot(stageClearSe);
     }
 
     // ステージ失敗処理
@@ -61,6 +77,7 @@ public class InGameUIManager : MonoBehaviour
         Debug.Log("Stage Failed ...");
         resultUI.enabled = true;
         failedUI.enabled = true;
+        GetComponent<AudioSource>().PlayOneShot(stageFailedSe);
     }
 
     // 敵の合計数テキスト
