@@ -5,21 +5,21 @@ public class HomeTab : MonoBehaviour
 {
     public Button shopButton; // ショップボタン
     public Button battleButton; // ステージ選択ボタン
-    public Button organizationButton; // 編成ボタン
+    public Button selectionButton; // 編成ボタン
 
     public GameObject shopCanvas; // ショップ画面
     public GameObject battleCanvas; //ステージ選択画面
-    public GameObject organizationCanvas;//編成画面
+    public GameObject selectionCanvas;//編成画面
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         shopButton.interactable = true;
         battleButton.interactable = false;
-        organizationButton.interactable = true;
+        selectionButton.interactable = true;
         shopCanvas.SetActive(false);
         battleCanvas.SetActive(true);
-        organizationCanvas.SetActive(false);
+        selectionCanvas.SetActive(false);
     }
 
     // Update is called once per frame
@@ -33,10 +33,10 @@ public class HomeTab : MonoBehaviour
     {
         shopButton.interactable = false;
         battleButton.interactable = true;
-        organizationButton.interactable = true;
+        selectionButton.interactable = true;
         shopCanvas.SetActive(true);
         battleCanvas.SetActive(false);
-        organizationCanvas.SetActive(false);
+        selectionCanvas.SetActive(false);
     }
 
     //ステージ選択画面を表示
@@ -44,20 +44,20 @@ public class HomeTab : MonoBehaviour
     {
         shopButton.interactable = true;
         battleButton.interactable = false;
-        organizationButton.interactable = true;
+        selectionButton.interactable = true;
         shopCanvas.SetActive(false);
         battleCanvas.SetActive(true);
-        organizationCanvas.SetActive(false);
+        selectionCanvas.SetActive(false);
     }
 
     //編成画面を表示
-    public void OnOrganization()
+    public void OnSelection()
     {
         shopButton.interactable = true;
         battleButton.interactable = true;
-        organizationButton.interactable = false;
+        selectionButton.interactable = false;
         shopCanvas.SetActive(false);
         battleCanvas.SetActive(false);
-        organizationCanvas.SetActive(true);
+        selectionCanvas.SetActive(true);
     }
 }
