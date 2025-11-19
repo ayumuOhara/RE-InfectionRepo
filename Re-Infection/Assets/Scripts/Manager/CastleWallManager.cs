@@ -5,7 +5,7 @@ public class CastleWallManager : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI currentHpText;
 
-    public float maxHp { get; private set; } = 1000;
+    public float maxHp { get; private set; } = 100;
 
     public float currentHp { get; private set; }
 
@@ -30,7 +30,6 @@ public class CastleWallManager : MonoBehaviour
         if (currentHp <= 0)
         {
             currentHp = 0;
-            FindAnyObjectByType<InGameUIManager>().StageFailed();
         }
         currentHpText.text = currentHp.ToString("F0");
     }

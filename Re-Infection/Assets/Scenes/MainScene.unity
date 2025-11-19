@@ -170,6 +170,7 @@ MonoBehaviour:
   cancelSe: {fileID: 8300000, guid: 1aaa0a1ff52a2ea41a9da0aa00d777b3, type: 3}
   stageClearSe: {fileID: 8300000, guid: 657ecfea9aa066a4ba7fff37932fa231, type: 3}
   stageFailedSe: {fileID: 8300000, guid: 7e1fe53bf2516b94a9a1390e8adfc135, type: 3}
+  resultBgm: {fileID: 8300000, guid: 7ebe709a3bafd2e46982bce9cda0954f, type: 3}
 --- !u!4 &603383
 Transform:
   m_ObjectHideFlags: 0
@@ -530,7 +531,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CostManager
   costText: {fileID: 99145687}
-  startCost: 7
+  startCost: 8
 --- !u!4 &20634379
 Transform:
   m_ObjectHideFlags: 0

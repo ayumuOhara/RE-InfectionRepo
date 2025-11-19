@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -24,12 +25,33 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        StartCoroutine(StayEndSession());
     }
 
     // Update is called once per frame
     void Update()
     {
 
+    }
+
+    IEnumerator StayEndSession()
+    {
+        do
+        {
+            if (waveSpawner.IsSessionClear)
+            {
+                StartCoroutine(inGameUIManager.SessionClear());
+                yield break;
+            }
+            if (castleWallManager.isBreak)
+            {
+                StartCoroutine(inGameUIManager.SessionFailed());
+                yield break;
+            }
+
+            yield return null;
+        } while (!waveSpawner.IsSessionClear || !castleWallManager.isBreak);
+
+        yield break;
     }
 }
