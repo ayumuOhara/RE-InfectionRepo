@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: TransitionAnimation
   m_EditorClassIdentifier: Assembly-CSharp::Transitions
   transitionList:
-  - {fileID: 3373773343345359229, guid: 62331b674c8baad4a9d05eea80791c4d, type: 3}
   - {fileID: 3036700777567189904, guid: bb4e0d62ff27bc541ba7b51cfe6e7fb1, type: 3}
