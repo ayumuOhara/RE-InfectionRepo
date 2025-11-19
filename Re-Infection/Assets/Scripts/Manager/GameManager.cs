@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
         unitManager = GameObject.Find("UnitManager").GetComponent<UnitManager>();
         costManager = GameObject.Find("CostManager").GetComponent<CostManager>();
         timeManager = GameObject.Find("TimeManager").GetComponent<TimeManager>();
-        inGameUIManager = GameObject.Find("InGameUIManager").GetComponent<InGameUIManager>();
+        inGameUIManager = GameObject.Find("InGameUI").GetComponent<InGameUIManager>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
             yield return null;
         } while (!waveSpawner.IsSessionClear || !castleWallManager.isBreak);
 
+        StopCoroutine(timeManager.SessionTimer());
         yield break;
     }
 }

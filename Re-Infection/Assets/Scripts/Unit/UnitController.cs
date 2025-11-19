@@ -177,7 +177,7 @@ public class UnitController : MonoBehaviour
     {
         var unitPos = Camera.main.WorldToScreenPoint(transform.position);   // ユニットのワールド座標をスクリーン座標に変換
         unitPos.y += 0.3f;
-        GameObject prefab = Instantiate(prefabUI, GameObject.Find("UI").transform, false); // ユニットの少し上にPrefabを生成
+        GameObject prefab = Instantiate(prefabUI, GameObject.Find("InGameUI").transform, false); // ユニットの少し上にPrefabを生成
         prefab.transform.position = unitPos;
 
         return prefab;
