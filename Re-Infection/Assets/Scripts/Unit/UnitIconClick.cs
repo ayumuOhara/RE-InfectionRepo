@@ -35,7 +35,7 @@ public class UnitIconClick : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if(!gameManager.timeManager.isPause)
+        if(!gameManager.timeManager.isPause && gameManager.waveSpawner.IsStartWave)
             if (eventData.button == PointerEventData.InputButton.Left)
             {
                 if (gameManager.costManager.EnoughCost(unitStats.summonCost))

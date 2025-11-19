@@ -194,6 +194,9 @@ public class InGameUIManager : MonoBehaviour
     {
         SeAudio.PlayOneShot(decideSe);
         retireUI.enabled = true;
+
+        if(gameManager.timeManager.isPause)
+            gameManager.timeManager.GamePause();
     }
 
     // リタイアキャンセル
