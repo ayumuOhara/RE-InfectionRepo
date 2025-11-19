@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using TMPro;
+using UnityEngine.UI;
 
 public class WaveSpawner : MonoBehaviour
 {
@@ -29,6 +30,10 @@ public class WaveSpawner : MonoBehaviour
 
     // ボスユニットを倒したか
     bool isBossDefeated => bossUnit.isDead;
+
+    // ウェーブが始まったか
+    bool isStartWave = false;
+    public bool IsStartWave => isStartWave;
 
     // 周回をクリアしたか
     bool isSessionClear = false;
@@ -63,6 +68,8 @@ public class WaveSpawner : MonoBehaviour
 
         while (true)
         {
+            isStartWave = false;
+
             var currentWave = stage.waveData[currentWaveIdx]; // 現在のウェーブのデータ取得
             SetWaveUI(currentWave);
 
@@ -135,6 +142,8 @@ public class WaveSpawner : MonoBehaviour
         gameUIManager.WaveStartText();
         yield return new WaitForSeconds(0.75f);
         gameUIManager.OffDisplayNextWaveUI();
+
+        isStartWave = true;
 
         yield break;
     }
