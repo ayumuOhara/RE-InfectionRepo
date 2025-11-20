@@ -52,6 +52,8 @@ public class GameManager : MonoBehaviour
             yield return null;
         } while (!waveSpawner.IsSessionClear || !castleWallManager.isBreak);
 
+        unitManager.AllPlayerUnitDestroy();
+        unitManager.AllEnemyUnitDestroy();
         StopCoroutine(timeManager.SessionTimer());
         yield break;
     }

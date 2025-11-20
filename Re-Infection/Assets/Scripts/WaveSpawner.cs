@@ -91,7 +91,7 @@ public class WaveSpawner : MonoBehaviour
                 // 全滅後、ウェーブを進行
                 currentWaveIdx++;
                 Debug.Log("全ての敵が全滅したので次のウェーブへ移行");
-                Reward(currentWave);
+                //Reward(currentWave);
                 unitManager.AllPlayerUnitDestroy();
             }
         }
@@ -181,7 +181,7 @@ public class WaveSpawner : MonoBehaviour
         for (int level = 0; level < currentWave.waveLevels.Length; level++)
         {
             if (level != 0)
-                yield return new WaitForSeconds(stage.waveData[currentWaveIdx].spawnInterbal);
+                yield return new WaitForSeconds(stage.waveData[currentWaveIdx].waveLevels[level].spawnInterbal);
 
             var currentLevel = currentWave.waveLevels[level];  // 現在のレベルのデータ取得
 
@@ -247,7 +247,6 @@ public class WaveSpawner : MonoBehaviour
         }
 
         costManager.AddCost(currentWave.rewardCost + unitCnt);
-        gameUIManager.WaveRewardText(currentWave.rewardCost);
     }
 
     // ウェーブの敵の残りの合計数を減らす
@@ -270,7 +269,6 @@ public class WaveSpawner : MonoBehaviour
             gameUIManager.BossNameText(currentWave.waveLevels[0].levelStats[0].unitStats.unitName);
             gameUIManager.BossHealthText((int)currentWave.waveLevels[0].levelStats[0].unitStats.maxHp);
             gameUIManager.BossHealthProgress(currentWave.waveLevels[0].levelStats[0].unitStats.maxHp / currentWave.waveLevels[0].levelStats[0].unitStats.maxHp);
-            gameUIManager.CloseRewardLabel();
         }
         else
         {
@@ -280,7 +278,6 @@ public class WaveSpawner : MonoBehaviour
             gameUIManager.WaveEnemyCntText(currentWaveEnemySum);
             gameUIManager.CurrentWaveText(currentWaveIdx);
             gameUIManager.CurrentWaveProgress(currentWaveEnemySum, currentWaveEnemySum);
-            gameUIManager.WaveRewardText(currentWave.rewardCost);
         }
     }
 }

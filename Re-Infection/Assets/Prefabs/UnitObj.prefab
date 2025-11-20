@@ -286,11 +286,11 @@ MonoBehaviour:
   unitUI: {fileID: 8874822762420751370}
   infectionRateGauge: {fileID: 1120724941087727946}
   damageTextPrefab: {fileID: 2331613197550584815, guid: 4be9b61064df5c246bcf92c1b4b3cf48, type: 3}
-  deadIconPrefab: {fileID: 5787258866959931574, guid: e9b68878a2534834dae792d26cac5b71, type: 3}
   corpseSprite: {fileID: 21300120, guid: 5cf1b4629c7cb104e98d369448084abd, type: 3}
   deadSe: {fileID: 8300000, guid: 6d533a1288cacbd4ab7a30d82341a187, type: 3}
   deadEffect: {fileID: 9157105887711914197, guid: c4f829cb7dd4b864caf8832ec5b1ee55, type: 3}
   bossDefeatEffect: {fileID: 5409222575132117316, guid: 6fc41f7dfdf9abd408d630c62fdac702, type: 3}
+  damageEffect: {fileID: 6823200998282874702, guid: 8f8fe12323625f5499b2853dd2ad3e58, type: 3}
 --- !u!82 &8417726802983968618
 AudioSource:
   m_ObjectHideFlags: 0
