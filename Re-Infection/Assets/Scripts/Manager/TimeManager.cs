@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,11 @@ public class TimeManager : MonoBehaviour
     [SerializeField] Sprite doubleSpdIcon;
 
     Image gameSpdSprite;
+
+    int seconds = 0;
+    public int Seconds => seconds;
+    int minutes = 0;
+    public int Minutes => minutes;
 
     public bool isPause { get; private set; } = false;
     bool isAcceleration = false;
@@ -25,7 +31,24 @@ public class TimeManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
+    }
+
+    // セッションのクリア時間を計る
+    public IEnumerator SessionTimer()
+    {
+        while (true)
+        {
+            seconds++;
+
+            if (seconds % 60 == 0)
+            {
+                minutes++;
+                seconds = 0;
+            }
+
+            yield return new WaitForSeconds(1.0f);
+        }
     }
 
     // 停止

@@ -14,7 +14,7 @@ public class DeadState : IUnitState
 
     public void Enter()
     {
-        Dead();
+        unitController.Dead();
 
         if (unitController.group == UnitGroup.Enemy && !unitController.bossUnit)
         {
@@ -47,16 +47,6 @@ public class DeadState : IUnitState
 
         SpriteRenderer sr = unitController.gameObject.GetComponent<SpriteRenderer>();
         sr.sprite = unitController.unitSprite;
-    }
-
-    // éÄñS
-    void Dead()
-    {
-        unitController.unitManager.RemoveUnitList(unitController, unitController.group);
-        unitController.InstanceObjHeadUp(unitController.deadIconPrefab);
-        
-        if(unitController.group == UnitGroup.Enemy)
-            unitController.waveSpawner.DecreaseEnemySum();
     }
 
     // éûä‘Ç…íBÇµÇΩÇÁä¥êıÇ≥ÇπÇÈ

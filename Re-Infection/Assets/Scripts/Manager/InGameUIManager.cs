@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -11,11 +12,13 @@ public class InGameUIManager : MonoBehaviour
 
     [SerializeField] Canvas transitionUIprefab;
 
+    [SerializeField] Canvas masterUI;
+    [SerializeField] Canvas combatUI;
     [SerializeField] Canvas resultUI;
     [SerializeField] Canvas clearUI;
     [SerializeField] Canvas failedUI;
     [SerializeField] Canvas retireUI;
-    [SerializeField] Canvas nextWaveUI;
+    [SerializeField] Canvas waveInformationUI;
 
     [SerializeField] TextMeshProUGUI currentWaveText;
     [SerializeField] Image rewardLabel;
@@ -26,13 +29,19 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI bossNameText;
     [SerializeField] TextMeshProUGUI bossHealthText;
 
-    [SerializeField] TextMeshProUGUI cntDownText;
-    [SerializeField] Image cntDownGauge;
+    [SerializeField] Image holdTextLabel;
+    [SerializeField] Image holdProgressIcon;
+    [SerializeField] Image holdProgressGauge;
+
+    [SerializeField] TextMeshProUGUI clearTimeText;
 
     AudioSource SeAudio;
     [SerializeField] AudioClip lordSe;
     [SerializeField] AudioClip decideSe;
     [SerializeField] AudioClip cancelSe;
+    [SerializeField] AudioClip stageClearSe;
+    [SerializeField] AudioClip stageFailedSe;
+    [SerializeField] AudioClip resultBgm;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -43,24 +52,59 @@ public class InGameUIManager : MonoBehaviour
         resultUI.enabled = false;
         clearUI.enabled = false;
         failedUI.enabled = false;
-        nextWaveUI.enabled = false;
         retireUI.enabled = false;
     }
 
-    // ステージクリア処理
-    public void StageClear()
+    // 全UI表示
+    public void VisibleAllUI()
     {
-        Debug.Log("Stage Completed !!");
+        masterUI.enabled = true;
+    }
+
+    // 全UI非表示
+    public void InvisibleAllUI()
+    {
+        masterUI.enabled = false;
+    }
+
+    // 戦闘UIを非表示
+    public void InvisibleCombatUI()
+    {
+        combatUI.enabled = false;
+    }
+
+    // ステージクリア処理
+    public IEnumerator SessionClear()
+    {
+        clearTimeText.text = gameManager.timeManager.Minutes.ToString("D2") + ":" + gameManager.timeManager.Seconds.ToString("D2");
+
+        GetComponent<AudioSource>().Pause();
+
         resultUI.enabled = true;
         clearUI.enabled = true;
+        GetComponent<AudioSource>().PlayOneShot(stageClearSe);
+
+        yield return new WaitForSeconds(2.5f);
+
+        GetComponent<AudioSource>().clip = resultBgm;
+        GetComponent<AudioSource>().Play();
     }
 
     // ステージ失敗処理
-    public void StageFailed()
+    public IEnumerator SessionFailed()
     {
-        Debug.Log("Stage Failed ...");
+        combatUI.enabled = false;
+        GetComponent<AudioSource>().Pause();
+        FindAnyObjectByType<GameManager>().GetComponent<AudioSource>().Pause();
+
         resultUI.enabled = true;
         failedUI.enabled = true;
+        GetComponent<AudioSource>().PlayOneShot(stageFailedSe);
+
+        yield return new WaitForSeconds(2.5f);
+
+        GetComponent<AudioSource>().clip = resultBgm;
+        GetComponent<AudioSource>().Play();
     }
 
     // 敵の合計数テキスト
@@ -105,34 +149,39 @@ public class InGameUIManager : MonoBehaviour
         currentWaveProgress.fillAmount = (float)value / max;
     }
 
-    // 次ウェーブのUIを表示
-    public void OnDisplayNextWaveUI()
+    // ホールドアイコンをタップ位置に表示
+    public void VisibleHoldIcon()
     {
-        nextWaveUI.enabled = true;
+        if (holdProgressIcon.gameObject.activeSelf != false) return;
+
+        holdProgressIcon.gameObject.SetActive(true);
+        holdProgressIcon.rectTransform.position = Input.mousePosition;
     }
 
-    // 次ウェーブのUIを非表示
-    public void OffDisplayNextWaveUI()
+    // ホールドアイコンを非表示
+    public void InvisibleHoldIcon()
     {
-        nextWaveUI.enabled = false;
+        if (holdProgressIcon.gameObject.activeSelf != true) return;
+
+        holdProgressIcon.gameObject.SetActive(false);
     }
 
-    // カウントダウンテキスト
-    public void CountDownText(int value)
+    // ホールドUIを開くアニメーション再生
+    public void OpenHoldLabel()
     {
-        cntDownText.text = value.ToString();
+        holdTextLabel.GetComponent<Animator>().SetTrigger("Open");
     }
 
-    // ウェーブ開始テキスト
-    public void WaveStartText()
+    // ホールドUIを閉じるアニメーション再生
+    public void CloseHoldLabel()
     {
-        cntDownText.text = "スタート！";
+        holdTextLabel.GetComponent<Animator>().SetTrigger("Close");
     }
 
-    // ウェーブまでの時間ゲージ
-    public void NextWaveTimerGauge(float value)
+    // ホールドの進行度
+    public void HoldProgressGauge(float value)
     {
-        cntDownGauge.fillAmount = value;
+        holdProgressGauge.fillAmount = value;
     }
 
     // ウェーブクリア時の報酬コスト
