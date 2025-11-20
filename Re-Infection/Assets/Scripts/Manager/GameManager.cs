@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -18,25 +19,40 @@ public class GameManager : MonoBehaviour
         unitManager = GameObject.Find("UnitManager").GetComponent<UnitManager>();
         costManager = GameObject.Find("CostManager").GetComponent<CostManager>();
         timeManager = GameObject.Find("TimeManager").GetComponent<TimeManager>();
-        inGameUIManager = GameObject.Find("InGameUIManager").GetComponent<InGameUIManager>();
+        inGameUIManager = GameObject.Find("InGameUI").GetComponent<InGameUIManager>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        StartCoroutine(StayEndSession());
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (waveSpawner.IsSessionClear)
+
+    }
+
+    IEnumerator StayEndSession()
+    {
+        do
         {
-            inGameUIManager.StageClear();
-        }
-        if (castleWallManager.isBreak)
-        {
-            inGameUIManager.StageFailed();
-        }
+            if (waveSpawner.IsSessionClear)
+            {
+                StartCoroutine(inGameUIManager.SessionClear());
+                yield break;
+            }
+            if (castleWallManager.isBreak)
+            {
+                StartCoroutine(inGameUIManager.SessionFailed());
+                yield break;
+            }
+
+            yield return null;
+        } while (!waveSpawner.IsSessionClear || !castleWallManager.isBreak);
+
+        StopCoroutine(timeManager.SessionTimer());
+        yield break;
     }
 }

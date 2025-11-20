@@ -9,10 +9,7 @@ public class WaveSpawner : MonoBehaviour
     CostManager costManager;
     UnitManager unitManager;
 
-    [SerializeField] Animator clearAnimator;
     [SerializeField] AudioClip[] clearSe;
-
-    [SerializeField] TextMeshProUGUI startText;
 
     [SerializeField] Stage stage;            // ステージのデータ
     [SerializeField] GameObject unitObj;
@@ -21,7 +18,7 @@ public class WaveSpawner : MonoBehaviour
     int currentWaveIdx = 0;      // 現在のウェーブ
     int currentWaveEnemySum = 0; // 現在のウェーブの敵の残りの合計数
 
-    const int NEXT_WAVE_START_CNT = 3;
+    const float WAVE_START_CNT = 0.5f;
 
     UnitController bossUnit;
 
@@ -41,7 +38,7 @@ public class WaveSpawner : MonoBehaviour
 
     void Awake()
     {
-        gameUIManager = GameObject.Find("InGameUIManager").GetComponent<InGameUIManager>();
+        gameUIManager = GameObject.Find("InGameUI").GetComponent<InGameUIManager>();
         costManager = GameObject.Find("CostManager").GetComponent<CostManager>();
         unitManager = GameObject.Find("UnitManager").GetComponent<UnitManager>();
     }
@@ -49,21 +46,16 @@ public class WaveSpawner : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        clearAnimator.GetComponent<Canvas>().enabled = false;
         var currentWave = stage.waveData[currentWaveIdx]; // 現在のウェーブのデータ取得
         SetWaveUI(currentWave);
 
-        startText.enabled = false;
         StartCoroutine(Wave());
     }
 
     // ウェーブ進行コルーチン
     IEnumerator Wave()
     {
-        startText.enabled = true;
-        yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
-        startText.gameObject.SetActive(false);
-
+        StartCoroutine(FindObjectOfType<TimeManager>().SessionTimer());
         isSessionClear = false;
 
         while (true)
@@ -127,21 +119,32 @@ public class WaveSpawner : MonoBehaviour
     // ウェーブ開始コルーチン
     IEnumerator WaveStart()
     {
-        float waveStartTimer = NEXT_WAVE_START_CNT;
-        while (waveStartTimer > 0)
-        {
-            gameUIManager.OnDisplayNextWaveUI();
-            waveStartTimer -= Time.deltaTime;
-            gameUIManager.CountDownText((int)waveStartTimer + 1);
-            float amount = (float)waveStartTimer / NEXT_WAVE_START_CNT;
-            gameUIManager.NextWaveTimerGauge(amount);
+        gameUIManager.OpenHoldLabel();
 
-            yield return null;
+        float holdTime = 0;
+        while (holdTime < WAVE_START_CNT)
+        {
+            if (Input.GetMouseButton(0))
+            {
+                gameUIManager.VisibleHoldIcon();
+
+                holdTime += Time.deltaTime;
+                float amount = (float)holdTime / WAVE_START_CNT;
+                gameUIManager.HoldProgressGauge(amount);
+
+                yield return null;
+            }
+            else
+            {
+                holdTime = 0;
+                gameUIManager.InvisibleHoldIcon();
+
+                yield return null;
+            }
         }
 
-        gameUIManager.WaveStartText();
-        yield return new WaitForSeconds(0.75f);
-        gameUIManager.OffDisplayNextWaveUI();
+        gameUIManager.CloseHoldLabel();
+        gameUIManager.InvisibleHoldIcon();
 
         isStartWave = true;
 
@@ -151,21 +154,23 @@ public class WaveSpawner : MonoBehaviour
     // ステージクリアコルーチン
     IEnumerator StageClear()
     {
+        gameUIManager.InvisibleAllUI();
         gameUIManager.BossHealthProgress(0);
-        Time.timeScale = 0.5f;
+        FindAnyObjectByType<GameManager>().GetComponent<AudioSource>().Pause();
+
+        Time.timeScale = 0.4f;
 
         AudioSource audio =  GetComponent<AudioSource>();
         foreach(var se in clearSe)
             audio.PlayOneShot(se);
 
-        clearAnimator.GetComponent<Canvas>().enabled = true;
-        clearAnimator.SetTrigger("Clear");
+        yield return new WaitForSeconds(1.0f);
 
-        yield return new WaitForSeconds(1.5f);
-
-        clearAnimator.GetComponent<Canvas>().enabled = false;
         Time.timeScale = 1.0f;
+        gameUIManager.InvisibleCombatUI();
+        gameUIManager.VisibleAllUI();
         isSessionClear = true;
+
         yield break;
     }
 

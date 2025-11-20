@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using TMPro;
 
 public class UnitIconClick : MonoBehaviour, IPointerClickHandler
 {
@@ -9,12 +10,17 @@ public class UnitIconClick : MonoBehaviour, IPointerClickHandler
     [SerializeField] GameObject unitObj;
     [SerializeField] public int slotIndex;
     [SerializeField] Image iconImage;
+    [SerializeField] Image assertLabel;
+    [SerializeField] AudioClip summonSe;
+    [SerializeField] AudioClip failedSe;
     GameManager gameManager;
 
     Vector3 spawnPos = new Vector3(0, -1.0f, 0);  // プレイヤーユニットの生成座標
 
     void Start()
     {
+        assertLabel.gameObject.SetActive(false);
+
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
         //slotIndexが有効ならUnitDataCarrierから該当ユニットを取得
@@ -35,13 +41,24 @@ public class UnitIconClick : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+
         if(!gameManager.timeManager.isPause && gameManager.waveSpawner.IsStartWave)
             if (eventData.button == PointerEventData.InputButton.Left)
             {
                 if (gameManager.costManager.EnoughCost(unitStats.summonCost))
+                {
+                    GetComponent<AudioSource>().PlayOneShot(summonSe);
+                    GetComponent<Animator>().SetTrigger("Tap");
                     GenerateUnit();
+                }
                 else
-                    Debug.Log("コストが足りません");
+                {
+                    GetComponent<AudioSource>().PlayOneShot(failedSe);
+                    GetComponent<Animator>().SetTrigger("Tap");
+
+                    assertLabel.gameObject.SetActive(true);
+                    assertLabel.GetComponent<Animator>().SetTrigger("Assert");
+                }
             }
     }
 

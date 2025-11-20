@@ -34,8 +34,11 @@ public class UnitController : MonoBehaviour
     [SerializeField] public GameObject unitUI;            // ユニット専用UIオブジェクト
     [SerializeField] public Image infectionRateGauge;     // 感染度ゲージ
     [SerializeField] GameObject damageTextPrefab;       　// ダメージ数表示テキスト
-    [SerializeField] public GameObject deadIconPrefab;    // 死亡時アイコン
     [SerializeField] public Sprite corpseSprite;          // 死体スプライト
+    
+    [SerializeField] AudioClip deadSe;                    // ユニット死亡時の音(後で消す)
+    [SerializeField] GameObject deadEffect;               // ユニット死亡時エフェクト(後で消す)
+    [SerializeField] GameObject bossDefeatEffect;         // ボス撃破時エフェクト(後で消す)
 
     const float UNIT_SCALE = 0.3f;
     Vector3 myScale = new Vector3(UNIT_SCALE, UNIT_SCALE, UNIT_SCALE); // ユニットのサイズ
@@ -128,8 +131,28 @@ public class UnitController : MonoBehaviour
 
     public void DestroyUnit()
     {
+        // 火曜の試遊に間に合わせる為のもの
+        // 試遊が終わったら作り直す
+        if (unitName == "ソードマスター")
+        {
+            GetComponent<SpriteRenderer>().enabled = false;
+            Instantiate(bossDefeatEffect, transform.position, Quaternion.identity);
+        }
+
         unitManager.RemoveUnitList(this, group);
         Destroy(gameObject);
+    }
+
+    // 死亡処理
+    public void Dead()
+    {
+        Instantiate(deadEffect, transform.position, Quaternion.identity);
+        unitAudio.PlayOneShot(deadSe);
+
+        unitManager.RemoveUnitList(this, group);
+
+        if (group == UnitGroup.Enemy)
+            waveSpawner.DecreaseEnemySum();
     }
 
     // ダメージ表示
@@ -154,7 +177,7 @@ public class UnitController : MonoBehaviour
     {
         var unitPos = Camera.main.WorldToScreenPoint(transform.position);   // ユニットのワールド座標をスクリーン座標に変換
         unitPos.y += 0.3f;
-        GameObject prefab = Instantiate(prefabUI, GameObject.Find("UI").transform, false); // ユニットの少し上にPrefabを生成
+        GameObject prefab = Instantiate(prefabUI, GameObject.Find("InGameUI").transform, false); // ユニットの少し上にPrefabを生成
         prefab.transform.position = unitPos;
 
         return prefab;
