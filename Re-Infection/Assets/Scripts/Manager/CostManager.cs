@@ -33,21 +33,28 @@ public class CostManager : MonoBehaviour
     {
         var timer = 0f;
 
-        while(!waveSpawner.IsSessionClear)
+        while (true)
         {
             yield return new WaitUntil(() => waveSpawner.IsStartWave);
 
-            timer += Time.deltaTime;
-            gameUIManager.CostGenerateGauge(timer / generateInterbal);
-
-            if (timer > generateInterbal)
+            while (waveSpawner.IsStartWave)
             {
-                timer = 0f;
-                AddCost(1);
+                timer += Time.deltaTime;
+                gameUIManager.CostGenerateGauge(timer / generateInterbal);
+
+                if (timer >= generateInterbal)
+                {
+                    timer = 0f;
+                    AddCost(1);
+                }
+
+                yield return null;
             }
 
+            timer = 0;
+            gameUIManager.CostGenerateGauge(timer / generateInterbal);
             yield return null;
-        }
+        }        
     }
 
     // ÉRÉXÉgí«â¡
