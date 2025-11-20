@@ -39,6 +39,7 @@ public class UnitController : MonoBehaviour
     [SerializeField] AudioClip deadSe;                    // ユニット死亡時の音(後で消す)
     [SerializeField] GameObject deadEffect;               // ユニット死亡時エフェクト(後で消す)
     [SerializeField] GameObject bossDefeatEffect;         // ボス撃破時エフェクト(後で消す)
+    [SerializeField] GameObject damageEffect;             // ダメージエフェクト
 
     const float UNIT_SCALE = 0.3f;
     Vector3 myScale = new Vector3(UNIT_SCALE, UNIT_SCALE, UNIT_SCALE); // ユニットのサイズ
@@ -127,6 +128,7 @@ public class UnitController : MonoBehaviour
 
         GameObject textObj = InstanceObjHeadUp(damageTextPrefab);
         DrawDamage(textObj, damage);
+        Instantiate(damageEffect, transform.position, Quaternion.identity);
     }
 
     public void DestroyUnit()

@@ -17,3 +17,4 @@ MonoBehaviour:
     spawnCnt: 2
   - unitStats: {fileID: 11400000, guid: fe15a39c45f5ba945931563260f1ba9f, type: 2}
     spawnCnt: 3
+  spawnInterbal: 10

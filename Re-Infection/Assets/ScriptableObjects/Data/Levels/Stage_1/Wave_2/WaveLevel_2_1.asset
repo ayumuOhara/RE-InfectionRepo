@@ -15,3 +15,4 @@ MonoBehaviour:
   levelStats:
   - unitStats: {fileID: 11400000, guid: b92b3387e050d804c96d18a3d08de2a8, type: 2}
     spawnCnt: 4
+  spawnInterbal: 7

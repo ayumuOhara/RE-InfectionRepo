@@ -11,4 +11,5 @@ public class LevelStats
 public class WaveLevel : ScriptableObject
 {
     public LevelStats[] levelStats;
+    public float spawnInterbal;       // ƒXƒ|[ƒ“‚·‚éŠÔ
 }
