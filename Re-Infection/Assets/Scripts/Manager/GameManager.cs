@@ -41,20 +41,26 @@ public class GameManager : MonoBehaviour
             if (waveSpawner.IsSessionClear)
             {
                 StartCoroutine(inGameUIManager.SessionClear());
+                SessionEnd();
                 yield break;
             }
             if (castleWallManager.isBreak)
             {
                 StartCoroutine(inGameUIManager.SessionFailed());
+                SessionEnd();
                 yield break;
             }
 
             yield return null;
         } while (!waveSpawner.IsSessionClear || !castleWallManager.isBreak);
 
+        yield break;
+    }
+
+    void SessionEnd()
+    {
         unitManager.AllPlayerUnitDestroy();
         unitManager.AllEnemyUnitDestroy();
         StopCoroutine(timeManager.SessionTimer());
-        yield break;
     }
 }
