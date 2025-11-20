@@ -20150,7 +20150,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 88262d2f692ee6444b26602b51d61599, type: 3}
   stage: {fileID: 11400000, guid: 3699ce58f8ebc564f94a20bf9f4d6f9c, type: 2}
   unitObj: {fileID: 6379689990235951777, guid: 206dd7b120d2598459d6433f407e1710, type: 3}
-  spawnPos: {x: 0, y: 5, z: 0}
+  spawnPos: {x: 0, y: 4.5, z: 0}
 --- !u!4 &1750744199
 Transform:
   m_ObjectHideFlags: 0

@@ -181,7 +181,7 @@ public class WaveSpawner : MonoBehaviour
         for (int level = 0; level < currentWave.waveLevels.Length; level++)
         {
             if (level != 0)
-                yield return new WaitForSeconds(stage.waveData[currentWaveIdx].waveLevels[level].spawnInterbal);
+                yield return new WaitForSeconds(currentWave.waveLevels[level].spawnInterbal);
 
             var currentLevel = currentWave.waveLevels[level];  // 現在のレベルのデータ取得
 
@@ -216,7 +216,6 @@ public class WaveSpawner : MonoBehaviour
 
         gameUIManager.BossHealthText((int)bossUnit.currentHp);
 
-
         yield break;
     }
 
@@ -232,21 +231,6 @@ public class WaveSpawner : MonoBehaviour
         // ボスユニット代入
         if (unitStats.bossUnit)
             bossUnit = uc;
-    }
-
-    // ウェーブクリア報酬
-    void Reward(WaveData currentWave)
-    {
-        var units = unitManager.GetUnitList(UnitGroup.Player);
-
-        var unitCnt = 0;
-        foreach (var unit in units)
-        {
-            if (!unit.isInfection)
-                unitCnt++;
-        }
-
-        costManager.AddCost(currentWave.rewardCost + unitCnt);
     }
 
     // ウェーブの敵の残りの合計数を減らす

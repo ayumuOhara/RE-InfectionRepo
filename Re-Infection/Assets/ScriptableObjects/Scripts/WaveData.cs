@@ -6,7 +6,6 @@ using System.Linq;
 public class WaveData : ScriptableObject
 {
     public WaveLevel[] waveLevels;   // ウェーブでスポーンさせるレベルのリスト
-    public int rewardCost;           // ウェーブクリア後に獲得できるコスト
     public bool bossWave;            // ボスウェーブか
 
     private List<UnitStats> spawnUnits;
