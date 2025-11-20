@@ -215,6 +215,7 @@ MonoBehaviour:
   unitObj: {fileID: 6379689990235951777, guid: 206dd7b120d2598459d6433f407e1710, type: 3}
   slotIndex: 0
   iconImage: {fileID: 1196899962}
+  unitCostText: {fileID: 180834926}
   assertLabel: {fileID: 873126810}
   summonSe: {fileID: 8300000, guid: d8841d95cdf3687469bb6072f5bf4a66, type: 3}
   failedSe: {fileID: 8300000, guid: d35a9f4f545e2e14286bf804bfc06748, type: 3}
@@ -20509,6 +20510,7 @@ MonoBehaviour:
   unitObj: {fileID: 6379689990235951777, guid: 206dd7b120d2598459d6433f407e1710, type: 3}
   slotIndex: 2
   iconImage: {fileID: 791957021}
+  unitCostText: {fileID: 1243679672}
   assertLabel: {fileID: 873126810}
   summonSe: {fileID: 8300000, guid: d8841d95cdf3687469bb6072f5bf4a66, type: 3}
   failedSe: {fileID: 8300000, guid: d35a9f4f545e2e14286bf804bfc06748, type: 3}
@@ -20727,6 +20729,7 @@ MonoBehaviour:
   unitObj: {fileID: 6379689990235951777, guid: 206dd7b120d2598459d6433f407e1710, type: 3}
   slotIndex: 1
   iconImage: {fileID: 1295531678}
+  unitCostText: {fileID: 693628854}
   assertLabel: {fileID: 873126810}
   summonSe: {fileID: 8300000, guid: d8841d95cdf3687469bb6072f5bf4a66, type: 3}
   failedSe: {fileID: 8300000, guid: d35a9f4f545e2e14286bf804bfc06748, type: 3}

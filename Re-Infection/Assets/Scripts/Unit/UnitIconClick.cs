@@ -10,6 +10,7 @@ public class UnitIconClick : MonoBehaviour, IPointerClickHandler
     [SerializeField] GameObject unitObj;
     [SerializeField] public int slotIndex;
     [SerializeField] Image iconImage;
+    [SerializeField] TextMeshProUGUI unitCostText;
     [SerializeField] Image assertLabel;
     [SerializeField] AudioClip summonSe;
     [SerializeField] AudioClip failedSe;
@@ -37,6 +38,8 @@ public class UnitIconClick : MonoBehaviour, IPointerClickHandler
         {
             iconImage.sprite = unitStats.unitSprite;
         }
+
+        unitCostText.text = unitStats.summonCost.ToString("F0");
     }
 
     public void OnPointerClick(PointerEventData eventData)
