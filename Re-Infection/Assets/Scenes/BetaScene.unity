@@ -372,7 +372,7 @@ MonoBehaviour:
   costAnimator: {fileID: 834038489}
   costText: {fileID: 99145687}
   startCost: 10
-  maxCost: 30
+  maxCost: 20
   generateInterbal: 2
 --- !u!4 &20634379
 Transform:
