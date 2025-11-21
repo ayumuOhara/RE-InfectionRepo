@@ -368,7 +368,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CostManager
   costText: {fileID: 99145687}
-  startCost: 10
+  startCost: 25
+  maxCost: 30
   generateInterbal: 2
 --- !u!4 &20634379
 Transform:
@@ -10194,7 +10195,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 814334185}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}

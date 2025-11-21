@@ -10,6 +10,7 @@ public class CostManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI costText;
 
     [SerializeField] int startCost;
+    [SerializeField] int maxCost;
     [SerializeField] float generateInterbal;
 
     public int currentCost { get; private set; } = 0;
@@ -35,9 +36,11 @@ public class CostManager : MonoBehaviour
 
         while (true)
         {
+            timer = 0;
+            gameUIManager.CostGenerateGauge(timer / generateInterbal);
             yield return new WaitUntil(() => waveSpawner.IsStartWave);
 
-            while (waveSpawner.IsStartWave)
+            while (waveSpawner.IsStartWave && currentCost < maxCost)
             {
                 timer += Time.deltaTime;
                 gameUIManager.CostGenerateGauge(timer / generateInterbal);
@@ -51,7 +54,7 @@ public class CostManager : MonoBehaviour
                 yield return null;
             }
 
-            timer = 0;
+            timer = generateInterbal;
             gameUIManager.CostGenerateGauge(timer / generateInterbal);
             yield return null;
         }        
@@ -61,6 +64,10 @@ public class CostManager : MonoBehaviour
     public void AddCost(int value)
     {
         currentCost += value;
+        if (currentCost >= maxCost)
+        {
+            currentCost = maxCost;
+        }
         costText.text = currentCost.ToString();
     }
 
