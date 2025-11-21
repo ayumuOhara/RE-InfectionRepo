@@ -128,7 +128,7 @@ public class InGameUIManager : MonoBehaviour
     // 現在のウェーブテキスト
     public void CurrentWaveText(int value)
     {
-        currentWaveText.text = "ウェーブ " + (value + 1);
+        currentWaveText.text = "WAVE " + (value + 1);
     }
 
     // 現在のウェーブテキスト表示
@@ -223,7 +223,7 @@ public class InGameUIManager : MonoBehaviour
     // ボスHP変動表記
     public void BossHealthText(int value)
     {
-        bossHealthText.text = value.ToString();
+        bossHealthText.text = "HP " + value.ToString();
     }
 
     // ボスHPバー表記
