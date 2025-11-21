@@ -20441,6 +20441,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6dff243f8ffc5446b5c908da81cc6a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TimeManager
+  waveSpawner: {fileID: 1750744198}
   gameSpdButton: {fileID: 1392548085}
   pauseCover: {fileID: 391679355}
   normalSpdIcon: {fileID: -6219010595072361576, guid: aa74ae4519ce50f408e46eb517d1ce34, type: 3}
