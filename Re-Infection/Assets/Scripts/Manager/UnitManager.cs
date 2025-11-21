@@ -70,4 +70,13 @@ public class UnitManager : MonoBehaviour
 
         playerUnitList.Clear();
     }
+
+    // エネミーのユニットを全て除外
+    public void AllEnemyUnitDestroy()
+    {
+        foreach (UnitController unit in enemyUnitList)
+            Destroy(unit.gameObject);
+
+        enemyUnitList.Clear();
+    }
 }

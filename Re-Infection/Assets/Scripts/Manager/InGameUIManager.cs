@@ -21,13 +21,13 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] Canvas waveInformationUI;
 
     [SerializeField] TextMeshProUGUI currentWaveText;
-    [SerializeField] Image rewardLabel;
-    [SerializeField] TextMeshProUGUI rewardCostText;
     [SerializeField] TextMeshProUGUI currentEnemyCntText;
     [SerializeField] Image currentWaveProgress;
 
     [SerializeField] TextMeshProUGUI bossNameText;
     [SerializeField] TextMeshProUGUI bossHealthText;
+
+    [SerializeField] Image costIcon;
 
     [SerializeField] Image holdTextLabel;
     [SerializeField] Image holdProgressIcon;
@@ -184,16 +184,10 @@ public class InGameUIManager : MonoBehaviour
         holdProgressGauge.fillAmount = value;
     }
 
-    // ウェーブクリア時の報酬コスト
-    public void WaveRewardText(int value)
+    // コスト生成の進行度
+    public void CostGenerateGauge(float value)
     {
-        rewardCostText.text = "+" + value;
-    }
-
-    // ボスウェーブ時の報酬コストUIを仕舞う
-    public void CloseRewardLabel()
-    {
-        rewardLabel.GetComponent<Animator>().SetTrigger("Close");
+        costIcon.fillAmount = value;
     }
 
     // ボスの名前表示

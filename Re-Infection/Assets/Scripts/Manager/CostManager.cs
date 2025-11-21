@@ -1,11 +1,16 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
 public class CostManager : MonoBehaviour
 {
+    WaveSpawner waveSpawner;
+    InGameUIManager gameUIManager;
+
     [SerializeField] TextMeshProUGUI costText;
 
     [SerializeField] int startCost;
+    [SerializeField] float generateInterbal;
 
     public int currentCost { get; private set; } = 0;
 
@@ -13,12 +18,43 @@ public class CostManager : MonoBehaviour
     void Start()
     {
         AddCost(startCost);
+        waveSpawner = FindObjectOfType<WaveSpawner>();
+        gameUIManager = FindObjectOfType<InGameUIManager>();
+        StartCoroutine(GenerateCost());
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    IEnumerator GenerateCost()
+    {
+        var timer = 0f;
+
+        while (true)
+        {
+            yield return new WaitUntil(() => waveSpawner.IsStartWave);
+
+            while (waveSpawner.IsStartWave)
+            {
+                timer += Time.deltaTime;
+                gameUIManager.CostGenerateGauge(timer / generateInterbal);
+
+                if (timer >= generateInterbal)
+                {
+                    timer = 0f;
+                    AddCost(1);
+                }
+
+                yield return null;
+            }
+
+            timer = 0;
+            gameUIManager.CostGenerateGauge(timer / generateInterbal);
+            yield return null;
+        }        
     }
 
     // ÉRÉXÉgí«â¡
