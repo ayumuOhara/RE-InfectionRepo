@@ -18,7 +18,6 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] Canvas clearUI;
     [SerializeField] Canvas failedUI;
     [SerializeField] Canvas retireUI;
-    [SerializeField] Canvas waveInformationUI;
 
     [SerializeField] TextMeshProUGUI currentWaveText;
     [SerializeField] TextMeshProUGUI currentEnemyCntText;
@@ -238,7 +237,7 @@ public class InGameUIManager : MonoBehaviour
         SeAudio.PlayOneShot(decideSe);
         retireUI.enabled = true;
 
-        if(gameManager.timeManager.isPause)
+        if (!gameManager.timeManager.isPause)
             gameManager.timeManager.GamePause();
     }
 
@@ -247,11 +246,17 @@ public class InGameUIManager : MonoBehaviour
     {
         SeAudio.PlayOneShot(cancelSe);
         retireUI.enabled = false;
+
+        if (gameManager.timeManager.isPause)
+            gameManager.timeManager.GamePause();
     }
 
     // シーンロード
     public void OnLoadScene(string name)
     {
+        if (gameManager.timeManager.isPause)
+            gameManager.timeManager.GamePause();
+
         SeAudio.PlayOneShot(lordSe);
         SceneTransitionner transitonner = Instantiate(transitionUIprefab).GetComponent<SceneTransitionner>();
         transitonner.OnLoadScene(name);
