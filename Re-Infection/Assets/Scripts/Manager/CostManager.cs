@@ -48,6 +48,7 @@ public class CostManager : MonoBehaviour
 
                 if (timer >= generateInterbal && currentCost < maxCost)
                 {
+                    costAnimator.SetTrigger("Generate");
                     timer = 0f;
                     AddCost(1);
                 }
@@ -62,7 +63,6 @@ public class CostManager : MonoBehaviour
     // ƒRƒXƒg’Ç‰Á
     public void AddCost(int value)
     {
-        costAnimator.SetTrigger("Generate");
         currentCost += value;
         if (currentCost >= maxCost)
         {
