@@ -17,7 +17,7 @@ MonoBehaviour:
   unitName: "\u9A0E\u58EB"
   maxHp: 50
   atk: 5
-  atkInterbal: 1.2
+  atkInterbal: 1
   moveSpeed: 5
   range: 0.3
   summonCost: 1
