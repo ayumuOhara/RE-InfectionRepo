@@ -3,6 +3,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using TMPro;
+using System.Collections;
 
 public class UnitIconClick : MonoBehaviour, IPointerClickHandler
 {
@@ -11,6 +12,7 @@ public class UnitIconClick : MonoBehaviour, IPointerClickHandler
     [SerializeField] public int slotIndex;
     [SerializeField] Image iconImage;
     [SerializeField] TextMeshProUGUI unitCostText;
+    [SerializeField] TextMeshProUGUI unitCntText;
     [SerializeField] Image assertLabel;
     [SerializeField] AudioClip summonSe;
     [SerializeField] AudioClip failedSe;
@@ -40,6 +42,7 @@ public class UnitIconClick : MonoBehaviour, IPointerClickHandler
         }
 
         unitCostText.text = unitStats.summonCost.ToString("F0");
+        StartCoroutine(UnitCntText());
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -76,5 +79,21 @@ public class UnitIconClick : MonoBehaviour, IPointerClickHandler
         UnitController uc = Instantiate(unitObj, spawnPos, Quaternion.identity).GetComponent<UnitController>();
         uc.transform.position = spawnPos;
         uc.SetUnitStats(unitStats, UnitGroup.Player);
+    }
+
+    // ユニットの数を表示
+    IEnumerator UnitCntText()
+    {
+        var cnt = 0;
+        
+        while (true)
+        {
+            yield return new WaitUntil(() => cnt < gameManager.unitManager.GetUnitCnt(unitStats)
+                                          || cnt > gameManager.unitManager.GetUnitCnt(unitStats));
+
+            cnt = gameManager.unitManager.GetUnitCnt(unitStats);
+            unitCntText.text = cnt + " 体";
+            yield return null;
+        }
     }
 }
