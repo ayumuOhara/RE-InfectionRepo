@@ -41,14 +41,12 @@ public class CostManager : MonoBehaviour
             timer = 0;
             gameUIManager.CostGenerateGauge(timer / generateInterbal);
 
-            yield return new WaitUntil(() => waveSpawner.IsStartWave);
-            
             while (waveSpawner.IsStartWave)
             {
                 timer += Time.deltaTime;
                 gameUIManager.CostGenerateGauge(timer / generateInterbal);
 
-                if (timer >= generateInterbal)
+                if (timer >= generateInterbal && currentCost < maxCost)
                 {
                     timer = 0f;
                     AddCost(1);
@@ -58,7 +56,7 @@ public class CostManager : MonoBehaviour
             }
 
             yield return null;
-        }        
+        }
     }
 
     // ƒRƒXƒg’Ç‰Á
