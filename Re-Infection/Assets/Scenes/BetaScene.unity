@@ -368,7 +368,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CostManager
   costText: {fileID: 99145687}
-  startCost: 25
+  startCost: 10
   maxCost: 30
   generateInterbal: 2
 --- !u!4 &20634379
