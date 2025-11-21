@@ -142,6 +142,7 @@ public class UnitController : MonoBehaviour
         }
 
         unitManager.RemoveUnitList(this, group);
+
         Destroy(gameObject);
     }
 
