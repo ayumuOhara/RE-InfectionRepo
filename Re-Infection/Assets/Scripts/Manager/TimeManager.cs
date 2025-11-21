@@ -1,9 +1,11 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.PlayerSettings;
 
 public class TimeManager : MonoBehaviour
 {
+    [SerializeField] WaveSpawner waveSpawner;
     [SerializeField] GameObject gameSpdButton;
     [SerializeField] Image pauseCover;
     [SerializeField] Sprite normalSpdIcon;
@@ -39,15 +41,22 @@ public class TimeManager : MonoBehaviour
     {
         while (true)
         {
-            seconds++;
+            yield return new WaitUntil(() => waveSpawner.IsStartWave);
 
-            if (seconds % 60 == 0)
+            while (waveSpawner.IsStartWave)
             {
-                minutes++;
-                seconds = 0;
+                seconds++;
+
+                if (seconds % 60 == 0)
+                {
+                    minutes++;
+                    seconds = 0;
+                }
+
+                yield return new WaitForSeconds(1.0f);
             }
 
-            yield return new WaitForSeconds(1.0f);
+            yield return null;
         }
     }
 
