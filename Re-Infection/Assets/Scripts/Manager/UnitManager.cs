@@ -44,6 +44,22 @@ public class UnitManager : MonoBehaviour
         return group == UnitGroup.Player ? playerUnitList : enemyUnitList;
     }
 
+    // 指定された味方ユニットの数を返す
+    public int GetUnitCnt(UnitStats stats)
+    {
+        var cnt = 0;
+
+        foreach (var unit in playerUnitList)
+        {
+            if (unit.unitName == stats.unitName)
+            {
+                cnt++;
+            }
+        }
+
+        return cnt;
+    }
+
     // 死体リストに追加
     public void AddCorpseList(UnitController unit)
     {
