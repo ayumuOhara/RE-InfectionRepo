@@ -7,6 +7,8 @@ public class CostManager : MonoBehaviour
     WaveSpawner waveSpawner;
     InGameUIManager gameUIManager;
 
+    [SerializeField] Animator costAnimator;
+
     [SerializeField] TextMeshProUGUI costText;
 
     [SerializeField] int startCost;
@@ -63,6 +65,7 @@ public class CostManager : MonoBehaviour
     // コスト追加
     public void AddCost(int value)
     {
+        costAnimator.SetTrigger("Generate");
         currentCost += value;
         if (currentCost >= maxCost)
         {
@@ -74,6 +77,7 @@ public class CostManager : MonoBehaviour
     // コスト減少
     public void RemoveCost(int value)
     {
+        costAnimator.SetTrigger("Used");
         currentCost -= value;
         currentCost = Mathf.Max(currentCost, 0);
         costText.text = currentCost.ToString();
