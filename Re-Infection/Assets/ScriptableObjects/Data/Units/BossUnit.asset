@@ -18,7 +18,7 @@ MonoBehaviour:
   maxHp: 3000
   atk: 25
   atkInterbal: 0.5
-  moveSpeed: 1
+  moveSpeed: 3
   range: 0.2
   summonCost: 1
   infecitonTime: 30
