@@ -1,9 +1,11 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CastleWallManager : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI currentHpText;
+    [SerializeField] Slider healthBar;
 
     public float maxHp { get; private set; } = 100;
 
@@ -16,12 +18,13 @@ public class CastleWallManager : MonoBehaviour
     {
         currentHp = maxHp;
         currentHpText.text = currentHp.ToString("F0");
+        healthBar.value = currentHp / maxHp;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void TakeDamage(float damage)
@@ -32,5 +35,6 @@ public class CastleWallManager : MonoBehaviour
             currentHp = 0;
         }
         currentHpText.text = currentHp.ToString("F0");
+        healthBar.value = currentHp / maxHp;
     }
 }

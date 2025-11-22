@@ -10,6 +10,7 @@ public class WaveSpawner : MonoBehaviour
     UnitManager unitManager;
 
     [SerializeField] AudioClip[] clearSe;
+    [SerializeField] Image castlePoint;
 
     [SerializeField] Stage stage;            // ステージのデータ
     [SerializeField] GameObject unitObj;
@@ -120,6 +121,7 @@ public class WaveSpawner : MonoBehaviour
     IEnumerator WaveStart()
     {
         gameUIManager.OpenHoldLabel();
+        castlePoint.enabled = true;
 
         float holdTime = 0;
         while (holdTime < WAVE_START_CNT)
@@ -145,6 +147,7 @@ public class WaveSpawner : MonoBehaviour
 
         gameUIManager.CloseHoldLabel();
         gameUIManager.InvisibleHoldIcon();
+        castlePoint.enabled = false;
 
         isStartWave = true;
 

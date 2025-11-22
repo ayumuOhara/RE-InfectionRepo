@@ -21,7 +21,7 @@ public class InGameUIManager : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI currentWaveText;
     [SerializeField] TextMeshProUGUI currentEnemyCntText;
-    [SerializeField] Image currentWaveProgress;
+    [SerializeField] Slider currentWaveProgress;
 
     [SerializeField] TextMeshProUGUI bossNameText;
     [SerializeField] TextMeshProUGUI bossHealthText;
@@ -145,7 +145,7 @@ public class InGameUIManager : MonoBehaviour
     // 現在のウェーブの進行度
     public void CurrentWaveProgress(int value, int max)
     {
-        currentWaveProgress.fillAmount = (float)value / max;
+        currentWaveProgress.value = (float)value / max;
     }
 
     // ホールドアイコンをタップ位置に表示
@@ -228,7 +228,7 @@ public class InGameUIManager : MonoBehaviour
     // ボスHPバー表記
     public void BossHealthProgress(float progress)
     {
-        currentWaveProgress.fillAmount = progress;
+        currentWaveProgress.value = progress;
     }
 
     // リタイアボタン(確認)
