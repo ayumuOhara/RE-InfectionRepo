@@ -29,6 +29,7 @@ public class UnitController : MonoBehaviour
     // 拠点オブジェクト座標
     public Vector3 castlePos => castleObj.transform.position;
 
+    public Animator animator { get; private set; }
     public AudioSource unitAudio;
 
     [SerializeField] public GameObject unitUI;            // ユニット専用UIオブジェクト
@@ -82,6 +83,11 @@ public class UnitController : MonoBehaviour
         infecitonTime = stats.infecitonTime;
         bossUnit = stats.bossUnit;
         attackSe = stats.attackSe;
+    }
+
+    void Awake()
+    {
+        animator = GetComponent<Animator>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
