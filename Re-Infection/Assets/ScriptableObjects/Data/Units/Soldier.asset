@@ -16,9 +16,9 @@ MonoBehaviour:
   unitSprite: {fileID: 21300002, guid: f5f1c19ce87450f4b97f8b363746558d, type: 3}
   unitName: "\u5263\u58EB"
   maxHp: 100
-  atk: 10
+  atk: 12
   atkInterbal: 1.5
-  moveSpeed: 2.5
+  moveSpeed: 2
   range: 0.35
   summonCost: 3
   infecitonTime: 10

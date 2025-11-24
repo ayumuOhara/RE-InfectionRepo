@@ -651,6 +651,8 @@ MonoBehaviour:
   unitObj: {fileID: 6379689990235951777, guid: 206dd7b120d2598459d6433f407e1710, type: 3}
   slotIndex: 2
   iconImage: {fileID: 515841974}
+  unitCostText: {fileID: 0}
+  unitCntText: {fileID: 0}
   assertLabel: {fileID: 61975382}
   summonSe: {fileID: 8300000, guid: d8841d95cdf3687469bb6072f5bf4a66, type: 3}
   failedSe: {fileID: 8300000, guid: d35a9f4f545e2e14286bf804bfc06748, type: 3}
@@ -2691,6 +2693,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6dff243f8ffc5446b5c908da81cc6a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TimeManager
+  waveSpawner: {fileID: 0}
   gameSpdButton: {fileID: 167790287}
   pauseCover: {fileID: 1728687920}
   normalSpdIcon: {fileID: -6219010595072361576, guid: aa74ae4519ce50f408e46eb517d1ce34, type: 3}
@@ -3200,6 +3203,8 @@ MonoBehaviour:
   unitObj: {fileID: 6379689990235951777, guid: 206dd7b120d2598459d6433f407e1710, type: 3}
   slotIndex: 1
   iconImage: {fileID: 110030091}
+  unitCostText: {fileID: 0}
+  unitCntText: {fileID: 0}
   assertLabel: {fileID: 61975382}
   summonSe: {fileID: 8300000, guid: d8841d95cdf3687469bb6072f5bf4a66, type: 3}
   failedSe: {fileID: 8300000, guid: d35a9f4f545e2e14286bf804bfc06748, type: 3}
@@ -4158,6 +4163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CastleWallManager
   currentHpText: {fileID: 507925154}
+  healthBar: {fileID: 0}
 --- !u!212 &971367355
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5858,7 +5864,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8026960e01f403d48b388202fcd3295d, type: 3}
   - {fileID: 8300000, guid: 8194c0c31dd9bb246bfaedc8497395dc, type: 3}
   - {fileID: 8300000, guid: 88262d2f692ee6444b26602b51d61599, type: 3}
-  startText: {fileID: 1723698136}
+  castlePoint: {fileID: 0}
   stage: {fileID: 11400000, guid: 3699ce58f8ebc564f94a20bf9f4d6f9c, type: 2}
   unitObj: {fileID: 6379689990235951777, guid: 206dd7b120d2598459d6433f407e1710, type: 3}
   spawnPos: {x: 0, y: 5, z: 0}
@@ -7335,8 +7341,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1462e1a66477c404586d24a5a2749849, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CostManager
+  costAnimator: {fileID: 0}
   costText: {fileID: 1496985503}
   startCost: 100
+  maxCost: 0
+  generateInterbal: 0
 --- !u!4 &1637910828
 Transform:
   m_ObjectHideFlags: 0
@@ -8271,21 +8280,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InGameUIManager
   transitionUIprefab: {fileID: 2276951682968027389, guid: 17dc9bdebecd870478ca8ad5eccab5a4, type: 3}
-  masterCanvas: {fileID: 1748124523}
+  masterUI: {fileID: 0}
+  combatUI: {fileID: 0}
   resultUI: {fileID: 534422327}
   clearUI: {fileID: 1815940273}
   failedUI: {fileID: 709799756}
   retireUI: {fileID: 27376453}
-  nextWaveUI: {fileID: 441521605}
   currentWaveText: {fileID: 262552434}
-  rewardLabel: {fileID: 644614962}
-  rewardCostText: {fileID: 1486652324}
   currentEnemyCntText: {fileID: 718843390}
-  currentWaveProgress: {fileID: 2039841690}
+  currentWaveProgress: {fileID: 0}
   bossNameText: {fileID: 960427063}
   bossHealthText: {fileID: 1168534625}
-  cntDownText: {fileID: 1794057046}
-  cntDownGauge: {fileID: 2126529669}
+  costIcon: {fileID: 0}
+  holdTextLabel: {fileID: 0}
+  holdProgressIcon: {fileID: 0}
+  holdProgressGauge: {fileID: 0}
   clearTimeText: {fileID: 1165121308}
   lordSe: {fileID: 8300000, guid: 80f98a0648fc79f4d8b6ccfea87681d8, type: 3}
   decideSe: {fileID: 8300000, guid: 3644753de082be94582a6125d927dd62, type: 3}
@@ -8975,6 +8984,8 @@ MonoBehaviour:
   unitObj: {fileID: 6379689990235951777, guid: 206dd7b120d2598459d6433f407e1710, type: 3}
   slotIndex: 0
   iconImage: {fileID: 1935793879}
+  unitCostText: {fileID: 0}
+  unitCntText: {fileID: 0}
   assertLabel: {fileID: 61975382}
   summonSe: {fileID: 8300000, guid: d8841d95cdf3687469bb6072f5bf4a66, type: 3}
   failedSe: {fileID: 8300000, guid: d35a9f4f545e2e14286bf804bfc06748, type: 3}
