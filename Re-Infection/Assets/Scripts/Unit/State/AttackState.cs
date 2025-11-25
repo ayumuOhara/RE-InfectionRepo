@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class AttackState : IUnitState
 {
-    UnitController unitController;
+    UnitBase unitBase;
     float atkTimer = 0; // 攻撃タイマー
 
-    public AttackState(UnitController controller)
+    public AttackState(UnitBase unitBase)
     {
-        unitController = controller;
+        this.unitBase = unitBase;
     }
 
     public void Enter()
@@ -19,21 +19,10 @@ public class AttackState : IUnitState
     {
         atkTimer += Time.deltaTime;
 
-        if (atkTimer >= unitController.atkInterbal)
+        if (atkTimer >= unitBase.Stats.atkInterbal)
         {
-            unitController.animator.SetTrigger("Attack");
-            unitController.unitAudio.PlayOneShot(unitController.attackSe);
-
-            if(unitController.targetObj != null)
-            {
-                UnitController uc = unitController.targetObj.GetComponent<UnitController>();
-                uc.TakeDamage(unitController.atk);
-            }
-            else if(unitController.castleObj != null && unitController.group == UnitGroup.Enemy)
-            {
-                CastleWallManager cm = unitController.castleObj.GetComponent<CastleWallManager>();
-                cm.TakeDamage(unitController.atk);
-            }
+            GetTarget.TargetInRange(unitBase.TargetPos, unitBase.MyPos, unitBase.Stats.range);
+            unitBase.Attack();
 
             atkTimer = 0;
         }

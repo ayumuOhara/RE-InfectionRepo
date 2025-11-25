@@ -4,11 +4,11 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using TMPro;
 using System.Collections;
+using Unity.VisualScripting;
 
 public class UnitIconClick : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] public UnitStats unitStats;
-    [SerializeField] GameObject unitObj;
     [SerializeField] public int slotIndex;
     [SerializeField] Image iconImage;
     [SerializeField] TextMeshProUGUI unitCostText;
@@ -18,7 +18,7 @@ public class UnitIconClick : MonoBehaviour, IPointerClickHandler
     [SerializeField] AudioClip failedSe;
     GameManager gameManager;
 
-    Vector3 spawnPos = new Vector3(0, -1.0f, 0);  // プレイヤーユニットの生成座標
+    Vector3 spawnPos = new Vector3(0, -2.0f, 0);  // プレイヤーユニットの生成座標
 
     void Start()
     {
@@ -31,7 +31,7 @@ public class UnitIconClick : MonoBehaviour, IPointerClickHandler
             UnitDataCarrier.Instance.selectedUnits.Count>slotIndex&&
             UnitDataCarrier.Instance.selectedUnits[slotIndex] != null)
         {
-            unitStats = UnitDataCarrier.Instance.selectedUnits[slotIndex];
+            //unitStats = UnitDataCarrier.Instance.selectedUnits[slotIndex];
 
             Debug.Log($"Slot{slotIndex}に選択されたユニット:{unitStats.unitName}");
         }
@@ -77,9 +77,10 @@ public class UnitIconClick : MonoBehaviour, IPointerClickHandler
         spawnPos.x = Random.Range(-1.7f, 1.7f);
 
         // 対応するインデックスのユニットのステータスを渡す
-        UnitController uc = Instantiate(unitObj, spawnPos, Quaternion.identity).GetComponent<UnitController>();
-        uc.transform.position = spawnPos;
-        uc.SetUnitStats(unitStats, UnitGroup.Player);
+        var unitObj = Instantiate(Resources.Load("PlayerUnit"), spawnPos, Quaternion.identity);
+        UnitBase unit = unitObj.GetComponent<UnitBase>();
+        unit.transform.position = spawnPos;
+        unit.Initialize(unitStats);
     }
 
     // ユニットの数を表示

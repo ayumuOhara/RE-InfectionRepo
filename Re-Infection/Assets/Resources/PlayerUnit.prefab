@@ -187,11 +187,11 @@ GameObject:
   m_Component:
   - component: {fileID: 8387142277514662798}
   - component: {fileID: 8234252526606897656}
-  - component: {fileID: -615418177299747073}
   - component: {fileID: 8417726802983968618}
   - component: {fileID: 8532348442563292378}
+  - component: {fileID: 3615813604422572115}
   m_Layer: 6
-  m_Name: UnitObj
+  m_Name: PlayerUnit
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -271,27 +271,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-615418177299747073
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6379689990235951777}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72880fb54f4f1b04f9dc7e329d651ff7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UnitController
-  unitAudio: {fileID: 8417726802983968618}
-  unitUI: {fileID: 8874822762420751370}
-  infectionRateGauge: {fileID: 1120724941087727946}
-  damageTextPrefab: {fileID: 2331613197550584815, guid: 4be9b61064df5c246bcf92c1b4b3cf48, type: 3}
-  corpseSprite: {fileID: 21300120, guid: 5cf1b4629c7cb104e98d369448084abd, type: 3}
-  deadSe: {fileID: 8300000, guid: 6d533a1288cacbd4ab7a30d82341a187, type: 3}
-  deadEffect: {fileID: 9157105887711914197, guid: c4f829cb7dd4b864caf8832ec5b1ee55, type: 3}
-  bossDefeatEffect: {fileID: 5409222575132117316, guid: 6fc41f7dfdf9abd408d630c62fdac702, type: 3}
-  damageEffect: {fileID: 6823200998282874702, guid: 8f8fe12323625f5499b2853dd2ad3e58, type: 3}
 --- !u!82 &8417726802983968618
 AudioSource:
   m_ObjectHideFlags: 0
@@ -411,6 +390,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3615813604422572115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6379689990235951777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20561d39596bf3e488a3927dd4472301, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerUnit
 --- !u!1 &8874822762420751370
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using System.Collections;
 
 [CreateAssetMenu(fileName = "Wave", menuName = "Scriptable Objects/Wave")]
 public class WaveData : ScriptableObject
@@ -8,15 +9,34 @@ public class WaveData : ScriptableObject
     public WaveLevel[] waveLevels;   // ウェーブでスポーンさせるレベルのリスト
     public bool bossWave;            // ボスウェーブか
 
-    private List<UnitStats> spawnUnits;
+    // レベル生成コルーチン
+    public IEnumerator SpawnLevels()
+    {
+        // ウェーブ内の全てのレベルを生成するまでループ
+        for (int level = 0; level < waveLevels.Length; level++)
+        {
+            if (level != 0)
+                yield return new WaitForSeconds(waveLevels[level].spawnInterbal);
+
+            var currentLevel = waveLevels[level];  // 現在のレベルのデータ取得
+
+            // レベル内のユニットを全て生成
+            yield return currentLevel.SpawnLevel();
+        }
+
+        yield break;
+    }
+
+
+    private List<UnitStats> spawnUnitsList;
     // スポーンするユニットの種類
-    public List<UnitStats> SpawnUnits
+    public List<UnitStats> SpawnUnitsList
     {
         get
         {
-            if (spawnUnits != null)
+            if (spawnUnitsList != null)
             {
-                return spawnUnits;
+                return spawnUnitsList;
             }
             else
             {
@@ -29,8 +49,8 @@ public class WaveData : ScriptableObject
                     }
                 }
 
-                spawnUnits = units.ToList();
-                return spawnUnits;
+                spawnUnitsList = units.ToList();
+                return spawnUnitsList;
             }
         }
     }
@@ -38,7 +58,7 @@ public class WaveData : ScriptableObject
 #if UNITY_EDITOR
     private void OnValidate()
     {
-        spawnUnits = null;
+        spawnUnitsList = null;
     }
 #endif
 

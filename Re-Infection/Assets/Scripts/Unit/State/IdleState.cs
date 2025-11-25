@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class IdleState : IUnitState
 {
-    UnitController unitController;
+    UnitBase unitBase;
 
-    public IdleState(UnitController controller)
+    public IdleState(UnitBase unitBase)
     {
-        unitController = controller;
+        this.unitBase = unitBase;
     }
 
     public void Enter()

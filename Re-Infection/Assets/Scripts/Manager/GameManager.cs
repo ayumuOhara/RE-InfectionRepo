@@ -59,8 +59,8 @@ public class GameManager : MonoBehaviour
 
     void SessionEnd()
     {
-        unitManager.AllPlayerUnitDestroy();
-        unitManager.AllEnemyUnitDestroy();
+        unitManager.AllUnitDestroy("Player");
+        unitManager.AllUnitDestroy("Enemy");
         StopCoroutine(timeManager.SessionTimer());
     }
 }
