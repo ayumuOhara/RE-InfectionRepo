@@ -18,11 +18,10 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] Canvas clearUI;
     [SerializeField] Canvas failedUI;
     [SerializeField] Canvas retireUI;
-    [SerializeField] Canvas waveInformationUI;
 
     [SerializeField] TextMeshProUGUI currentWaveText;
     [SerializeField] TextMeshProUGUI currentEnemyCntText;
-    [SerializeField] Image currentWaveProgress;
+    [SerializeField] Slider currentWaveProgress;
 
     [SerializeField] TextMeshProUGUI bossNameText;
     [SerializeField] TextMeshProUGUI bossHealthText;
@@ -128,7 +127,7 @@ public class InGameUIManager : MonoBehaviour
     // 現在のウェーブテキスト
     public void CurrentWaveText(int value)
     {
-        currentWaveText.text = "ウェーブ " + (value + 1);
+        currentWaveText.text = "WAVE " + (value + 1);
     }
 
     // 現在のウェーブテキスト表示
@@ -146,7 +145,7 @@ public class InGameUIManager : MonoBehaviour
     // 現在のウェーブの進行度
     public void CurrentWaveProgress(int value, int max)
     {
-        currentWaveProgress.fillAmount = (float)value / max;
+        currentWaveProgress.value = (float)value / max;
     }
 
     // ホールドアイコンをタップ位置に表示
@@ -223,13 +222,13 @@ public class InGameUIManager : MonoBehaviour
     // ボスHP変動表記
     public void BossHealthText(int value)
     {
-        bossHealthText.text = value.ToString();
+        bossHealthText.text = "HP " + value.ToString();
     }
 
     // ボスHPバー表記
     public void BossHealthProgress(float progress)
     {
-        currentWaveProgress.fillAmount = progress;
+        currentWaveProgress.value = progress;
     }
 
     // リタイアボタン(確認)
@@ -238,7 +237,7 @@ public class InGameUIManager : MonoBehaviour
         SeAudio.PlayOneShot(decideSe);
         retireUI.enabled = true;
 
-        if(gameManager.timeManager.isPause)
+        if (!gameManager.timeManager.isPause)
             gameManager.timeManager.GamePause();
     }
 
@@ -247,11 +246,17 @@ public class InGameUIManager : MonoBehaviour
     {
         SeAudio.PlayOneShot(cancelSe);
         retireUI.enabled = false;
+
+        if (gameManager.timeManager.isPause)
+            gameManager.timeManager.GamePause();
     }
 
     // シーンロード
     public void OnLoadScene(string name)
     {
+        if (gameManager.timeManager.isPause)
+            gameManager.timeManager.GamePause();
+
         SeAudio.PlayOneShot(lordSe);
         SceneTransitionner transitonner = Instantiate(transitionUIprefab).GetComponent<SceneTransitionner>();
         transitonner.OnLoadScene(name);

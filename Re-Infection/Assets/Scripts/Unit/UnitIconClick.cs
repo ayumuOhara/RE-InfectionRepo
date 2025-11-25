@@ -42,12 +42,13 @@ public class UnitIconClick : MonoBehaviour, IPointerClickHandler
         }
 
         unitCostText.text = unitStats.summonCost.ToString("F0");
+
         StartCoroutine(UnitCntText());
+        StartCoroutine(ShortageCost());
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-
         if(!gameManager.timeManager.isPause && gameManager.waveSpawner.IsStartWave)
             if (eventData.button == PointerEventData.InputButton.Left)
             {
@@ -93,6 +94,32 @@ public class UnitIconClick : MonoBehaviour, IPointerClickHandler
 
             cnt = gameManager.unitManager.GetUnitCnt(unitStats);
             unitCntText.text = cnt + " 体";
+            yield return null;
+        }
+    }
+
+    // ユニットの数を表示
+    IEnumerator ShortageCost()
+    {
+        var cnt = unitStats.summonCost;
+
+        while (true)
+        {
+            if (!gameManager.costManager.EnoughCost(unitStats.summonCost))
+            {
+                unitCostText.color = Color.orangeRed;
+                iconImage.color = Color.gray4;
+            }
+            else
+            {
+                unitCostText.color = Color.white;
+                iconImage.color = Color.white;
+            }
+
+            yield return new WaitUntil(() => cnt < gameManager.costManager.currentCost
+                                          || cnt > gameManager.costManager.currentCost);
+
+
             yield return null;
         }
     }

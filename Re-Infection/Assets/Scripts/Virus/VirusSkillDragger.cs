@@ -17,6 +17,7 @@ public class VirusSkillDragger : MonoBehaviour, IBeginDragHandler, IDragHandler,
 {
     [SerializeField] GameObject virusAreaPrefab;
     UnitManager unitManager;
+    WaveSpawner waveSpawner;
     GameObject dragObj;
 
     bool isDragging = false;    // ドラッグ中フラグ
@@ -27,12 +28,15 @@ public class VirusSkillDragger : MonoBehaviour, IBeginDragHandler, IDragHandler,
 
     void Awake()
     {
+        waveSpawner = FindObjectOfType<WaveSpawner>();
         if (unitManager == null)
             unitManager = GameObject.Find("UnitManager").GetComponent<UnitManager>();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (!waveSpawner.IsStartWave) return;
+
         dragEndTcs = new TaskCompletionSource<PointerEventData>();
 
         if (dragObj == null)
@@ -48,6 +52,8 @@ public class VirusSkillDragger : MonoBehaviour, IBeginDragHandler, IDragHandler,
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (!waveSpawner.IsStartWave) return;
+
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = 0;
 
@@ -58,6 +64,8 @@ public class VirusSkillDragger : MonoBehaviour, IBeginDragHandler, IDragHandler,
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (!waveSpawner.IsStartWave) return;
+
         dragEndTcs?.TrySetResult(eventData);
 
         if(isDragCancel)

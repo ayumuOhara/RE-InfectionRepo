@@ -21,6 +21,7 @@ public class AttackState : IUnitState
 
         if (atkTimer >= unitController.atkInterbal)
         {
+            unitController.animator.SetTrigger("Attack");
             unitController.unitAudio.PlayOneShot(unitController.attackSe);
 
             if(unitController.targetObj != null)
