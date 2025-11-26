@@ -8,7 +8,7 @@ using Unity.VisualScripting;
 
 public class UnitIconClick : MonoBehaviour, IPointerClickHandler
 {
-    [SerializeField] public UnitStats unitStats;
+    [SerializeField] public UnitStatsData unitData;
     [SerializeField] public int slotIndex;
     [SerializeField] Image unitIcon;
     [SerializeField] Image jobIcon;
@@ -32,18 +32,18 @@ public class UnitIconClick : MonoBehaviour, IPointerClickHandler
             UnitDataCarrier.Instance.selectedUnits.Count>slotIndex&&
             UnitDataCarrier.Instance.selectedUnits[slotIndex] != null)
         {
-            //unitStats = UnitDataCarrier.Instance.selectedUnits[slotIndex];
+            //unitData = UnitDataCarrier.Instance.selectedUnits[slotIndex];
 
-            Debug.Log($"Slot{slotIndex}に選択されたユニット:{unitStats.unitName}");
+            Debug.Log($"Slot{slotIndex}に選択されたユニット:{unitData.unitStats.unitName}");
         }
 
-        if (unitStats != null && unitIcon != null)
+        if (unitData != null && unitIcon != null)
         {
-            unitIcon.sprite = unitStats.unitSprite;
-            jobIcon.sprite = unitStats.JobSprite;
+            unitIcon.sprite = unitData.unitStats.unitSprite;
+            jobIcon.sprite = unitData.unitStats.JobSprite;
         }
 
-        unitCostText.text = unitStats.summonCost.ToString("F0");
+        unitCostText.text = unitData.unitStats.summonCost.ToString("F0");
 
         StartCoroutine(UnitCntText());
         StartCoroutine(ShortageCost());
@@ -54,7 +54,7 @@ public class UnitIconClick : MonoBehaviour, IPointerClickHandler
         if(!gameManager.timeManager.isPause && gameManager.waveSpawner.IsStartWave)
             if (eventData.button == PointerEventData.InputButton.Left)
             {
-                if (gameManager.costManager.EnoughCost(unitStats.summonCost))
+                if (gameManager.costManager.EnoughCost(unitData.unitStats.summonCost))
                 {
                     GetComponent<AudioSource>().PlayOneShot(summonSe);
                     GetComponent<Animator>().SetTrigger("Tap");
@@ -74,7 +74,7 @@ public class UnitIconClick : MonoBehaviour, IPointerClickHandler
     // ユニット生成
     void GenerateUnit()
     {
-        gameManager.costManager.RemoveCost(unitStats.summonCost);
+        gameManager.costManager.RemoveCost(unitData.unitStats.summonCost);
 
         spawnPos.x = Random.Range(-1.7f, 1.7f);
 
@@ -82,7 +82,7 @@ public class UnitIconClick : MonoBehaviour, IPointerClickHandler
         var unitObj = Instantiate(Resources.Load("PlayerUnit"), spawnPos, Quaternion.identity);
         UnitBase unit = unitObj.GetComponent<UnitBase>();
         unit.transform.position = spawnPos;
-        unit.Initialize(unitStats);
+        unit.Initialize(unitData.unitStats);
     }
 
     // ユニットの数を表示
@@ -92,10 +92,10 @@ public class UnitIconClick : MonoBehaviour, IPointerClickHandler
         
         while (true)
         {
-            yield return new WaitUntil(() => cnt < gameManager.unitManager.GetUnitCnt(unitStats)
-                                          || cnt > gameManager.unitManager.GetUnitCnt(unitStats));
+            yield return new WaitUntil(() => cnt < gameManager.unitManager.GetUnitCnt(unitData.unitStats)
+                                          || cnt > gameManager.unitManager.GetUnitCnt(unitData.unitStats));
 
-            cnt = gameManager.unitManager.GetUnitCnt(unitStats);
+            cnt = gameManager.unitManager.GetUnitCnt(unitData.unitStats);
             unitCntText.text = cnt + " 体";
             yield return null;
         }
@@ -104,11 +104,11 @@ public class UnitIconClick : MonoBehaviour, IPointerClickHandler
     // ユニットの数を表示
     IEnumerator ShortageCost()
     {
-        var cnt = unitStats.summonCost;
+        var cnt = unitData.unitStats.summonCost;
 
         while (true)
         {
-            if (!gameManager.costManager.EnoughCost(unitStats.summonCost))
+            if (!gameManager.costManager.EnoughCost(unitData.unitStats.summonCost))
             {
                 unitCostText.color = Color.orangeRed;
                 unitIcon.color = Color.gray4;

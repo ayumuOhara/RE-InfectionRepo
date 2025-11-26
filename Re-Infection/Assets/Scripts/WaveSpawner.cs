@@ -219,9 +219,9 @@ public class WaveSpawner : MonoBehaviour
 
         if (currentWave.bossWave)
         {
-            gameUIManager.BossNameText(currentWave.waveLevels[0].levelStats[0].unitStats.unitName);
-            gameUIManager.BossHealthText((int)currentWave.waveLevels[0].levelStats[0].unitStats.maxHp);
-            gameUIManager.BossHealthProgress(currentWave.waveLevels[0].levelStats[0].unitStats.maxHp / currentWave.waveLevels[0].levelStats[0].unitStats.maxHp);
+            gameUIManager.BossNameText(currentWave.waveLevels[0].levelStats[0].statsData.unitStats.unitName);
+            gameUIManager.BossHealthText((int)currentWave.waveLevels[0].levelStats[0].statsData.unitStats.maxHp);
+            gameUIManager.BossHealthProgress(currentWave.waveLevels[0].levelStats[0].statsData.unitStats.maxHp / currentWave.waveLevels[0].levelStats[0].statsData.unitStats.maxHp);
         }
         else
         {

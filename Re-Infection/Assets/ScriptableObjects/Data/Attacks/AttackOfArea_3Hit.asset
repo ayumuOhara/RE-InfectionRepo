@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fedaa68b43ab9804baf13676359aac91, type: 3}
-  m_Name: AreaAttackData
+  m_Name: AttackOfArea_3Hit
   m_EditorClassIdentifier: Assembly-CSharp::AreaAttackData
   hitMaxCnt: 3

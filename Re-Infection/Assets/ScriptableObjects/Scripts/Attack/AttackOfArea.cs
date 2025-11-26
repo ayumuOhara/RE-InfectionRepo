@@ -1,10 +1,7 @@
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.UI.Extensions;
 
-[CreateAssetMenu(fileName = "AreaAttackData", menuName = "Scriptable Objects/AreaAttackData")]
-public class AreaAttackData : AttackDataBase
+[CreateAssetMenu(fileName = "AttackOfArea", menuName = "Scriptable Objects/AttackOfArea")]
+public class AttackOfArea : AttackDataBase
 {
     [Header("ƒqƒbƒg‚·‚é“G‚ÌÅ‘å”")]
     public int hitMaxCnt;

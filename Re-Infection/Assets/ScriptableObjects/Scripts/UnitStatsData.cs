@@ -27,8 +27,8 @@ public class Types
     }
 }
 
-[CreateAssetMenu(fileName = "UnitStats", menuName = "Scriptable Objects/UnitStats")]
-public class UnitStats : ScriptableObject
+[System.Serializable]
+public class UnitStats
 {
     [Header("スプライト")]
     public Sprite unitSprite;           // ユニットのスプライト
@@ -103,4 +103,10 @@ public class UnitStats : ScriptableObject
             }
         }
     }
+}
+
+[CreateAssetMenu(fileName = "UnitStats", menuName = "Scriptable Objects/UnitStats")]
+public class UnitStatsData : ScriptableObject
+{
+    public UnitStats unitStats;
 }

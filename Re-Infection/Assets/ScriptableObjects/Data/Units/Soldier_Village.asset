@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dcf73ff0467ebad4b8d9a591c6ac54e0, type: 3}
-  m_Name: BossUnit
+  m_Name: Soldier_Village
   m_EditorClassIdentifier: Assembly-CSharp::UnitStats
   unitStats:
-    unitSprite: {fileID: 21300112, guid: f5f1c19ce87450f4b97f8b363746558d, type: 3}
-    unitName: "\u738B\u56FD\u9A0E\u58EB"
+    unitSprite: {fileID: 21300002, guid: f5f1c19ce87450f4b97f8b363746558d, type: 3}
+    unitName: "\u6751\u306E\u5263\u58EB"
     jobType: 0
     targetType: 0
-    maxHp: 3000
+    maxHp: 100
     attackData: {fileID: 0}
-    atk: 25
-    atkInterbal: 0.5
-    range: 0.2
+    atk: 12
+    atkInterbal: 1.5
+    range: 0.35
     moveType: 0
-    moveSpeed: 3
-    summonCost: 0
-    infecitonTime: 0
-    bossUnit: 1
+    moveSpeed: 2
+    summonCost: 3
+    infecitonTime: 10
+    bossUnit: 0
     attackSe: {fileID: 8300000, guid: dab120b7a12444d42b8454c3420e7830, type: 3}

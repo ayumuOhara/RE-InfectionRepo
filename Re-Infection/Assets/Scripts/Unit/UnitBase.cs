@@ -71,7 +71,7 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
         GetComponent<AudioSource>().PlayOneShot(stats.attackSe);
         GetComponent<Animator>().SetTrigger("Attack");
 
-        attackBase.Attack(targetLayer, this, Stats.atk, Stats.range);
+        attackBase?.Attack(targetLayer, this, Stats.atk, Stats.range);
     }
 
     public virtual void Damage(float damage)
