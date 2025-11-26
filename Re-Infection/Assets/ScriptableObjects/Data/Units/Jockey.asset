@@ -14,16 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UnitStats
   unitSprite: {fileID: 21300006, guid: f5f1c19ce87450f4b97f8b363746558d, type: 3}
   unitName: "\u9A0E\u58EB"
-  jobType: 0
+  jobType: 3
   targetType: 0
   maxHp: 50
   attackType: 0
-  hitTargetCnt: 0
+  hitTargetCnt: 1
   atk: 5
   atkInterbal: 1
+  range: 0.3
   moveType: 0
   moveSpeed: 6
-  range: 0.3
   summonCost: 1
   infecitonTime: 10
   bossUnit: 0

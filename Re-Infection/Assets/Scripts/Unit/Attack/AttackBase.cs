@@ -1,6 +1,9 @@
 using UnityEngine;
 
-public interface AttackBase
+public abstract class AttackBase
 {
-    public void Attacking();
+    public virtual void Attacking()
+    {
+        // UŒ‚ˆ—
+    }
 }

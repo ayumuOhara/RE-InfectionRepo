@@ -1,13 +1,15 @@
 using UnityEngine;
+using UnityEngine.Experimental.Rendering;
 
 public class Types
 {
     // –ğE
     public enum JobType
     {
-        SOLDIER,    // ‹ßÚUŒ‚E
-        TANK,       // ‹ßÚ–hŒäE
-        GUNNER,     // ‰“‹——£E
+        SOLDIER,    // Œ•m
+        TANK,       // ‚
+        GUNNER,     // ‰“‹——£
+        CAVALRY,    // ‹R•º
     }
 
     // UŒ‚•û–@
@@ -21,7 +23,6 @@ public class Types
     public enum MoveType
     {
         RUN,    // ’ÊíˆÚ“®
-        WARP,   // ƒ[ƒv
     }
 
     // –Ú•W
@@ -42,6 +43,25 @@ public class UnitStats : ScriptableObject
     public string unitName;             // ƒ†ƒjƒbƒg–¼
     [Header("–ğE")]
     public Types.JobType jobType;       // –ğE
+    public Sprite JobSprite
+    {
+        get
+        {
+            switch (jobType)
+            {
+                case Types.JobType.SOLDIER:
+                    return Resources.Load<Sprite>("Sprites/SoldierIcon");
+                case Types.JobType.TANK:
+                    return Resources.Load<Sprite>("Sprites/TankIcon");
+                case Types.JobType.GUNNER:
+                    return Resources.Load<Sprite>("Sprites/GunnerIcon");
+                case Types.JobType.CAVALRY:
+                    return Resources.Load<Sprite>("Sprites/CavalryIcon");
+                default:
+                    return Resources.Load<Sprite>("Sprites/DefaultIcon");
+            }
+        }
+    }
     [Header("UŒ‚/ˆÚ“® –Ú•W")]
     public Types.TargetType targetType; // UŒ‚‚Ü‚½‚ÍˆÚ“®‘ÎÛ
 
@@ -87,8 +107,6 @@ public class UnitStats : ScriptableObject
             {
                 case Types.MoveType.RUN:
                     return new RunMovement();
-                case Types.MoveType.WARP:
-                    return null;
                 default:
                     return null;
             }

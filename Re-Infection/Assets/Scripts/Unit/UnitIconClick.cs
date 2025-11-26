@@ -10,7 +10,8 @@ public class UnitIconClick : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] public UnitStats unitStats;
     [SerializeField] public int slotIndex;
-    [SerializeField] Image iconImage;
+    [SerializeField] Image unitIcon;
+    [SerializeField] Image jobIcon;
     [SerializeField] TextMeshProUGUI unitCostText;
     [SerializeField] TextMeshProUGUI unitCntText;
     [SerializeField] Image assertLabel;
@@ -36,9 +37,10 @@ public class UnitIconClick : MonoBehaviour, IPointerClickHandler
             Debug.Log($"Slot{slotIndex}に選択されたユニット:{unitStats.unitName}");
         }
 
-        if (unitStats != null && iconImage != null)
+        if (unitStats != null && unitIcon != null)
         {
-            iconImage.sprite = unitStats.unitSprite;
+            unitIcon.sprite = unitStats.unitSprite;
+            jobIcon.sprite = unitStats.JobSprite;
         }
 
         unitCostText.text = unitStats.summonCost.ToString("F0");
@@ -109,12 +111,12 @@ public class UnitIconClick : MonoBehaviour, IPointerClickHandler
             if (!gameManager.costManager.EnoughCost(unitStats.summonCost))
             {
                 unitCostText.color = Color.orangeRed;
-                iconImage.color = Color.gray4;
+                unitIcon.color = Color.gray4;
             }
             else
             {
                 unitCostText.color = Color.white;
-                iconImage.color = Color.white;
+                unitIcon.color = Color.white;
             }
 
             yield return new WaitUntil(() => cnt < gameManager.costManager.currentCost

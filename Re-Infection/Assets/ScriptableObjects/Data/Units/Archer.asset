@@ -18,12 +18,12 @@ MonoBehaviour:
   targetType: 0
   maxHp: 30
   attackType: 0
-  hitTargetCnt: 0
+  hitTargetCnt: 1
   atk: 8
   atkInterbal: 3
+  range: 3
   moveType: 0
   moveSpeed: 2.5
-  range: 3
   summonCost: 2
   infecitonTime: 10
   bossUnit: 0

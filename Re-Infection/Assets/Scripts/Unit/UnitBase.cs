@@ -24,24 +24,25 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
 
     public void Initialize(UnitStats stats)
     {
-        //this.stats = new UnitStats()
-        //{
-        //    unitSprite = stats.unitSprite,
-        //    unitName = stats.unitName,
-        //    jobType = stats.jobType,
-        //    targetType = stats.targetType,
-        //    maxHp = stats.maxHp,
-        //    atk = stats.atk,
-        //    atkInterbal = stats.atkInterbal,
-        //    moveSpeed = stats.moveSpeed,
-        //    range = stats.range,
-        //    infecitonTime = stats.infecitonTime,
-        //    bossUnit = stats.bossUnit,
-        //    attackSe = stats.attackSe,
-        //};
+        this.stats = new UnitStats()
+        {
+            unitSprite = stats.unitSprite,
+            unitName = stats.unitName,
+            jobType = stats.jobType,
+            targetType = stats.targetType,
+            maxHp = stats.maxHp,
+            atk = stats.atk,
+            atkInterbal = stats.atkInterbal,
+            moveSpeed = stats.moveSpeed,
+            range = stats.range,
+            infecitonTime = stats.infecitonTime,
+            bossUnit = stats.bossUnit,
+            attackSe = stats.attackSe,
+        };
 
         movementBase = stats.MovementBase;
         attackBase = stats.AttackBase;
+
         GetComponent<SpriteRenderer>().sprite = this.stats.unitSprite;
         currentHealth = stats.maxHp;
     }
