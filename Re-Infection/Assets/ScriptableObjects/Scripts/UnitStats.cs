@@ -12,13 +12,6 @@ public class Types
         CAVALRY,    // ‹R•º
     }
 
-    // UŒ‚•û–@
-    public enum AttackType
-    {
-        ONE_STRIKE,         // ’P”­
-        COMBO_STRIKE,       // ˜AŒ‚
-    }
-
     // ˆÚ“®•û–@
     public enum MoveType
     {
@@ -67,10 +60,8 @@ public class UnitStats : ScriptableObject
 
     [Header("Å‘åHP")]
     public float maxHp;                 // Å‘åHP
-    [Header("UŒ‚•û–@")]
-    public Types.AttackType attackType; // UŒ‚•û–@
-    [Header("UŒ‚‘ÎÛ‚Ì”")]
-    public int hitTargetCnt;            // UŒ‚‘ÎÛ‚Ì”
+    [Header("UŒ‚ƒf[ƒ^")]
+    public AttackDataBase attackData;     // UŒ‚ƒXƒ^ƒbƒc
     [Header("UŒ‚—Í")]
     public float atk;                   // UŒ‚—Í
     [Header("UŒ‚ŠÔŠu")]
@@ -107,22 +98,6 @@ public class UnitStats : ScriptableObject
             {
                 case Types.MoveType.RUN:
                     return new RunMovement();
-                default:
-                    return null;
-            }
-        }
-    }
-
-    public AttackBase AttackBase
-    {
-        get
-        {
-            switch (attackType)
-            {
-                case Types.AttackType.ONE_STRIKE:
-                    return null;
-                case Types.AttackType.COMBO_STRIKE:
-                    return null;
                 default:
                     return null;
             }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4578004896513259297}
   - component: {fileID: 4013076609182561736}
   - component: {fileID: 1120724941087727946}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: InfectionRatioBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 267401373177801286}
   - component: {fileID: 1529935724440922714}
   - component: {fileID: 5440236735088344463}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: UnitInformation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190,7 +190,8 @@ GameObject:
   - component: {fileID: 8417726802983968618}
   - component: {fileID: 8532348442563292378}
   - component: {fileID: 4246640369161838273}
-  m_Layer: 6
+  - component: {fileID: 6532507719244782651}
+  m_Layer: 7
   m_Name: EnemyUnit
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -402,6 +403,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fa7aef9fca27894fa8745d1b72abdcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyUnit
+  stats: {fileID: 0}
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 64
+--- !u!58 &6532507719244782651
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6379689990235951777}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: -0.6}
+  m_Radius: 0.5
 --- !u!1 &8874822762420751370
 GameObject:
   m_ObjectHideFlags: 0
@@ -413,7 +454,7 @@ GameObject:
   - component: {fileID: 8502141567913599524}
   - component: {fileID: 517856415589893337}
   - component: {fileID: 1721511489682213582}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: InfectionRatioBarBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}

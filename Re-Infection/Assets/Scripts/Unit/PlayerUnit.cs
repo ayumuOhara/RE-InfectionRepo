@@ -22,8 +22,6 @@ public class PlayerUnit : UnitBase
 
     public override void Move()
     {
-        TargetPos = GetTarget.GetEnemyUnit(MyPos).transform.position;
-
         transform.position = Movement.Movement(MyPos, TargetPos, Stats.MoveSpeed);
     }
 }

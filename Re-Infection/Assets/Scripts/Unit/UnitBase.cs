@@ -6,6 +6,8 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
     [SerializeField] UnitStats stats;
     public UnitStats Stats => stats;
 
+    [SerializeField] LayerMask targetLayer;
+
     float currentHealth;
     public float CurrentHealth => currentHealth;
     public float HealthRate => currentHealth / stats.maxHp;
@@ -17,8 +19,7 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
     MovementBase movementBase;
     public MovementBase Movement => movementBase;
 
-    AttackBase attackBase;
-    public AttackBase Attacking => attackBase;
+    AttackDataBase attackBase;
 
     public UnitStateManager stateManager { get; set; }
 
@@ -31,6 +32,7 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
             jobType = stats.jobType,
             targetType = stats.targetType,
             maxHp = stats.maxHp,
+            attackData = stats.attackData,
             atk = stats.atk,
             atkInterbal = stats.atkInterbal,
             moveSpeed = stats.moveSpeed,
@@ -41,19 +43,19 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
         };
 
         movementBase = stats.MovementBase;
-        attackBase = stats.AttackBase;
+        attackBase = stats.attackData;
 
         GetComponent<SpriteRenderer>().sprite = this.stats.unitSprite;
         currentHealth = stats.maxHp;
     }
 
-    public virtual void Start()
+    public void Start()
     {
         FindObjectOfType<UnitManager>()?.AddUnitList(this);
         stateManager.StateMachine.Initialize(stateManager.StateMachine.moveState);
     }
 
-    public virtual void Update()
+    public void Update()
     {
         stateManager.StateTransition();
         stateManager.StateMachine.Update();
@@ -61,7 +63,7 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
 
     public virtual void Move()
     {
-        transform.position += movementBase.Movement(MyPos, TargetPos, stats.MoveSpeed);
+        // ˆÚ“®ˆ—
     }
 
     public virtual void Attack()
@@ -69,7 +71,7 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
         GetComponent<AudioSource>().PlayOneShot(stats.attackSe);
         GetComponent<Animator>().SetTrigger("Attack");
 
-        //attackBase.Attacking();
+        attackBase.Attack(targetLayer, this, Stats.atk, Stats.range);
     }
 
     public virtual void Damage(float damage)
@@ -88,6 +90,6 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
 
     public virtual void Dead()
     {
-
+        // €–S‚Ìˆ—
     }
 }
