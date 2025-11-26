@@ -12,14 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcf73ff0467ebad4b8d9a591c6ac54e0, type: 3}
   m_Name: Tank
   m_EditorClassIdentifier: Assembly-CSharp::UnitStats
-  unitId: 0
   unitSprite: {fileID: 21300008, guid: f5f1c19ce87450f4b97f8b363746558d, type: 3}
   unitName: "\u91CD\u88C5\u5175"
+  jobType: 1
+  targetType: 0
   maxHp: 300
+  attackData: {fileID: 11400000, guid: 0711e333974647d41ab7e833fafc9b14, type: 2}
   atk: 10
   atkInterbal: 8
-  moveSpeed: 2
   range: 0.3
+  moveType: 0
+  moveSpeed: 2
   summonCost: 5
   infecitonTime: 10
   bossUnit: 0

@@ -9,12 +9,12 @@ public class UnitStateMachine
     public AttackState attackState;
     public DeadState deadState;
 
-    public UnitStateMachine(UnitController controller)
+    public UnitStateMachine(UnitBase unitBase)
     {
-        idleState = new IdleState(controller);
-        moveState = new MoveState(controller);
-        attackState = new AttackState(controller);
-        deadState = new DeadState(controller);
+        idleState = new IdleState(unitBase);
+        moveState = new MoveState(unitBase);
+        attackState = new AttackState(unitBase);
+        deadState = new DeadState(unitBase);
     }
 
     public void Initialize(IUnitState state)

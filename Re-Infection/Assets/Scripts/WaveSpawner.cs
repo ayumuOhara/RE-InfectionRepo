@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using TMPro;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 
 public class WaveSpawner : MonoBehaviour
 {
@@ -13,21 +14,19 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField] Image castlePoint;
 
     [SerializeField] Stage stage;            // ステージのデータ
-    [SerializeField] GameObject unitObj;
-    [SerializeField] Vector3 spawnPos;       // スポーン座標
 
     int currentWaveIdx = 0;      // 現在のウェーブ
     int currentWaveEnemySum = 0; // 現在のウェーブの敵の残りの合計数
 
     const float WAVE_START_CNT = 0.5f;
 
-    UnitController bossUnit;
+    EnemyUnit bossUnit;
 
     // ウェーブ内の敵を全て倒したか
     public bool isAllEnemyDefeatedInWave => currentWaveEnemySum <= 0;
 
     // ボスユニットを倒したか
-    bool isBossDefeated => bossUnit.isDead;
+    bool isBossDefeated => bossUnit.IsDead;
 
     // ウェーブが始まったか
     bool isStartWave = false;
@@ -66,34 +65,30 @@ public class WaveSpawner : MonoBehaviour
             var currentWave = stage.waveData[currentWaveIdx]; // 現在のウェーブのデータ取得
             SetWaveUI(currentWave);
 
-            yield return StartCoroutine(WaveStart());
-            yield return StartCoroutine(SpawnLevels(currentWave));
+            yield return WaveStart();
+            yield return currentWave.SpawnLevels();
 
             if(currentWave.bossWave)
             {
-                Debug.Log("ボスが撃破されるまで待機");
-                StartCoroutine(BossUI());
+                BossUI();
                 yield return new WaitUntil(() => isBossDefeated);
             }
             else
             {
-                Debug.Log("ウェーブ内の敵が全滅するまで待機");
                 yield return new WaitUntil(() => isAllEnemyDefeatedInWave);
             }
 
             // 最終ウェーブの場合、即終了する
             if (currentWave.bossWave)
             {
-                StartCoroutine(StageClear());
+                StageClear();
                 yield break;
             }
             else
             {
                 // 全滅後、ウェーブを進行
                 currentWaveIdx++;
-                Debug.Log("全ての敵が全滅したので次のウェーブへ移行");
-                //Reward(currentWave);
-                unitManager.AllPlayerUnitDestroy();
+                unitManager.AllUnitDestroy("Player");
             }
         }
     }
@@ -177,63 +172,34 @@ public class WaveSpawner : MonoBehaviour
         yield break;
     }
 
-    // レベル生成コルーチン
-    IEnumerator SpawnLevels(WaveData currentWave)
-    {
-        // ウェーブ内の全てのレベルを生成するまでループ
-        for (int level = 0; level < currentWave.waveLevels.Length; level++)
-        {
-            if (level != 0)
-                yield return new WaitForSeconds(currentWave.waveLevels[level].spawnInterbal);
-
-            var currentLevel = currentWave.waveLevels[level];  // 現在のレベルのデータ取得
-
-            // レベル内のユニットを全て生成
-            foreach (LevelStats Lstats in currentLevel.levelStats)
-            {
-                for (int i = 0; i < Lstats.spawnCnt; i++)
-                {
-                    SpawnUnit(Lstats.unitStats);
-                    yield return null;
-                }
-            }
-        }
-
-
-        yield break;
-    }
-
     // ボスUI更新コルーチン
     IEnumerator BossUI()
     {
-        Debug.Log("ボスUI表示コルーチン呼び出し");
-
-        gameUIManager.BossNameText(bossUnit.unitName);
+        gameUIManager.BossNameText(bossUnit.Stats.unitName);
 
         while (!isBossDefeated)
         {
-            gameUIManager.BossHealthText((int)bossUnit.currentHp);
+            gameUIManager.BossHealthText((int)bossUnit.CurrentHealth);
             gameUIManager.BossHealthProgress(bossUnit.HealthRate);
             yield return null;
         }
 
-        gameUIManager.BossHealthText((int)bossUnit.currentHp);
+        gameUIManager.BossHealthText((int)bossUnit.CurrentHealth);
 
         yield break;
     }
 
     // ユニット生成
-    void SpawnUnit(UnitStats unitStats)
+    public static void SpawnUnit(UnitStats unitStats)
     {
+        var spawnPos = new Vector3(0, 4.5f, 0);
         spawnPos.x = Random.Range(-2f, 2f);
 
-        UnitController uc = Instantiate(unitObj, spawnPos, Quaternion.identity).GetComponent<UnitController>();
-        uc.transform.position = spawnPos;
-        uc.SetUnitStats(unitStats, UnitGroup.Enemy);    // 生成したユニットにステータスを代入
+        var enemyObj = Instantiate(Resources.Load("EnemyUnit"), spawnPos, Quaternion.identity);
+        EnemyUnit enemy = enemyObj.GetComponent<EnemyUnit>();
 
-        // ボスユニット代入
-        if (unitStats.bossUnit)
-            bossUnit = uc;
+        enemy.transform.position = spawnPos;
+        enemy.Initialize(unitStats);    // 生成したユニットにステータスを代入
     }
 
     // ウェーブの敵の残りの合計数を減らす

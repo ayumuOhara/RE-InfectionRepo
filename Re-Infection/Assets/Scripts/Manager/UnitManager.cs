@@ -1,12 +1,12 @@
 using UnityEngine;
 using System.Collections.Generic;
-using Unity.Burst.Intrinsics;
+using System.Linq;
 
 public class UnitManager : MonoBehaviour
 {
-    public List<UnitController> playerUnitList { get; private set; } = new List<UnitController>();    // プレイヤーユニット格納リスト
-    public List<UnitController> enemyUnitList { get; private set; } = new List<UnitController>();     // エネミーユニット格納リスト
-    public List<UnitController> corpseUnitList { get; private set; } = new List<UnitController>();    // 死体ユニット格納リスト
+    public List<UnitBase> playerUnitList { get; private set; } = new List<UnitBase>();    // プレイヤーユニット格納リスト
+    public List<UnitBase> enemyUnitList { get; private set; } = new List<UnitBase>();     // エネミーユニット格納リスト
+    public List<UnitBase> corpseUnitList { get; private set; } = new List<UnitBase>();    // 死体ユニット格納リスト
 
     // プレイヤーユニットの数を返す
     public int PlayerCnt => playerUnitList.Count;
@@ -21,78 +21,70 @@ public class UnitManager : MonoBehaviour
     public bool IsAllEnemyDefeated => enemyUnitList.Count <= 0;
 
     // ユニットをリストに追加
-    public void AddUnitList(UnitController unit, UnitGroup group)
+    public void AddUnitList(UnitBase unit)
     {
-        if(group == UnitGroup.Player)
-            playerUnitList.Add(unit);
-        if(group == UnitGroup.Enemy)
-            enemyUnitList.Add(unit);
+        switch (unit)
+        {
+            case PlayerUnit:
+                playerUnitList.Add(unit); break;
+            case EnemyUnit: 
+                enemyUnitList.Add(unit);  break;
+        }
     }
 
     // ユニットをリストから削除
-    public void RemoveUnitList(UnitController unit, UnitGroup group)
+    public void RemoveUnitList(UnitBase unit)
     {
-        if (group == UnitGroup.Player)
-            playerUnitList.Remove(unit);
-        if (group == UnitGroup.Enemy)
-            enemyUnitList.Remove(unit);
-    }
-
-    // ユニットのリストを返す
-    public List<UnitController> GetUnitList(UnitGroup group)
-    {
-        return group == UnitGroup.Player ? playerUnitList : enemyUnitList;
+        switch (unit)
+        {
+            case PlayerUnit:
+                playerUnitList.Remove(unit); break;
+            case EnemyUnit:
+                enemyUnitList.Remove(unit);  break;
+        }
     }
 
     // 指定された味方ユニットの数を返す
     public int GetUnitCnt(UnitStats stats)
     {
-        var cnt = 0;
-
-        foreach (var unit in playerUnitList)
-        {
-            if (unit.unitName == stats.unitName)
-            {
-                cnt++;
-            }
-        }
-
-        return cnt;
+        return playerUnitList.Count(unit => unit.Stats.unitName == stats.unitName);
     }
 
     // 死体リストに追加
-    public void AddCorpseList(UnitController unit)
+    public void AddCorpseList(EnemyUnit unit)
     {
         corpseUnitList.Add(unit);
     }
 
     // 死体リストから削除
-    public void RemoveCorpseList(UnitController unit)
+    public void RemoveCorpseList(EnemyUnit unit)
     {
         corpseUnitList.Remove(unit);
     }
 
     // 死体のリストを返す
-    public List<UnitController> GetCorpseList()
+    public List<UnitBase> GetCorpseList()
     {
         return corpseUnitList;
     }
 
-    // プレイヤーのユニットを全て除外
-    public void AllPlayerUnitDestroy()
+    // ユニットを全て削除
+    public void AllUnitDestroy(string tag)
     {
-        foreach (UnitController unit in playerUnitList)
-            Destroy(unit.gameObject);
+        switch (tag)
+        {
+            case "Player":
+                foreach (var unit in playerUnitList)
+                    Destroy(unit.gameObject);
 
-        playerUnitList.Clear();
-    }
+                playerUnitList.Clear();
+                break;
+            case "Enemy":
+                foreach (var unit in enemyUnitList)
+                    Destroy(unit.gameObject);
 
-    // エネミーのユニットを全て除外
-    public void AllEnemyUnitDestroy()
-    {
-        foreach (UnitController unit in enemyUnitList)
-            Destroy(unit.gameObject);
-
-        enemyUnitList.Clear();
+                enemyUnitList.Clear();
+                break;
+        }
     }
 }

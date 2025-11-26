@@ -1,27 +1,36 @@
 using UnityEngine;
 using System.Collections.Generic;
 using static UnityEngine.RuleTile.TilingRuleOutput;
+using static UnityEditor.PlayerSettings;
 
 public static class GetTarget
 {
-    public static GameObject GetTargetObj(UnitGroup targetGroup, Vector3 myPos)
+    // プレイヤーユニット取得
+    public static GameObject GetPlayerUnit(Vector3 myPos)
     {
         UnitManager unitManager = GameObject.Find("UnitManager").GetComponent<UnitManager>();
 
-        // 取得したい陣営のリスト格納用変数
-        List<UnitController> targetUnitList = new List<UnitController>();
+        if(unitManager.playerUnitList == null || unitManager.playerUnitList.Count == 0) return null; // 対象が取得できない場合、nullを返す
+        
+        return NearestUnit(unitManager.playerUnitList, myPos);
+    }
 
-        // 目的の陣営のユニットリストを代入
-        if(targetGroup == UnitGroup.Player)
-            targetUnitList = unitManager.playerUnitList;
-        if (targetGroup == UnitGroup.Enemy)
-            targetUnitList = unitManager.enemyUnitList;
+    // エネミーユニット取得
+    public static GameObject GetEnemyUnit(Vector3 myPos)
+    {
+        UnitManager unitManager = GameObject.Find("UnitManager").GetComponent<UnitManager>();
 
-        if(targetUnitList == null || targetUnitList.Count == 0) return null; // 対象が取得できない場合、nullを返す
+        if (unitManager.enemyUnitList == null || unitManager.enemyUnitList.Count == 0) return null; // 対象が取得できない場合、nullを返す
 
+        return NearestUnit(unitManager.enemyUnitList, myPos);
+    }
+
+    // 渡されたユニットリストから一番近い要素を返す
+    public static GameObject NearestUnit(List<UnitBase> unitBases, Vector3 myPos)
+    {
         GameObject nearestObj = null;
 
-        foreach(UnitController targetUnit in targetUnitList)
+        foreach (UnitBase targetUnit in unitBases)
         {
             if (nearestObj == null)
             {
@@ -37,9 +46,18 @@ public static class GetTarget
         return nearestObj;
     }
 
-    // ターゲットが範囲内かどうか
+    // ターゲットが攻撃範囲内かどうか
     public static bool TargetInRange(Vector3 targetPos, Vector3 pos, float range)
     {
         return Vector3.Distance(targetPos, pos) < range;
+    }
+
+    // 近いほうのターゲットを返す
+    public static GameObject NearestTarget(GameObject unit, GameObject castle, Vector3 myPos)
+    {
+        if(unit == null) return castle;
+
+        return Vector3.Distance(unit.transform.position, myPos) < Vector3.Distance(castle.transform.position, myPos)
+               ? unit : castle;
     }
 }

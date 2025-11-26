@@ -5,33 +5,16 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class DeadState : IUnitState
 {
-    UnitController unitController;
+    UnitBase unitController;
 
-    public DeadState(UnitController controller)
+    public DeadState(UnitBase controller)
     {
         unitController = controller;
     }
 
     public void Enter()
     {
-        unitController.Dead();
 
-        if (unitController.group == UnitGroup.Enemy && !unitController.bossUnit)
-        {
-            if (unitController.isInfection)
-            {
-                unitController.DestroyUnit();
-            }
-
-            SpriteRenderer sr = unitController.gameObject.GetComponent<SpriteRenderer>();
-            sr.sprite = unitController.corpseSprite;
-
-            unitController.unitManager.AddCorpseList(unitController);
-        }
-        else
-        {
-            unitController.DestroyUnit();
-        }
     }
 
     public void Update()
@@ -41,34 +24,6 @@ public class DeadState : IUnitState
 
     public void Exit()
     {
-        // ïúäàéûÇÃèàóù
-        unitController.unitManager.RemoveCorpseList(unitController);
-        unitController.unitManager.AddUnitList(unitController, UnitGroup.Player);
 
-        SpriteRenderer sr = unitController.gameObject.GetComponent<SpriteRenderer>();
-        sr.sprite = unitController.unitSprite;
-    }
-
-    // éûä‘Ç…íBÇµÇΩÇÁä¥êıÇ≥ÇπÇÈ
-    public IEnumerator Infectioning()
-    {
-        Debug.Log("ä¥êıäJén");
-
-        unitController.unitUI.SetActive(true);
-
-        float timer = 0;
-
-        while(timer < unitController.infecitonTime)
-        {
-            timer += Time.deltaTime;
-
-            unitController.infectionRateGauge.fillAmount = timer / unitController.infecitonTime;
-
-            yield return null;
-        }
-
-        unitController.unitUI.SetActive(false);
-
-        unitController.HealHelth(unitController.maxHp * 0.5f);
     }
 }

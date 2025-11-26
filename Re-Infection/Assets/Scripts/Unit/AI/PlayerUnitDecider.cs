@@ -2,20 +2,20 @@ using UnityEngine;
 
 public class PlayerUnitDecider : IUnitAIDecider
 {
-    UnitController unitController;
+    UnitBase unitBase;
 
-    public PlayerUnitDecider(UnitController controller)
+    public PlayerUnitDecider(UnitBase controller)
     {
-        unitController = controller;
+        unitBase = controller;
     }
 
     public UnitDicision UnitDecider()
     {
-        if(unitController.isDead)
+        if(unitBase.IsDead)
             return UnitDicision.Dead;
         else
-            if (unitController.targetObj != null)
-                if (GetTarget.TargetInRange(unitController.targetObj.transform.position, unitController.gameObject.transform.position, unitController.range))  // “G‚Æ‚Ì‹——£‚ªË’ö“à‚©
+            if (GetTarget.GetEnemyUnit(unitBase.MyPos) != null)
+                if (GetTarget.TargetInRange(unitBase.TargetPos, unitBase.MyPos, unitBase.Stats.range))  // “G‚Æ‚Ì‹——£‚ªË’ö“à‚©
                     return UnitDicision.Attack; // UŒ‚‚·‚é
                 else
                     return UnitDicision.MoveToTarget; // ƒ^[ƒQƒbƒg‚Ü‚ÅˆÚ“®
