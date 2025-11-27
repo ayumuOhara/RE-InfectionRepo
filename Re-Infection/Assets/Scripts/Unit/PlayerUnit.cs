@@ -13,9 +13,9 @@ public class PlayerUnit : UnitBase
     {
         while (true)
         {
-            yield return new WaitUntil(() => GetTarget.GetEnemyUnit(MyPos) != null);
+            yield return new WaitUntil(() => GetTarget.GetNearestTargetUnit(this) != null);
 
-            TargetPos = GetTarget.GetEnemyUnit(MyPos).transform.position;
+            TargetPos = GetTarget.GetNearestTargetUnit(this).transform.position;
             yield return null;
         }
     }

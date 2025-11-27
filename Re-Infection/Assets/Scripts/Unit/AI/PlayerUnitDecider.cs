@@ -14,7 +14,7 @@ public class PlayerUnitDecider : IUnitAIDecider
         if(unitBase.IsDead)
             return UnitDicision.Dead;
         else
-            if (GetTarget.GetEnemyUnit(unitBase.MyPos) != null)
+            if (GetTarget.GetNearestTargetUnit(unitBase) != null)
                 if (GetTarget.TargetInRange(unitBase.TargetPos, unitBase.MyPos, unitBase.Stats.range))  // “G‚Æ‚Ì‹——£‚ªË’ö“à‚©
                     return UnitDicision.Attack; // UŒ‚‚·‚é
                 else

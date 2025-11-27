@@ -18,7 +18,8 @@ MonoBehaviour:
     jobType: 2
     targetType: 0
     maxHp: 30
-    attackData: {fileID: 0}
+    attackType: 2
+    hitCnt: 1
     atk: 8
     atkInterbal: 3
     range: 3

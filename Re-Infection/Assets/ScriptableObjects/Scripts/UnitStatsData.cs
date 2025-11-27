@@ -12,6 +12,15 @@ public class Types
         CAVALRY,    // ‹R•º
     }
 
+    // UŒ‚•û–@
+    public enum AttackType
+    {
+        POINT_MELEE,    // ‹ß‹——£’P‘ÌUŒ‚
+        AREA_MELEE,     // ‹ß‹——£”ÍˆÍUŒ‚
+        POINT_RANGE,    // ‰“‹——£’P‘ÌUŒ‚
+        AREA_RANGE,     // ‰“‹——£”ÍˆÍUŒ‚
+    }
+
     // ˆÚ“®•û–@
     public enum MoveType
     {
@@ -60,8 +69,10 @@ public class UnitStats
 
     [Header("Å‘åHP")]
     public float maxHp;                 // Å‘åHP
-    [Header("UŒ‚ƒf[ƒ^")]
-    public AttackDataBase attackData;     // UŒ‚ƒXƒ^ƒbƒc
+    [Header("UŒ‚ƒ^ƒCƒv")]
+    public Types.AttackType attackType; // UŒ‚•û–@
+    [Header("ƒqƒbƒg‚·‚é”(”ÍˆÍUŒ‚‚Ì‚İ—LŒø)")]
+    public int hitCnt;                  // ƒqƒbƒg‚·‚é”
     [Header("UŒ‚—Í")]
     public float atk;                   // UŒ‚—Í
     [Header("UŒ‚ŠÔŠu")]
@@ -90,11 +101,31 @@ public class UnitStats
     [Header("UŒ‚‚ÌSE")]
     public AudioClip attackSe;          // UŒ‚‰¹
 
+    public AttackBase AttackBase
+    {
+        get
+        {
+            switch(attackType)
+            {
+                case Types.AttackType.POINT_MELEE:
+                    return new AttackMeleeOfPoint();
+                case Types.AttackType.AREA_MELEE:
+                    return new AttackMeleeOfArea();
+                case Types.AttackType.POINT_RANGE:
+                    return null;
+                case Types.AttackType.AREA_RANGE:
+                    return null;
+                default:
+                    return null;
+            }
+        }
+    }
+
     public MovementBase MovementBase
     {
         get
         {
-            switch (moveType)
+            switch(moveType)
             {
                 case Types.MoveType.RUN:
                     return new RunMovement();

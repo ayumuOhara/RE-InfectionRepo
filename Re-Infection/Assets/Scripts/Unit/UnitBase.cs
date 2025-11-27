@@ -1,12 +1,31 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
+using static UnityEditor.PlayerSettings;
 
 public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
 {
-    [SerializeField] UnitStats stats;
+    UnitStats stats;
     public UnitStats Stats => stats;
 
     [SerializeField] LayerMask targetLayer;
+    public LayerMask TargetLayer => targetLayer;
+    public string TargetTag
+    {
+        get
+        {
+            var layerName = LayerMask.LayerToName(gameObject.layer);
+            switch (layerName)
+            {
+                case "PlayerUnit":
+                    return "EnemyUnit";
+                case "EnemyUnit":
+                    return "PlayerUnit";
+                default:
+                    return null;
+            }
+        }
+    }
 
     float currentHealth;
     public float CurrentHealth => currentHealth;
@@ -19,7 +38,7 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
     MovementBase movementBase;
     public MovementBase Movement => movementBase;
 
-    AttackDataBase attackBase;
+    AttackBase attackBase;
 
     public UnitStateManager stateManager { get; set; }
 
@@ -32,7 +51,6 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
             jobType = stats.jobType,
             targetType = stats.targetType,
             maxHp = stats.maxHp,
-            attackData = stats.attackData,
             atk = stats.atk,
             atkInterbal = stats.atkInterbal,
             moveSpeed = stats.moveSpeed,
@@ -43,7 +61,7 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
         };
 
         movementBase = stats.MovementBase;
-        attackBase = stats.attackData;
+        attackBase = stats.AttackBase;
 
         GetComponent<SpriteRenderer>().sprite = this.stats.unitSprite;
         currentHealth = stats.maxHp;
@@ -71,7 +89,7 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
         GetComponent<AudioSource>().PlayOneShot(stats.attackSe);
         GetComponent<Animator>().SetTrigger("Attack");
 
-        attackBase?.Attack(targetLayer, this, Stats.atk, Stats.range);
+        attackBase?.Attack(this);
     }
 
     public virtual void Damage(float damage)

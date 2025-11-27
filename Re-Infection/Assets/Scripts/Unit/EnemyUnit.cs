@@ -15,10 +15,10 @@ public class EnemyUnit : UnitBase
         switch (Stats.targetType)
         {
             case Types.TargetType.BOTH:
-                TargetPos = GetTarget.NearestTarget(GetTarget.GetPlayerUnit(MyPos), castleObj, MyPos).transform.position;
+                TargetPos = GetTarget.NearestTarget(GetTarget.GetNearestTargetUnit(this), castleObj, MyPos).transform.position;
                 break;
             case Types.TargetType.UNIT:
-                TargetPos = GetTarget.GetPlayerUnit(MyPos).transform.position;
+                TargetPos = GetTarget.GetNearestTargetUnit(this).transform.position;
                 break;
             case Types.TargetType.BUILDING:
                 TargetPos = GameObject.Find("CastleWall").transform.position;

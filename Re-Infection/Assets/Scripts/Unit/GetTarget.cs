@@ -5,28 +5,40 @@ using static UnityEditor.PlayerSettings;
 
 public static class GetTarget
 {
-    // プレイヤーユニット取得
-    public static GameObject GetPlayerUnit(Vector3 myPos)
+    // 最も近い敵対ユニット取得
+    public static GameObject GetNearestTargetUnit(UnitBase unit)
     {
         UnitManager unitManager = GameObject.Find("UnitManager").GetComponent<UnitManager>();
 
-        if(unitManager.playerUnitList == null || unitManager.playerUnitList.Count == 0) return null; // 対象が取得できない場合、nullを返す
-        
-        return NearestUnit(unitManager.playerUnitList, myPos);
+        switch (unit.TargetTag)
+        {
+            case "PlayerUnit":
+                return NearestUnit(unitManager.playerUnitList, unit.MyPos);
+            case "EnemyUnit":
+                return NearestUnit(unitManager.enemyUnitList, unit.MyPos);
+            default:
+                return null;
+        }
     }
 
-    // エネミーユニット取得
-    public static GameObject GetEnemyUnit(Vector3 myPos)
+    // 最も遠い敵対ユニット取得
+    public static GameObject GetFarthestTargetUnit(UnitBase unit)
     {
         UnitManager unitManager = GameObject.Find("UnitManager").GetComponent<UnitManager>();
 
-        if (unitManager.enemyUnitList == null || unitManager.enemyUnitList.Count == 0) return null; // 対象が取得できない場合、nullを返す
-
-        return NearestUnit(unitManager.enemyUnitList, myPos);
+        switch (unit.TargetTag)
+        {
+            case "PlayerUnit":
+                return FarthestUnit(unitManager.playerUnitList, unit.MyPos);
+            case "EnemyUnit":
+                return FarthestUnit(unitManager.enemyUnitList, unit.MyPos);
+            default:
+                return null;
+        }
     }
 
     // 渡されたユニットリストから一番近い要素を返す
-    public static GameObject NearestUnit(List<UnitBase> unitBases, Vector3 myPos)
+    static GameObject NearestUnit(List<UnitBase> unitBases, Vector3 myPos)
     {
         GameObject nearestObj = null;
 
@@ -44,6 +56,27 @@ public static class GetTarget
         }
 
         return nearestObj;
+    }
+
+    // 渡されたユニットリストから一番遠い要素を返す
+    static GameObject FarthestUnit(List<UnitBase> unitBases, Vector3 myPos)
+    {
+        GameObject farthestObj = null;
+
+        foreach (UnitBase targetUnit in unitBases)
+        {
+            if (farthestObj == null)
+            {
+                farthestObj = targetUnit.gameObject;
+            }
+            else
+            {
+                // 現在のfarthestObjがtargetUnitより距離が遠かったらそのままにし、targetUnitの方が遠い場合、targetUnitを代入
+                farthestObj = Vector3.Distance(farthestObj.transform.position, myPos) > Vector3.Distance(targetUnit.gameObject.transform.position, myPos) ? farthestObj : targetUnit.gameObject;
+            }
+        }
+
+        return farthestObj;
     }
 
     // ターゲットが攻撃範囲内かどうか
