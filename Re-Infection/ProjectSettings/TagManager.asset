@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - CloneOnly
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
@@ -12,8 +13,8 @@ TagManager:
   - 
   - Water
   - UI
-  - Unit
-  - 
+  - PlayerUnit
+  - EnemyUnit
   - 
   - 
   - 

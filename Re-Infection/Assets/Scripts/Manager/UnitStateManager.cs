@@ -2,23 +2,19 @@ using UnityEngine;
 
 public class UnitStateManager
 {
-    UnitController unitController;
+    UnitBase unitController;
 
     IUnitAIDecider unitAI;
 
     UnitStateMachine unitStateMachine;
     public UnitStateMachine StateMachine => unitStateMachine;
 
-    public UnitStateManager(UnitController controller)
+    public UnitStateManager(UnitBase controller, IUnitAIDecider ai)
     {
         unitController = controller;
         unitStateMachine = new UnitStateMachine(unitController);
         unitStateMachine.Initialize(unitStateMachine.idleState);
-
-        if(unitController.group == UnitGroup.Player)
-            unitAI = new PlayerUnitDecider(controller);
-        if(unitController.group == UnitGroup.Enemy)
-            unitAI = new EnemyUnitDecider(controller);
+        unitAI = ai;
     }
 
     // ステート遷移管理AI

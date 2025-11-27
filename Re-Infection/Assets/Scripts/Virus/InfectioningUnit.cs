@@ -20,7 +20,7 @@ public class InfectioningUnit : MonoBehaviour
     async void OnEnable()
     {
         await WaitEndDrag.WaitDragEndAsync();
-        var targetUnits = new List<UnitController>(unitManager.GetCorpseList());
+        var targetUnits = new List<UnitBase>(unitManager.GetCorpseList());
 
         if (targetUnits.Count <= 0 || targetUnits == null)
         {
@@ -33,14 +33,14 @@ public class InfectioningUnit : MonoBehaviour
     }
 
     // 取得したターゲットを感染
-    IEnumerator AllTargetInfection(List<UnitController> targetUnits)
+    IEnumerator AllTargetInfection(List<UnitBase> targetUnits)
     {
-        foreach (UnitController target in targetUnits)
+        foreach (UnitBase target in targetUnits)
         {
             // 範囲内にいるターゲット全てに感染
             if (GetTarget.TargetInRange(target.gameObject.transform.position, transform.position, virusStats.infectionRange))
             {
-                target.Infection();
+                //target.Infection();
             }
 
             yield return null;

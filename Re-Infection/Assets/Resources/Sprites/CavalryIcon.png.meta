@@ -1,17 +1,10 @@
 fileFormatVersion: 2
-guid: 4ce3c6c92d7198f4daa79a3746d45f00
-AssetOrigin:
-  serializedVersion: 1
-  productId: 235559
-  packageName: Violet Themed UI
-  packageVersion: 1.2
-  assetPath: Assets/Violet Theme Ui/White Icons/White Horse Shoe.png
-  uploadId: 767621
+guid: 81b1dfeb03cd0df45b3b77853938ab15
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7190536233848578743
-    second: White Horse Shoe_0
+      213: -8177362083965334997
+    second: CavalryIcon_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -120,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: White Horse Shoe_0
+      name: CavalryIcon_0
       rect:
         serializedVersion: 2
         x: 0
@@ -135,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 94d51e47465163c90800000000000000
-      internalID: -7190536233848578743
+      spriteID: b2a8f79928c248e80800000000000000
+      internalID: -8177362083965334997
       vertices: []
       indices: 
       edges: []
@@ -155,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      White Horse Shoe_0: -7190536233848578743
+      CavalryIcon_0: -8177362083965334997
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

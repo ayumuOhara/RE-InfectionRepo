@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 4615255790038142715}
   - component: {fileID: 6048909422697686753}
   m_Layer: 5
-  m_Name: JobIcon (1)
+  m_Name: JobIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -685,9 +685,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnitIconClick
   unitStats: {fileID: 0}
-  unitObj: {fileID: 6379689990235951777, guid: 206dd7b120d2598459d6433f407e1710, type: 3}
   slotIndex: 0
-  iconImage: {fileID: 1416224280683693564}
+  unitIcon: {fileID: 1416224280683693564}
+  jobIcon: {fileID: 6048909422697686753}
   unitCostText: {fileID: 1650022726083233300}
   unitCntText: {fileID: 9138495377779703852}
   assertLabel: {fileID: 0}

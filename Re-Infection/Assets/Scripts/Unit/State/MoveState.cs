@@ -3,39 +3,21 @@ using UnityEngine.EventSystems;
 
 public class MoveState : IUnitState
 {
-    UnitController unitController;
-    Vector3 myPos;
-    Vector3 castlePos;
+    UnitBase unitBase;
 
-    public MoveState(UnitController controller)
+    public MoveState(UnitBase unitBase)
     {
-        unitController = controller;
+        this.unitBase = unitBase;
     }
 
     public void Enter()
     {
-        myPos = unitController.gameObject.transform.position;
-        if(castlePos == null)
-            castlePos = GameObject.Find("CastleWall").transform.position;
+
     }
 
     public void Update()
     {
-        if (unitController.targetObj != null)
-        {
-            Vector3 moveDirection = unitController.targetObj.transform.position - myPos;
-            myPos += moveDirection.normalized * unitController.moveSpeed * Time.deltaTime;
-        }
-        else
-        {
-            if (unitController.group == UnitGroup.Enemy)
-            {
-                Vector3 moveDirection = unitController.castleObj.transform.position - myPos;
-                myPos += moveDirection.normalized * unitController.moveSpeed * Time.deltaTime;
-            }
-        }
-
-        unitController.gameObject.transform.position = myPos;
+        unitBase.Move();
     }
 
     public void Exit()
