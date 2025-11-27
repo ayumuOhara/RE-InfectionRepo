@@ -18,7 +18,7 @@ MonoBehaviour:
     jobType: 2
     targetType: 0
     maxHp: 30
-    attackType: 2
+    attackType: 0
     hitCnt: 1
     atk: 8
     atkInterbal: 3

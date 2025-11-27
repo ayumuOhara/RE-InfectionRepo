@@ -193,7 +193,7 @@ GameObject:
   - component: {fileID: 6532507719244782651}
   m_Layer: 7
   m_Name: EnemyUnit
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -403,7 +403,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fa7aef9fca27894fa8745d1b72abdcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyUnit
-  stats: {fileID: 0}
   targetLayer:
     serializedVersion: 2
     m_Bits: 64

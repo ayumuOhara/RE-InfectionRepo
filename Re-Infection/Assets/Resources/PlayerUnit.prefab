@@ -193,7 +193,7 @@ GameObject:
   - component: {fileID: 5359235498427360541}
   m_Layer: 6
   m_Name: PlayerUnit
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -403,23 +403,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20561d39596bf3e488a3927dd4472301, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerUnit
-  stats:
-    unitSprite: {fileID: 0}
-    unitName: 
-    jobType: 0
-    targetType: 0
-    maxHp: 0
-    attackType: 0
-    hitCnt: 0
-    atk: 0
-    atkInterbal: 0
-    range: 0
-    moveType: 0
-    moveSpeed: 0
-    summonCost: 0
-    infecitonTime: 0
-    bossUnit: 0
-    attackSe: {fileID: 0}
   targetLayer:
     serializedVersion: 2
     m_Bits: 128

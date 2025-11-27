@@ -54,6 +54,7 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
             jobType = stats.jobType,
             targetType = stats.targetType,
             maxHp = stats.maxHp,
+            hitCnt = stats.hitCnt,
             atk = stats.atk,
             atkInterbal = stats.atkInterbal,
             moveSpeed = stats.moveSpeed,

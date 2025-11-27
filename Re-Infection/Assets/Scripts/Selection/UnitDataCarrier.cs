@@ -5,7 +5,7 @@ public class UnitDataCarrier : MonoBehaviour
 {
     public static UnitDataCarrier Instance;
 
-    public List<UnitStats> selectedUnits = new List<UnitStats>(); // 複数ユニット保持
+    public List<UnitStatsData> selectedUnits = new List<UnitStatsData>(); // 複数ユニット保持
 
     private void Awake()
     {
@@ -21,7 +21,7 @@ public class UnitDataCarrier : MonoBehaviour
     }
 
     // ユニット追加用メソッド
-    public void AddUnit(UnitStats unit)
+    public void AddUnit(UnitStatsData unit)
     {
         if (unit != null && !selectedUnits.Contains(unit))
         {

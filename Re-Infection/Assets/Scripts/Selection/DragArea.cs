@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class DropArea : MonoBehaviour, IDropHandler
 {
     [SerializeField] private Transform dropTargetParent;
-    public UnitStats currentUnitStats;
+    public UnitStatsData currentUnitStats;
     public int slotIndex; // このDropAreaが何番目の枠か
     public TextMeshProUGUI displayTMP;
     public GameObject displayTMPObj;
@@ -18,7 +18,7 @@ public class DropArea : MonoBehaviour, IDropHandler
             UnitDataCarrier.Instance.selectedUnits.Count > slotIndex &&
             UnitDataCarrier.Instance.selectedUnits[slotIndex] != null)
         {
-            UnitStats unit = UnitDataCarrier.Instance.selectedUnits[slotIndex];
+            UnitStatsData unit = UnitDataCarrier.Instance.selectedUnits[slotIndex];
             currentUnitStats = unit;
 
             GameObject restored = new GameObject("RestoredUnit");
@@ -26,7 +26,7 @@ public class DropArea : MonoBehaviour, IDropHandler
             restored.AddComponent<RectTransform>().anchoredPosition = Vector2.zero;
 
             Image img = restored.AddComponent<Image>();
-            img.sprite = unit.unitSprite;
+            img.sprite = unit.unitStats.unitSprite;
 
             CanvasGroup cg = restored.AddComponent<CanvasGroup>();
             cg.alpha = 1f;
@@ -80,21 +80,21 @@ public class DropArea : MonoBehaviour, IDropHandler
         // ドラッグ用スクリプトをアタッチ
         DropAreaIconDrag dragScript = clone.AddComponent<DropAreaIconDrag>();
         dragScript.slotIndex = slotIndex;
-        dragScript.unitStats = currentUnitStats;
+        dragScript.unitStats = currentUnitStats.unitStats;
 
         // UnitIconClick にも渡す
         UnitIconClick iconClick = clone.GetComponent<UnitIconClick>();
         if (iconClick != null)
         {
             iconClick.slotIndex = slotIndex;
-            iconClick.unitStats = currentUnitStats;
+            iconClick.unitData = currentUnitStats;
         }
 
         // テキスト表示更新
         if (currentUnitStats != null && displayTMP != null)
         {
             displayTMPObj.SetActive(true);
-            displayTMP.text = $"{currentUnitStats.unitName}";
+            displayTMP.text = $"{currentUnitStats.unitStats.unitName}";
         }
     }
     public void diaplayText()

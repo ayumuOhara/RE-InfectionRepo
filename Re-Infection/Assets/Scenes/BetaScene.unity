@@ -2204,7 +2204,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 486474697}
   m_HandleRect: {fileID: 0}
@@ -22782,7 +22782,7 @@ GameObject:
   - component: {fileID: 1629424289}
   m_Layer: 6
   m_Name: CastleWall
-  m_TagString: Untagged
+  m_TagString: Castle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

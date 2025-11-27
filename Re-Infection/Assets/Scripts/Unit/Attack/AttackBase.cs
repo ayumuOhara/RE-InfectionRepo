@@ -13,6 +13,8 @@ public abstract class AttackBase
         {
             UnitBase unit = target.GetComponent<UnitBase>();
             unit.Damage(attacker.Stats.atk);
+
+            Debug.Log($"{attacker.Stats.unitName}‚ª{target.GetComponent<UnitBase>().Stats.unitName}‚É{attacker.Stats.atk}ƒ_ƒ[ƒW");
         }
     }
 

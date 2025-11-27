@@ -15,10 +15,9 @@ public class Types
     // UŒ‚•û–@
     public enum AttackType
     {
-        SINGLE_MELEE,           // ‹ß‹——£’P‘ÌUŒ‚
-        AREA_MELEE,             // ‹ß‹——£”ÍˆÍUŒ‚
-        SINGLE_RANGE,           // ‰“‹——£’P‘ÌUŒ‚
-        AREA_RANGE,             // ‰“‹——£”ÍˆÍUŒ‚
+        SINGLE,
+        AREA_MELEE,
+        AREA_RANGE,
     }
 
     // ˆÚ“®•û–@
@@ -107,8 +106,7 @@ public class UnitStats
         {
             switch(attackType)
             {
-                case Types.AttackType.SINGLE_MELEE:
-                case Types.AttackType.SINGLE_RANGE:
+                case Types.AttackType.SINGLE:
                     return new AttackOfSingle();
                 case Types.AttackType.AREA_MELEE:
                     return new AttackOfAreaMelee();

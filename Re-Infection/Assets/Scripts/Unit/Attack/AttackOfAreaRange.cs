@@ -20,6 +20,8 @@ public class AttackOfAreaRange : AttackBase
             cnt++;
         }
 
+        Debug.Log($"{attacker.Stats.unitName}‚ª{cnt}‘Ì‚Éƒqƒbƒg");
+
         //Debug.Log($"UŒ‚Ò: {attacker.gameObject.layer} UŒ‚‘ÎÛ”: {cnt}");
     }
 }
