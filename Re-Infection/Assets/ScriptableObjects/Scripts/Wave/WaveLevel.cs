@@ -4,7 +4,7 @@ using System.Collections;
 [System.Serializable]
 public class LevelStats
 {
-    public UnitStats unitStats; // ユニットのScriptableObject
+    public UnitStatsData statsData; // ユニットのScriptableObject
     public int spawnCnt;        // 出現する数
 }
 
@@ -22,7 +22,13 @@ public class WaveLevel : ScriptableObject
         {
             for (int i = 0; i < Lstats.spawnCnt; i++)
             {
-                WaveSpawner.SpawnUnit(Lstats.unitStats);
+                if (Lstats.statsData == null)
+                {
+                    Debug.LogAssertion("ユニットが設定されていない為、コルーチンを終了します");
+                    yield break;
+                }
+
+                WaveSpawner.SpawnUnit(Lstats.statsData.unitStats);
                 yield return null;
             }
         }

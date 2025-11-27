@@ -12,6 +12,15 @@ public class Types
         CAVALRY,    // 騎兵
     }
 
+    // 攻撃方法
+    public enum AttackType
+    {
+        SINGLE_MELEE,           // 近距離単体攻撃
+        AREA_MELEE,             // 近距離範囲攻撃
+        SINGLE_RANGE,           // 遠距離単体攻撃
+        AREA_RANGE,             // 遠距離範囲攻撃
+    }
+
     // 移動方法
     public enum MoveType
     {
@@ -21,14 +30,14 @@ public class Types
     // 目標
     public enum TargetType
     {
-        BOTH,       // どちらも
-        UNIT,       // ユニットのみ
-        BUILDING,   // 建物のみ
+        UNIT_NEAREST,   // 最寄りのユニット
+        UNIT_FARTHEST,  // 最遠のユニット
+        BUILDING,       // 建物のみ
     }
 }
 
-[CreateAssetMenu(fileName = "UnitStats", menuName = "Scriptable Objects/UnitStats")]
-public class UnitStats : ScriptableObject
+[System.Serializable]
+public class UnitStats
 {
     [Header("スプライト")]
     public Sprite unitSprite;           // ユニットのスプライト
@@ -60,8 +69,10 @@ public class UnitStats : ScriptableObject
 
     [Header("最大HP")]
     public float maxHp;                 // 最大HP
-    [Header("攻撃データ")]
-    public AttackDataBase attackData;     // 攻撃スタッツ
+    [Header("攻撃タイプ")]
+    public Types.AttackType attackType; // 攻撃方法
+    [Header("ヒットする数(範囲攻撃のみ有効)")]
+    public int hitCnt;                  // ヒットする数
     [Header("攻撃力")]
     public float atk;                   // 攻撃力
     [Header("攻撃間隔")]
@@ -90,11 +101,30 @@ public class UnitStats : ScriptableObject
     [Header("攻撃時のSE")]
     public AudioClip attackSe;          // 攻撃音
 
+    public AttackBase AttackBase
+    {
+        get
+        {
+            switch(attackType)
+            {
+                case Types.AttackType.SINGLE_MELEE:
+                case Types.AttackType.SINGLE_RANGE:
+                    return new AttackOfSingle();
+                case Types.AttackType.AREA_MELEE:
+                    return new AttackOfAreaMelee();
+                case Types.AttackType.AREA_RANGE:
+                    return new AttackOfAreaRange();
+                default:
+                    return null;
+            }
+        }
+    }
+
     public MovementBase MovementBase
     {
         get
         {
-            switch (moveType)
+            switch(moveType)
             {
                 case Types.MoveType.RUN:
                     return new RunMovement();
@@ -103,4 +133,10 @@ public class UnitStats : ScriptableObject
             }
         }
     }
+}
+
+[CreateAssetMenu(fileName = "UnitStats", menuName = "Scriptable Objects/UnitStats")]
+public class UnitStatsData : ScriptableObject
+{
+    public UnitStats unitStats;
 }

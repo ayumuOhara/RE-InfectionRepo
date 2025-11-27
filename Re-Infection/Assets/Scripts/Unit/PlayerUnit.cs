@@ -5,18 +5,19 @@ public class PlayerUnit : UnitBase
 {
     private void Awake()
     {
-        stateManager = new UnitStateManager(this, new PlayerUnitDecider(this));
-        StartCoroutine(Targetting());
+        SetStateManager(new UnitStateManager(this, new PlayerUnitDecider(this)));
     }
 
-    IEnumerator Targetting()
+    public override void Targetting()
     {
-        while (true)
+        switch (Stats.targetType)
         {
-            yield return new WaitUntil(() => GetTarget.GetEnemyUnit(MyPos) != null);
-
-            TargetPos = GetTarget.GetEnemyUnit(MyPos).transform.position;
-            yield return null;
+            case Types.TargetType.UNIT_NEAREST:
+                TargetObj = GetTarget.GetNearestTargetUnit(this);
+                break;
+            case Types.TargetType.UNIT_FARTHEST:
+                TargetObj = GetTarget.GetFarthestTargetUnit(this);
+                break;
         }
     }
 

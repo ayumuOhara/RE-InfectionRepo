@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: WaveLevel_Boss_1
   m_EditorClassIdentifier: Assembly-CSharp::WaveLevel
   levelStats:
-  - unitStats: {fileID: 11400000, guid: 3ab42a19c04e3134fb12a71cceee2ccf, type: 2}
+  - statsData: {fileID: 11400000, guid: 3ab42a19c04e3134fb12a71cceee2ccf, type: 2}
     spawnCnt: 1
+  spawnInterbal: 0

@@ -1,12 +1,31 @@
-using Unity.VisualScripting;
+using System.Collections;
 using UnityEngine;
 
 public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
 {
-    [SerializeField] UnitStats stats;
+    UnitManager unitManager;
+
+    UnitStats stats;
     public UnitStats Stats => stats;
 
     [SerializeField] LayerMask targetLayer;
+    public LayerMask TargetLayer => targetLayer;
+    public string TargetLayerStr
+    {
+        get
+        {
+            var layerName = LayerMask.LayerToName(gameObject.layer);
+            switch (layerName)
+            {
+                case "PlayerUnit":
+                    return "EnemyUnit";
+                case "EnemyUnit":
+                    return "PlayerUnit";
+                default:
+                    return null;
+            }
+        }
+    }
 
     float currentHealth;
     public float CurrentHealth => currentHealth;
@@ -14,14 +33,17 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
     public bool IsDead => currentHealth <= 0;
 
     public Vector3 MyPos => transform.position;
-    public Vector3 TargetPos { get; set; }
+
+    public GameObject TargetObj { get; set; }
+
+    public Vector3 TargetPos => GetTargetPos();
 
     MovementBase movementBase;
     public MovementBase Movement => movementBase;
 
-    AttackDataBase attackBase;
+    AttackBase attackBase;
 
-    public UnitStateManager stateManager { get; set; }
+    public UnitStateManager stateManager { get; private set; }
 
     public void Initialize(UnitStats stats)
     {
@@ -32,7 +54,6 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
             jobType = stats.jobType,
             targetType = stats.targetType,
             maxHp = stats.maxHp,
-            attackData = stats.attackData,
             atk = stats.atk,
             atkInterbal = stats.atkInterbal,
             moveSpeed = stats.moveSpeed,
@@ -43,22 +64,38 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
         };
 
         movementBase = stats.MovementBase;
-        attackBase = stats.attackData;
+        attackBase = stats.AttackBase;
 
         GetComponent<SpriteRenderer>().sprite = this.stats.unitSprite;
         currentHealth = stats.maxHp;
     }
 
+    public void SetStateManager(UnitStateManager unitStateManager)
+    {
+        stateManager = unitStateManager;
+    }
+
     public void Start()
     {
-        FindObjectOfType<UnitManager>()?.AddUnitList(this);
+        unitManager = FindObjectOfType<UnitManager>();
+        unitManager?.AddUnitList(this);
         stateManager.StateMachine.Initialize(stateManager.StateMachine.moveState);
     }
 
     public void Update()
     {
+        if (!IsDead)
+        {
+            Targetting();
+        }
+
         stateManager.StateTransition();
         stateManager.StateMachine.Update();
+    }
+
+    public virtual void Targetting()
+    {
+        // ターゲッティング処理
     }
 
     public virtual void Move()
@@ -71,7 +108,7 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
         GetComponent<AudioSource>().PlayOneShot(stats.attackSe);
         GetComponent<Animator>().SetTrigger("Attack");
 
-        attackBase.Attack(targetLayer, this, Stats.atk, Stats.range);
+        attackBase?.Attack(this);
     }
 
     public virtual void Damage(float damage)
@@ -91,5 +128,13 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
     public virtual void Dead()
     {
         // 死亡時の処理
+    }
+
+    Vector3 GetTargetPos()
+    {
+        if(TargetObj == null)
+            return Vector3.zero;
+        else
+            return TargetObj.transform.position;
     }
 }
