@@ -87,7 +87,7 @@ public class DropArea : MonoBehaviour, IDropHandler
         if (iconClick != null)
         {
             iconClick.slotIndex = slotIndex;
-            iconClick.unitStats = currentUnitStats;
+            iconClick.unitData.unitStats = currentUnitStats;
         }
 
         // テキスト表示更新
