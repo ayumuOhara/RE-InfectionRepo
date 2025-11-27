@@ -22780,7 +22780,7 @@ GameObject:
   - component: {fileID: 1629424288}
   - component: {fileID: 1629424287}
   - component: {fileID: 1629424289}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CastleWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -6,25 +6,30 @@ public class EnemyUnit : UnitBase
 
     private void Awake()
     {
-        stateManager = new UnitStateManager(this, new EnemyUnitDecider(this));
+        SetStateManager(new UnitStateManager(this, new EnemyUnitDecider(this)));
         castleObj = GameObject.Find("CastleWall");
+    }
+
+    public override void Targetting()
+    {
+        switch (Stats.targetType)
+        {
+            case Types.TargetType.UNIT_NEAREST:
+                var targetN = GetTarget.GetNearestTargetUnit(this);
+                TargetObj = targetN != null ? targetN : castleObj;
+                break;
+            case Types.TargetType.UNIT_FARTHEST:
+                var targetF = GetTarget.GetFarthestTargetUnit(this);
+                TargetObj = targetF != null ? targetF : castleObj;
+                break;
+            case Types.TargetType.BUILDING:
+                TargetObj = castleObj;
+                break;
+        }
     }
 
     public override void Move()
     {
-        switch (Stats.targetType)
-        {
-            case Types.TargetType.BOTH:
-                TargetPos = GetTarget.NearestTarget(GetTarget.GetNearestTargetUnit(this), castleObj, MyPos).transform.position;
-                break;
-            case Types.TargetType.UNIT:
-                TargetPos = GetTarget.GetNearestTargetUnit(this).transform.position;
-                break;
-            case Types.TargetType.BUILDING:
-                TargetPos = GameObject.Find("CastleWall").transform.position;
-                break;
-        }
-
         transform.position = Movement.Movement(MyPos, TargetPos, Stats.MoveSpeed);
     }
 }

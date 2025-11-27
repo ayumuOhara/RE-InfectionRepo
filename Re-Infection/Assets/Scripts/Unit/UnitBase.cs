@@ -1,16 +1,16 @@
-using Unity.VisualScripting;
+using System.Collections;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
-using static UnityEditor.PlayerSettings;
 
 public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
 {
+    UnitManager unitManager;
+
     UnitStats stats;
     public UnitStats Stats => stats;
 
     [SerializeField] LayerMask targetLayer;
     public LayerMask TargetLayer => targetLayer;
-    public string TargetTag
+    public string TargetLayerStr
     {
         get
         {
@@ -33,14 +33,17 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
     public bool IsDead => currentHealth <= 0;
 
     public Vector3 MyPos => transform.position;
-    public Vector3 TargetPos { get; set; }
+
+    public GameObject TargetObj { get; set; }
+
+    public Vector3 TargetPos => GetTargetPos();
 
     MovementBase movementBase;
     public MovementBase Movement => movementBase;
 
     AttackBase attackBase;
 
-    public UnitStateManager stateManager { get; set; }
+    public UnitStateManager stateManager { get; private set; }
 
     public void Initialize(UnitStats stats)
     {
@@ -67,16 +70,32 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
         currentHealth = stats.maxHp;
     }
 
+    public void SetStateManager(UnitStateManager unitStateManager)
+    {
+        stateManager = unitStateManager;
+    }
+
     public void Start()
     {
-        FindObjectOfType<UnitManager>()?.AddUnitList(this);
+        unitManager = FindObjectOfType<UnitManager>();
+        unitManager?.AddUnitList(this);
         stateManager.StateMachine.Initialize(stateManager.StateMachine.moveState);
     }
 
     public void Update()
     {
+        if (!IsDead)
+        {
+            Targetting();
+        }
+
         stateManager.StateTransition();
         stateManager.StateMachine.Update();
+    }
+
+    public virtual void Targetting()
+    {
+        // ターゲッティング処理
     }
 
     public virtual void Move()
@@ -109,5 +128,13 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
     public virtual void Dead()
     {
         // 死亡時の処理
+    }
+
+    Vector3 GetTargetPos()
+    {
+        if(TargetObj == null)
+            return Vector3.zero;
+        else
+            return TargetObj.transform.position;
     }
 }

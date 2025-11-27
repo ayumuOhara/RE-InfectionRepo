@@ -10,7 +10,7 @@ public static class GetTarget
     {
         UnitManager unitManager = GameObject.Find("UnitManager").GetComponent<UnitManager>();
 
-        switch (unit.TargetTag)
+        switch (unit.TargetLayerStr)
         {
             case "PlayerUnit":
                 return NearestUnit(unitManager.playerUnitList, unit.MyPos);
@@ -26,7 +26,7 @@ public static class GetTarget
     {
         UnitManager unitManager = GameObject.Find("UnitManager").GetComponent<UnitManager>();
 
-        switch (unit.TargetTag)
+        switch (unit.TargetLayerStr)
         {
             case "PlayerUnit":
                 return FarthestUnit(unitManager.playerUnitList, unit.MyPos);
@@ -40,10 +40,14 @@ public static class GetTarget
     // 渡されたユニットリストから一番近い要素を返す
     static GameObject NearestUnit(List<UnitBase> unitBases, Vector3 myPos)
     {
+        if(unitBases.Count <= 0 || unitBases == null) return null;
+
         GameObject nearestObj = null;
 
         foreach (UnitBase targetUnit in unitBases)
         {
+            if (targetUnit.IsDead) continue;
+
             if (nearestObj == null)
             {
                 nearestObj = targetUnit.gameObject;
@@ -61,10 +65,14 @@ public static class GetTarget
     // 渡されたユニットリストから一番遠い要素を返す
     static GameObject FarthestUnit(List<UnitBase> unitBases, Vector3 myPos)
     {
+        if (unitBases.Count <= 0 || unitBases == null) return null;
+
         GameObject farthestObj = null;
 
         foreach (UnitBase targetUnit in unitBases)
         {
+            if (targetUnit.IsDead) continue;
+
             if (farthestObj == null)
             {
                 farthestObj = targetUnit.gameObject;

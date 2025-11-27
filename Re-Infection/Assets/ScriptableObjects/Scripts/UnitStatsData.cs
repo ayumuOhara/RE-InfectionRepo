@@ -15,10 +15,10 @@ public class Types
     // 攻撃方法
     public enum AttackType
     {
-        POINT_MELEE,    // 近距離単体攻撃
-        AREA_MELEE,     // 近距離範囲攻撃
-        POINT_RANGE,    // 遠距離単体攻撃
-        AREA_RANGE,     // 遠距離範囲攻撃
+        SINGLE_MELEE,           // 近距離単体攻撃
+        AREA_MELEE,             // 近距離範囲攻撃
+        SINGLE_RANGE,           // 遠距離単体攻撃
+        AREA_RANGE,             // 遠距離範囲攻撃
     }
 
     // 移動方法
@@ -30,9 +30,9 @@ public class Types
     // 目標
     public enum TargetType
     {
-        BOTH,       // どちらも
-        UNIT,       // ユニットのみ
-        BUILDING,   // 建物のみ
+        UNIT_NEAREST,   // 最寄りのユニット
+        UNIT_FARTHEST,  // 最遠のユニット
+        BUILDING,       // 建物のみ
     }
 }
 
@@ -107,14 +107,13 @@ public class UnitStats
         {
             switch(attackType)
             {
-                case Types.AttackType.POINT_MELEE:
-                    return new AttackMeleeOfPoint();
+                case Types.AttackType.SINGLE_MELEE:
+                case Types.AttackType.SINGLE_RANGE:
+                    return new AttackOfSingle();
                 case Types.AttackType.AREA_MELEE:
-                    return new AttackMeleeOfArea();
-                case Types.AttackType.POINT_RANGE:
-                    return null;
+                    return new AttackOfAreaMelee();
                 case Types.AttackType.AREA_RANGE:
-                    return null;
+                    return new AttackOfAreaRange();
                 default:
                     return null;
             }

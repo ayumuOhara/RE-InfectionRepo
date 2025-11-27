@@ -1,22 +1,23 @@
 using UnityEngine;
 
-public class AttackMeleeOfArea : AttackBase
+public class AttackOfAreaRange : AttackBase
 {
     public override void Attack(UnitBase attacker)
     {
-        Collider2D[] hits = Physics2D.OverlapCircleAll(attacker.transform.position, attacker.Stats.range, attacker.TargetLayer);
+        // UŒ‚‘ÎÛ‚ğ’†S‚É‚µ‚½”ÍˆÍ
+        Collider2D[] hits = Physics2D.OverlapCircleAll(attacker.TargetPos, attacker.Stats.range, attacker.TargetLayer);
 
         // ”ÍˆÍ“à‚É“G‚ª‚¢‚È‚¢ê‡AI—¹
         if(hits.Length <= 0 || hits == null) return;
 
+        // ƒqƒbƒg”‚Ü‚ÅŒJ‚è•Ô‚·
         var cnt = 0;        
         while (cnt < attacker.Stats.hitCnt)
         {
             if (cnt >= hits.Length) break;
 
-            UnitBase unitBase = hits[cnt].GetComponent<UnitBase>();
-            unitBase.Damage(attacker.Stats.atk);
-            ++cnt;
+            DamageToTarget(attacker, hits[cnt].gameObject);
+            cnt++;
         }
 
         //Debug.Log($"UŒ‚Ò: {attacker.gameObject.layer} UŒ‚‘ÎÛ”: {cnt}");
