@@ -70,6 +70,6 @@ public class BattleCanvas : MonoBehaviour
     //oŒ‚ƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚½‚Æ‚«‚Ìˆ—
     public void OnSortie(int Stage)
     {
-        SceneManager.LoadScene("MainScene");
+        SceneManager.LoadScene("BetaScene");
     }
 }
