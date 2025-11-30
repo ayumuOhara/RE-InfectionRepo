@@ -6,7 +6,7 @@ public class UnitManager : MonoBehaviour
 {
     public List<UnitBase> playerUnitList { get; private set; } = new List<UnitBase>();    // プレイヤーユニット格納リスト
     public List<UnitBase> enemyUnitList { get; private set; } = new List<UnitBase>();     // エネミーユニット格納リスト
-    public List<UnitBase> corpseUnitList { get; private set; } = new List<UnitBase>();    // 死体ユニット格納リスト
+    public List<EnemyUnit> corpseUnitList { get; private set; } = new List<EnemyUnit>();    // 死体ユニット格納リスト
 
     // プレイヤーユニットの数を返す
     public int PlayerCnt => playerUnitList.Count;
@@ -21,26 +21,34 @@ public class UnitManager : MonoBehaviour
     public bool IsAllEnemyDefeated => enemyUnitList.Count <= 0;
 
     // ユニットをリストに追加
-    public void AddUnitList(UnitBase unit)
+    public void AddUnitList(UnitBase unit, bool infection = false)
     {
         switch (unit)
         {
             case PlayerUnit:
                 playerUnitList.Add(unit); break;
-            case EnemyUnit: 
-                enemyUnitList.Add(unit);  break;
+            case EnemyUnit:
+                if (infection)
+                    playerUnitList.Add(unit);
+                else
+                    enemyUnitList.Add(unit);
+                break;
         }
     }
 
     // ユニットをリストから削除
-    public void RemoveUnitList(UnitBase unit)
+    public void RemoveUnitList(UnitBase unit, bool infection = false)
     {
         switch (unit)
         {
             case PlayerUnit:
                 playerUnitList.Remove(unit); break;
             case EnemyUnit:
-                enemyUnitList.Remove(unit);  break;
+                if (infection)
+                    playerUnitList.Remove(unit);
+                else
+                    enemyUnitList.Remove(unit);
+                break;
         }
     }
 
@@ -63,7 +71,7 @@ public class UnitManager : MonoBehaviour
     }
 
     // 死体のリストを返す
-    public List<UnitBase> GetCorpseList()
+    public List<EnemyUnit> GetCorpseList()
     {
         return corpseUnitList;
     }
