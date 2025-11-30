@@ -15,7 +15,7 @@ MonoBehaviour:
   unitStats:
     unitSprite: {fileID: 21300006, guid: f5f1c19ce87450f4b97f8b363746558d, type: 3}
     unitName: "\u4E57\u99AC\u5175"
-    jobType: 3
+    jobType: 5
     targetType: 0
     maxHp: 50
     attackType: 0
