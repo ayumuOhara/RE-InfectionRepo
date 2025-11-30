@@ -3,6 +3,9 @@ using UnityEngine;
 
 public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
 {
+    [SerializeField] GameObject damageEffect;
+    [SerializeField] GameObject deadEffect;
+
     UnitStats stats;
     public UnitStats Stats => stats;
 
@@ -112,6 +115,8 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
 
     public virtual void Damage(float damage)
     {
+        Instantiate(damageEffect, transform.position, Quaternion.identity);
+
         currentHealth -= damage;
     }
 
@@ -127,6 +132,7 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
     public virtual void Dead()
     {
         // éÄñSéûÇÃèàóù
+        Instantiate(deadEffect, transform.position, Quaternion.identity);
         FindObjectOfType<UnitManager>().RemoveUnitList(this);
     }
 
@@ -147,9 +153,9 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
 
         while (true)
         {
-            if (drag.IsDragging)
+            if (drag.IsDragging && !IsDead)
             {
-                color.a = 0.5f;
+                color.a = 0.4f;
                 sprite.color = color;
             }
             else
