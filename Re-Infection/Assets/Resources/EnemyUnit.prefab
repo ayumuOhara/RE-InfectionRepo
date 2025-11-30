@@ -478,6 +478,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fa7aef9fca27894fa8745d1b72abdcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyUnit
+  damageEffect: {fileID: 6823200998282874702, guid: 8f8fe12323625f5499b2853dd2ad3e58, type: 3}
+  deadEffect: {fileID: 4553287630450876385, guid: 15483e51212e3d74886ea57291f4639a, type: 3}
   targetLayer:
     serializedVersion: 2
     m_Bits: 64
