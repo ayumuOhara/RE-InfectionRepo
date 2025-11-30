@@ -118,6 +118,10 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
         Instantiate(damageEffect, transform.position, Quaternion.identity);
 
         currentHealth -= damage;
+        if (currentHealth < 0)
+        {
+            currentHealth = 0;
+        }
     }
 
     public virtual void Heal(float heal)
