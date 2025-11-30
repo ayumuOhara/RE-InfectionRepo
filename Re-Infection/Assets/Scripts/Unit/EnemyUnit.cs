@@ -50,21 +50,29 @@ public class EnemyUnit : UnitBase, Iinfection
 
     public override void Dead()
     {
-        if (!Stats.bossUnit && !IsInfectioning)
-        {
-            var unitManager = FindObjectOfType<UnitManager>();
-            unitManager.RemoveUnitList(this, IsInfectioning);
-            unitManager.AddCorpseList(this);
-
-            FindObjectOfType<WaveSpawner>().DecreaseEnemySum();
-            GetComponent<SpriteRenderer>().sprite = corpseSprite;
-
-            StartCoroutine(Infection());
-        }
-        else
+        if (Stats.bossUnit)
         {
             FindObjectOfType<UnitManager>().RemoveUnitList(this, IsInfectioning);
             Destroy(gameObject);
+        }
+        else
+        {
+            if (!IsInfectioning)
+            {
+                var unitManager = FindObjectOfType<UnitManager>();
+                unitManager.RemoveUnitList(this, IsInfectioning);
+                unitManager.AddCorpseList(this);
+
+                FindObjectOfType<WaveSpawner>().DecreaseEnemySum();
+                GetComponent<SpriteRenderer>().sprite = corpseSprite;
+
+                StartCoroutine(Infection());
+            }
+            else
+            {
+                FindObjectOfType<UnitManager>().RemoveUnitList(this, IsInfectioning);
+                Destroy(gameObject);
+            }
         }
     }
 
