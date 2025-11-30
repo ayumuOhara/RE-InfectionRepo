@@ -25,4 +25,10 @@ public class PlayerUnit : UnitBase
     {
         transform.position = Movement.Movement(MyPos, TargetPos, Stats.MoveSpeed);
     }
+
+    public override void Dead()
+    {
+        base.Dead();
+        Destroy(gameObject);
+    }
 }
