@@ -1,0 +1,910 @@
+fileFormatVersion: 2
+guid: c82054c3765b12a4586e2538a5ef23d4
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5046458152721685371
+    second: "Thunder\uFF17_0"
+  - first:
+      213: -2239512113070995006
+    second: "Thunder\uFF17_1"
+  - first:
+      213: 769675527146079226
+    second: "Thunder\uFF17_2"
+  - first:
+      213: -1330796998336255235
+    second: "Thunder\uFF17_3"
+  - first:
+      213: 5555461609231625224
+    second: "Thunder\uFF17_4"
+  - first:
+      213: -6712112402038772237
+    second: "Thunder\uFF17_5"
+  - first:
+      213: -5695999326259759014
+    second: "Thunder\uFF17_6"
+  - first:
+      213: 7931357389135867022
+    second: "Thunder\uFF17_7"
+  - first:
+      213: 6920117947389187516
+    second: "Thunder\uFF17_8"
+  - first:
+      213: 2047956650778077737
+    second: "Thunder\uFF17_9"
+  - first:
+      213: 1741585911463385048
+    second: "Thunder\uFF17_10"
+  - first:
+      213: 3982217749981650068
+    second: "Thunder\uFF17_11"
+  - first:
+      213: -6004270372868543538
+    second: "Thunder\uFF17_12"
+  - first:
+      213: 1694468101393609377
+    second: "Thunder\uFF17_13"
+  - first:
+      213: 1475720601458357112
+    second: "Thunder\uFF17_14"
+  - first:
+      213: -8298681189834628240
+    second: "Thunder\uFF17_15"
+  - first:
+      213: -2837100213247212563
+    second: "Thunder\uFF17_16"
+  - first:
+      213: 3066628235939151880
+    second: "Thunder\uFF17_17"
+  - first:
+      213: 813675845531097564
+    second: "Thunder\uFF17_18"
+  - first:
+      213: -8812389243234071232
+    second: "Thunder\uFF17_19"
+  - first:
+      213: 8708920035219534714
+    second: "Thunder\uFF17_20"
+  - first:
+      213: 2945197287329042784
+    second: "Thunder\uFF17_21"
+  - first:
+      213: 2088208666624929461
+    second: "Thunder\uFF17_22"
+  - first:
+      213: -4063413409688782089
+    second: "Thunder\uFF17_23"
+  - first:
+      213: 5748519676256605582
+    second: "Thunder\uFF17_24"
+  - first:
+      213: 991770074927789567
+    second: "Thunder\uFF17_25"
+  - first:
+      213: 7262511002919445112
+    second: "Thunder\uFF17_26"
+  - first:
+      213: 4429749403661763479
+    second: "Thunder\uFF17_27"
+  - first:
+      213: 3243755167421794034
+    second: "Thunder\uFF17_28"
+  - first:
+      213: 7587624590273883035
+    second: "Thunder\uFF17_29"
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: "Thunder\uFF17_0"
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 165
+        width: 1390
+        height: 1804
+      alignment: 9
+      pivot: {x: 0.5862963, y: 0.8774405}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b7b99ded3fe980640800000000000000
+      internalID: 5046458152721685371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Thunder\uFF17_1"
+      rect:
+        serializedVersion: 2
+        x: 868
+        y: 1538
+        width: 22
+        height: 34
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c9083e3997abe0e0800000000000000
+      internalID: -2239512113070995006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Thunder\uFF17_2"
+      rect:
+        serializedVersion: 2
+        x: 1202
+        y: 1550
+        width: 33
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af38ad360df6eaa00800000000000000
+      internalID: 769675527146079226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Thunder\uFF17_3"
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 743
+        width: 207
+        height: 244
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dfae20e4e2f088de0800000000000000
+      internalID: -1330796998336255235
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Thunder\uFF17_4"
+      rect:
+        serializedVersion: 2
+        x: 552
+        y: 813
+        width: 8
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80c229546e6f81d40800000000000000
+      internalID: 5555461609231625224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Thunder\uFF17_5"
+      rect:
+        serializedVersion: 2
+        x: 561
+        y: 817
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3fd2cf72559c9d2a0800000000000000
+      internalID: -6712112402038772237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Thunder\uFF17_6"
+      rect:
+        serializedVersion: 2
+        x: 715
+        y: 168
+        width: 585
+        height: 836
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a583c6d9aceb3f0b0800000000000000
+      internalID: -5695999326259759014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Thunder\uFF17_7"
+      rect:
+        serializedVersion: 2
+        x: 1343
+        y: 775
+        width: 55
+        height: 157
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8cec16f587d11e60800000000000000
+      internalID: 7931357389135867022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Thunder\uFF17_8"
+      rect:
+        serializedVersion: 2
+        x: 1448
+        y: 814
+        width: 14
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb510f9db92390060800000000000000
+      internalID: 6920117947389187516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Thunder\uFF17_9"
+      rect:
+        serializedVersion: 2
+        x: 1461
+        y: 818
+        width: 7
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92aa60d29bdcb6c10800000000000000
+      internalID: 2047956650778077737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Thunder\uFF17_10"
+      rect:
+        serializedVersion: 2
+        x: 1497
+        y: 743
+        width: 205
+        height: 244
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d7999eb82b5b2810800000000000000
+      internalID: 1741585911463385048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Thunder\uFF17_11"
+      rect:
+        serializedVersion: 2
+        x: 527
+        y: 771
+        width: 23
+        height: 34
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49c59e5e1fda34730800000000000000
+      internalID: 3982217749981650068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Thunder\uFF17_12"
+      rect:
+        serializedVersion: 2
+        x: 1472
+        y: 791
+        width: 9
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ecba4c968eb8caca0800000000000000
+      internalID: -6004270372868543538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Thunder\uFF17_13"
+      rect:
+        serializedVersion: 2
+        x: 524
+        y: 611
+        width: 158
+        height: 168
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a2fbc2b2c5f38710800000000000000
+      internalID: 1694468101393609377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Thunder\uFF17_14"
+      rect:
+        serializedVersion: 2
+        x: 623
+        y: 778
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 873b6ad7110da7410800000000000000
+      internalID: 1475720601458357112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Thunder\uFF17_15"
+      rect:
+        serializedVersion: 2
+        x: 1338
+        y: 606
+        width: 161
+        height: 173
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 073e0b71d6925dc80800000000000000
+      internalID: -8298681189834628240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Thunder\uFF17_16"
+      rect:
+        serializedVersion: 2
+        x: 1485
+        y: 775
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de3073d336890a8d0800000000000000
+      internalID: -2837100213247212563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Thunder\uFF17_17"
+      rect:
+        serializedVersion: 2
+        x: 347
+        y: 611
+        width: 116
+        height: 104
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8000655022ade8a20800000000000000
+      internalID: 3066628235939151880
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Thunder\uFF17_18"
+      rect:
+        serializedVersion: 2
+        x: 824
+        y: 652
+        width: 17
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd95237ded1ca4b00800000000000000
+      internalID: 813675845531097564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Thunder\uFF17_19"
+      rect:
+        serializedVersion: 2
+        x: 1181
+        y: 652
+        width: 19
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04d4f8e5caa14b580800000000000000
+      internalID: -8812389243234071232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Thunder\uFF17_20"
+      rect:
+        serializedVersion: 2
+        x: 1557
+        y: 610
+        width: 119
+        height: 105
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a73fa8451ac4cd870800000000000000
+      internalID: 8708920035219534714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Thunder\uFF17_21"
+      rect:
+        serializedVersion: 2
+        x: 1247
+        y: 497
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06111b814517fd820800000000000000
+      internalID: 2945197287329042784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Thunder\uFF17_22"
+      rect:
+        serializedVersion: 2
+        x: 673
+        y: 436
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5be221fe7becafc10800000000000000
+      internalID: 2088208666624929461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Thunder\uFF17_23"
+      rect:
+        serializedVersion: 2
+        x: 566
+        y: 394
+        width: 14
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7faf0f3680bdb97c0800000000000000
+      internalID: -4063413409688782089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Thunder\uFF17_24"
+      rect:
+        serializedVersion: 2
+        x: 1440
+        y: 390
+        width: 17
+        height: 35
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e855e974038d6cf40800000000000000
+      internalID: 5748519676256605582
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Thunder\uFF17_25"
+      rect:
+        serializedVersion: 2
+        x: 563
+        y: 349
+        width: 22
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff5fee6e0a973cd00800000000000000
+      internalID: 991770074927789567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Thunder\uFF17_26"
+      rect:
+        serializedVersion: 2
+        x: 851
+        y: 376
+        width: 13
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 872216a574f99c460800000000000000
+      internalID: 7262511002919445112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Thunder\uFF17_27"
+      rect:
+        serializedVersion: 2
+        x: 1433
+        y: 346
+        width: 27
+        height: 45
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7930241ec91a97d30800000000000000
+      internalID: 4429749403661763479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Thunder\uFF17_28"
+      rect:
+        serializedVersion: 2
+        x: 719
+        y: 314
+        width: 10
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f6838c7322240d20800000000000000
+      internalID: 3243755167421794034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Thunder\uFF17_29"
+      rect:
+        serializedVersion: 2
+        x: 835
+        y: 82
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b9b2b482d58ac4960800000000000000
+      internalID: 7587624590273883035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 546e217efa183b64da28e9ecfb8b8a10
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      "Thunder\uFF17_0": 5046458152721685371
+      "Thunder\uFF17_1": -2239512113070995006
+      "Thunder\uFF17_10": 1741585911463385048
+      "Thunder\uFF17_11": 3982217749981650068
+      "Thunder\uFF17_12": -6004270372868543538
+      "Thunder\uFF17_13": 1694468101393609377
+      "Thunder\uFF17_14": 1475720601458357112
+      "Thunder\uFF17_15": -8298681189834628240
+      "Thunder\uFF17_16": -2837100213247212563
+      "Thunder\uFF17_17": 3066628235939151880
+      "Thunder\uFF17_18": 813675845531097564
+      "Thunder\uFF17_19": -8812389243234071232
+      "Thunder\uFF17_2": 769675527146079226
+      "Thunder\uFF17_20": 8708920035219534714
+      "Thunder\uFF17_21": 2945197287329042784
+      "Thunder\uFF17_22": 2088208666624929461
+      "Thunder\uFF17_23": -4063413409688782089
+      "Thunder\uFF17_24": 5748519676256605582
+      "Thunder\uFF17_25": 991770074927789567
+      "Thunder\uFF17_26": 7262511002919445112
+      "Thunder\uFF17_27": 4429749403661763479
+      "Thunder\uFF17_28": 3243755167421794034
+      "Thunder\uFF17_29": 7587624590273883035
+      "Thunder\uFF17_3": -1330796998336255235
+      "Thunder\uFF17_4": 5555461609231625224
+      "Thunder\uFF17_5": -6712112402038772237
+      "Thunder\uFF17_6": -5695999326259759014
+      "Thunder\uFF17_7": 7931357389135867022
+      "Thunder\uFF17_8": 6920117947389187516
+      "Thunder\uFF17_9": 2047956650778077737
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,676 @@
+fileFormatVersion: 2
+guid: 75724f81c9e14e6499205e9656db4427
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6675292372664717624
+    second: Thunder8_0
+  - first:
+      213: 1303904125893732445
+    second: Thunder8_1
+  - first:
+      213: 2990614601106751823
+    second: Thunder8_2
+  - first:
+      213: -2233231944508972838
+    second: Thunder8_3
+  - first:
+      213: 1202471804546866296
+    second: Thunder8_4
+  - first:
+      213: 4526445268824890030
+    second: Thunder8_5
+  - first:
+      213: 3460934623452176185
+    second: Thunder8_6
+  - first:
+      213: -3653262588644289531
+    second: Thunder8_7
+  - first:
+      213: -8111263441338148528
+    second: Thunder8_8
+  - first:
+      213: -8276319448464993529
+    second: Thunder8_9
+  - first:
+      213: -8198786498038606960
+    second: Thunder8_10
+  - first:
+      213: -2208360222743044023
+    second: Thunder8_11
+  - first:
+      213: -6501987946881612535
+    second: Thunder8_12
+  - first:
+      213: 3377259222424258058
+    second: Thunder8_13
+  - first:
+      213: -605728739766200653
+    second: Thunder8_14
+  - first:
+      213: -5297695855481884343
+    second: Thunder8_15
+  - first:
+      213: -2492640099225802615
+    second: Thunder8_16
+  - first:
+      213: -615251710381446628
+    second: Thunder8_17
+  - first:
+      213: 6980678741241574878
+    second: Thunder8_18
+  - first:
+      213: 771888380793941442
+    second: Thunder8_19
+  - first:
+      213: 1887244196443414969
+    second: Thunder8_20
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Thunder8_0
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 168
+        width: 1387
+        height: 1801
+      alignment: 9
+      pivot: {x: 0.586483, y: 0.8349733}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8cee17b44f89c53a0800000000000000
+      internalID: -6675292372664717624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thunder8_1
+      rect:
+        serializedVersion: 2
+        x: 868
+        y: 1538
+        width: 22
+        height: 34
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d58ef05e4e5681210800000000000000
+      internalID: 1303904125893732445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thunder8_2
+      rect:
+        serializedVersion: 2
+        x: 1202
+        y: 1550
+        width: 33
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f41801f722cc08920800000000000000
+      internalID: 2990614601106751823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thunder8_3
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 842
+        width: 161
+        height: 145
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad0ec7ee067f101e0800000000000000
+      internalID: -2233231944508972838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thunder8_4
+      rect:
+        serializedVersion: 2
+        x: 623
+        y: 778
+        width: 95
+        height: 147
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87c507a3cb900b010800000000000000
+      internalID: 1202471804546866296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thunder8_5
+      rect:
+        serializedVersion: 2
+        x: 1343
+        y: 775
+        width: 55
+        height: 157
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eaa1e876df921de30800000000000000
+      internalID: 4526445268824890030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thunder8_6
+      rect:
+        serializedVersion: 2
+        x: 1539
+        y: 843
+        width: 163
+        height: 144
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93f97b504b5b70030800000000000000
+      internalID: 3460934623452176185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thunder8_7
+      rect:
+        serializedVersion: 2
+        x: 824
+        y: 652
+        width: 17
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50412ac08010d4dc0800000000000000
+      internalID: -3653262588644289531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thunder8_8
+      rect:
+        serializedVersion: 2
+        x: 1181
+        y: 652
+        width: 19
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0595d6b10e00f6f80800000000000000
+      internalID: -8111263441338148528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thunder8_9
+      rect:
+        serializedVersion: 2
+        x: 673
+        y: 436
+        width: 99
+        height: 67
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 703569abf4b942d80800000000000000
+      internalID: -8276319448464993529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thunder8_10
+      rect:
+        serializedVersion: 2
+        x: 917
+        y: 168
+        width: 383
+        height: 353
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 093d32b7e1f083e80800000000000000
+      internalID: -8198786498038606960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thunder8_11
+      rect:
+        serializedVersion: 2
+        x: 1247
+        y: 497
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9406c4be3145a51e0800000000000000
+      internalID: -2208360222743044023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thunder8_12
+      rect:
+        serializedVersion: 2
+        x: 566
+        y: 394
+        width: 14
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 905004c496c44c5a0800000000000000
+      internalID: -6501987946881612535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thunder8_13
+      rect:
+        serializedVersion: 2
+        x: 903
+        y: 399
+        width: 20
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a06820b8e5f6ede20800000000000000
+      internalID: 3377259222424258058
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thunder8_14
+      rect:
+        serializedVersion: 2
+        x: 1099
+        y: 401
+        width: 15
+        height: 29
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b69df3abe40897f0800000000000000
+      internalID: -605728739766200653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thunder8_15
+      rect:
+        serializedVersion: 2
+        x: 1440
+        y: 390
+        width: 17
+        height: 35
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 94171f510bdca76b0800000000000000
+      internalID: -5297695855481884343
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thunder8_16
+      rect:
+        serializedVersion: 2
+        x: 563
+        y: 349
+        width: 22
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98860cc490d586dd0800000000000000
+      internalID: -2492640099225802615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thunder8_17
+      rect:
+        serializedVersion: 2
+        x: 818
+        y: 366
+        width: 55
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c1a234344df2677f0800000000000000
+      internalID: -615251710381446628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thunder8_18
+      rect:
+        serializedVersion: 2
+        x: 1433
+        y: 346
+        width: 27
+        height: 45
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed533d6745a50e060800000000000000
+      internalID: 6980678741241574878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thunder8_19
+      rect:
+        serializedVersion: 2
+        x: 718
+        y: 314
+        width: 11
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2cd6977846c46ba00800000000000000
+      internalID: 771888380793941442
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thunder8_20
+      rect:
+        serializedVersion: 2
+        x: 835
+        y: 82
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b16d6df896d03a10800000000000000
+      internalID: 1887244196443414969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: aefd49aa7e2d1734badb9c86381602b5
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Thunder8_0: -6675292372664717624
+      Thunder8_1: 1303904125893732445
+      Thunder8_10: -8198786498038606960
+      Thunder8_11: -2208360222743044023
+      Thunder8_12: -6501987946881612535
+      Thunder8_13: 3377259222424258058
+      Thunder8_14: -605728739766200653
+      Thunder8_15: -5297695855481884343
+      Thunder8_16: -2492640099225802615
+      Thunder8_17: -615251710381446628
+      Thunder8_18: 6980678741241574878
+      Thunder8_19: 771888380793941442
+      Thunder8_2: 2990614601106751823
+      Thunder8_20: 1887244196443414969
+      Thunder8_3: -2233231944508972838
+      Thunder8_4: 1202471804546866296
+      Thunder8_5: 4526445268824890030
+      Thunder8_6: 3460934623452176185
+      Thunder8_7: -3653262588644289531
+      Thunder8_8: -8111263441338148528
+      Thunder8_9: -8276319448464993529
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
