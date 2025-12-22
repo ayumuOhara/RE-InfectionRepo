@@ -1,97 +1,94 @@
 fileFormatVersion: 2
-guid: c82054c3765b12a4586e2538a5ef23d4
+guid: ae5e815fb43972041b783656b91a33cb
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5046458152721685371
-    second: "Thunder\uFF17_0"
+      213: 1481207330938673205
+    second: Thunder9_0
   - first:
-      213: -2239512113070995006
-    second: "Thunder\uFF17_1"
+      213: -4893842877246277160
+    second: Thunder9_1
   - first:
-      213: 769675527146079226
-    second: "Thunder\uFF17_2"
+      213: 4864561069372332182
+    second: Thunder9_2
   - first:
-      213: -1330796998336255235
-    second: "Thunder\uFF17_3"
+      213: -5496665335761537356
+    second: Thunder9_3
   - first:
-      213: 5555461609231625224
-    second: "Thunder\uFF17_4"
+      213: -4289245713340315235
+    second: Thunder9_4
   - first:
-      213: -6712112402038772237
-    second: "Thunder\uFF17_5"
+      213: -7016735574971702513
+    second: Thunder9_5
   - first:
-      213: -5695999326259759014
-    second: "Thunder\uFF17_6"
+      213: -8180964496565454797
+    second: Thunder9_6
   - first:
-      213: 7931357389135867022
-    second: "Thunder\uFF17_7"
+      213: 4259661309202527930
+    second: Thunder9_7
   - first:
-      213: 6920117947389187516
-    second: "Thunder\uFF17_8"
+      213: -1069184813292614432
+    second: Thunder9_8
   - first:
-      213: 2047956650778077737
-    second: "Thunder\uFF17_9"
+      213: 7770746374923370210
+    second: Thunder9_9
   - first:
-      213: 1741585911463385048
-    second: "Thunder\uFF17_10"
+      213: -7414672577573980688
+    second: Thunder9_10
   - first:
-      213: 3982217749981650068
-    second: "Thunder\uFF17_11"
+      213: 8372499795774151601
+    second: Thunder9_11
   - first:
-      213: -6004270372868543538
-    second: "Thunder\uFF17_12"
+      213: -4500879888408642032
+    second: Thunder9_12
   - first:
-      213: 1694468101393609377
-    second: "Thunder\uFF17_13"
+      213: -3211848779487262429
+    second: Thunder9_13
   - first:
-      213: 1475720601458357112
-    second: "Thunder\uFF17_14"
+      213: -3837260978442208352
+    second: Thunder9_14
   - first:
-      213: -8298681189834628240
-    second: "Thunder\uFF17_15"
+      213: -8197624453091233006
+    second: Thunder9_15
   - first:
-      213: -2837100213247212563
-    second: "Thunder\uFF17_16"
+      213: -6557927322853339097
+    second: Thunder9_16
   - first:
-      213: 3066628235939151880
-    second: "Thunder\uFF17_17"
+      213: -5698905051546080084
+    second: Thunder9_17
   - first:
-      213: 813675845531097564
-    second: "Thunder\uFF17_18"
+      213: -1703615823815790227
+    second: Thunder9_18
   - first:
-      213: -8812389243234071232
-    second: "Thunder\uFF17_19"
+      213: 8691932698838938704
+    second: Thunder9_19
   - first:
-      213: 8708920035219534714
-    second: "Thunder\uFF17_20"
+      213: 2182252605045645948
+    second: Thunder9_20
   - first:
-      213: 2945197287329042784
-    second: "Thunder\uFF17_21"
+      213: -8010424672393716361
+    second: Thunder9_21
   - first:
-      213: 2088208666624929461
-    second: "Thunder\uFF17_22"
+      213: -4163103385766909760
+    second: Thunder9_22
   - first:
-      213: -4063413409688782089
-    second: "Thunder\uFF17_23"
+      213: 3347943751959930635
+    second: Thunder9_23
   - first:
-      213: 5748519676256605582
-    second: "Thunder\uFF17_24"
+      213: -712587873691929713
+    second: Thunder9_24
   - first:
-      213: 991770074927789567
-    second: "Thunder\uFF17_25"
+      213: 2773213673495239148
+    second: Thunder9_25
   - first:
-      213: 7262511002919445112
-    second: "Thunder\uFF17_26"
+      213: 5809909543719740109
+    second: Thunder9_26
   - first:
-      213: 4429749403661763479
-    second: "Thunder\uFF17_27"
+      213: 8961614681108275848
+    second: Thunder9_27
   - first:
-      213: 3243755167421794034
-    second: "Thunder\uFF17_28"
-  - first:
-      213: 7587624590273883035
-    second: "Thunder\uFF17_29"
+      213: -3979782919530663928
+    second: Thunder9_28
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -200,29 +197,29 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "Thunder\uFF17_0"
+      name: Thunder9_0
       rect:
         serializedVersion: 2
-        x: 304
-        y: 165
-        width: 1390
-        height: 1804
+        x: 297
+        y: 56
+        width: 1443
+        height: 1940
       alignment: 9
-      pivot: {x: 0.5862963, y: 0.8774405}
+      pivot: {x: 0.51955926, y: 0.7909685}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b7b99ded3fe980640800000000000000
-      internalID: 5046458152721685371
+      spriteID: 538dd4f383e4e8410800000000000000
+      internalID: 1481207330938673205
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Thunder\uFF17_1"
+      name: Thunder9_1
       rect:
         serializedVersion: 2
         x: 868
@@ -237,14 +234,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2c9083e3997abe0e0800000000000000
-      internalID: -2239512113070995006
+      spriteID: 8d9f823f4d3951cb0800000000000000
+      internalID: -4893842877246277160
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Thunder\uFF17_2"
+      name: Thunder9_2
       rect:
         serializedVersion: 2
         x: 1202
@@ -259,14 +256,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: af38ad360df6eaa00800000000000000
-      internalID: 769675527146079226
+      spriteID: 698d120e484628340800000000000000
+      internalID: 4864561069372332182
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Thunder\uFF17_3"
+      name: Thunder9_3
       rect:
         serializedVersion: 2
         x: 320
@@ -281,14 +278,36 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: dfae20e4e2f088de0800000000000000
-      internalID: -1330796998336255235
+      spriteID: 4b6fabceffbe7b3b0800000000000000
+      internalID: -5496665335761537356
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Thunder\uFF17_4"
+      name: Thunder9_4
+      rect:
+        serializedVersion: 2
+        x: 524
+        y: 611
+        width: 405
+        height: 393
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d99cbf5cfb98974c0800000000000000
+      internalID: -4289245713340315235
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thunder9_5
       rect:
         serializedVersion: 2
         x: 552
@@ -303,14 +322,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 80c229546e6f81d40800000000000000
-      internalID: 5555461609231625224
+      spriteID: f0327fabb2c8f9e90800000000000000
+      internalID: -7016735574971702513
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Thunder\uFF17_5"
+      name: Thunder9_6
       rect:
         serializedVersion: 2
         x: 561
@@ -325,36 +344,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3fd2cf72559c9d2a0800000000000000
-      internalID: -6712112402038772237
+      spriteID: 338322e8220677e80800000000000000
+      internalID: -8180964496565454797
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Thunder\uFF17_6"
-      rect:
-        serializedVersion: 2
-        x: 715
-        y: 168
-        width: 585
-        height: 836
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a583c6d9aceb3f0b0800000000000000
-      internalID: -5695999326259759014
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "Thunder\uFF17_7"
+      name: Thunder9_7
       rect:
         serializedVersion: 2
         x: 1343
@@ -369,14 +366,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e8cec16f587d11e60800000000000000
-      internalID: 7931357389135867022
+      spriteID: ab6fd7e546b5d1b30800000000000000
+      internalID: 4259661309202527930
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Thunder\uFF17_8"
+      name: Thunder9_8
       rect:
         serializedVersion: 2
         x: 1448
@@ -391,14 +388,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cb510f9db92390060800000000000000
-      internalID: 6920117947389187516
+      spriteID: 0ec837cb31e7921f0800000000000000
+      internalID: -1069184813292614432
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Thunder\uFF17_9"
+      name: Thunder9_9
       rect:
         serializedVersion: 2
         x: 1461
@@ -413,14 +410,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 92aa60d29bdcb6c10800000000000000
-      internalID: 2047956650778077737
+      spriteID: 2ee36f428ac37db60800000000000000
+      internalID: 7770746374923370210
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Thunder\uFF17_10"
+      name: Thunder9_10
       rect:
         serializedVersion: 2
         x: 1497
@@ -435,14 +432,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8d7999eb82b5b2810800000000000000
-      internalID: 1741585911463385048
+      spriteID: 0f57fd7439ac91990800000000000000
+      internalID: -7414672577573980688
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Thunder\uFF17_11"
+      name: Thunder9_11
       rect:
         serializedVersion: 2
         x: 527
@@ -457,14 +454,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 49c59e5e1fda34730800000000000000
-      internalID: 3982217749981650068
+      spriteID: 1bb16217438113470800000000000000
+      internalID: 8372499795774151601
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Thunder\uFF17_12"
+      name: Thunder9_12
       rect:
         serializedVersion: 2
         x: 1472
@@ -479,36 +476,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ecba4c968eb8caca0800000000000000
-      internalID: -6004270372868543538
+      spriteID: 01ef3b29699a981c0800000000000000
+      internalID: -4500879888408642032
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Thunder\uFF17_13"
-      rect:
-        serializedVersion: 2
-        x: 524
-        y: 611
-        width: 158
-        height: 168
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 1a2fbc2b2c5f38710800000000000000
-      internalID: 1694468101393609377
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "Thunder\uFF17_14"
+      name: Thunder9_13
       rect:
         serializedVersion: 2
         x: 623
@@ -523,14 +498,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 873b6ad7110da7410800000000000000
-      internalID: 1475720601458357112
+      spriteID: 329c36a5d883d63d0800000000000000
+      internalID: -3211848779487262429
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Thunder\uFF17_15"
+      name: Thunder9_14
       rect:
         serializedVersion: 2
         x: 1338
@@ -545,14 +520,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 073e0b71d6925dc80800000000000000
-      internalID: -8298681189834628240
+      spriteID: 0abfb75887f4fbac0800000000000000
+      internalID: -3837260978442208352
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Thunder\uFF17_16"
+      name: Thunder9_15
       rect:
         serializedVersion: 2
         x: 1485
@@ -567,14 +542,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: de3073d336890a8d0800000000000000
-      internalID: -2837100213247212563
+      spriteID: 213f0772eff2c3e80800000000000000
+      internalID: -8197624453091233006
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Thunder\uFF17_17"
+      name: Thunder9_16
       rect:
         serializedVersion: 2
         x: 347
@@ -589,36 +564,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8000655022ade8a20800000000000000
-      internalID: 3066628235939151880
+      spriteID: 7209f7268df8df4a0800000000000000
+      internalID: -6557927322853339097
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Thunder\uFF17_18"
-      rect:
-        serializedVersion: 2
-        x: 824
-        y: 652
-        width: 17
-        height: 11
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: cd95237ded1ca4b00800000000000000
-      internalID: 813675845531097564
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "Thunder\uFF17_19"
+      name: Thunder9_17
       rect:
         serializedVersion: 2
         x: 1181
@@ -633,14 +586,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 04d4f8e5caa14b580800000000000000
-      internalID: -8812389243234071232
+      spriteID: cacaae9bc0c69e0b0800000000000000
+      internalID: -5698905051546080084
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Thunder\uFF17_20"
+      name: Thunder9_18
       rect:
         serializedVersion: 2
         x: 1557
@@ -655,102 +608,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a73fa8451ac4cd870800000000000000
-      internalID: 8708920035219534714
+      spriteID: d61b9b33f6a8b58e0800000000000000
+      internalID: -1703615823815790227
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Thunder\uFF17_21"
-      rect:
-        serializedVersion: 2
-        x: 1247
-        y: 497
-        width: 6
-        height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 06111b814517fd820800000000000000
-      internalID: 2945197287329042784
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "Thunder\uFF17_22"
-      rect:
-        serializedVersion: 2
-        x: 673
-        y: 436
-        width: 7
-        height: 7
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 5be221fe7becafc10800000000000000
-      internalID: 2088208666624929461
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "Thunder\uFF17_23"
-      rect:
-        serializedVersion: 2
-        x: 566
-        y: 394
-        width: 14
-        height: 30
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 7faf0f3680bdb97c0800000000000000
-      internalID: -4063413409688782089
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "Thunder\uFF17_24"
-      rect:
-        serializedVersion: 2
-        x: 1440
-        y: 390
-        width: 17
-        height: 35
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: e855e974038d6cf40800000000000000
-      internalID: 5748519676256605582
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "Thunder\uFF17_25"
+      name: Thunder9_19
       rect:
         serializedVersion: 2
         x: 563
@@ -765,20 +630,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ff5fee6e0a973cd00800000000000000
-      internalID: 991770074927789567
+      spriteID: 054b5eddcb2ff9870800000000000000
+      internalID: 8691932698838938704
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Thunder\uFF17_26"
+      name: Thunder9_20
       rect:
         serializedVersion: 2
-        x: 851
-        y: 376
-        width: 13
-        height: 6
+        x: 566
+        y: 394
+        width: 14
+        height: 30
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -787,14 +652,124 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 872216a574f99c460800000000000000
-      internalID: 7262511002919445112
+      spriteID: c72aae5ae2be84e10800000000000000
+      internalID: 2182252605045645948
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Thunder\uFF17_27"
+      name: Thunder9_21
+      rect:
+        serializedVersion: 2
+        x: 673
+        y: 436
+        width: 99
+        height: 67
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77d92f5933145d090800000000000000
+      internalID: -8010424672393716361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thunder9_22
+      rect:
+        serializedVersion: 2
+        x: 718
+        y: 314
+        width: 11
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c82328178fa936c0800000000000000
+      internalID: -4163103385766909760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thunder9_23
+      rect:
+        serializedVersion: 2
+        x: 818
+        y: 366
+        width: 55
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b076f8faa19467e20800000000000000
+      internalID: 3347943751959930635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thunder9_24
+      rect:
+        serializedVersion: 2
+        x: 903
+        y: 399
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f837755ba116c16f0800000000000000
+      internalID: -712587873691929713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thunder9_25
+      rect:
+        serializedVersion: 2
+        x: 1188
+        y: 335
+        width: 112
+        height: 168
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce990f6942f6c7620800000000000000
+      internalID: 2773213673495239148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thunder9_26
       rect:
         serializedVersion: 2
         x: 1433
@@ -809,20 +784,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7930241ec91a97d30800000000000000
-      internalID: 4429749403661763479
+      spriteID: dc22192a2f1f0a050800000000000000
+      internalID: 5809909543719740109
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Thunder\uFF17_28"
+      name: Thunder9_27
       rect:
         serializedVersion: 2
-        x: 719
-        y: 314
-        width: 10
-        height: 30
+        x: 1440
+        y: 390
+        width: 17
+        height: 35
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -831,14 +806,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2f6838c7322240d20800000000000000
-      internalID: 3243755167421794034
+      spriteID: 8826261621d0e5c70800000000000000
+      internalID: 8961614681108275848
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Thunder\uFF17_29"
+      name: Thunder9_28
       rect:
         serializedVersion: 2
         x: 835
@@ -853,8 +828,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b9b2b482d58ac4960800000000000000
-      internalID: 7587624590273883035
+      spriteID: 800353e3588f4c8c0800000000000000
+      internalID: -3979782919530663928
       vertices: []
       indices: 
       edges: []
@@ -863,7 +838,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 546e217efa183b64da28e9ecfb8b8a10
+    spriteID: 68ded5898190412458aea78cb7114e36
     internalID: 0
     vertices: []
     indices: 
@@ -873,36 +848,35 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      "Thunder\uFF17_0": 5046458152721685371
-      "Thunder\uFF17_1": -2239512113070995006
-      "Thunder\uFF17_10": 1741585911463385048
-      "Thunder\uFF17_11": 3982217749981650068
-      "Thunder\uFF17_12": -6004270372868543538
-      "Thunder\uFF17_13": 1694468101393609377
-      "Thunder\uFF17_14": 1475720601458357112
-      "Thunder\uFF17_15": -8298681189834628240
-      "Thunder\uFF17_16": -2837100213247212563
-      "Thunder\uFF17_17": 3066628235939151880
-      "Thunder\uFF17_18": 813675845531097564
-      "Thunder\uFF17_19": -8812389243234071232
-      "Thunder\uFF17_2": 769675527146079226
-      "Thunder\uFF17_20": 8708920035219534714
-      "Thunder\uFF17_21": 2945197287329042784
-      "Thunder\uFF17_22": 2088208666624929461
-      "Thunder\uFF17_23": -4063413409688782089
-      "Thunder\uFF17_24": 5748519676256605582
-      "Thunder\uFF17_25": 991770074927789567
-      "Thunder\uFF17_26": 7262511002919445112
-      "Thunder\uFF17_27": 4429749403661763479
-      "Thunder\uFF17_28": 3243755167421794034
-      "Thunder\uFF17_29": 7587624590273883035
-      "Thunder\uFF17_3": -1330796998336255235
-      "Thunder\uFF17_4": 5555461609231625224
-      "Thunder\uFF17_5": -6712112402038772237
-      "Thunder\uFF17_6": -5695999326259759014
-      "Thunder\uFF17_7": 7931357389135867022
-      "Thunder\uFF17_8": 6920117947389187516
-      "Thunder\uFF17_9": 2047956650778077737
+      Thunder9_0: 1481207330938673205
+      Thunder9_1: -4893842877246277160
+      Thunder9_10: -7414672577573980688
+      Thunder9_11: 8372499795774151601
+      Thunder9_12: -4500879888408642032
+      Thunder9_13: -3211848779487262429
+      Thunder9_14: -3837260978442208352
+      Thunder9_15: -8197624453091233006
+      Thunder9_16: -6557927322853339097
+      Thunder9_17: -5698905051546080084
+      Thunder9_18: -1703615823815790227
+      Thunder9_19: 8691932698838938704
+      Thunder9_2: 4864561069372332182
+      Thunder9_20: 2182252605045645948
+      Thunder9_21: -8010424672393716361
+      Thunder9_22: -4163103385766909760
+      Thunder9_23: 3347943751959930635
+      Thunder9_24: -712587873691929713
+      Thunder9_25: 2773213673495239148
+      Thunder9_26: 5809909543719740109
+      Thunder9_27: 8961614681108275848
+      Thunder9_28: -3979782919530663928
+      Thunder9_3: -5496665335761537356
+      Thunder9_4: -4289245713340315235
+      Thunder9_5: -7016735574971702513
+      Thunder9_6: -8180964496565454797
+      Thunder9_7: 4259661309202527930
+      Thunder9_8: -1069184813292614432
+      Thunder9_9: 7770746374923370210
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

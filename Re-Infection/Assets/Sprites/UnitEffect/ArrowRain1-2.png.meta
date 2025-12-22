@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: dda9620ad57b477488d833474cb0a328
+guid: 7f0eb3171cb77a84d8564edec53ce9ff
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5634030570129283518
-    second: Magic4_0
+      213: 1655975193829873510
+    second: ArrowRain1-2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Magic4_0
+      name: ArrowRain1-2_0
       rect:
         serializedVersion: 2
-        x: 710
-        y: 786
-        width: 628
-        height: 1262
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 917
+        y: 0
+        width: 202
+        height: 2048
+      alignment: 9
+      pivot: {x: 0.5698617, y: 0.8927649}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: eb95f3204f8103e40800000000000000
-      internalID: 5634030570129283518
+      spriteID: 66796114aa43bf610800000000000000
+      internalID: 1655975193829873510
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 430b0cc032e7db945a5b2e0e9e078d0d
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Magic4_0: 5634030570129283518
+      ArrowRain1-2_0: 1655975193829873510
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

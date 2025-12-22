@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: dda9620ad57b477488d833474cb0a328
+guid: a32000543a770d54193489f14b7cf1c7
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5634030570129283518
-    second: Magic4_0
+      213: 7157184280433780340
+    second: ShockWave1_0
+  - first:
+      213: 3896530207339145508
+    second: ShockWave1_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,23 +116,45 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Magic4_0
+      name: ShockWave1_0
       rect:
         serializedVersion: 2
-        x: 710
-        y: 786
-        width: 628
-        height: 1262
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 477
+        y: 775
+        width: 1108
+        height: 551
+      alignment: 9
+      pivot: {x: 0.49681616, y: 0.43597114}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: eb95f3204f8103e40800000000000000
-      internalID: 5634030570129283518
+      spriteID: 476e343ce2d635360800000000000000
+      internalID: 7157184280433780340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShockWave1_1
+      rect:
+        serializedVersion: 2
+        x: 473
+        y: 771
+        width: 1110
+        height: 545
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 42967013491431630800000000000000
+      internalID: 3896530207339145508
       vertices: []
       indices: 
       edges: []
@@ -138,7 +163,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: d404ccb5b0acfe149b8efd9b5ba4b918
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +173,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Magic4_0: 5634030570129283518
+      ShockWave1_0: 7157184280433780340
+      ShockWave1_1: 3896530207339145508
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -47,15 +47,6 @@ TextureImporter:
   - first:
       213: 6543068237185351957
     second: Thunder6_14
-  - first:
-      213: 2974837244772496129
-    second: Thunder6_15
-  - first:
-      213: 3678863619546530762
-    second: Thunder6_16
-  - first:
-      213: 7186258033309922207
-    second: Thunder6_17
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -167,12 +158,12 @@ TextureImporter:
       name: Thunder6_0
       rect:
         serializedVersion: 2
-        x: 318
-        y: 63
-        width: 1380
-        height: 1906
+        x: 495
+        y: 27
+        width: 1037
+        height: 2004
       alignment: 9
-      pivot: {x: 0.5485739, y: 0.82577485}
+      pivot: {x: 0.48979372, y: 0.7939995}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -189,10 +180,10 @@ TextureImporter:
       name: Thunder6_1
       rect:
         serializedVersion: 2
-        x: 818
-        y: 168
-        width: 376
-        height: 1404
+        x: 1171
+        y: 652
+        width: 282
+        height: 287
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -211,10 +202,10 @@ TextureImporter:
       name: Thunder6_2
       rect:
         serializedVersion: 2
-        x: 1202
-        y: 1550
-        width: 33
-        height: 43
+        x: 485
+        y: 432
+        width: 171
+        height: 218
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -233,10 +224,10 @@ TextureImporter:
       name: Thunder6_3
       rect:
         serializedVersion: 2
-        x: 320
-        y: 732
-        width: 401
-        height: 255
+        x: 661
+        y: 399
+        width: 262
+        height: 239
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -255,10 +246,10 @@ TextureImporter:
       name: Thunder6_4
       rect:
         serializedVersion: 2
-        x: 524
-        y: 498
-        width: 248
-        height: 281
+        x: 1099
+        y: 355
+        width: 261
+        height: 279
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -277,10 +268,10 @@ TextureImporter:
       name: Thunder6_5
       rect:
         serializedVersion: 2
-        x: 1274
-        y: 535
-        width: 225
-        height: 244
+        x: 1367
+        y: 432
+        width: 168
+        height: 217
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -299,10 +290,10 @@ TextureImporter:
       name: Thunder6_6
       rect:
         serializedVersion: 2
-        x: 1299
-        y: 733
-        width: 403
-        height: 254
+        x: 566
+        y: 411
+        width: 32
+        height: 15
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -321,10 +312,10 @@ TextureImporter:
       name: Thunder6_7
       rect:
         serializedVersion: 2
-        x: 347
-        y: 557
-        width: 203
-        height: 158
+        x: 641
+        y: 395
+        width: 55
+        height: 34
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -343,10 +334,10 @@ TextureImporter:
       name: Thunder6_8
       rect:
         serializedVersion: 2
-        x: 824
-        y: 652
-        width: 17
-        height: 11
+        x: 1327
+        y: 398
+        width: 52
+        height: 31
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -365,10 +356,10 @@ TextureImporter:
       name: Thunder6_9
       rect:
         serializedVersion: 2
-        x: 1181
-        y: 652
-        width: 19
-        height: 11
+        x: 1424
+        y: 410
+        width: 32
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -387,10 +378,10 @@ TextureImporter:
       name: Thunder6_10
       rect:
         serializedVersion: 2
-        x: 1469
-        y: 555
-        width: 207
-        height: 160
+        x: 818
+        y: 366
+        width: 55
+        height: 18
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -409,10 +400,10 @@ TextureImporter:
       name: Thunder6_11
       rect:
         serializedVersion: 2
-        x: 1247
-        y: 497
+        x: 917
+        y: 380
         width: 6
-        height: 6
+        height: 11
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -431,10 +422,10 @@ TextureImporter:
       name: Thunder6_12
       rect:
         serializedVersion: 2
-        x: 673
-        y: 436
-        width: 7
-        height: 7
+        x: 719
+        y: 311
+        width: 10
+        height: 24
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -453,10 +444,10 @@ TextureImporter:
       name: Thunder6_13
       rect:
         serializedVersion: 2
-        x: 563
-        y: 307
-        width: 109
-        height: 122
+        x: 1028
+        y: 169
+        width: 8
+        height: 9
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -475,9 +466,9 @@ TextureImporter:
       name: Thunder6_14
       rect:
         serializedVersion: 2
-        x: 851
-        y: 376
-        width: 13
+        x: 835
+        y: 82
+        width: 8
         height: 6
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -493,77 +484,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: Thunder6_15
-      rect:
-        serializedVersion: 2
-        x: 1297
-        y: 271
-        width: 163
-        height: 158
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 103344776beb84920800000000000000
-      internalID: 2974837244772496129
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Thunder6_16
-      rect:
-        serializedVersion: 2
-        x: 718
-        y: 314
-        width: 11
-        height: 33
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ac3cd2478f2fd0330800000000000000
-      internalID: 3678863619546530762
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Thunder6_17
-      rect:
-        serializedVersion: 2
-        x: 835
-        y: 82
-        width: 8
-        height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f933cbb5b97bab360800000000000000
-      internalID: 7186258033309922207
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 3562621659775b649b5da8b3f17a1b1a
+    spriteID: dff247acfd7750446800c63a18c9ef5d
     internalID: 0
     vertices: []
     indices: 
@@ -580,9 +505,6 @@ TextureImporter:
       Thunder6_12: 6498683374629560016
       Thunder6_13: -1162743993544701588
       Thunder6_14: 6543068237185351957
-      Thunder6_15: 2974837244772496129
-      Thunder6_16: 3678863619546530762
-      Thunder6_17: 7186258033309922207
       Thunder6_2: 6402246113324632382
       Thunder6_3: 1084018084432509570
       Thunder6_4: -7016296421089268753

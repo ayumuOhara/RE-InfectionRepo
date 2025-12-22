@@ -116,10 +116,10 @@ TextureImporter:
       name: Magic2_0
       rect:
         serializedVersion: 2
-        x: 520
-        y: 745
-        width: 1008
-        height: 1303
+        x: 959
+        y: 781
+        width: 130
+        height: 1267
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

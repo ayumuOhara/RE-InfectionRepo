@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: dda9620ad57b477488d833474cb0a328
+guid: 0c1edacaf3cedb44199bfdc5be65e11c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5634030570129283518
-    second: Magic4_0
+      213: 8616577923661824938
+    second: ArrowRain1-4_0
+  - first:
+      213: 1792478795680197988
+    second: ArrowRain1-4_1
+  - first:
+      213: 7750439910448479009
+    second: ArrowRain1-4_2
+  - first:
+      213: -3793742915538445895
+    second: ArrowRain1-4_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,23 +122,89 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Magic4_0
+      name: ArrowRain1-4_0
       rect:
         serializedVersion: 2
-        x: 710
-        y: 786
-        width: 628
-        height: 1262
+        x: 509
+        y: 221
+        width: 1027
+        height: 1383
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: eb95f3204f8103e40800000000000000
-      internalID: 5634030570129283518
+      spriteID: aa3065f08fb349770800000000000000
+      internalID: 8616577923661824938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ArrowRain1-4_1
+      rect:
+        serializedVersion: 2
+        x: 654
+        y: 361
+        width: 144
+        height: 173
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46d20fbb7f920e810800000000000000
+      internalID: 1792478795680197988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ArrowRain1-4_2
+      rect:
+        serializedVersion: 2
+        x: 1250
+        y: 361
+        width: 144
+        height: 173
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12bba43f8081f8b60800000000000000
+      internalID: 7750439910448479009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ArrowRain1-4_3
+      rect:
+        serializedVersion: 2
+        x: 1407
+        y: 221
+        width: 132
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b91d2e1beae95bc0800000000000000
+      internalID: -3793742915538445895
       vertices: []
       indices: 
       edges: []
@@ -138,7 +213,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: f8e01178eaf86824bb0c84c27adc919b
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +223,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Magic4_0: 5634030570129283518
+      ArrowRain1-4_0: 8616577923661824938
+      ArrowRain1-4_1: 1792478795680197988
+      ArrowRain1-4_2: 7750439910448479009
+      ArrowRain1-4_3: -3793742915538445895
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

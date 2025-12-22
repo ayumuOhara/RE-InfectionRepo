@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: dda9620ad57b477488d833474cb0a328
+guid: e00d769b0f8f67a46b0dd236fc6cc23f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5634030570129283518
-    second: Magic4_0
+      213: -806725362550804069
+    second: ShockWave 1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Magic4_0
+      name: ShockWave 1_0
       rect:
         serializedVersion: 2
-        x: 710
-        y: 786
-        width: 628
-        height: 1262
+        x: 443
+        y: 771
+        width: 1170
+        height: 703
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: eb95f3204f8103e40800000000000000
-      internalID: 5634030570129283518
+      spriteID: b917cd59e8fedc4f0800000000000000
+      internalID: -806725362550804069
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Magic4_0: 5634030570129283518
+      ShockWave 1_0: -806725362550804069
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: dda9620ad57b477488d833474cb0a328
+guid: a626993be876d104590cb539ed0a2a21
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5634030570129283518
-    second: Magic4_0
+      213: -8716509916504247988
+    second: ShockWave2_0
+  - first:
+      213: -6303190901326012774
+    second: ShockWave2_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +116,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Magic4_0
+      name: ShockWave2_0
       rect:
         serializedVersion: 2
-        x: 710
-        y: 786
-        width: 628
-        height: 1262
+        x: 445
+        y: 771
+        width: 1164
+        height: 670
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +131,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: eb95f3204f8103e40800000000000000
-      internalID: 5634030570129283518
+      spriteID: c413899b96cb80780800000000000000
+      internalID: -8716509916504247988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShockWave2_1
+      rect:
+        serializedVersion: 2
+        x: 882
+        y: 1441
+        width: 25
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a9e1dfe55419688a0800000000000000
+      internalID: -6303190901326012774
       vertices: []
       indices: 
       edges: []
@@ -148,7 +173,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Magic4_0: 5634030570129283518
+      ShockWave2_0: -8716509916504247988
+      ShockWave2_1: -6303190901326012774
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

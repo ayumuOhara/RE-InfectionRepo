@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: dda9620ad57b477488d833474cb0a328
+guid: 85b87975fd0435e409a5932db2fe7d26
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5634030570129283518
-    second: Magic4_0
+      213: -314251388365322981
+    second: ArrowRain1-3_0
+  - first:
+      213: -1729376851564507103
+    second: ArrowRain1-3_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,23 +116,45 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Magic4_0
+      name: ArrowRain1-3_0
       rect:
         serializedVersion: 2
-        x: 710
-        y: 786
-        width: 628
-        height: 1262
+        x: 799
+        y: 268
+        width: 454
+        height: 1255
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: eb95f3204f8103e40800000000000000
-      internalID: 5634030570129283518
+      spriteID: b15cf4af60e83abf0800000000000000
+      internalID: -314251388365322981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ArrowRain1-3_1
+      rect:
+        serializedVersion: 2
+        x: 1129
+        y: 268
+        width: 120
+        height: 157
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 120d6b78ae40008e0800000000000000
+      internalID: -1729376851564507103
       vertices: []
       indices: 
       edges: []
@@ -138,7 +163,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 119c2da99ac56194e9be9c31d7622520
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +173,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Magic4_0: 5634030570129283518
+      ArrowRain1-3_0: -314251388365322981
+      ArrowRain1-3_1: -1729376851564507103
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

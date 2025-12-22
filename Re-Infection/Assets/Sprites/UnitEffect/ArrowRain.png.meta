@@ -116,12 +116,12 @@ TextureImporter:
       name: ArrowRain_0
       rect:
         serializedVersion: 2
-        x: 963
-        y: 475
-        width: 140
-        height: 620
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 837
+        y: 0
+        width: 406
+        height: 2048
+      alignment: 9
+      pivot: {x: 0.5000003, y: 0.05211025}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5474152891c42b5458d8e5832642f21b
     internalID: 0
     vertices: []
     indices: 
