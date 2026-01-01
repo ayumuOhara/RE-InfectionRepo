@@ -27,7 +27,7 @@ public class Stage : ScriptableObject
                     {
                         foreach (var stats in level.levelStats)
                         {
-                            units.Add(stats.unitStats);
+                            units.Add(stats.statsData.unitStats);
                         }
                     }
                 }

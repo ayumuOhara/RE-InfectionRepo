@@ -70,7 +70,7 @@ public class WaveSpawner : MonoBehaviour
 
             if(currentWave.bossWave)
             {
-                BossUI();
+                StartCoroutine(BossUI());
                 yield return new WaitUntil(() => isBossDefeated);
             }
             else
@@ -81,7 +81,7 @@ public class WaveSpawner : MonoBehaviour
             // 最終ウェーブの場合、即終了する
             if (currentWave.bossWave)
             {
-                StageClear();
+                StartCoroutine(StageClear());
                 yield break;
             }
             else
@@ -202,6 +202,12 @@ public class WaveSpawner : MonoBehaviour
         enemy.Initialize(unitStats);    // 生成したユニットにステータスを代入
     }
 
+    // ボスユニット設定
+    public void SetBoss(EnemyUnit boss)
+    {
+        bossUnit = boss;
+    }
+
     // ウェーブの敵の残りの合計数を減らす
     public void DecreaseEnemySum()
     {
@@ -219,9 +225,9 @@ public class WaveSpawner : MonoBehaviour
 
         if (currentWave.bossWave)
         {
-            gameUIManager.BossNameText(currentWave.waveLevels[0].levelStats[0].unitStats.unitName);
-            gameUIManager.BossHealthText((int)currentWave.waveLevels[0].levelStats[0].unitStats.maxHp);
-            gameUIManager.BossHealthProgress(currentWave.waveLevels[0].levelStats[0].unitStats.maxHp / currentWave.waveLevels[0].levelStats[0].unitStats.maxHp);
+            gameUIManager.BossNameText(currentWave.waveLevels[0].levelStats[0].statsData.unitStats.unitName);
+            gameUIManager.BossHealthText((int)currentWave.waveLevels[0].levelStats[0].statsData.unitStats.maxHp);
+            gameUIManager.BossHealthProgress(currentWave.waveLevels[0].levelStats[0].statsData.unitStats.maxHp / currentWave.waveLevels[0].levelStats[0].statsData.unitStats.maxHp);
         }
         else
         {

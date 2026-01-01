@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcf73ff0467ebad4b8d9a591c6ac54e0, type: 3}
+  m_Name: Tank_Village
+  m_EditorClassIdentifier: Assembly-CSharp::UnitStats
+  unitStats:
+    unitSprite: {fileID: 21300008, guid: f5f1c19ce87450f4b97f8b363746558d, type: 3}
+    unitName: "\u6751\u306E\u93A7\u5175"
+    jobType: 2
+    targetType: 0
+    maxHp: 300
+    attackType: 0
+    hitCnt: 1
+    atk: 10
+    atkInterbal: 8
+    range: 0.3
+    moveType: 0
+    moveSpeed: 2
+    summonCost: 5
+    infecitonTime: 10
+    bossUnit: 0
+    attackSe: {fileID: 8300000, guid: dab120b7a12444d42b8454c3420e7830, type: 3}

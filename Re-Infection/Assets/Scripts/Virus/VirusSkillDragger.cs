@@ -21,6 +21,8 @@ public class VirusSkillDragger : MonoBehaviour, IBeginDragHandler, IDragHandler,
     GameObject dragObj;
 
     bool isDragging = false;    // ドラッグ中フラグ
+    public bool IsDragging => isDragging;
+
     bool isDragCancel = false;  // 使用キャンセルフラグ
 
     // ドラッグ終了待機

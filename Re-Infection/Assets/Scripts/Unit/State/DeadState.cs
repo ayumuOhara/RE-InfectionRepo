@@ -1,20 +1,17 @@
-using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class DeadState : IUnitState
 {
-    UnitBase unitController;
+    UnitBase unit;
 
-    public DeadState(UnitBase controller)
+    public DeadState(UnitBase unit)
     {
-        unitController = controller;
+        this.unit = unit;
     }
 
     public void Enter()
     {
-
+        unit.Dead();
     }
 
     public void Update()

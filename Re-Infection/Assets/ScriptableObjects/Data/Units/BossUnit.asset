@@ -12,18 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcf73ff0467ebad4b8d9a591c6ac54e0, type: 3}
   m_Name: BossUnit
   m_EditorClassIdentifier: Assembly-CSharp::UnitStats
-  unitSprite: {fileID: 21300112, guid: f5f1c19ce87450f4b97f8b363746558d, type: 3}
-  unitName: "\u30BD\u30FC\u30C9\u30DE\u30B9\u30BF\u30FC"
-  jobType: 0
-  targetType: 0
-  maxHp: 3000
-  attackData: {fileID: 11400000, guid: 0711e333974647d41ab7e833fafc9b14, type: 2}
-  atk: 25
-  atkInterbal: 0.5
-  range: 0.2
-  moveType: 0
-  moveSpeed: 3
-  summonCost: 1
-  infecitonTime: 30
-  bossUnit: 1
-  attackSe: {fileID: 8300000, guid: dab120b7a12444d42b8454c3420e7830, type: 3}
+  unitStats:
+    unitSprite: {fileID: 21300112, guid: f5f1c19ce87450f4b97f8b363746558d, type: 3}
+    unitName: "\u738B\u56FD\u9A0E\u58EB"
+    jobType: 0
+    targetType: 0
+    maxHp: 3000
+    attackType: 0
+    hitCnt: 1
+    atk: 25
+    atkInterbal: 0.5
+    range: 0.2
+    moveType: 0
+    moveSpeed: 3
+    summonCost: 0
+    infecitonTime: 0
+    bossUnit: 1
+    attackSe: {fileID: 8300000, guid: dab120b7a12444d42b8454c3420e7830, type: 3}

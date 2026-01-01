@@ -14,7 +14,7 @@ public class DragIconController : MonoBehaviour, IBeginDragHandler, IDragHandler
     public Color originalColor;
 
     public Transform returnTarget;
-    public UnitStats unitStats;
+    public UnitStatsData unitStats;
     void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
@@ -32,9 +32,9 @@ public class DragIconController : MonoBehaviour, IBeginDragHandler, IDragHandler
             originalColor = img.color;
 
             //アイコンの見た目をUnitStatsから設定
-            if (unitStats != null && unitStats.unitSprite != null)
+            if (unitStats != null && unitStats.unitStats.unitSprite != null)
             {
-                img.sprite = unitStats.unitSprite;
+                img.sprite = unitStats.unitStats.unitSprite;
             }
         }
        

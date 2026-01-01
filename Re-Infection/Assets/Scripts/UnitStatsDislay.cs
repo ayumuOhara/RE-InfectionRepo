@@ -2,14 +2,14 @@ using UnityEngine;
 using TMPro;
 public class UnitStatsDislay:MonoBehaviour
 {
-    public UnitStats unitStats;
+    public UnitStatsData unitStats;
     public TextMeshProUGUI displayTMP;
 
     private void Start()
     {
         if (unitStats != null && displayTMP != null)
         {
-            displayTMP.text = GetUnitStatsText(unitStats);
+            displayTMP.text = GetUnitStatsText(unitStats.unitStats);
         }
     }
 
