@@ -1,0 +1,416 @@
+fileFormatVersion: 2
+guid: c82054c3765b12a4586e2538a5ef23d4
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5046458152721685371
+    second: "Thunder\uFF17_0"
+  - first:
+      213: -2239512113070995006
+    second: "Thunder\uFF17_1"
+  - first:
+      213: 769675527146079226
+    second: "Thunder\uFF17_2"
+  - first:
+      213: -1330796998336255235
+    second: "Thunder\uFF17_3"
+  - first:
+      213: 5555461609231625224
+    second: "Thunder\uFF17_4"
+  - first:
+      213: -6712112402038772237
+    second: "Thunder\uFF17_5"
+  - first:
+      213: -5695999326259759014
+    second: "Thunder\uFF17_6"
+  - first:
+      213: 7931357389135867022
+    second: "Thunder\uFF17_7"
+  - first:
+      213: 6920117947389187516
+    second: "Thunder\uFF17_8"
+  - first:
+      213: 2047956650778077737
+    second: "Thunder\uFF17_9"
+  - first:
+      213: 1741585911463385048
+    second: "Thunder\uFF17_10"
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: "Thunder\uFF17_0"
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 52
+        width: 1395
+        height: 1937
+      alignment: 9
+      pivot: {x: 0.48988396, y: 0.8424175}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b7b99ded3fe980640800000000000000
+      internalID: 5046458152721685371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Thunder\uFF17_1"
+      rect:
+        serializedVersion: 2
+        x: 347
+        y: 432
+        width: 309
+        height: 283
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c9083e3997abe0e0800000000000000
+      internalID: -2239512113070995006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Thunder\uFF17_2"
+      rect:
+        serializedVersion: 2
+        x: 524
+        y: 399
+        width: 393
+        height: 380
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af38ad360df6eaa00800000000000000
+      internalID: 769675527146079226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Thunder\uFF17_3"
+      rect:
+        serializedVersion: 2
+        x: 1120
+        y: 355
+        width: 379
+        height: 424
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dfae20e4e2f088de0800000000000000
+      internalID: -1330796998336255235
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Thunder\uFF17_4"
+      rect:
+        serializedVersion: 2
+        x: 1171
+        y: 652
+        width: 531
+        height: 335
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80c229546e6f81d40800000000000000
+      internalID: 5555461609231625224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Thunder\uFF17_5"
+      rect:
+        serializedVersion: 2
+        x: 1367
+        y: 432
+        width: 309
+        height: 283
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3fd2cf72559c9d2a0800000000000000
+      internalID: -6712112402038772237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Thunder\uFF17_6"
+      rect:
+        serializedVersion: 2
+        x: 931
+        y: 583
+        width: 11
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a583c6d9aceb3f0b0800000000000000
+      internalID: -5695999326259759014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Thunder\uFF17_7"
+      rect:
+        serializedVersion: 2
+        x: 563
+        y: 300
+        width: 166
+        height: 129
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8cec16f587d11e60800000000000000
+      internalID: 7931357389135867022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Thunder\uFF17_8"
+      rect:
+        serializedVersion: 2
+        x: 818
+        y: 366
+        width: 55
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb510f9db92390060800000000000000
+      internalID: 6920117947389187516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Thunder\uFF17_9"
+      rect:
+        serializedVersion: 2
+        x: 1297
+        y: 271
+        width: 163
+        height: 158
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92aa60d29bdcb6c10800000000000000
+      internalID: 2047956650778077737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Thunder\uFF17_10"
+      rect:
+        serializedVersion: 2
+        x: 835
+        y: 82
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d7999eb82b5b2810800000000000000
+      internalID: 1741585911463385048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 894b53311283687488e71209ade3c219
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      "Thunder\uFF17_0": 5046458152721685371
+      "Thunder\uFF17_1": -2239512113070995006
+      "Thunder\uFF17_10": 1741585911463385048
+      "Thunder\uFF17_2": 769675527146079226
+      "Thunder\uFF17_3": -1330796998336255235
+      "Thunder\uFF17_4": 5555461609231625224
+      "Thunder\uFF17_5": -6712112402038772237
+      "Thunder\uFF17_6": -5695999326259759014
+      "Thunder\uFF17_7": 7931357389135867022
+      "Thunder\uFF17_8": 6920117947389187516
+      "Thunder\uFF17_9": 2047956650778077737
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
