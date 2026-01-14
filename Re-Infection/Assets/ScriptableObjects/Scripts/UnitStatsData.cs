@@ -7,17 +7,19 @@ public class Types
     public enum JobType
     {
         SOLDIER,    // Œ•m
+        HAMMER,     // ƒnƒ“ƒ}[
         TANK,       // ‚
-        GUNNER,     // ‰“‹——£
+        ARCHER,     // ‹|•º
+        MAGE,       // –‚–@g‚¢
         CAVALRY,    // ‹R•º
     }
 
     // UŒ‚•û–@
     public enum AttackType
     {
-        SINGLE,
-        AREA_MELEE,
-        AREA_RANGE,
+        SINGLE,         // ’P‘Ì
+        AREA_MELEE,     // ‹ßÚ”ÍˆÍ
+        AREA_RANGE,     // ‰“‹——£”ÍˆÍ
     }
 
     // ˆÚ“®•û–@
@@ -44,25 +46,7 @@ public class UnitStats
     public string unitName;             // ƒ†ƒjƒbƒg–¼
     [Header("–ğE")]
     public Types.JobType jobType;       // –ğE
-    public Sprite JobSprite
-    {
-        get
-        {
-            switch (jobType)
-            {
-                case Types.JobType.SOLDIER:
-                    return Resources.Load<Sprite>("Sprites/SoldierIcon");
-                case Types.JobType.TANK:
-                    return Resources.Load<Sprite>("Sprites/TankIcon");
-                case Types.JobType.GUNNER:
-                    return Resources.Load<Sprite>("Sprites/GunnerIcon");
-                case Types.JobType.CAVALRY:
-                    return Resources.Load<Sprite>("Sprites/CavalryIcon");
-                default:
-                    return Resources.Load<Sprite>("Sprites/DefaultIcon");
-            }
-        }
-    }
+    
     [Header("UŒ‚/ˆÚ“® –Ú•W")]
     public Types.TargetType targetType; // UŒ‚‚Ü‚½‚ÍˆÚ“®‘ÎÛ
 
@@ -99,6 +83,30 @@ public class UnitStats
     public bool bossUnit;               // ƒ{ƒX‚©
     [Header("UŒ‚‚ÌSE")]
     public AudioClip attackSe;          // UŒ‚‰¹
+
+    public Sprite JobSprite
+    {
+        get
+        {
+            switch (jobType)
+            {
+                case Types.JobType.SOLDIER:
+                    return Resources.Load<Sprite>("Sprites/SoldierIcon");
+                case Types.JobType.HAMMER:
+                    return Resources.Load<Sprite>("Sprites/HammerIcon");
+                case Types.JobType.TANK:
+                    return Resources.Load<Sprite>("Sprites/TankIcon");
+                case Types.JobType.ARCHER:
+                    return Resources.Load<Sprite>("Sprites/ArcherIcon");
+                case Types.JobType.MAGE:
+                    return Resources.Load<Sprite>("Sprites/MageIcon");
+                case Types.JobType.CAVALRY:
+                    return Resources.Load<Sprite>("Sprites/CavalryIcon");
+                default:
+                    return Resources.Load<Sprite>("Sprites/DefaultIcon");
+            }
+        }
+    }
 
     public AttackBase AttackBase
     {

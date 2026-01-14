@@ -3,12 +3,13 @@ using UnityEngine;
 
 public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
 {
-    UnitManager unitManager;
+    [SerializeField] GameObject damageEffect;
+    [SerializeField] GameObject deadEffect;
 
     UnitStats stats;
     public UnitStats Stats => stats;
 
-    [SerializeField] LayerMask targetLayer;
+    public LayerMask targetLayer;
     public LayerMask TargetLayer => targetLayer;
     public string TargetLayerStr
     {
@@ -76,11 +77,11 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
         stateManager = unitStateManager;
     }
 
-    public void Start()
+    public virtual void Start()
     {
-        unitManager = FindObjectOfType<UnitManager>();
-        unitManager?.AddUnitList(this);
+        FindObjectOfType<UnitManager>().AddUnitList(this);
         stateManager.StateMachine.Initialize(stateManager.StateMachine.moveState);
+        StartCoroutine(Transparency());
     }
 
     public void Update()
@@ -114,7 +115,13 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
 
     public virtual void Damage(float damage)
     {
+        Instantiate(damageEffect, transform.position, Quaternion.identity);
+
         currentHealth -= damage;
+        if (currentHealth < 0)
+        {
+            currentHealth = 0;
+        }
     }
 
     public virtual void Heal(float heal)
@@ -129,6 +136,8 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
     public virtual void Dead()
     {
         // 死亡時の処理
+        Instantiate(deadEffect, transform.position, Quaternion.identity);
+        FindObjectOfType<UnitManager>().RemoveUnitList(this);
     }
 
     Vector3 GetTargetPos()
@@ -137,5 +146,30 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
             return Vector3.zero;
         else
             return TargetObj.transform.position;
+    }
+
+    // ウイルス使用中、スプライトを透過
+    IEnumerator Transparency()
+    {
+        var drag = FindObjectOfType<VirusSkillDragger>();
+        SpriteRenderer sprite = GetComponent<SpriteRenderer>();
+        Color color = sprite.color;
+
+        while (true)
+        {
+            if (drag.IsDragging && !IsDead)
+            {
+                color.a = 0.4f;
+                sprite.color = color;
+            }
+            else
+            {
+                color.a = 1.0f;
+                sprite.color = color;
+            }
+
+            yield return null;
+        }
+
     }
 }

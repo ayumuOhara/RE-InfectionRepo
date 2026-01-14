@@ -14,7 +14,12 @@ public class UnitStateManager
         unitController = controller;
         unitStateMachine = new UnitStateMachine(unitController);
         unitStateMachine.Initialize(unitStateMachine.idleState);
-        unitAI = ai;
+        SetUnitAI(ai);
+    }
+
+    public void SetUnitAI(IUnitAIDecider aI)
+    {
+        unitAI = aI;
     }
 
     // ステート遷移管理AI

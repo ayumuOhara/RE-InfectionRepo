@@ -15,6 +15,7 @@ public class AttackOfAreaMelee : AttackBase
         while (cnt < attacker.Stats.hitCnt)
         {
             if (cnt >= hits.Length) break;
+            if (hits[cnt].gameObject.GetComponent<UnitBase>().IsDead) return;
 
             DamageToTarget(attacker, hits[cnt].gameObject);
             cnt++;

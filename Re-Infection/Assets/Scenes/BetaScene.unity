@@ -151,8 +151,8 @@ MonoBehaviour:
   costAnimator: {fileID: 834038489}
   costText: {fileID: 99145687}
   startCost: 10
-  maxCost: 20
-  generateInterbal: 2
+  maxCost: 30
+  generateInterbal: 1.7
 --- !u!4 &20634379
 Transform:
   m_ObjectHideFlags: 0
@@ -24509,6 +24509,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6048909422697686753, guid: 95d2408ff4febfe4d9a617269ecd28f6, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 7277667510922486690, guid: 2e6df814af40e2945b8e3ea9c9bb5115, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -24709,7 +24713,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 1606713727}
   m_HandleRect: {fileID: 0}
