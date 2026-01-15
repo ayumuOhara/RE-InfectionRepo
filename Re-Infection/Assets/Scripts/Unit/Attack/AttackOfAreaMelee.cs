@@ -15,11 +15,15 @@ public class AttackOfAreaMelee : AttackBase
 
         for (int i = 0; i < hits.Length; i++)
         {
-            if (cnt >= hits.Length) break;
-            if (hits[i].gameObject.GetComponent<UnitBase>().IsDead) return;
-
-            DamageToTarget(attacker, hits[i].gameObject);
-            cnt++;
+            if (hits[i].gameObject.GetComponent<UnitBase>().IsDead == false)
+            {
+                DamageToTarget(attacker, hits[i].gameObject);
+                cnt++;
+                if (cnt >= attacker.Stats.hitCnt)
+                {
+                    break;
+                }
+            }
         }
 
         Debug.Log($"{attacker.Stats.unitName}‚ª{cnt}‘Ì‚Éƒqƒbƒg");
