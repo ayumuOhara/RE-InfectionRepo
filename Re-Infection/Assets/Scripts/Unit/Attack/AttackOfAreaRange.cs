@@ -12,12 +12,13 @@ public class AttackOfAreaRange : AttackBase
 
         // ƒqƒbƒg”‚Ü‚ÅŒJ‚è•Ô‚·
         var cnt = 0;        
-        while (cnt < attacker.Stats.hitCnt)
+
+        for(int i = 0; i < hits.Length; i++)
         {
             if (cnt >= hits.Length) break;
-            if (hits[cnt].gameObject.GetComponent<UnitBase>().IsDead) return;
+            if (hits[i].gameObject.GetComponent<UnitBase>().IsDead) return;
 
-            DamageToTarget(attacker, hits[cnt].gameObject);
+            DamageToTarget(attacker, hits[i].gameObject);
             cnt++;
         }
 
