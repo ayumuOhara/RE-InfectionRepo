@@ -1,17 +1,25 @@
 using DanielLochner.Assets.SimpleScrollSnap;
+using Mono.Cecil.Cil;
 using UnityEngine;
+using UnityEngine.InputSystem.Controls;
 
 public class ScrollChecker : MonoBehaviour
 {
     public SimpleScrollSnap scrollSnap;
 
+    [SerializeField] public int stageCount;//ステージの総数
     [SerializeField] public int stagePage;//表示しているページ番号
 
+    private void Start()
+    {
+        stageCount = scrollSnap.NumberOfPanels;//ステージの総数を取得
+        Debug.Log($"ステージ数{stageCount}");
+    }
     // Update is called once per frame
     void Update()
     {
         stagePage = scrollSnap.SelectedPanel;//今表示しているパネル番号を取得
-        //Debug.Log($"ステージ{stagePage + 1}");
+        Debug.Log($"ステージ{stagePage}");
 
     }
 
@@ -31,5 +39,11 @@ public class ScrollChecker : MonoBehaviour
     public int GetStagePage()
     {
         return stagePage;
+    }
+
+    //ステージの最後のページ番号を取得する関数
+    public int GetStageLastPage()
+    {
+        return stageCount;
     }
 }

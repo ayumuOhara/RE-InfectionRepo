@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -12,9 +13,13 @@ public class BattleCanvas : MonoBehaviour
     public GameObject[] lookImage; //ステージのロック中の表示にスプライト
 
     public TextMeshProUGUI conditionsText; //ステージの解放条件を表示するテキスト
+
+    public Button rightButton; //右矢印ボタン
+    public Button leftButton; //左矢印ボタン
     public Button sortieButton; //出撃ボタン
 
     int stageNumber = 0; //現在表示しているステージ番号
+    int stageLastNumber = 0; //ステージの最後の番号
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -34,6 +39,28 @@ public class BattleCanvas : MonoBehaviour
     void Update()
     {
         stageNumber = scrollChecker.GetStagePage(); //現在のステージ番号を取得
+        stageLastNumber = scrollChecker.GetStageLastPage(); //ステージの最後の番号を取得
+
+        //ページの端に来たら矢印ボタンを押せなくする
+        //左端のとき
+        if (stageNumber == 0)
+        {
+            leftButton.interactable = false;
+        }
+        else
+        {
+            leftButton.interactable = true;
+        }
+
+        //右端のとき
+        if (stageNumber == stageLastNumber - 1)
+        {
+            rightButton.interactable = false;
+        }
+        else
+        {
+            rightButton.interactable = true;
+        }
 
         //ステージ1のときは必ず出撃可能
         if (stageNumber == 0)
@@ -64,6 +91,7 @@ public class BattleCanvas : MonoBehaviour
         {
             Debug.LogError("ステージクリアフラグ配列の要素数が足りません");
         }
+
     }
 
 
