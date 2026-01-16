@@ -6,12 +6,14 @@ using UnityEngine.UI;
 public class DropArea : MonoBehaviour, IDropHandler
 {
     [SerializeField] private Transform dropTargetParent;
+    [SerializeField] private Vector2 cloneOffset = Vector2.zero;
     public UnitStatsData currentUnitStats;
     public int slotIndex; // このDropAreaが何番目の枠か
     public TextMeshProUGUI displayTMP;
     public GameObject displayTMPObj;
+    public DragIconController dragIconController;
 
-    void Start()
+      void Start()
     {
         // 復元処理（UnitDataCarrierから）
         if (UnitDataCarrier.Instance != null &&
@@ -55,6 +57,7 @@ public class DropArea : MonoBehaviour, IDropHandler
         if (droppedController != null)
         {
             currentUnitStats = droppedController.unitStats;
+            droppedController.isUsedInDropArea = true;
 
             while (UnitDataCarrier.Instance.selectedUnits.Count <= slotIndex)
             {
@@ -67,10 +70,17 @@ public class DropArea : MonoBehaviour, IDropHandler
         GameObject clone = Instantiate(dropped, dropTargetParent);
         clone.tag = "CloneOnly";
         clone.SetActive(true);
-        clone.transform.localScale = new Vector3(1.3f, 1.3f, 1f);
-        clone.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+        //clone.transform.localScale = new Vector3(1.3f, 1.3f, 1f);
+        RectTransform rt = clone.GetComponent<RectTransform>();
+        rt.anchoredPosition = Vector2.zero;
+
+        if (clone.CompareTag("CloneOnly"))
+        {
+            rt.anchoredPosition += cloneOffset;
+        }
         Destroy(clone.GetComponent<DragIconController>());
         clone.transform.SetAsFirstSibling();
+        //dragIconController.CheckObj();
 
         // CanvasGroupを必ず付ける
         CanvasGroup cg = clone.GetComponent<CanvasGroup>();
@@ -90,12 +100,17 @@ public class DropArea : MonoBehaviour, IDropHandler
             iconClick.unitData = currentUnitStats;
         }
 
-        // テキスト表示更新
-        if (currentUnitStats != null && displayTMP != null)
-        {
-            displayTMPObj.SetActive(true);
-            displayTMP.text = $"{currentUnitStats.unitStats.unitName}";
-        }
+       
+
+        // ★ 位置調整が終わったあとに originalPos をセット
+        dragScript.SetOriginalPos();
+
+        //// テキスト表示更新
+        //if (currentUnitStats != null && displayTMP != null)
+        //{
+        //    displayTMPObj.SetActive(true);
+        //    displayTMP.text = $"{currentUnitStats.unitStats.unitName}";
+        //}
     }
     public void diaplayText()
     {
