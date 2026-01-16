@@ -21,14 +21,15 @@ public class AttackOfAreaRange : AttackBase
 
         for (int i = 0; i < hits.Length; i++)
         {
-            if (hits[i].gameObject.GetComponent<UnitBase>().IsDead == false)
+            if (hits[i].gameObject.tag == "Castle" || hits[i].gameObject.GetComponent<UnitBase>()?.IsDead == false)
             {
                 DamageToTarget(attacker, hits[i].gameObject);
                 cnt++;
-                if (cnt >= attacker.Stats.hitCnt)
-                {
-                    break;
-                }
+            }
+
+            if (cnt >= attacker.Stats.hitCnt)
+            {
+                break;
             }
         }
 
