@@ -54,8 +54,14 @@ public class UnitStats
     public float maxHp;                 // 最大HP
     [Header("攻撃タイプ")]
     public Types.AttackType attackType; // 攻撃方法
-    [Header("ヒットする数(範囲攻撃のみ有効)")]
+    
+    [Header("-----範囲攻撃用ステータス-----")]
+    [Header("ヒットする数")]
     public int hitCnt;                  // ヒットする数
+    [Header("攻撃範囲(半径、遠距離のみ)")]
+    public float radius;                // 攻撃範囲
+
+    [Header("------汎用攻撃ステータス------")]
     [Header("攻撃力")]
     public float atk;                   // 攻撃力
     [Header("攻撃間隔")]
