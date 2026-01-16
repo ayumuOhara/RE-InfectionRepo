@@ -11,15 +11,19 @@ public class AttackOfAreaRange : AttackBase
         if(hits.Length <= 0 || hits == null) return;
 
         // ƒqƒbƒg”‚Ü‚ÅŒJ‚è•Ô‚·
-        var cnt = 0;        
+        var cnt = 0;
 
-        for(int i = 0; i < hits.Length; i++)
+        for (int i = 0; i < hits.Length; i++)
         {
-            if (cnt >= hits.Length) break;
-            if (hits[i].gameObject.GetComponent<UnitBase>().IsDead) return;
-
-            DamageToTarget(attacker, hits[i].gameObject);
-            cnt++;
+            if (hits[i].gameObject.GetComponent<UnitBase>().IsDead == false)
+            {
+                DamageToTarget(attacker, hits[i].gameObject);
+                cnt++;
+                if (cnt >= attacker.Stats.hitCnt)
+                {
+                    break;
+                }
+            }
         }
 
         Debug.Log($"{attacker.Stats.unitName}‚ª{cnt}‘Ì‚Éƒqƒbƒg");
