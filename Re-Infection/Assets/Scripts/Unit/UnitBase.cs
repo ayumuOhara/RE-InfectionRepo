@@ -35,6 +35,8 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
     public float CurrentHealth => currentHealth;
     public float HealthRate => currentHealth / stats.maxHp;
     public bool IsDead => currentHealth <= 0;
+    // 複製体フラグ
+    protected bool isClone;
 
     public Vector3 MyPos => transform.position;
 
@@ -49,8 +51,10 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
 
     public UnitStateManager stateManager { get; private set; }
 
-    public void Initialize(UnitStats stats)
+    public void Initialize(UnitStats stats, bool isClone = false)
     {
+        this.isClone = isClone;
+
         this.stats = new UnitStats()
         {
             unitSprite = stats.unitSprite,
@@ -74,7 +78,11 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
         attackBase = stats.AttackBase;
 
         GetComponent<SpriteRenderer>().sprite = this.stats.unitSprite;
-        currentHealth = stats.maxHp;
+
+        if (!isClone)
+            currentHealth = stats.maxHp;
+        else
+            currentHealth = 0;
     }
 
     public void SetStateManager(UnitStateManager unitStateManager)
@@ -84,9 +92,9 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
 
     public virtual void Start()
     {
-        FindObjectOfType<UnitManager>().AddUnitList(this);
+        if(!isClone) FindObjectOfType<UnitManager>().AddUnitList(this);
         stateManager.StateMachine.Initialize(stateManager.StateMachine.moveState);
-        StartCoroutine(Transparency());
+        StartCoroutine(UsingVirusSkillTransparency());
     }
 
     public void Update()
@@ -154,9 +162,9 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
     }
 
     // ウイルス使用中、スプライトを透過
-    IEnumerator Transparency()
+    IEnumerator UsingVirusSkillTransparency()
     {
-        var drag = FindObjectOfType<VirusSkillDragger>();
+        var drag = GameObject.Find("VirusSkillPointer").GetComponent<SkillDragger>();
         SpriteRenderer sprite = GetComponent<SpriteRenderer>();
         Color color = sprite.color;
 
@@ -174,6 +182,24 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
             }
 
             yield return null;
+        }
+    }
+
+    // 円を描画するための補助メソッド
+    public static void DrawDebugCircle(Vector2 center, float radius, Color color, float duration)
+    {
+        int segments = 20; // 円を構成する線の数
+        float angleStep = 360f / segments;
+        Vector3 prevPoint = center + new Vector2(radius, 0);
+
+        for (int i = 1; i <= segments; i++)
+        {
+            float angle = i * angleStep * Mathf.Deg2Rad;
+            Vector3 nextPoint = center + new Vector2(Mathf.Cos(angle) * radius, Mathf.Sin(angle) * radius);
+
+            // Sceneビューに線を描画
+            Debug.DrawLine(prevPoint, nextPoint, color, duration);
+            prevPoint = nextPoint;
         }
     }
 }

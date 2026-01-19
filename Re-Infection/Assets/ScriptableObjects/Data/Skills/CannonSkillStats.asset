@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 835e6ddf90eb9f945bfafc4ae8c1b92a, type: 3}
-  m_Name: VirusStats
-  m_EditorClassIdentifier: Assembly-CSharp::VirusStats
-  infectionRange: 1
-  coolTime: 30
+  m_Script: {fileID: 11500000, guid: 40ef234d99b3ca645b9293f99bfc6216, type: 3}
+  m_Name: CannonSkillStats
+  m_EditorClassIdentifier: Assembly-CSharp::CannonSkillStats
+  cannonRadius: 2
+  cannonDamage: 100
+  coolTime: 150

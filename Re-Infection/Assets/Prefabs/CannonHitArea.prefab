@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1903241904303291064}
   - component: {fileID: 3935166174419155955}
-  - component: {fileID: -4603793309428897972}
+  - component: {fileID: 6004719199924265376}
   m_Layer: 0
-  m_Name: VirusArea
+  m_Name: CannonHitArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81,7 +81,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 10
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.7058824, g: 0.3137255, b: 1, a: 0.39215687}
+  m_Color: {r: 0.735849, g: 0, b: 0, a: 0.39215687}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -91,7 +91,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-4603793309428897972
+--- !u!114 &6004719199924265376
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -100,10 +100,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4189163746107725710}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1f3ad97a99aced49b89ef9289f22437, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b66f17d958bdad48ada77d026e1cf30, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InfectioningUnit
-  virusStats: {fileID: 11400000, guid: b1864040b59013a40a5d5f5f4fc74c25, type: 2}
+  m_EditorClassIdentifier: Assembly-CSharp::CannonAttack
+  cannonSkillStats: {fileID: 11400000, guid: e9dc34fea9f005941a14199de50eef58, type: 2}
   skillTargetLayer:
     serializedVersion: 2
     m_Bits: 128

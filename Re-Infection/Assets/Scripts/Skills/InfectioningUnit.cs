@@ -7,8 +7,9 @@ public class InfectioningUnit : MonoBehaviour
     UnitManager unitManager;
 
     [SerializeField] VirusStats virusStats;
+    [SerializeField] LayerMask skillTargetLayer;
 
-    const float VISUAL_RANGE = 1.7f;
+    const float VISUAL_RANGE = 2f;
 
     private void Awake()
     {
@@ -20,9 +21,15 @@ public class InfectioningUnit : MonoBehaviour
     async void OnEnable()
     {
         await WaitEndDrag.WaitDragEndAsync();
-        var targetUnits = new List<EnemyUnit>(unitManager.GetCorpseList());
+        if (unitManager.GetCorpseList().Count <= 0)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
 
-        if (targetUnits.Count <= 0 || targetUnits == null)
+        var targetUnits = Physics2D.OverlapCircleAll(transform.position, virusStats.infectionRange, skillTargetLayer);
+
+        if (targetUnits.Length <= 0 || targetUnits == null)
         {
             gameObject.SetActive(false);
         }
@@ -32,17 +39,22 @@ public class InfectioningUnit : MonoBehaviour
         }
     }
 
-    // 取得したターゲットを感染
-    IEnumerator AllTargetInfection(List<EnemyUnit> targetUnits)
+    private void Update()
     {
-        foreach (EnemyUnit target in targetUnits)
+        //UnitBase.DrawDebugCircle(transform.position, virusStats.infectionRange, Color.purple, 0.5f);
+    }
+
+    // 取得したターゲットを感染
+    IEnumerator AllTargetInfection(Collider2D[] targetUnits)
+    {
+        foreach (Collider2D target in targetUnits)
         {
             // 範囲内にいるターゲット全てに感染
-            if (GetTarget.TargetInRange(target.gameObject.transform.position, transform.position, virusStats.infectionRange))
+            if (target.GetComponent<EnemyUnit>()?.IsDead == true && target.GetComponent<EnemyUnit>().IsInfectioning == false)
             {
-                target.IsInfectioning = true;
+                target.GetComponent<EnemyUnit>().IsInfectioning = true;
             }
-
+            
             yield return null;
         }
 

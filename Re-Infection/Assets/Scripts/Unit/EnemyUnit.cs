@@ -60,10 +60,14 @@ public class EnemyUnit : UnitBase, Iinfection
             if (!IsInfectioning)
             {
                 var unitManager = FindObjectOfType<UnitManager>();
-                unitManager.RemoveUnitList(this, IsInfectioning);
+                if (!isClone)
+                {
+                    unitManager.RemoveUnitList(this, IsInfectioning);
+                    FindObjectOfType<WaveSpawner>().DecreaseEnemySum();
+                }
+
                 unitManager.AddCorpseList(this);
 
-                FindObjectOfType<WaveSpawner>().DecreaseEnemySum();
                 GetComponent<SpriteRenderer>().sprite = corpseSprite;
 
                 StartCoroutine(Infection());
