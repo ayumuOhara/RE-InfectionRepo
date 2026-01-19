@@ -518,6 +518,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 6b7696a2506e6254898ee43fc57898c2, type: 2}
     - target: {fileID: 7491374937133148069, guid: 78e595d171d4b37409494f279f3145be, type: 3}
+      propertyPath: targetPosition.x
+      value: 171
+      objectReference: {fileID: 0}
+    - target: {fileID: 7491374937133148069, guid: 78e595d171d4b37409494f279f3145be, type: 3}
+      propertyPath: targetPosition.y
+      value: 230
+      objectReference: {fileID: 0}
+    - target: {fileID: 7491374937133148069, guid: 78e595d171d4b37409494f279f3145be, type: 3}
       propertyPath: tergetPositoin.x
       value: 760
       objectReference: {fileID: 0}
@@ -721,6 +729,14 @@ PrefabInstance:
       propertyPath: unitStats
       value: 
       objectReference: {fileID: 11400000, guid: b92b3387e050d804c96d18a3d08de2a8, type: 2}
+    - target: {fileID: 7491374937133148069, guid: 78e595d171d4b37409494f279f3145be, type: 3}
+      propertyPath: targetPosition.x
+      value: -58
+      objectReference: {fileID: 0}
+    - target: {fileID: 7491374937133148069, guid: 78e595d171d4b37409494f279f3145be, type: 3}
+      propertyPath: targetPosition.y
+      value: 230
+      objectReference: {fileID: 0}
     - target: {fileID: 7491374937133148069, guid: 78e595d171d4b37409494f279f3145be, type: 3}
       propertyPath: tergetPositoin.x
       value: 530
@@ -2075,6 +2091,14 @@ PrefabInstance:
       propertyPath: unitStats
       value: 
       objectReference: {fileID: 11400000, guid: e6d3327307b2d5c4c9367da09a7e2d3b, type: 2}
+    - target: {fileID: 7491374937133148069, guid: 78e595d171d4b37409494f279f3145be, type: 3}
+      propertyPath: targetPosition.x
+      value: -58
+      objectReference: {fileID: 0}
+    - target: {fileID: 7491374937133148069, guid: 78e595d171d4b37409494f279f3145be, type: 3}
+      propertyPath: targetPosition.y
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7491374937133148069, guid: 78e595d171d4b37409494f279f3145be, type: 3}
       propertyPath: tergetPositoin.x
       value: 530
@@ -4502,6 +4526,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: e6d3327307b2d5c4c9367da09a7e2d3b, type: 2}
     - target: {fileID: 7491374937133148069, guid: 78e595d171d4b37409494f279f3145be, type: 3}
+      propertyPath: targetPosition.x
+      value: 171
+      objectReference: {fileID: 0}
+    - target: {fileID: 7491374937133148069, guid: 78e595d171d4b37409494f279f3145be, type: 3}
+      propertyPath: targetPosition.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7491374937133148069, guid: 78e595d171d4b37409494f279f3145be, type: 3}
       propertyPath: tergetPositoin.x
       value: 760
       objectReference: {fileID: 0}
@@ -5348,6 +5380,10 @@ PrefabInstance:
       propertyPath: unitStats
       value: 
       objectReference: {fileID: 11400000, guid: fe15a39c45f5ba945931563260f1ba9f, type: 2}
+    - target: {fileID: 7491374937133148069, guid: 78e595d171d4b37409494f279f3145be, type: 3}
+      propertyPath: targetPosition.x
+      value: 406
+      objectReference: {fileID: 0}
     - target: {fileID: 7491374937133148069, guid: 78e595d171d4b37409494f279f3145be, type: 3}
       propertyPath: tergetPositoin.x
       value: 980
@@ -9426,6 +9462,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 3ab42a19c04e3134fb12a71cceee2ccf, type: 2}
     - target: {fileID: 7491374937133148069, guid: 78e595d171d4b37409494f279f3145be, type: 3}
+      propertyPath: targetPosition.x
+      value: -287
+      objectReference: {fileID: 0}
+    - target: {fileID: 7491374937133148069, guid: 78e595d171d4b37409494f279f3145be, type: 3}
+      propertyPath: targetPosition.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7491374937133148069, guid: 78e595d171d4b37409494f279f3145be, type: 3}
       propertyPath: tergetPositoin.x
       value: 297
       objectReference: {fileID: 0}
@@ -10656,10 +10700,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14c372767f973734ebad3882a7f845db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HomeTab
-  shopButton: {fileID: 1251878302}
   battleButton: {fileID: 981118438}
   selectionButton: {fileID: 1788002216}
-  shopCanvas: {fileID: 325302035}
   battleCanvas: {fileID: 1262412672}
   selectionCanvas: {fileID: 670263544}
 --- !u!1 &1206817214
@@ -11307,6 +11349,8 @@ MonoBehaviour:
   - {fileID: 2144914354}
   - {fileID: 255759490}
   conditionsText: {fileID: 915037850}
+  rightButton: {fileID: 2005414112}
+  leftButton: {fileID: 2044578779}
   sortieButton: {fileID: 1163255589}
 --- !u!1 &1268747287
 GameObject:
@@ -18106,6 +18150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScrollChecker
   scrollSnap: {fileID: 5681489238170330432}
+  stageCount: 0
   stagePage: 0
 --- !u!1001 &6364221454856140572
 PrefabInstance:
@@ -18206,6 +18251,14 @@ PrefabInstance:
     - target: {fileID: 5836444385189893045, guid: 78e595d171d4b37409494f279f3145be, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7491374937133148069, guid: 78e595d171d4b37409494f279f3145be, type: 3}
+      propertyPath: targetPosition.x
+      value: -287
+      objectReference: {fileID: 0}
+    - target: {fileID: 7491374937133148069, guid: 78e595d171d4b37409494f279f3145be, type: 3}
+      propertyPath: targetPosition.y
+      value: 230
       objectReference: {fileID: 0}
     - target: {fileID: 7491374937133148069, guid: 78e595d171d4b37409494f279f3145be, type: 3}
       propertyPath: tergetPositoin.x

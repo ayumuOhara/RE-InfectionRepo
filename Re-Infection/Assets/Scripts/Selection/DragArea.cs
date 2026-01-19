@@ -11,7 +11,7 @@ public class DropArea : MonoBehaviour, IDropHandler
     public int slotIndex; // このDropAreaが何番目の枠か
     public TextMeshProUGUI displayTMP;
     public GameObject displayTMPObj;
-    public DragIconController dragIconController;
+    //public DragIconController dragIconController;
 
       void Start()
     {
@@ -42,9 +42,10 @@ public class DropArea : MonoBehaviour, IDropHandler
 
     public void OnDrop(PointerEventData eventData)
     {
+
         GameObject dropped = eventData.pointerDrag;
         if (dropped == null) return;
-
+        //Debug.Log("Dropped object: " + dropped.name);
         // 既存の子オブジェクトを削除
         if (dropTargetParent.childCount > 0)
         {
@@ -81,7 +82,11 @@ public class DropArea : MonoBehaviour, IDropHandler
         Destroy(clone.GetComponent<DragIconController>());
         clone.transform.SetAsFirstSibling();
         //dragIconController.CheckObj();
-
+        foreach (var comp in clone.GetComponentsInChildren<DragIconController>())
+        {
+            Destroy(comp);
+        }
+       
         // CanvasGroupを必ず付ける
         CanvasGroup cg = clone.GetComponent<CanvasGroup>();
         if (cg == null) cg = clone.AddComponent<CanvasGroup>();
@@ -90,7 +95,7 @@ public class DropArea : MonoBehaviour, IDropHandler
         // ドラッグ用スクリプトをアタッチ
         DropAreaIconDrag dragScript = clone.AddComponent<DropAreaIconDrag>();
         dragScript.slotIndex = slotIndex;
-        dragScript.unitStats = currentUnitStats.unitStats;
+        dragScript.unitStats = currentUnitStats;
 
         // UnitIconClick にも渡す
         UnitIconClick iconClick = clone.GetComponent<UnitIconClick>();
@@ -100,7 +105,6 @@ public class DropArea : MonoBehaviour, IDropHandler
             iconClick.unitData = currentUnitStats;
         }
 
-       
 
         // ★ 位置調整が終わったあとに originalPos をセット
         dragScript.SetOriginalPos();
@@ -111,6 +115,49 @@ public class DropArea : MonoBehaviour, IDropHandler
         //    displayTMPObj.SetActive(true);
         //    displayTMP.text = $"{currentUnitStats.unitStats.unitName}";
         //}
+
+        DropArea.UpdateAllCheckImage();
+    }
+
+    public static void UpdateAllCheckImage()
+    {
+        //全てのDropAreaを取得
+        DropArea[] dropAreas = FindObjectsOfType<DropArea>();
+
+        //全てのDragIconControllerを取得
+        DragIconController[] icons = FindObjectsOfType<DragIconController>();
+
+        foreach(var icon in icons)
+        {
+            bool isUsed = false;
+
+            //どれかのDropAreaに同じUnitStatsDataが入っていればON
+            foreach(var da in dropAreas)
+            {
+                if(da.currentUnitStats!=null &&
+                    da.currentUnitStats == icon.unitStats)
+                {
+                    isUsed = true;
+                    break;
+                }
+            }
+            icon.CheckObj(isUsed);
+        }
+    }
+
+    public static bool IsUnitInAnyDropArea(UnitStatsData target)
+    {
+        DropArea[] dropAreas = FindObjectsOfType<DropArea>();
+
+        foreach(var da in dropAreas)
+        {
+            if(da.currentUnitStats!=null &&
+                da.currentUnitStats == target)
+            {
+                return true;
+            }
+        }
+        return false;
     }
     public void diaplayText()
     {
