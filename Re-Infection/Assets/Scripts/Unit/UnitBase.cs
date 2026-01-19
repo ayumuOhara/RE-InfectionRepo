@@ -1,4 +1,7 @@
 using System.Collections;
+using System.Collections.Generic;
+using UnityEditor;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
@@ -55,11 +58,13 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
             jobType = stats.jobType,
             targetType = stats.targetType,
             maxHp = stats.maxHp,
+            attackType = stats.attackType,
             hitCnt = stats.hitCnt,
             atk = stats.atk,
             atkInterbal = stats.atkInterbal,
             moveSpeed = stats.moveSpeed,
             range = stats.range,
+            radius = stats.radius,
             infecitonTime = stats.infecitonTime,
             bossUnit = stats.bossUnit,
             attackSe = stats.attackSe,
@@ -170,6 +175,5 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
 
             yield return null;
         }
-
     }
 }

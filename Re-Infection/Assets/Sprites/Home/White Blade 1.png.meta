@@ -1,17 +1,16 @@
 fileFormatVersion: 2
-guid: 568350414cfbb984bb3baec6a1d2e48a
-AssetOrigin:
-  serializedVersion: 1
-  productId: 235559
-  packageName: Violet Themed UI
-  packageVersion: 1.2
-  assetPath: Assets/Violet Theme Ui/White Icons/White Sad 1.png
-  uploadId: 767621
+guid: a24639a74a0f36b40ba81dfd38996362
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5334270721218815464
-    second: White Sad 1_0
+      213: -7754277175718803032
+    second: White Blade 1_0
+  - first:
+      213: -2139103532800375117
+    second: White Blade 1_1
+  - first:
+      213: 6416580310616032551
+    second: White Blade 1_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -133,7 +132,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: White Sad 1_0
+      name: White Blade 1_2
       rect:
         serializedVersion: 2
         x: 0
@@ -141,15 +140,15 @@ TextureImporter:
         width: 512
         height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 81a5cfd8a0dd8f5b0800000000000000
-      internalID: -5334270721218815464
+      spriteID: 725c807cbc54c0950800000000000000
+      internalID: 6416580310616032551
       vertices: []
       indices: 
       edges: []
@@ -158,7 +157,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: a9218306598d35b4689cbf850b17bbe3
     internalID: 0
     vertices: []
     indices: 
@@ -168,7 +167,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      White Sad 1_0: -5334270721218815464
+      White Blade 1_0: -7754277175718803032
+      White Blade 1_1: -2139103532800375117
+      White Blade 1_2: 6416580310616032551
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
