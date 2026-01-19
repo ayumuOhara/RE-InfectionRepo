@@ -50,17 +50,10 @@ public class DragIconController : MonoBehaviour, IBeginDragHandler, IDragHandler
         // すでにどこかの DropArea で使われているならドラッグ不可
         if (isUsedInDropArea)
         {
-            
             return;
         }
-        if (isUsedInDropArea == true)
-        {
-            CheckImage.SetActive(false);
-        }
-        else
-        {
-            CheckImage.SetActive(true);
-        }
+        //ドラッグした瞬間非表示
+        CheckImage.SetActive(false);
         originalParent = transform.parent;
 
         transform.SetParent(canvas.transform, true);
@@ -81,6 +74,8 @@ public class DragIconController : MonoBehaviour, IBeginDragHandler, IDragHandler
             out localPoint
         );
 
+        CheckImage.SetActive(false);
+
         rectTransform.localPosition = localPoint;
     }
 
@@ -100,15 +95,8 @@ public class DragIconController : MonoBehaviour, IBeginDragHandler, IDragHandler
         canvasGroup.interactable = true;
     }
 
-    public void CheckObj()
+    public void CheckObj(bool isOn)
     {
-        if (isUsedInDropArea == true)
-        {
-            CheckImage.SetActive(false);
-        }
-        else
-        {
-            CheckImage.SetActive(true);
-        }
+        CheckImage.SetActive(isOn);
     }
 }
