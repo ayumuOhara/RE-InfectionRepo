@@ -10,8 +10,8 @@ public class DropAreaIconDrag : MonoBehaviour,
 
     public int slotIndex;
     public UnitStats unitStats;
-     
-    private void Awake()
+
+    private void Start()
     {
         canvasGroup = GetComponent<CanvasGroup>();
         if (canvasGroup == null) canvasGroup = gameObject.AddComponent<CanvasGroup>();
@@ -57,5 +57,9 @@ public class DropAreaIconDrag : MonoBehaviour,
             // DropArea内なら元位置に戻す
             GetComponent<RectTransform>().anchoredPosition = originalPos;
         }
+    }
+    public void SetOriginalPos()
+    {
+        originalPos = GetComponent<RectTransform>().anchoredPosition;
     }
 }
