@@ -56,9 +56,10 @@ public class SkillDragger : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
         while (time > 0)
         {
+            yield return new WaitUntil(() => waveSpawner.IsStartWave);
+
             time -= Time.deltaTime;
             cannonPointerFilled.fillAmount = time / coolTime;
-            yield return null;
         }
 
         canUseSkill = true;
