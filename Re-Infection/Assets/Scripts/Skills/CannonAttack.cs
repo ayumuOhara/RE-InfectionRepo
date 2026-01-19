@@ -16,8 +16,6 @@ public class CannonAttack : MonoBehaviour
 
     private void Awake()
     {
-        OnSkillUsed += GameObject.Find("CannonSkillPointer").GetComponent<SkillDragger>().OnSkillUse;
-
         transform.localScale = new Vector3(cannonSkillStats.cannonRadius * VISUAL_RANGE, cannonSkillStats.cannonRadius * VISUAL_RANGE);
 
         unitManager = GameObject.Find("UnitManager").GetComponent<UnitManager>();
@@ -25,6 +23,8 @@ public class CannonAttack : MonoBehaviour
 
     async void OnEnable()
     {
+        OnSkillUsed += GameObject.Find("CannonSkillPointer").GetComponent<SkillDragger>().OnSkillUse;
+
         await WaitEndDrag.WaitDragEndAsync();
         if (unitManager.EnemyCnt <= 0)
         {

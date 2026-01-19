@@ -12,8 +12,8 @@ public class TimeManager : MonoBehaviour
 
     Image gameSpdSprite;
 
-    int seconds = 0;
-    public int Seconds => seconds;
+    float seconds = 0;
+    public int Seconds => (int)seconds;
     int minutes = 0;
     public int Minutes => minutes;
 
@@ -42,20 +42,13 @@ public class TimeManager : MonoBehaviour
         {
             yield return new WaitUntil(() => waveSpawner.IsStartWave);
 
-            while (waveSpawner.IsStartWave)
+            seconds += Time.deltaTime;
+
+            if (seconds >= 60)
             {
-                seconds++;
-
-                if (seconds % 60 == 0)
-                {
-                    minutes++;
-                    seconds = 0;
-                }
-
-                yield return new WaitForSeconds(1.0f);
+                minutes++;
+                seconds = 0;
             }
-
-            yield return null;
         }
     }
 
