@@ -5428,7 +5428,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &670263545
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7048,11 +7048,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DropArea
   dropTargetParent: {fileID: 822095931}
-  cloneOffset: {x: 50, y: -50}
   currentUnitStats: {fileID: 0}
   slotIndex: 0
-  displayTMP: {fileID: 912715855}
-  displayTMPObj: {fileID: 1785663682}
 --- !u!61 &822095933
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11491,11 +11488,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DropArea
   dropTargetParent: {fileID: 1272797860}
-  cloneOffset: {x: 50, y: -50}
   currentUnitStats: {fileID: 0}
   slotIndex: 1
-  displayTMP: {fileID: 1545273666}
-  displayTMPObj: {fileID: 76975184}
 --- !u!61 &1272797862
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11659,11 +11653,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DropArea
   dropTargetParent: {fileID: 1279111359}
-  cloneOffset: {x: 50, y: -50}
   currentUnitStats: {fileID: 0}
   slotIndex: 2
-  displayTMP: {fileID: 692462101}
-  displayTMPObj: {fileID: 543035810}
 --- !u!114 &1279111361
 MonoBehaviour:
   m_ObjectHideFlags: 0
