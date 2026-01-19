@@ -117,6 +117,12 @@ public class DropArea : MonoBehaviour, IDropHandler
         //}
 
         DropArea.UpdateAllCheckImage();
+
+        DropAreaIconDrag drag = dropped.GetComponent<DropAreaIconDrag>();
+        if (drag != null)
+        {
+            drag.droppedSuccessfully = true;
+        }
     }
 
     public static void UpdateAllCheckImage()
