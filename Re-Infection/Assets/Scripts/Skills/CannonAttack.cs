@@ -8,6 +8,7 @@ public class CannonAttack : MonoBehaviour
     public static event Action<float> OnSkillUsed;
 
     UnitManager unitManager;
+    SkillDragger skillDragger;
 
     [SerializeField] CannonSkillStats cannonSkillStats;
     [SerializeField] LayerMask skillTargetLayer;
@@ -16,6 +17,7 @@ public class CannonAttack : MonoBehaviour
 
     private void Awake()
     {
+        skillDragger = GameObject.Find("CannonSkillPointer").GetComponent<SkillDragger>();
         transform.localScale = new Vector3(cannonSkillStats.cannonRadius * VISUAL_RANGE, cannonSkillStats.cannonRadius * VISUAL_RANGE);
 
         unitManager = GameObject.Find("UnitManager").GetComponent<UnitManager>();
@@ -23,8 +25,6 @@ public class CannonAttack : MonoBehaviour
 
     async void OnEnable()
     {
-        OnSkillUsed += GameObject.Find("CannonSkillPointer").GetComponent<SkillDragger>().OnSkillUse;
-
         await WaitEndDrag.WaitDragEndAsync();
         if (unitManager.EnemyCnt <= 0)
         {
@@ -71,8 +71,9 @@ public class CannonAttack : MonoBehaviour
             yield return null;
         }
 
+        OnSkillUsed += skillDragger.OnSkillUse;
         OnSkillUsed?.Invoke(cannonSkillStats.coolTime);
-        OnSkillUsed -= GameObject.Find("CannonSkillPointer").GetComponent<SkillDragger>().OnSkillUse;
+        OnSkillUsed -= skillDragger.OnSkillUse;
 
         // 処理終了後、非アクティブ化
         gameObject.SetActive(false);
