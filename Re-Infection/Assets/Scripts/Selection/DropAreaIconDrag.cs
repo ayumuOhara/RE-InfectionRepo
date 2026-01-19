@@ -10,6 +10,7 @@ public class DropAreaIconDrag : MonoBehaviour,
 
     public int slotIndex;
     public UnitStatsData unitStats;
+    public bool droppedSuccessfully = false;
 
     private DropArea originalDropArea;
     private void Start()
@@ -53,75 +54,36 @@ public class DropAreaIconDrag : MonoBehaviour,
         transform.position = eventData.position;
     }
 
-    public void OnEndDrag(PointerEventData eventData)
+   public void OnEndDrag(PointerEventData eventData)
+{
+    canvasGroup.blocksRaycasts = true;
+
+    // DropArea が受け取った場合は droppedSuccessfully = true
+    if (!droppedSuccessfully)
     {
-        canvasGroup.blocksRaycasts = true;
+        // 失敗扱い → 元アイコンの CheckImage を OFF にしてしまう処理
+        // （ここは本当に失敗したときだけ実行される）
+        originalDropArea.currentUnitStats = null;
+        originalDropArea.diaplayText();
+        UnitDataCarrier.Instance.selectedUnits[slotIndex] = null;
 
-        // ドロップ先の DropArea を取得
-        DropArea dropArea = null;
-        if (eventData.pointerEnter != null)
-            dropArea = eventData.pointerEnter.GetComponentInParent<DropArea>();
-
-        
-        DropArea parentDropArea = originalDropArea;
-
-        // ★ 別の DropArea にドロップしようとした場合
-        if (dropArea != null && dropArea != parentDropArea)
+        foreach (var icon in FindObjectsOfType<DragIconController>())
         {
-            // DropArea のデータを消す
-            parentDropArea.currentUnitStats = null;
-            parentDropArea.diaplayText();
-
-            // UnitDataCarrier のデータも消す
-            UnitDataCarrier.Instance.selectedUnits[slotIndex] = null;
-
-            // DragIconController のフラグを戻す
-            DragIconController[] icons = FindObjectsOfType<DragIconController>();
-            foreach (var icon in icons)
+            if (icon.unitStats == unitStats)
             {
-                if (icon.unitStats == unitStats)
-                {
-                    icon.isUsedInDropArea = false;
-                    icon.isDropped = false;
-                }
+                icon.isUsedInDropArea = false;
+                icon.isDropped = false;
             }
-
-            DropArea.UpdateAllCheckImage();
-
-            // ★ Clone を削除
-            Destroy(gameObject);
-            return;
         }
 
-        // ★ DropArea 外にドロップ → 削除
-        if (dropArea == null)
-        {
-            // DropArea のデータを消す
-            parentDropArea.currentUnitStats = null;
-            parentDropArea.diaplayText();
-
-            // UnitDataCarrier のデータも消す
-            UnitDataCarrier.Instance.selectedUnits[slotIndex] = null;
-
-            // DragIconController のフラグを戻す
-            DragIconController[] icons = FindObjectsOfType<DragIconController>();
-            foreach (var icon in icons)
-            {
-                if (icon.unitStats == unitStats)
-                {
-                    icon.isUsedInDropArea = false;
-                    icon.isDropped = false;
-                }
-            }
-
-            DropArea.UpdateAllCheckImage();
-            Destroy(gameObject);
-            return;
-        }
-
-        // ★ 同じ DropArea 内なら元位置に戻す
-        GetComponent<RectTransform>().anchoredPosition = originalPos;
+        DropArea.UpdateAllCheckImage();
+        Destroy(gameObject);
+        return;
     }
+
+    //// 成功していた場合は元位置に戻すだけ
+    //GetComponent<RectTransform>().anchoredPosition = originalPos;
+}
     public void SetOriginalPos()
     {
         originalPos = GetComponent<RectTransform>().anchoredPosition;

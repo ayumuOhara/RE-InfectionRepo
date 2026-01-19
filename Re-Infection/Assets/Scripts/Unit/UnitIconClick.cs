@@ -20,7 +20,13 @@ public class UnitIconClick : MonoBehaviour, IPointerClickHandler
     GameManager gameManager;
 
     Vector3 spawnPos = new Vector3(0, -2.0f, 0);  // プレイヤーユニットの生成座標
+    Vector2 defaltSize;
 
+    void Awake()
+    {
+        //インスペクターで設定したサイズを保存
+        defaltSize = unitIcon.rectTransform.sizeDelta;
+    }
     void Start()
     {
         assertLabel.gameObject.SetActive(false);
@@ -28,18 +34,19 @@ public class UnitIconClick : MonoBehaviour, IPointerClickHandler
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
         //slotIndexが有効ならUnitDataCarrierから該当ユニットを取得
-        if(UnitDataCarrier.Instance!=null&&
-            UnitDataCarrier.Instance.selectedUnits.Count>slotIndex&&
-            UnitDataCarrier.Instance.selectedUnits[slotIndex] != null)
+        if (UnitDataCarrier.Instance != null &&
+    UnitDataCarrier.Instance.selectedUnits.Count > slotIndex &&
+    UnitDataCarrier.Instance.selectedUnits[slotIndex] != null)
         {
-            //unitData = UnitDataCarrier.Instance.selectedUnits[slotIndex];
+            unitData = UnitDataCarrier.Instance.selectedUnits[slotIndex];
 
-            Debug.Log($"Slot{slotIndex}に選択されたユニット:{unitData.unitStats.unitName}");
+            Debug.Log($"Slot{slotIndex} に選択されたユニット: {unitData.unitStats.unitName}");
         }
 
         if (unitData != null && unitIcon != null)
         {
             unitIcon.sprite = unitData.unitStats.unitSprite;
+            unitIcon.rectTransform.sizeDelta = defaltSize;
             jobIcon.sprite = unitData.unitStats.JobSprite;
         }
 
