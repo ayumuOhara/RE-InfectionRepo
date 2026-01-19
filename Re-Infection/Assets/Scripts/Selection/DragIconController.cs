@@ -10,20 +10,25 @@ public class DragIconController : MonoBehaviour, IBeginDragHandler, IDragHandler
     private Vector3 originalPosition;
     private Image image;
     private Transform originalParent;
-    
-    public Color originalColor;
+    private Vector3 originalScale;
 
+    public Color originalColor;
+    public Vector3 tergetPositoin=new Vector3(0,0,0);
+    public Image Icon;
     public Transform returnTarget;
     public UnitStatsData unitStats;
+    public bool isDropped=false;
+    public bool isUsedInDropArea = false;
+    public GameObject CheckImage;
     void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
         canvas = GetComponentInParent<Canvas>();
         canvasGroup = GetComponent<CanvasGroup>();
-        image = GetComponent<Image>();
+        image = GetComponentInChildren<Image>();
 
-        // サイズを固定（例：80%スケール）
-        transform.localScale = new Vector3(0.8f, 0.8f, 1f);
+        //// サイズを固定（例：80%スケール）
+        //transform.localScale = new Vector3(1.2f, 1.2f, 1f);
 
 
         Image img = GetComponent<Image>();
@@ -37,30 +42,27 @@ public class DragIconController : MonoBehaviour, IBeginDragHandler, IDragHandler
                 img.sprite = unitStats.unitStats.unitSprite;
             }
         }
-       
+        CheckImage.SetActive(false);
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (UnitDataCarrier.Instance != null &&
-        UnitDataCarrier.Instance.selectedUnits.Contains(unitStats))
+        // すでにどこかの DropArea で使われているならドラッグ不可
+        if (isUsedInDropArea)
         {
-            canvasGroup.blocksRaycasts = true;
-            eventData.pointerDrag = null;
             return;
         }
-
+        //ドラッグした瞬間非表示
+        CheckImage.SetActive(false);
         originalParent = transform.parent;
 
-        // Canvas直下に移動（描画順を最前面に）
         transform.SetParent(canvas.transform, true);
         transform.SetAsLastSibling();
 
         canvasGroup.blocksRaycasts = false;
         canvasGroup.interactable = false;
-
-
     }
+
 
     public void OnDrag(PointerEventData eventData)
     {
@@ -72,6 +74,8 @@ public class DragIconController : MonoBehaviour, IBeginDragHandler, IDragHandler
             out localPoint
         );
 
+        CheckImage.SetActive(false);
+
         rectTransform.localPosition = localPoint;
     }
 
@@ -80,11 +84,19 @@ public class DragIconController : MonoBehaviour, IBeginDragHandler, IDragHandler
         // 戻り先に戻す（インスペクターで指定された Transform）
         rectTransform.SetParent(returnTarget, false); // ← 親を戻す（ローカル座標維持）
         rectTransform.anchoredPosition = Vector2.zero; // ← 親の基準で位置を揃える
+        transform.position = tergetPositoin;
 
-        transform.localScale = new Vector3(0.8f, 0.8f, 1f);
+        //transform.localScale = new Vector3(0.8f, 0.8f, 1f);
+
+        isDropped = true;
 
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
         canvasGroup.interactable = true;
+    }
+
+    public void CheckObj(bool isOn)
+    {
+        CheckImage.SetActive(isOn);
     }
 }
