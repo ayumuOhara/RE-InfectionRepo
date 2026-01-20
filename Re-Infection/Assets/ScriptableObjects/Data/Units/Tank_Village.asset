@@ -13,13 +13,15 @@ MonoBehaviour:
   m_Name: Tank_Village
   m_EditorClassIdentifier: Assembly-CSharp::UnitStats
   unitStats:
-    unitSprite: {fileID: 21300008, guid: f5f1c19ce87450f4b97f8b363746558d, type: 3}
+    animatorController: {fileID: 9100000, guid: 1a564d0e3dc0d3f4f8c7fa6bbc0aa694, type: 2}
+    unitSprite: {fileID: 4326872430171513394, guid: b02f0fbf02194364092885bfb7328b4a, type: 3}
     unitName: "\u6751\u306E\u93A7\u5175"
     jobType: 2
     targetType: 0
     maxHp: 300
     attackType: 0
     hitCnt: 1
+    radius: 0
     atk: 10
     atkInterbal: 8
     range: 0.3
