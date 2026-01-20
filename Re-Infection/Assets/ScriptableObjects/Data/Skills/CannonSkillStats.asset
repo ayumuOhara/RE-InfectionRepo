@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: CannonSkillStats
   m_EditorClassIdentifier: Assembly-CSharp::CannonSkillStats
   cannonRadius: 2
-  cannonDamage: 100
-  coolTime: 0.5
+  cannonDamage: 80
+  coolTime: 180

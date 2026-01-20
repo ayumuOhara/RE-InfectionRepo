@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using VirusPointer;
 
 public class InfectioningUnit : MonoBehaviour
 {

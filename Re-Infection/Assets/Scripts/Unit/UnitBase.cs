@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.Rendering;
 using UnityEngine;
+using VirusPointer;
 
 public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
 {
@@ -164,7 +165,7 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
     // ウイルス使用中、スプライトを透過
     IEnumerator UsingVirusSkillTransparency()
     {
-        var drag = GameObject.Find("VirusSkillPointer").GetComponent<SkillDragger>();
+        var drag = GameObject.Find("VirusSkillPointer").GetComponent<VirusSkillPointer>();
         SpriteRenderer sprite = GetComponent<SpriteRenderer>();
         Color color = sprite.color;
 
