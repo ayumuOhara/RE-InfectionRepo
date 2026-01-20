@@ -24,9 +24,7 @@ public class DropArea : MonoBehaviour, IDropHandler
             UnitDataCarrier.Instance.selectedUnits.Add(null);
         }
 
-        // ============================================================
-        // ① DragIconController → DropArea のときだけ重複チェック
-        // ============================================================
+        // DragIconController → DropArea のときだけ重複チェック
         if (fromList != null)
         {
             UnitStatsData incoming = fromList.unitStats;
@@ -41,9 +39,8 @@ public class DropArea : MonoBehaviour, IDropHandler
             }
         }
 
-        // ============================================================
-        // ② 既存の Clone があれば削除（上書き用）
-        // ============================================================
+        
+        //  既存の Clone があれば削除（上書き用）
         if (dropTargetParent.childCount > 0)
         {
             Destroy(dropTargetParent.GetChild(0).gameObject);
@@ -55,9 +52,8 @@ public class DropArea : MonoBehaviour, IDropHandler
             UnitDataCarrier.Instance.selectedUnits[slotIndex] = null;
         }
 
-        // ============================================================
-        // ③ DragIconController → DropArea（新規登録）
-        // ============================================================
+       
+        //  DragIconController → DropArea（新規登録）
         if (fromList != null)
         {
             currentUnitStats = fromList.unitStats;
@@ -72,9 +68,9 @@ public class DropArea : MonoBehaviour, IDropHandler
             return;
         }
 
-        // ============================================================
-        // ④ DropAreaIconDrag → DropArea（Clone を新しく作らず移動）
-        // ============================================================
+     
+        //  DropAreaIconDrag → DropArea（Clone を新しく作らず移動）
+
         if (fromDropArea != null)
         {
             // 元の DropArea のデータを消す
