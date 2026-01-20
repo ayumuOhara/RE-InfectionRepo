@@ -10,9 +10,12 @@ public class CannonAttack : MonoBehaviour
     UnitManager unitManager;
     SkillDragger skillDragger;
 
+    AudioSource audioSource;
+
     [SerializeField] CannonSkillStats cannonSkillStats;
     [SerializeField] LayerMask skillTargetLayer;
     [SerializeField] GameObject cannonEffect;
+    [SerializeField] AudioClip cannonSE;
 
     const float VISUAL_RANGE = 2f;
 
@@ -22,6 +25,7 @@ public class CannonAttack : MonoBehaviour
         transform.localScale = new Vector3(cannonSkillStats.cannonRadius * VISUAL_RANGE, cannonSkillStats.cannonRadius * VISUAL_RANGE);
 
         unitManager = GameObject.Find("UnitManager").GetComponent<UnitManager>();
+        audioSource = GameObject.Find("WaveSpawner").GetComponent<AudioSource>();
     }
 
     async void OnEnable()
@@ -54,6 +58,7 @@ public class CannonAttack : MonoBehaviour
     IEnumerator AllTargetDamage(Collider2D[] targetUnits)
     {
         Instantiate(cannonEffect, transform.position + new Vector3(0, -1.7f, 0), Quaternion.identity);
+        audioSource.PlayOneShot(cannonSE);
 
         foreach (Collider2D target in targetUnits)
         {
