@@ -111,6 +111,7 @@ public class DropArea : MonoBehaviour, IDropHandler
         // Clone の初期位置
         rt.anchoredPosition = new Vector2(53f, -49f);
 
+        
         // DragIconController を削除
         Destroy(clone.GetComponent<DragIconController>());
         foreach (var comp in clone.GetComponentsInChildren<DragIconController>())
@@ -128,6 +129,21 @@ public class DropArea : MonoBehaviour, IDropHandler
         dragScript.slotIndex = slotIndex;
         dragScript.unitStats = currentUnitStats;
         dragScript.SetOriginalPos();
+
+        // ★ Clone の CheckImage を非表示にする
+        var checkImages = clone.GetComponentsInChildren<Image>(true);
+        bool found = false;
+
+        foreach (var img in checkImages)
+        {
+            if (img.gameObject.name == "CheckImage")
+            {
+                img.enabled = false;
+                found = true;
+                  }
+        }
+
+       
     }
 
     public static bool IsUnitInAnyDropArea(UnitStatsData target)
