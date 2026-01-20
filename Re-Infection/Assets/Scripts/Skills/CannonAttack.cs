@@ -12,6 +12,7 @@ public class CannonAttack : MonoBehaviour
 
     [SerializeField] CannonSkillStats cannonSkillStats;
     [SerializeField] LayerMask skillTargetLayer;
+    [SerializeField] GameObject cannonEffect;
 
     const float VISUAL_RANGE = 2f;
 
@@ -52,6 +53,8 @@ public class CannonAttack : MonoBehaviour
     // 取得したターゲットにダメージ
     IEnumerator AllTargetDamage(Collider2D[] targetUnits)
     {
+        Instantiate(cannonEffect, transform.position + new Vector3(0, -1.7f, 0), Quaternion.identity);
+
         foreach (Collider2D target in targetUnits)
         {
             var enemy = target.GetComponent<EnemyUnit>();

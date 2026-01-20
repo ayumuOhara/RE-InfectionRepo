@@ -107,3 +107,4 @@ MonoBehaviour:
   skillTargetLayer:
     serializedVersion: 2
     m_Bits: 128
+  cannonEffect: {fileID: 4593184484909914552, guid: 2e1e9506f5904a64b81744324fb7cd50, type: 3}
