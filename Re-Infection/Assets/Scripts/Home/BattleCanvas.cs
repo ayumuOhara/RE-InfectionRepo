@@ -10,7 +10,7 @@ public class BattleCanvas : MonoBehaviour
     public ScrollChecker scrollChecker;
 
     public Image[] stageImage; //ステートの画像スプライト配列
-    public GameObject[] lockImage; //ステージのロック中の表示にスプライト
+    public GameObject[] lookImage; //ステージのロック中の表示にスプライト
 
     public TextMeshProUGUI conditionsText; //ステージの解放条件を表示するテキスト
 
@@ -24,7 +24,6 @@ public class BattleCanvas : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
         //最初は全てのステージを暗くする
         for (int i = 0; i < stageImage.Length; i++)
         {
@@ -66,7 +65,7 @@ public class BattleCanvas : MonoBehaviour
         //ステージ1のときは必ず出撃可能
         if (stageNumber == 0)
         {
-            lockImage[stageNumber].SetActive(false);
+            lookImage[stageNumber].SetActive(false);
             stageImage[stageNumber].color = new Color(1f, 1f, 1f, 1f);
             conditionsText.gameObject.SetActive(false);
             sortieButton.interactable = true;
@@ -75,10 +74,22 @@ public class BattleCanvas : MonoBehaviour
         //前のステージがクリア済みか
         if (stageDataManager.stage[stageNumber - 1].isClear == false)
         {
-            lockImage[stageNumber].SetActive(true);
+            lookImage[stageNumber].SetActive(true);
             conditionsText.text = $"ステージ{stageNumber}クリアで解放";
             conditionsText.gameObject.SetActive(true);
             sortieButton.interactable = false;
+        }
+        else if (stageDataManager.stage[stageNumber - 1].isClear == true)//クリア済みなら
+        {
+            lookImage[stageNumber].SetActive(false);
+            stageImage[stageNumber].color = new Color(1f, 1f, 1f, 1f);
+            conditionsText.gameObject.SetActive(false);
+            sortieButton.interactable = true;
+
+        }
+        else
+        {
+            Debug.LogError("ステージクリアフラグ配列の要素数が足りません");
         }
 
     }
@@ -89,24 +100,4 @@ public class BattleCanvas : MonoBehaviour
     {
         SceneManager.LoadScene("BetaScene");
     }
-
-    //クリア後に解放されたステージに移る処理
-    public void OnChangeStage(int stage)
-    {
-        if (stage > 2)
-        {
-            Debug.LogError("ステージ数を超えている");
-            return;
-        }
-
-        //TODO　ここに鍵が外れるアニメーション
-
-        scrollChecker.scrollSnap.GoToPanel(stage);
-        lockImage[stage].SetActive(false);
-        stageImage[stage].color = new Color(1f, 1f, 1f, 1f);
-        //conditionsText.gameObject.SetActive(false);
-        //sortieButton.interactable = true;
-        Debug.Log($"{stage + 1 }ステージ解放");
-    }
 }
-
