@@ -2,13 +2,14 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using CannonPointer;
 
 public class CannonAttack : MonoBehaviour
 {
     public static event Action<float> OnSkillUsed;
 
     UnitManager unitManager;
-    SkillDragger skillDragger;
+    CannonSkillPointer cannonSkillPointer;
 
     AudioSource audioSource;
 
@@ -21,7 +22,7 @@ public class CannonAttack : MonoBehaviour
 
     private void Awake()
     {
-        skillDragger = GameObject.Find("CannonSkillPointer").GetComponent<SkillDragger>();
+        cannonSkillPointer = GameObject.Find("CannonSkillPointer").GetComponent<CannonSkillPointer>();
         transform.localScale = new Vector3(cannonSkillStats.cannonRadius * VISUAL_RANGE, cannonSkillStats.cannonRadius * VISUAL_RANGE);
 
         unitManager = GameObject.Find("UnitManager").GetComponent<UnitManager>();
@@ -75,13 +76,13 @@ public class CannonAttack : MonoBehaviour
                     clone.Initialize(enemy.Stats, true);
                 }
             }
-            
+
             yield return null;
         }
 
-        OnSkillUsed += skillDragger.OnSkillUse;
+        OnSkillUsed += cannonSkillPointer.OnSkillUse;
         OnSkillUsed?.Invoke(cannonSkillStats.coolTime);
-        OnSkillUsed -= skillDragger.OnSkillUse;
+        OnSkillUsed -= cannonSkillPointer.OnSkillUse;
 
         // 処理終了後、非アクティブ化
         gameObject.SetActive(false);
