@@ -8,6 +8,7 @@ public class InfectioningUnit : MonoBehaviour
 
     [SerializeField] VirusStats virusStats;
     [SerializeField] LayerMask skillTargetLayer;
+    [SerializeField] GameObject infectionEffect;
 
     const float VISUAL_RANGE = 2f;
 
@@ -47,14 +48,21 @@ public class InfectioningUnit : MonoBehaviour
     // 取得したターゲットを感染
     IEnumerator AllTargetInfection(Collider2D[] targetUnits)
     {
+        var effectGenerated = false;
+
         foreach (Collider2D target in targetUnits)
         {
             // 範囲内にいるターゲット全てに感染
             if (target.GetComponent<EnemyUnit>()?.IsDead == true && target.GetComponent<EnemyUnit>().IsInfectioning == false)
             {
                 target.GetComponent<EnemyUnit>().IsInfectioning = true;
+                if (!effectGenerated)
+                {
+                    effectGenerated = true;
+                    Instantiate(infectionEffect, transform.position, Quaternion.identity);
+                }
             }
-            
+
             yield return null;
         }
 

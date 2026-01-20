@@ -1693,6 +1693,41 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &183000830
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 183000831}
+  m_Layer: 5
+  m_Name: Character_Anim
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &183000831
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 183000830}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1262412673}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &183770124
 GameObject:
   m_ObjectHideFlags: 0
@@ -7048,11 +7083,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DropArea
   dropTargetParent: {fileID: 822095931}
-  cloneOffset: {x: 50, y: -50}
   currentUnitStats: {fileID: 0}
   slotIndex: 0
-  displayTMP: {fileID: 912715855}
-  displayTMPObj: {fileID: 1785663682}
 --- !u!61 &822095933
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11263,6 +11295,7 @@ RectTransform:
   - {fileID: 3252892435740679450}
   - {fileID: 1957868037}
   - {fileID: 1847911230}
+  - {fileID: 183000831}
   - {fileID: 1261467056}
   m_Father: {fileID: 177441285}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11491,11 +11524,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DropArea
   dropTargetParent: {fileID: 1272797860}
-  cloneOffset: {x: 50, y: -50}
   currentUnitStats: {fileID: 0}
   slotIndex: 1
-  displayTMP: {fileID: 1545273666}
-  displayTMPObj: {fileID: 76975184}
 --- !u!61 &1272797862
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11659,11 +11689,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DropArea
   dropTargetParent: {fileID: 1279111359}
-  cloneOffset: {x: 50, y: -50}
   currentUnitStats: {fileID: 0}
   slotIndex: 2
-  displayTMP: {fileID: 692462101}
-  displayTMPObj: {fileID: 543035810}
 --- !u!114 &1279111361
 MonoBehaviour:
   m_ObjectHideFlags: 0

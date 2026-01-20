@@ -86,7 +86,6 @@ GameObject:
   - component: {fileID: 3458619735045408979}
   - component: {fileID: 4475672670112417991}
   - component: {fileID: 4913536522267112490}
-  - component: {fileID: 8737788542618220352}
   m_Layer: 5
   m_Name: CheckImage
   m_TagString: Untagged
@@ -151,28 +150,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!95 &8737788542618220352
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1924868482876304540}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c353daebdc6043b4490e6bd3b022c580, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6357981984528747803
 GameObject:
   m_ObjectHideFlags: 0
@@ -299,12 +276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c964ab10504994b81e67eee8bde5ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DragIconController
-  originalColor: {r: 0, g: 0, b: 0, a: 0}
-  tergetPositoin: {x: 287, y: 1500, z: 0}
-  Icon: {fileID: 5841817380627422565}
-  returnTarget: {fileID: 3699922363973113639}
   unitStats: {fileID: 11400000, guid: e6d3327307b2d5c4c9367da09a7e2d3b, type: 2}
-  isDropped: 0
   isUsedInDropArea: 0
   CheckImage: {fileID: 1924868482876304540}
 --- !u!225 &606917004501525991
