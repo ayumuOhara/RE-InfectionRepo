@@ -1,52 +1,37 @@
-﻿using UnityEngine;
-using UnityEngine.EventSystems;
+﻿using UnityEngine.EventSystems;
+using UnityEngine;
 
 public class DropAreaIconDrag : MonoBehaviour,
     IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     private CanvasGroup canvasGroup;
     private Vector2 originalPos;
-    
+    private Transform originalParent;
 
     public int slotIndex;
     public UnitStatsData unitStats;
     public bool droppedSuccessfully = false;
 
-    private DropArea originalDropArea;
+    public DropArea originalDropArea; // ★ 追加
+
     private void Start()
     {
         canvasGroup = GetComponent<CanvasGroup>();
         if (canvasGroup == null) canvasGroup = gameObject.AddComponent<CanvasGroup>();
 
+        originalParent = transform.parent;
         originalPos = GetComponent<RectTransform>().anchoredPosition;
 
-        Transform check = transform.Find("CheckImage");
-        if (check != null)
-        {
-            Debug.Log($"[Clone Start] CheckImage FOUND on {gameObject.name}");
-            check.gameObject.SetActive(false);
-        }
-        else
-        {
-            Debug.Log($"[Clone Start] CheckImage NOT FOUND on {gameObject.name}");
-        }
-        originalDropArea = transform.GetComponentInParent<DropArea>();
+       originalDropArea = GetComponentInParent<DropArea>();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        canvasGroup.blocksRaycasts = false;
+        droppedSuccessfully = false;
 
-        // ★ Clone を Canvas の最前面に移動
+        canvasGroup.blocksRaycasts = false;
         transform.SetParent(transform.root, true);
         transform.SetAsLastSibling();
-
-        Transform check = transform.Find("CheckImage");
-        if (check != null)
-        {
-            check.gameObject.SetActive(false);
-        }
-
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -54,38 +39,43 @@ public class DropAreaIconDrag : MonoBehaviour,
         transform.position = eventData.position;
     }
 
-   public void OnEndDrag(PointerEventData eventData)
-{
-    canvasGroup.blocksRaycasts = true;
-
-    // DropArea が受け取った場合は droppedSuccessfully = true
-    if (!droppedSuccessfully)
+    public void OnEndDrag(PointerEventData eventData)
     {
-        // 失敗扱い → 元アイコンの CheckImage を OFF にしてしまう処理
-        // （ここは本当に失敗したときだけ実行される）
-        originalDropArea.currentUnitStats = null;
-        originalDropArea.diaplayText();
-        UnitDataCarrier.Instance.selectedUnits[slotIndex] = null;
+        canvasGroup.blocksRaycasts = true;
 
-        foreach (var icon in FindObjectsOfType<DragIconController>())
+        if (!droppedSuccessfully)
         {
-            if (icon.unitStats == unitStats)
+            // ★ 元の DropArea のデータを確実にクリア
+            if (originalDropArea != null)
             {
-                icon.isUsedInDropArea = false;
-                icon.isDropped = false;
-            }
-        }
+                originalDropArea.currentUnitStats = null;
 
-        DropArea.UpdateAllCheckImage();
-        Destroy(gameObject);
-        return;
+                while (UnitDataCarrier.Instance.selectedUnits.Count <= slotIndex)
+                    UnitDataCarrier.Instance.selectedUnits.Add(null);
+
+                UnitDataCarrier.Instance.selectedUnits[slotIndex] = null;
+            }
+
+
+            // DragIconController の制限解除
+            foreach (var icon in FindObjectsOfType<DragIconController>())
+            {
+                if (icon.unitStats == unitStats)
+                {
+                    icon.isUsedInDropArea = false;
+                    icon.CheckObj(false);
+                }
+            }
+
+            Destroy(gameObject);
+            return;
+        }
     }
 
-    //// 成功していた場合は元位置に戻すだけ
-    //GetComponent<RectTransform>().anchoredPosition = originalPos;
-}
     public void SetOriginalPos()
     {
+        originalParent = transform.parent;
         originalPos = GetComponent<RectTransform>().anchoredPosition;
+        originalDropArea = GetComponentInParent<DropArea>();
     }
 }
