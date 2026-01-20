@@ -12,7 +12,7 @@ public class MoveState : IUnitState
 
     public void Enter()
     {
-
+        if (unitBase.animator.enabled) unitBase.animator.SetBool("Move", true);
     }
 
     public void Update()
@@ -22,6 +22,6 @@ public class MoveState : IUnitState
 
     public void Exit()
     {
-
+        if (unitBase.animator.enabled) unitBase.animator.SetBool("Move", false);
     }
 }

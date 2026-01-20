@@ -13,13 +13,15 @@ MonoBehaviour:
   m_Name: Soldier_Village
   m_EditorClassIdentifier: Assembly-CSharp::UnitStats
   unitStats:
-    unitSprite: {fileID: 21300002, guid: f5f1c19ce87450f4b97f8b363746558d, type: 3}
+    animatorController: {fileID: 9100000, guid: b5e1e502168df8e4f95c1934827aaf01, type: 2}
+    unitSprite: {fileID: 3613407544420638092, guid: 7f5ae49a99a833940abc9ef28f2f9f56, type: 3}
     unitName: "\u6751\u306E\u5263\u58EB"
     jobType: 0
     targetType: 0
     maxHp: 100
     attackType: 0
     hitCnt: 1
+    radius: 0
     atk: 12
     atkInterbal: 1.5
     range: 0.35

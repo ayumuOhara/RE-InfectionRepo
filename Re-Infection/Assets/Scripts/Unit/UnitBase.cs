@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
+using UnityEditor.Animations;
 using UnityEditor.Rendering;
 using UnityEngine;
 using VirusPointer;
@@ -9,6 +10,8 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
 {
     [SerializeField] GameObject damageEffect;
     [SerializeField] GameObject deadEffect;
+
+    public Animator animator {  get; private set; }
 
     UnitStats stats;
     public UnitStats Stats => stats;
@@ -55,6 +58,9 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
     public void Initialize(UnitStats stats, bool isClone = false)
     {
         this.isClone = isClone;
+        animator = GetComponent<Animator>();
+        if(stats.animatorController != null)
+        animator.runtimeAnimatorController = (RuntimeAnimatorController)stats.animatorController;
 
         this.stats = new UnitStats()
         {
@@ -122,7 +128,7 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
     public virtual void Attack()
     {
         GetComponent<AudioSource>().PlayOneShot(stats.attackSe);
-        GetComponent<Animator>().SetTrigger("Attack");
+        if(animator.enabled) animator.SetTrigger("Attack");
 
         attackBase?.Attack(this);
     }

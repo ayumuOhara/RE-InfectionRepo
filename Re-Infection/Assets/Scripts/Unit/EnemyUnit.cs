@@ -67,6 +67,7 @@ public class EnemyUnit : UnitBase, Iinfection
                 }
 
                 unitManager.AddCorpseList(this);
+                animator.enabled = false;
 
                 GetComponent<SpriteRenderer>().sprite = corpseSprite;
 
@@ -110,5 +111,6 @@ public class EnemyUnit : UnitBase, Iinfection
         FindObjectOfType<UnitManager>().AddUnitList(this, IsInfectioning);
 
         GetComponent<SpriteRenderer>().sprite = Stats.unitSprite;
+        animator.enabled = true;
     }
 }

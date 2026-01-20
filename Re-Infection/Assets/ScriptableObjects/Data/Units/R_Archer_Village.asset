@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: R_Archer_Village
   m_EditorClassIdentifier: Assembly-CSharp::UnitStats
   unitStats:
-    unitSprite: {fileID: 21300012, guid: f5f1c19ce87450f4b97f8b363746558d, type: 3}
+    animatorController: {fileID: 9100000, guid: 15178b7899658e94d9a683e487f397fb, type: 2}
+    unitSprite: {fileID: -7856493677412862020, guid: 3941807682d9a5d4ba9bf72995220d83, type: 3}
     unitName: "\u6751\u306EAoE\u5F13\u4F7F\u3044"
     jobType: 3
     targetType: 0
