@@ -10,23 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dcf73ff0467ebad4b8d9a591c6ac54e0, type: 3}
-  m_Name: Jockey
+  m_Name: Hammer_Village
   m_EditorClassIdentifier: Assembly-CSharp::UnitStats
   unitStats:
-    unitSprite: {fileID: 21300006, guid: f5f1c19ce87450f4b97f8b363746558d, type: 3}
-    unitName: "\u4E57\u99AC\u5175"
-    jobType: 5
+    unitSprite: {fileID: 21300108, guid: f5f1c19ce87450f4b97f8b363746558d, type: 3}
+    unitName: "\u6751\u306E\u7BC4\u99AC\u30FC \u52C7\u6B21\u90CE"
+    jobType: 1
     targetType: 0
-    maxHp: 80
-    attackType: 0
-    hitCnt: 1
-    radius: 0
-    atk: 6
-    atkInterbal: 1
-    range: 0.4
+    maxHp: 120
+    attackType: 2
+    hitCnt: 3
+    radius: 0.2
+    atk: 7
+    atkInterbal: 2
+    range: 0.35
     moveType: 0
-    moveSpeed: 6
-    summonCost: 3
+    moveSpeed: 2
+    summonCost: 4
     infecitonTime: 10
     bossUnit: 0
     attackSe: {fileID: 8300000, guid: dab120b7a12444d42b8454c3420e7830, type: 3}

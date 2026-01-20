@@ -10,23 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dcf73ff0467ebad4b8d9a591c6ac54e0, type: 3}
-  m_Name: Jockey
+  m_Name: BossUnit 1
   m_EditorClassIdentifier: Assembly-CSharp::UnitStats
   unitStats:
-    unitSprite: {fileID: 21300006, guid: f5f1c19ce87450f4b97f8b363746558d, type: 3}
-    unitName: "\u4E57\u99AC\u5175"
-    jobType: 5
+    unitSprite: {fileID: 21300112, guid: f5f1c19ce87450f4b97f8b363746558d, type: 3}
+    unitName: "\u738B\u56FD\u9A0E\u58EB"
+    jobType: 0
     targetType: 0
-    maxHp: 80
-    attackType: 0
-    hitCnt: 1
-    radius: 0
-    atk: 6
+    maxHp: 4000
+    attackType: 2
+    hitCnt: 2
+    radius: 0.1
+    atk: 40
     atkInterbal: 1
-    range: 0.4
+    range: 0.3
     moveType: 0
-    moveSpeed: 6
-    summonCost: 3
-    infecitonTime: 10
-    bossUnit: 0
+    moveSpeed: 5
+    summonCost: 0
+    infecitonTime: 0
+    bossUnit: 1
     attackSe: {fileID: 8300000, guid: dab120b7a12444d42b8454c3420e7830, type: 3}
