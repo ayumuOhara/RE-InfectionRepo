@@ -168,6 +168,8 @@ public class WaveSpawner : MonoBehaviour
         gameUIManager.InvisibleCombatUI();
         gameUIManager.VisibleAllUI();
         isSessionClear = true;
+        stage.isClear = true;
+
 
         yield break;
     }
