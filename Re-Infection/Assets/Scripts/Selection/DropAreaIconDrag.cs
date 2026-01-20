@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using UnityEngine.EventSystems;
+﻿using UnityEngine.EventSystems;
+using UnityEngine;
 
 public class DropAreaIconDrag : MonoBehaviour,
     IBeginDragHandler, IDragHandler, IEndDragHandler
@@ -7,11 +7,12 @@ public class DropAreaIconDrag : MonoBehaviour,
     private CanvasGroup canvasGroup;
     private Vector2 originalPos;
     private Transform originalParent;
+
     public int slotIndex;
     public UnitStatsData unitStats;
     public bool droppedSuccessfully = false;
 
-    private DropArea originalDropArea;
+    public DropArea originalDropArea; // ★ 追加
 
     private void Start()
     {
@@ -20,12 +21,15 @@ public class DropAreaIconDrag : MonoBehaviour,
 
         originalParent = transform.parent;
         originalPos = GetComponent<RectTransform>().anchoredPosition;
+
+       originalDropArea = GetComponentInParent<DropArea>();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        canvasGroup.blocksRaycasts = false;
+        droppedSuccessfully = false;
 
+        canvasGroup.blocksRaycasts = false;
         transform.SetParent(transform.root, true);
         transform.SetAsLastSibling();
     }
@@ -41,8 +45,19 @@ public class DropAreaIconDrag : MonoBehaviour,
 
         if (!droppedSuccessfully)
         {
-            Destroy(gameObject);
+            // ★ 元の DropArea のデータを確実にクリア
+            if (originalDropArea != null)
+            {
+                originalDropArea.currentUnitStats = null;
 
+                while (UnitDataCarrier.Instance.selectedUnits.Count <= slotIndex)
+                    UnitDataCarrier.Instance.selectedUnits.Add(null);
+
+                UnitDataCarrier.Instance.selectedUnits[slotIndex] = null;
+            }
+
+
+            // DragIconController の制限解除
             foreach (var icon in FindObjectsOfType<DragIconController>())
             {
                 if (icon.unitStats == unitStats)
@@ -52,9 +67,7 @@ public class DropAreaIconDrag : MonoBehaviour,
                 }
             }
 
-            UnitDataCarrier.Instance.selectedUnits[slotIndex] = null;
-            transform.SetParent(originalDropArea.transform, false);
-            GetComponent<RectTransform>().anchoredPosition = originalPos;
+            Destroy(gameObject);
             return;
         }
     }
@@ -63,5 +76,6 @@ public class DropAreaIconDrag : MonoBehaviour,
     {
         originalParent = transform.parent;
         originalPos = GetComponent<RectTransform>().anchoredPosition;
+        originalDropArea = GetComponentInParent<DropArea>();
     }
 }
