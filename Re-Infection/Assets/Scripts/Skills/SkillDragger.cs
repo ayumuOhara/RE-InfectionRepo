@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -9,16 +11,20 @@ public static class WaitEndDrag
     // ドラッグ終了まで待機
     public static async Task WaitDragEndAsync()
     {
-        await VirusSkillDragger.dragEndTcs.Task;
+        await SkillDragger.dragEndTcs.Task;
     }
 }
 
-public class VirusSkillDragger : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
+public class SkillDragger : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] GameObject virusAreaPrefab;
+    [SerializeField] GameObject skillPrefab;
     UnitManager unitManager;
     WaveSpawner waveSpawner;
     GameObject dragObj;
+
+    [SerializeField] Image cannonPointerFilled;
+
+    bool canUseSkill;
 
     bool isDragging = false;    // ドラッグ中フラグ
     public bool IsDragging => isDragging;
@@ -30,20 +36,44 @@ public class VirusSkillDragger : MonoBehaviour, IBeginDragHandler, IDragHandler,
 
     void Awake()
     {
+        if(cannonPointerFilled != null) cannonPointerFilled.fillAmount = 0;
+        canUseSkill = true;
+
         waveSpawner = FindObjectOfType<WaveSpawner>();
         if (unitManager == null)
             unitManager = GameObject.Find("UnitManager").GetComponent<UnitManager>();
     }
 
+    public void OnSkillUse(float coolTime)
+    {
+        StartCoroutine(SkillCoolTimer(coolTime));
+    }
+
+    IEnumerator SkillCoolTimer(float coolTime)
+    {
+        canUseSkill = false;
+        var time = coolTime;
+
+        while (time > 0)
+        {
+            yield return new WaitUntil(() => waveSpawner.IsStartWave);
+
+            time -= Time.deltaTime;
+            cannonPointerFilled.fillAmount = time / coolTime;
+        }
+
+        canUseSkill = true;
+    }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (!waveSpawner.IsStartWave) return;
+        if (!waveSpawner.IsStartWave || !canUseSkill) return;
 
         dragEndTcs = new TaskCompletionSource<PointerEventData>();
 
         if (dragObj == null)
         {
-            dragObj = Instantiate(virusAreaPrefab);
+            dragObj = Instantiate(skillPrefab);
             dragObj.SetActive(false);
         }
 
@@ -54,7 +84,7 @@ public class VirusSkillDragger : MonoBehaviour, IBeginDragHandler, IDragHandler,
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (!waveSpawner.IsStartWave) return;
+        if (!waveSpawner.IsStartWave || !canUseSkill) return;
 
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = 0;
@@ -66,7 +96,7 @@ public class VirusSkillDragger : MonoBehaviour, IBeginDragHandler, IDragHandler,
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (!waveSpawner.IsStartWave) return;
+        if (!waveSpawner.IsStartWave || !canUseSkill) return;
 
         dragEndTcs?.TrySetResult(eventData);
 
