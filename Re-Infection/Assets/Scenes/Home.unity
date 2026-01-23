@@ -6769,8 +6769,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14c372767f973734ebad3882a7f845db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HomeTab
+  shopButton: {fileID: 1528406815}
   battleButton: {fileID: 1528406815}
   selectionButton: {fileID: 962835241}
+  shopCanvas: {fileID: 1262412672}
   battleCanvas: {fileID: 1262412672}
   selectionCanvas: {fileID: 737501077}
 --- !u!114 &1173830517
