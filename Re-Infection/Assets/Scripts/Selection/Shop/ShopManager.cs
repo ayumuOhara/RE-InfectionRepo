@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 
 public enum UpgradeType
 {
@@ -16,6 +17,7 @@ public class ShopManager:MonoBehaviour
     [Header("UI")]
     public GameObject DialogObj;
     public TextMeshProUGUI money_text;
+    public GameObject LayCastObj;
 
     [Header("城のレベルとコスト")]
     public TextMeshProUGUI Castle_text;
@@ -38,8 +40,9 @@ public class ShopManager:MonoBehaviour
     public TextMeshProUGUI DialogLevel_text1;
     public TextMeshProUGUI DialogLevel_text2;
     public TextMeshProUGUI DialogMoney_text;
+    public GameObject WarningObj;
+    public TextMeshProUGUI Warning_text;
 
-    
     [Header("所持金")]
     public int money = 1000;
 
@@ -65,6 +68,7 @@ public class ShopManager:MonoBehaviour
     {
         DialogObj.SetActive(false);
         money_text.text = ($"{money}");
+        LayCastObj.SetActive(false);
 
         Castle_text.text = ($"{Castle_level}");
         CastleMoney_text.text = ($"{CastleMoney}");
@@ -77,6 +81,9 @@ public class ShopManager:MonoBehaviour
 
         Cost_text.text = ($"{Cost_level}");
         CostMoney_text.text = ($"{CostMoney}");
+
+        Warning_text.text = "";
+        WarningObj.SetActive(false);
     }
 
     //城の強化ボタン
@@ -84,7 +91,8 @@ public class ShopManager:MonoBehaviour
     {
         currentUpgrade = UpgradeType.Castle;
         DialogObj.SetActive(true);
-        
+        LayCastObj.SetActive(true);
+
         DialogLevel_text1.text = ($"{Castle_level}");
         DialogLevel_text2.text = ($"{Castle_level + 1}");
         DialogMoney_text.text = ($"{CastleMoney}");
@@ -97,6 +105,7 @@ public class ShopManager:MonoBehaviour
         currentUpgrade = UpgradeType.Canon;
 
         DialogObj.SetActive(true);
+        LayCastObj.SetActive(true);
 
         DialogLevel_text1.text = ($"{Canon_level}");
         DialogLevel_text2.text = ($"{Canon_level + 1}");
@@ -110,6 +119,7 @@ public class ShopManager:MonoBehaviour
         currentUpgrade = UpgradeType.CanonRange;
 
         DialogObj.SetActive(true);
+        LayCastObj.SetActive(true);
 
         DialogLevel_text1.text = ($"{CanonRange_level}");
         DialogLevel_text2.text = ($"{CanonRange_level + 1}");
@@ -123,6 +133,7 @@ public class ShopManager:MonoBehaviour
         currentUpgrade = UpgradeType.Cost;
 
         DialogObj.SetActive(true);
+        LayCastObj.SetActive(true);
 
         DialogLevel_text1.text = ($"{Cost_level}");
         DialogLevel_text2.text = ($"{Cost_level + 1}");
@@ -157,22 +168,37 @@ public class ShopManager:MonoBehaviour
     public void NoButton()
     {
         DialogObj.SetActive(false);
+        LayCastObj.SetActive(false);
     }
 
     //城の強化処理
-    private void TryUpgradeCastle()
+    private void  TryUpgradeCastle()
     {
-        if (money < CastleMoney)
+        if (Castle_level >= 3)
         {
-            Debug.Log("所持金が足りません");
+            StartCoroutine(WarningLevelText());
             return;
         }
 
+        if (money < CastleMoney)
+        {
+            Debug.Log("所持金が足りません");
+            StartCoroutine(WarningMoneyText());
+            return;
+        }
+      
         money -= CastleMoney;
         money_text.text = $"{money}";
 
         Castle_level++;
         Castle_text.text = $"{Castle_level}";
+
+        //レベル３になった時文字を赤くする
+        if (Castle_level >= 3)
+        {
+            Castle_text.color = new Color(1f, 0.337f, 0.337f);
+
+        }
 
         if (CastleMoney == 100)
         {
@@ -185,14 +211,21 @@ public class ShopManager:MonoBehaviour
         CastleMoney_text.text = $"{CastleMoney}";
 
         DialogObj.SetActive(false);
+        LayCastObj.SetActive(false);
     }
 
     // 砲撃の強化処理
      private void TryUpgradeCanon()
     {
+        if (Canon_level >= 3)
+        {
+            StartCoroutine(WarningLevelText());
+            return;
+        }
         if (money < CanonMoney)
         {
             Debug.Log("所持金が足りません");
+            StartCoroutine(WarningMoneyText());
             return;
         }
 
@@ -201,6 +234,13 @@ public class ShopManager:MonoBehaviour
 
         Canon_level++;
         Canon_text.text = $"{Canon_level}";
+
+        //レベル３になった時文字を赤くする
+        if (Canon_level >= 3)
+        {
+            Canon_text.color = new Color(1f, 0.337f, 0.337f);
+
+        }
 
         if (CanonMoney == 100)
         {
@@ -213,13 +253,20 @@ public class ShopManager:MonoBehaviour
             CanonMoney_text.text = $"{CanonMoney}";
 
         DialogObj.SetActive(false);
+        LayCastObj.SetActive(false);
     }
 
     private void TryUpgradeCanonRange()
     {
+        if (CanonRange_level >= 3)
+        {
+            StartCoroutine(WarningLevelText());
+            return;
+        }
         if (money < CanonRangeMoney)
         {
             Debug.Log("所持金が足りません");
+            StartCoroutine(WarningMoneyText());
             return;
         }
 
@@ -229,6 +276,12 @@ public class ShopManager:MonoBehaviour
         CanonRange_level++;
         CanonRange_text.text = $"{CanonRange_level}";
 
+        //レベル３になった時文字を赤くする
+        if (CanonRange_level >= 3)
+        {
+            CanonRange_text.color = new Color(1f, 0.337f, 0.337f);
+
+        }
 
         if (CanonRangeMoney == 100) 
         { 
@@ -241,13 +294,20 @@ public class ShopManager:MonoBehaviour
         CanonRangeMoney_text.text = $"{CanonRangeMoney}";
 
         DialogObj.SetActive(false);
+        LayCastObj.SetActive(false);
     }
 
     private void TryUpgradeCost()
     {
+        if (Cost_level >= 3)
+        {
+            StartCoroutine(WarningLevelText());
+            return;
+        }
         if (money < CostMoney)
         {
             Debug.Log("所持金が足りません");
+            StartCoroutine(WarningMoneyText());
             return;
         }
 
@@ -257,6 +317,12 @@ public class ShopManager:MonoBehaviour
         Cost_level++;
         Cost_text.text = $"{Cost_level}";
 
+        //レベル３になった時文字を赤くする
+        if (Cost_level >= 3)
+        {
+            Cost_text.color = new Color(1f, 0.337f, 0.337f);
+
+        }
 
         if (CostMoney == 100)
         {
@@ -269,5 +335,24 @@ public class ShopManager:MonoBehaviour
         CostMoney_text.text = $"{CostMoney}";
 
         DialogObj.SetActive(false);
+        LayCastObj.SetActive(false);
+    }
+
+   public IEnumerator WarningMoneyText()
+    {
+       
+        WarningObj.SetActive(true);
+        Warning_text.text = ("お 金 が 足 り ま せ ん ！");
+        yield return new WaitForSeconds(1f);
+        WarningObj.SetActive(false);
+    }
+
+    public IEnumerator WarningLevelText()
+    {
+
+        WarningObj.SetActive(true);
+        Warning_text.text = ("レ ベ ル マ ッ ク ス で す ！");
+        yield return new WaitForSeconds(1f);
+        WarningObj.SetActive(false);
     }
 }
