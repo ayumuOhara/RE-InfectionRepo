@@ -21,5 +21,6 @@ public abstract class AttackBase
     public virtual void Attack(UnitBase attacker)
     {
         // UŒ‚ˆ—
+        attacker.InstanceEffect(attacker.TargetObj.transform.position);
     }
 }
