@@ -19,6 +19,12 @@ public class ShopManager:MonoBehaviour
     public TextMeshProUGUI money_text;
     public GameObject LayCastObj;
 
+    [Header("Buttons")]
+    public Button CastleButton; //城の強化ボタン
+    public Button CanonButton; //砲撃強化ボタン
+    public Button CanonRangeButton; //砲撃範囲ボタン
+    public Button CostButton; //コスト回復ボタン
+
     [Header("城のレベルとコスト")]
     public TextMeshProUGUI Castle_text;
     public TextMeshProUGUI CastleMoney_text;
@@ -89,6 +95,11 @@ public class ShopManager:MonoBehaviour
     //城の強化ボタン
     public void CastleSkillEnhancement()
     {
+        if (Castle_level >= 3)
+        {
+            StartCoroutine(WarningLevelText());
+            return;
+        }
         currentUpgrade = UpgradeType.Castle;
         DialogObj.SetActive(true);
         LayCastObj.SetActive(true);
@@ -102,6 +113,12 @@ public class ShopManager:MonoBehaviour
 
     public void CanonSkillEnhancement()
     {
+        if (Canon_level >= 3)
+        {
+            StartCoroutine(WarningLevelText());
+            return;
+        }
+
         currentUpgrade = UpgradeType.Canon;
 
         DialogObj.SetActive(true);
@@ -116,6 +133,12 @@ public class ShopManager:MonoBehaviour
 
     public void CanonRangeSkillEnhacement()
     {
+        if (CanonRange_level >= 3)
+        {
+            StartCoroutine(WarningLevelText());
+            return;
+        }
+
         currentUpgrade = UpgradeType.CanonRange;
 
         DialogObj.SetActive(true);
@@ -130,6 +153,12 @@ public class ShopManager:MonoBehaviour
 
     public void CostSkillEnhacement()
     {
+        if (Cost_level >= 3)
+        {
+            StartCoroutine(WarningLevelText());
+            return;
+        }
+
         currentUpgrade = UpgradeType.Cost;
 
         DialogObj.SetActive(true);
@@ -197,7 +226,9 @@ public class ShopManager:MonoBehaviour
         if (Castle_level >= 3)
         {
             Castle_text.color = new Color(1f, 0.337f, 0.337f);
-
+           
+            //ボタンを押せなくする
+            CastleButton.interactable = false;
         }
 
         if (CastleMoney == 100)
@@ -208,8 +239,16 @@ public class ShopManager:MonoBehaviour
         {
             CastleMoney = 1000;
         }
-        CastleMoney_text.text = $"{CastleMoney}";
 
+        //レベルマックスでテキストをMAXにする
+        if (Castle_level >= 3)
+        {
+            CastleMoney_text.text = "MAX";
+        }
+        else
+        {
+            CastleMoney_text.text = $"{CastleMoney}";
+        }
         DialogObj.SetActive(false);
         LayCastObj.SetActive(false);
     }
@@ -239,7 +278,8 @@ public class ShopManager:MonoBehaviour
         if (Canon_level >= 3)
         {
             Canon_text.color = new Color(1f, 0.337f, 0.337f);
-
+            //ボタンを押せなくする
+            CanonButton.interactable = false;
         }
 
         if (CanonMoney == 100)
@@ -250,7 +290,16 @@ public class ShopManager:MonoBehaviour
         {
             CanonMoney = 1000;
         }
+
+        //レベルマックスでテキストをMAXにする
+        if (Canon_level >= 3)
+        {
+            CanonMoney_text.text = "MAX";
+        }
+        else
+        {
             CanonMoney_text.text = $"{CanonMoney}";
+        }
 
         DialogObj.SetActive(false);
         LayCastObj.SetActive(false);
@@ -280,7 +329,8 @@ public class ShopManager:MonoBehaviour
         if (CanonRange_level >= 3)
         {
             CanonRange_text.color = new Color(1f, 0.337f, 0.337f);
-
+            //ボタンを押せなくする
+            CanonRangeButton.interactable = false;
         }
 
         if (CanonRangeMoney == 100) 
@@ -291,7 +341,16 @@ public class ShopManager:MonoBehaviour
         {
             CanonRangeMoney = 1000;
         }
-        CanonRangeMoney_text.text = $"{CanonRangeMoney}";
+
+        //レベルマックスでテキストをMAXにする
+        if (CanonRange_level >= 3)
+        {
+            CanonRangeMoney_text.text = "MAX";
+        }
+        else
+        {
+            CanonRangeMoney_text.text = $"{CanonRangeMoney}";
+        }
 
         DialogObj.SetActive(false);
         LayCastObj.SetActive(false);
@@ -321,7 +380,8 @@ public class ShopManager:MonoBehaviour
         if (Cost_level >= 3)
         {
             Cost_text.color = new Color(1f, 0.337f, 0.337f);
-
+            //ボタンを押せなくする
+            CostButton.interactable = false;
         }
 
         if (CostMoney == 100)
@@ -332,7 +392,16 @@ public class ShopManager:MonoBehaviour
         {
             CostMoney = 1000;
         }
-        CostMoney_text.text = $"{CostMoney}";
+
+        //レベルマックスでテキストをMAXにする
+        if (Cost_level >= 3)
+        {
+            CostMoney_text.text = "MAX";
+        }
+        else
+        {
+            CostMoney_text.text = $"{CostMoney}";
+        }
 
         DialogObj.SetActive(false);
         LayCastObj.SetActive(false);
