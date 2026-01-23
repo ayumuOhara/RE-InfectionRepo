@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a13b8b7d745f9774ca90705af610f89e, type: 3}
+  m_Name: Wave_3
+  m_EditorClassIdentifier: Assembly-CSharp::WaveData
+  waveLevels:
+  - {fileID: 11400000, guid: de3cbce50faefd14481a4783498a22b8, type: 2}
+  - {fileID: 11400000, guid: c70ae6a6294580346b1db76e72ad2f44, type: 2}
+  - {fileID: 11400000, guid: 3b76af5827c59a14981b569cbc5edd44, type: 2}
+  - {fileID: 11400000, guid: 3de69770df8802e4ba7339d4d31cee0a, type: 2}
+  bossWave: 0
