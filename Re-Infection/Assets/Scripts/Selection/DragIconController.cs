@@ -5,6 +5,8 @@ using UnityEngine.UI;
 public class DragIconController : MonoBehaviour,
     IBeginDragHandler, IDragHandler, IEndDragHandler
 {
+    [SerializeField] private Image unitIcon;
+
     private RectTransform rectTransform;
     private Canvas canvas;
     private CanvasGroup canvasGroup;
@@ -22,6 +24,7 @@ public class DragIconController : MonoBehaviour,
         canvas = GetComponentInParent<Canvas>();
         canvasGroup = GetComponent<CanvasGroup>();
         returnTarget = transform.parent;
+        unitIcon.sprite = unitStats.unitStats.unitSprite;
 
         CheckImage.SetActive(false);
     }
