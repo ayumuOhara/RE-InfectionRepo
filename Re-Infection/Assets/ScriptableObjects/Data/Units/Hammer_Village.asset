@@ -23,7 +23,7 @@ MonoBehaviour:
     attackType: 2
     hitCnt: 3
     radius: 0.2
-    atk: 8
+    atk: 7
     atkInterbal: 2
     range: 0.35
     moveType: 0
