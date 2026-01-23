@@ -119,12 +119,12 @@ TextureImporter:
       name: Thunder5_0
       rect:
         serializedVersion: 2
-        x: 858
-        y: 49
-        width: 272
-        height: 1968
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 830
+        y: 160
+        width: 350
+        height: 1888
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []

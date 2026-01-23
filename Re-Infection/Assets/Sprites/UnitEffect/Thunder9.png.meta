@@ -200,12 +200,12 @@ TextureImporter:
       name: Thunder9_0
       rect:
         serializedVersion: 2
-        x: 297
-        y: 56
+        x: 282
+        y: 580
         width: 1443
-        height: 1940
-      alignment: 9
-      pivot: {x: 0.51955926, y: 0.7909685}
+        height: 1468
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -870,6 +870,7 @@ TextureImporter:
       Thunder9_26: 5809909543719740109
       Thunder9_27: 8961614681108275848
       Thunder9_28: -3979782919530663928
+      Thunder9_29: -108440770
       Thunder9_3: -5496665335761537356
       Thunder9_4: -4289245713340315235
       Thunder9_5: -7016735574971702513

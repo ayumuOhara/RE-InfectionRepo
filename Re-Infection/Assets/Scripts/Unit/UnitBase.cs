@@ -67,6 +67,7 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
         this.stats = new UnitStats()
         {
             unitSprite = stats.unitSprite,
+            attackEffect = stats.attackEffect,
             unitName = stats.unitName,
             jobType = stats.jobType,
             targetType = stats.targetType,
@@ -200,6 +201,15 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
             }
 
             yield return null;
+        }
+    }
+
+    // エフェクト生成
+    public void InstanceEffect(Vector3 targetPos)
+    {
+        if (stats.attackEffect != null)
+        {
+            Instantiate(stats.attackEffect, targetPos, Quaternion.identity);
         }
     }
 

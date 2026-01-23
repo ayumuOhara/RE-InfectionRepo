@@ -24,6 +24,8 @@ public class AttackOfAreaRange : AttackBase
             if (hits[i].gameObject.tag == "Castle" || hits[i].gameObject.GetComponent<UnitBase>()?.IsDead == false)
             {
                 DamageToTarget(attacker, hits[i].gameObject);
+                attacker.InstanceEffect(hits[i].gameObject.transform.position);
+
                 cnt++;
             }
 

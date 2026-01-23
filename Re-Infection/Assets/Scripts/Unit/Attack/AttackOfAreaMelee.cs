@@ -13,6 +13,8 @@ public class AttackOfAreaMelee : AttackBase
         // 範囲内に敵がいない場合、終了
         if (hits.Length <= 0 || hits == null) return;
 
+        base.Attack(attacker);
+
         // ヒット数まで繰り返す
         var cnt = 0;
 
