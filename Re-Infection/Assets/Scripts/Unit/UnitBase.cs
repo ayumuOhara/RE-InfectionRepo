@@ -10,7 +10,9 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
 {
     [SerializeField] GameObject damageEffect;
     [SerializeField] GameObject deadEffect;
+    [SerializeField] private int precision = 100; // 精度（100倍すれば0.01単位まで反映）
 
+    private SpriteRenderer spriteRenderer;
     public Animator animator {  get; private set; }
 
     UnitStats stats;
@@ -84,7 +86,8 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
         movementBase = stats.MovementBase;
         attackBase = stats.AttackBase;
 
-        GetComponent<SpriteRenderer>().sprite = this.stats.unitSprite;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = this.stats.unitSprite;
 
         if (!isClone)
             currentHealth = stats.maxHp;
@@ -113,6 +116,14 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
 
         stateManager.StateTransition();
         stateManager.StateMachine.Update();
+    }
+
+    void LateUpdate()
+    {
+        // Y座標を -100倍して整数に変換
+        // 例: Yが 1.23 の場合 -> sortingOrder は -123 になる
+        // Yが低い（画面下）ほど、数値が大きくなる（手前に来る）
+        spriteRenderer.sortingOrder = Mathf.RoundToInt(transform.position.y * -precision + transform.position.x * precision);
     }
 
     public virtual void Targetting()
