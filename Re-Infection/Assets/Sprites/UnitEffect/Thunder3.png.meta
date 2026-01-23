@@ -119,12 +119,12 @@ TextureImporter:
       name: Thunder3_0
       rect:
         serializedVersion: 2
-        x: 795
-        y: 17
-        width: 427
-        height: 1993
-      alignment: 9
-      pivot: {x: 0.5578362, y: 0.7814606}
+        x: 830
+        y: 0
+        width: 350
+        height: 2048
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -133,28 +133,6 @@ TextureImporter:
       bones: []
       spriteID: 7c6bfaa148e1b7bf0800000000000000
       internalID: -325632995321989433
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Thunder3_1
-      rect:
-        serializedVersion: 2
-        x: 798
-        y: 17
-        width: 429
-        height: 1998
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: dd10e43d41a8ac1b0800000000000000
-      internalID: -5635540161651670563
       vertices: []
       indices: 
       edges: []

@@ -45,6 +45,8 @@ public class UnitStats
     public AnimatorController animatorController;           // ユニットのアニメーター
     [Header("スプライト")]
     public Sprite unitSprite;           // ユニットのスプライト
+    [Header("攻撃エフェクト")]
+    public GameObject attackEffect;     // ユニット攻撃時のエフェクト
     [Header("名前")]
     public string unitName;             // ユニット名
     [Header("役職")]
