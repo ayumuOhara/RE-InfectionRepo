@@ -15,6 +15,8 @@ public class DragIconController : MonoBehaviour,
     public bool isUsedInDropArea = false;
     public GameObject CheckImage;
 
+    public UnitDetailUII detaUI;
+
     private Transform returnTarget;
     private Vector2 originalPos;
     private Transform originalParent;
@@ -71,5 +73,10 @@ public class DragIconController : MonoBehaviour,
     public void CheckObj(bool isOn)
     {
         CheckImage.SetActive(isOn);
+    }
+
+    public void OnClickUnitIcon()
+    {
+        detaUI.SetUnit(unitStats.unitStats);
     }
 }
