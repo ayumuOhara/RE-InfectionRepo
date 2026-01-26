@@ -7,8 +7,14 @@ public class UnitDetailUII : MonoBehaviour
 {
     public GameObject UnitStatsObj;
     public Image unitImage;
-    public TextMeshProUGUI unitNameText;
-    public TextMeshProUGUI statsText;
+
+    [Header("UnitStats")]
+    public TextMeshProUGUI unitNameText; //名前
+    public TextMeshProUGUI unitHpText; //HP
+    public TextMeshProUGUI atkText; //攻撃力
+    public TextMeshProUGUI rangeText; //射程
+    public TextMeshProUGUI atkInterbalText; //攻撃速度
+    public TextMeshProUGUI hitCntText; //ヒットする数
     public GameObject LayCastObj; //ステータス表示した際、ほかのボタンが触れないように
     public void Start()
     {
@@ -19,15 +25,14 @@ public class UnitDetailUII : MonoBehaviour
     {
         UnitStatsObj.SetActive(true);
         unitImage.sprite = stats.unitSprite;
-        unitNameText.text = stats.unitName;
         LayCastObj.SetActive(true);
 
-        statsText.text =
-    $"HP：{stats.maxHp}\n" +
-    $"攻撃力：{stats.atk}\n" +
-    $"射程：{stats.range}\n" +
-    $"攻撃速度：{stats.atkInterbal}\n" +
-    $"攻撃範囲：{stats.radius}";
+        unitNameText.text = stats.unitName;
+        unitHpText.text = $"{stats.maxHp}";
+        atkText.text = $"{stats.atk}";
+        rangeText.text = $"{stats.range}";
+        atkInterbalText.text = $"{stats.atkInterbal}";
+        hitCntText.text = $"{stats.hitCnt}";
 
     }
 
