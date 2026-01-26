@@ -1,9 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
-using UnityEditor.Animations;
-using UnityEditor.Rendering;
 using UnityEngine;
+
 using VirusPointer;
 
 public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable

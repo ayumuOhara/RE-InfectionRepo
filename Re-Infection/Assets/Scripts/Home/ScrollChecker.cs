@@ -1,7 +1,5 @@
 using DanielLochner.Assets.SimpleScrollSnap;
-using Mono.Cecil.Cil;
 using UnityEngine;
-using UnityEngine.InputSystem.Controls;
 
 public class ScrollChecker : MonoBehaviour
 {
