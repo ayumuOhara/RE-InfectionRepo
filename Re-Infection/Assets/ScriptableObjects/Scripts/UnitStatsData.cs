@@ -1,6 +1,4 @@
-using UnityEditor.Animations;
 using UnityEngine;
-using UnityEngine.Experimental.Rendering;
 
 public class Types
 {
@@ -42,7 +40,7 @@ public class Types
 public class UnitStats
 {
     [Header("アニメーター")]
-    public AnimatorController animatorController;           // ユニットのアニメーター
+    public RuntimeAnimatorController animatorController;           // ユニットのアニメーター
     [Header("スプライト")]
     public Sprite unitSprite;           // ユニットのスプライト
     [Header("攻撃エフェクト")]

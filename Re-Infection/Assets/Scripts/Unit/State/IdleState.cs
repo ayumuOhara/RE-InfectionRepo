@@ -1,6 +1,3 @@
-using UnityEngine;
-using static UnityEditor.PlayerSettings;
-
 public class IdleState : IUnitState
 {
     UnitBase unitBase;

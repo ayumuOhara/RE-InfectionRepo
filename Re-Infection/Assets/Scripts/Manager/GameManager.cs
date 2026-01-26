@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
+        Application.targetFrameRate = 60;
+
         waveSpawner = GameObject.Find("WaveSpawner").GetComponent<WaveSpawner>();
         castleWallManager = GameObject.Find("CastleWall").GetComponent <CastleWallManager>();
         unitManager = GameObject.Find("UnitManager").GetComponent<UnitManager>();

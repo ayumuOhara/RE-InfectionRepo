@@ -1,7 +1,5 @@
 using UnityEngine;
 using System.Collections.Generic;
-using static UnityEngine.RuleTile.TilingRuleOutput;
-using static UnityEditor.PlayerSettings;
 
 public static class GetTarget
 {
