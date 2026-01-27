@@ -9,6 +9,7 @@ public class WaveSpawner : MonoBehaviour
     InGameUIManager gameUIManager; // UI管理マネージャ
     CostManager costManager;
     UnitManager unitManager;
+    public StageData stageData;
 
     [SerializeField] AudioClip[] clearSe;
     [SerializeField] Image castlePoint;
@@ -41,6 +42,8 @@ public class WaveSpawner : MonoBehaviour
         gameUIManager = GameObject.Find("InGameUI").GetComponent<InGameUIManager>();
         costManager = GameObject.Find("CostManager").GetComponent<CostManager>();
         unitManager = GameObject.Find("UnitManager").GetComponent<UnitManager>();
+
+        stage = stageData.Stage[stageData.SelectStageNumber];
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

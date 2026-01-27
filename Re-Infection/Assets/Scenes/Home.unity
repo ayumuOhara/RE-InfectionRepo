@@ -7253,6 +7253,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BattleCanvas
   stageDataManager: {fileID: 1556152407}
   scrollChecker: {fileID: 5681489238170330433}
+  stageData: {fileID: 11400000, guid: a9dee92a76df99143bf40defe66e5352, type: 2}
   stageImage:
   - {fileID: 446696949}
   - {fileID: 1206817216}
