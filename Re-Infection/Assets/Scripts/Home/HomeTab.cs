@@ -11,7 +11,7 @@ public class HomeTab : MonoBehaviour
     public Button battleButton; // ステージ選択ボタン
     public Button selectionButton; // 編成ボタン
 
-    public GameObject shopCanvas; // ショップ画面
+    //public GameObject shopCanvas; // ショップ画面
     public GameObject battleCanvas; //ステージ選択画面
     public GameObject selectionCanvas;//編成画面
 
@@ -24,7 +24,7 @@ public class HomeTab : MonoBehaviour
         selectionButton.interactable = true;
 
         battleCanvas.SetActive(true);
-        shopCanvas.SetActive(false);
+        //shopCanvas.SetActive(false);
         selectionCanvas.SetActive(false);
     }
 
@@ -65,7 +65,7 @@ public class HomeTab : MonoBehaviour
         battleButton.interactable = true;
         selectionButton.interactable = true;
 
-        shopCanvas.SetActive(true);
+        //shopCanvas.SetActive(true);
         battleCanvas.SetActive(false);
         selectionCanvas.SetActive(false);
     }
@@ -77,7 +77,7 @@ public class HomeTab : MonoBehaviour
         battleButton.interactable = false;
         selectionButton.interactable = true;
 
-        shopCanvas.SetActive(false);
+        //shopCanvas.SetActive(false);
         battleCanvas.SetActive(true);
         selectionCanvas.SetActive(false);
     }
@@ -89,7 +89,7 @@ public class HomeTab : MonoBehaviour
         battleButton.interactable = true;
         selectionButton.interactable = false;
 
-        shopCanvas.SetActive(false);
+        //shopCanvas.SetActive(false);
         battleCanvas.SetActive(false);
         selectionCanvas.SetActive(true);
     }

@@ -4,12 +4,10 @@ using System.Collections;
 
 public class StageDataManager : MonoBehaviour
 {
-    public static StageDataManager Instance;
+    public StageData stageData;
 
     [SerializeField] public Stage[] stage;
     public BattleCanvas battleCanvas;
-
-    public bool[] saveisClear;//ステージのクリア情報保存用配列
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -18,23 +16,56 @@ public class StageDataManager : MonoBehaviour
         StartCoroutine(SceneStart());
     }
 
-    IEnumerator SceneStart()
+
+    private void Update()
     {
 
-        for (int i = 0; i < stage.Length; i++)
+        if (Input.GetKey(KeyCode.X))
         {
-            saveisClear[i] = stage[i].isClear;
+            for (int i = 0; i < stage.Length; i++)
+            {
+                stageData.isStageOpen[i] = false;
+            }
         }
 
-        yield return new WaitForSeconds(4.5f);
+        if (Input.GetKey(KeyCode.C))
+        {
+            //ステージのクリア情報を確認
+            for (int i = 0; i < stage.Length; i++)
+            {
+                //解放さたら
+                if (stageData.isStageClear[i] == true && stageData.isStageOpen[i] == false)
+                {
+                    battleCanvas.OnChangeStage(i + 1);
+                    stageData.isStageOpen[i] = true;
+                }
+            }
+        }
+    }
+
+    IEnumerator SceneStart()
+    {
+        for (int i = 0; i < stage.Length; i++)
+        {
+            stageData.isStageClear[i] = stage[i].isClear;
+            
+            //解放済みステージの処理
+            if (stageData.isStageClear[i] == true && stageData.isStageOpen[i] == true)
+            {
+                battleCanvas.OnClearedStage(i + 1);
+            }
+        }
+
+        yield return new WaitForSeconds(2f);
 
         //ステージのクリア情報を確認
         for (int i = 0; i < stage.Length; i++)
         {
-            if (saveisClear[i] == true)
+            //解放さたら
+            if (stageData.isStageClear[i] == true && stageData.isStageOpen[i] == false)
             {
                 battleCanvas.OnChangeStage(i + 1);
-
+                stageData.isStageOpen[i] = true;
             }
         }
     }
