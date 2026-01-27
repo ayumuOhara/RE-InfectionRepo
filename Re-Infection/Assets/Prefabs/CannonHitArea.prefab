@@ -79,7 +79,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 10000
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 0.735849, g: 0, b: 0, a: 0.39215687}
   m_FlipX: 0
@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b66f17d958bdad48ada77d026e1cf30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CannonAttack
-  cannonSkillStats: {fileID: 11400000, guid: e9dc34fea9f005941a14199de50eef58, type: 2}
+  cannonRadius: 2
   skillTargetLayer:
     serializedVersion: 2
     m_Bits: 128

@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: BossUnit_S2
   m_EditorClassIdentifier: Assembly-CSharp::UnitStats
   unitStats:
+    animatorController: {fileID: 0}
     unitSprite: {fileID: 21300112, guid: f5f1c19ce87450f4b97f8b363746558d, type: 3}
+    attackEffect: {fileID: 0}
     unitName: "\u738B\u56FD\u9A0E\u58EB"
     jobType: 0
     targetType: 0
@@ -27,6 +29,5 @@ MonoBehaviour:
     moveType: 0
     moveSpeed: 5
     summonCost: 0
-    infecitonTime: 0
     bossUnit: 1
     attackSe: {fileID: 8300000, guid: dab120b7a12444d42b8454c3420e7830, type: 3}

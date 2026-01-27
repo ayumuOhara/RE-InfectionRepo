@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f5147572aec5af4fba6d9ac57615b32, type: 3}
+  m_Name: PlayerStatusData
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerStatusData
+  castleAbility:
+    lv: 0
+    healths: 640000002c010000f401000084030000
+  cannonAbility:
+    lv: 0
+    damages: 28000000460000005a00000064000000
+    coolTime: 180
+  costAbility:
+    lv: 3
+    costStats:
+    - maxCost: 30
+      interbal: 1.6
+    - maxCost: 40
+      interbal: 1.5
+    - maxCost: 40
+      interbal: 1.4
+    - maxCost: 50
+      interbal: 1.2
+  virusAbility:
+    lv: 0
+    virusStats:
+    - reviveHealthRate: 0.3
+      infectionTime: 15
+    - reviveHealthRate: 0.5
+      infectionTime: 10
+    - reviveHealthRate: 0.6
+      infectionTime: 7
+    - reviveHealthRate: 0.8
+      infectionTime: 5

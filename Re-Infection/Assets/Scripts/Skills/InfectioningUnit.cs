@@ -2,12 +2,17 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using VirusPointer;
+using System;
 
 public class InfectioningUnit : MonoBehaviour
 {
+    PlayerStatusData playerStatusData;
+
+    public static event Action<float, float> OnInfection;
+
     UnitManager unitManager;
 
-    [SerializeField] VirusStats virusStats;
+    [SerializeField] private float infectionRange;
     [SerializeField] LayerMask skillTargetLayer;
     [SerializeField] GameObject infectionEffect;
 
@@ -15,7 +20,9 @@ public class InfectioningUnit : MonoBehaviour
 
     private void Awake()
     {
-        transform.localScale = new Vector3(virusStats.infectionRange * VISUAL_RANGE, virusStats.infectionRange * VISUAL_RANGE);
+        playerStatusData = Resources.Load<PlayerStatusData>("PlayerStatusData");
+
+        transform.localScale = new Vector3(infectionRange * VISUAL_RANGE, infectionRange * VISUAL_RANGE);
 
         unitManager = GameObject.Find("UnitManager").GetComponent<UnitManager>();
     }
@@ -29,7 +36,7 @@ public class InfectioningUnit : MonoBehaviour
             return;
         }
 
-        var targetUnits = Physics2D.OverlapCircleAll(transform.position, virusStats.infectionRange, skillTargetLayer);
+        var targetUnits = Physics2D.OverlapCircleAll(transform.position, infectionRange, skillTargetLayer);
 
         if (targetUnits.Length <= 0 || targetUnits == null)
         {
@@ -53,10 +60,15 @@ public class InfectioningUnit : MonoBehaviour
 
         foreach (Collider2D target in targetUnits)
         {
+            EnemyUnit enemy = target.GetComponent<EnemyUnit>();
+
             // 範囲内にいるターゲット全てに感染
-            if (target.GetComponent<EnemyUnit>()?.IsDead == true && target.GetComponent<EnemyUnit>().IsInfectioning == false)
+            if (enemy?.IsDead == true && enemy.IsInfectioning == false)
             {
-                target.GetComponent<EnemyUnit>().IsInfectioning = true;
+                OnInfection += enemy.StartInfection;
+                OnInfection?.Invoke(playerStatusData.virusAbility.VirusStats.infectionTime, playerStatusData.virusAbility.VirusStats.reviveHealthRate);
+                OnInfection -= enemy.StartInfection;
+
                 if (!effectGenerated)
                 {
                     effectGenerated = true;
