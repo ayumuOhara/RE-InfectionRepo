@@ -23982,6 +23982,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 337cc6eba6b3faa4dadb48a91c4bb154, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WaveSpawner
+  stageData: {fileID: 11400000, guid: a9dee92a76df99143bf40defe66e5352, type: 2}
   clearSe:
   - {fileID: 8300000, guid: 6b725274c4be74746b5753777d228f84, type: 3}
   - {fileID: 8300000, guid: ccf6c30f76603264a810dab0862c25a2, type: 3}

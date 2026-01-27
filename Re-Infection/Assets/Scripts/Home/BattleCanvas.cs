@@ -105,7 +105,7 @@ public class BattleCanvas : MonoBehaviour
     {
 
         stageData.SelectStageNumber = stageNumber;
-        SceneManager.LoadScene("BetaScene");
+        SceneManager.LoadScene("MainScene");
     }
 
     //クリア済みステージの処理
