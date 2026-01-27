@@ -9,7 +9,7 @@ public enum UpgradeType
 {
     Castle,
     Canon,
-    CanonRange,
+    Infection,
     Cost
 }
 public class ShopManager:MonoBehaviour
@@ -22,20 +22,20 @@ public class ShopManager:MonoBehaviour
     [Header("Buttons")]
     public Button CastleButton; //城の強化ボタン
     public Button CanonButton; //砲撃強化ボタン
-    public Button CanonRangeButton; //砲撃範囲ボタン
+    public Button InfectionButton; //砲撃範囲ボタン
     public Button CostButton; //コスト回復ボタン
 
     [Header("城のレベルとコスト")]
     public TextMeshProUGUI Castle_text;
     public TextMeshProUGUI CastleMoney_text;
 
-    [Header("砲撃の攻撃力のレベルとコスト")]
+    [Header("爆弾の攻撃力のレベルとコスト")]
     public TextMeshProUGUI Canon_text;
     public TextMeshProUGUI CanonMoney_text;
 
-    [Header("砲撃の範囲のレベルとコスト")]
-    public TextMeshProUGUI CanonRange_text;
-    public TextMeshProUGUI CanonRangeMoney_text;
+    [Header("感染レベルとコスト")]
+    public TextMeshProUGUI Infection_text;
+    public TextMeshProUGUI InfectionMoney_text;
 
     [Header("コストの回復速度のレベルとコスト")]
     public TextMeshProUGUI Cost_text;
@@ -48,25 +48,32 @@ public class ShopManager:MonoBehaviour
     public TextMeshProUGUI DialogMoney_text;
     public GameObject WarningObj;
     public TextMeshProUGUI Warning_text;
+    public TextMeshProUGUI Details_text; //レベルアップ詳細
+
+    [Header("レベルアップ詳細")]
+    public TextMeshProUGUI CastleDetails_text; //城
+    private int CastleLevelUp=100; //城の最大HP
+    public TextMeshProUGUI CanonDetails_text; //砲撃
+    private int CanonLevelUp=30; //砲撃威力
 
     [Header("所持金")]
     public int money = 1000;
 
     //城
-    private int Castle_level = 1;
-    private int CastleMoney = 100;
+    private int Castle_level = 0;
+    private int CastleMoney = 300;
 
     //砲撃
-    private int Canon_level = 1;
-    private int CanonMoney = 100;
+    private int Canon_level = 0;
+    private int CanonMoney = 300;
 
     //砲撃範囲
-    private int CanonRange_level = 1;
-    private int CanonRangeMoney = 100;
+    private int Infection_level = 0;
+    private int InfectionMoney = 300;
 
     //コスト
-    private int Cost_level = 1;
-    private int CostMoney = 100;
+    private int Cost_level = 0;
+    private int CostMoney = 300;
 
     private UpgradeType currentUpgrade;
 
@@ -82,20 +89,41 @@ public class ShopManager:MonoBehaviour
         Canon_text.text = ($"{Canon_level}");
         CanonMoney_text.text = ($"{CanonMoney}");
 
-        CanonRange_text.text = ($"{CanonRange_level}");
-        CanonRangeMoney_text.text = ($"{CanonRangeMoney}");
+        Infection_text.text = ($"{Infection_level}");
+        InfectionMoney_text.text = ($"{InfectionMoney}");
 
         Cost_text.text = ($"{Cost_level}");
         CostMoney_text.text = ($"{CostMoney}");
 
         Warning_text.text = "";
         WarningObj.SetActive(false);
-    }
 
+        CastleDetails_text.text = $"城のHPがアップ\n最大HPは{CastleLevelUp}です";
+
+        CanonDetails_text.text = $"爆弾の威力アップ\n威力値は{CanonLevelUp}です";
+    }
+    private void Update()
+    {
+        CastleDetails_text.text = $"城の最大HPがアップ\n最大HPは{CastleLevelUp}です";
+
+        CanonDetails_text.text = $"爆弾の威力アップ\n威力値は{CanonLevelUp}です";
+    }
     //城の強化ボタン
     public void CastleSkillEnhancement()
     {
-        if (Castle_level >= 3)
+        if (Castle_level == 0)
+        {
+            Details_text.text = "HP：100　　→　　300";
+        }
+        else if (Castle_level == 1)
+        {
+            Details_text.text = "HP：300　　→　　500";
+        }
+        else if (Castle_level == 2)
+        {
+            Details_text.text = "HP：500　　→　　1000";
+        }
+       else
         {
             StartCoroutine(WarningLevelText());
             return;
@@ -113,7 +141,19 @@ public class ShopManager:MonoBehaviour
 
     public void CanonSkillEnhancement()
     {
-        if (Canon_level >= 3)
+        if (Canon_level == 0)
+        {
+            Details_text.text = "威力：30　　→　　50";
+        }
+        else if (Canon_level == 1)
+        {
+            Details_text.text = "威力：50　　→　　80";
+        }
+        else if (Canon_level == 2)
+        {
+            Details_text.text = "威力：80　　→　　100";
+        }
+        else
         {
             StartCoroutine(WarningLevelText());
             return;
@@ -131,29 +171,59 @@ public class ShopManager:MonoBehaviour
         DialogMessege.text = "砲撃の攻撃力を強化しますか？";
     }
 
-    public void CanonRangeSkillEnhacement()
+    public void InfectionSkillEnhacement()
     {
-        if (CanonRange_level >= 3)
+        if (Infection_level == 0)
+        {
+            Details_text.text = "HP：0.5　　→　　0.6\n"+
+                "速度：10 　→　　9";
+        }
+        else if (Infection_level == 1)
+        {
+            Details_text.text = "HP：0.6　　→　　0.7\n" +
+                "速度：9 　→　　7.5";
+        }
+        else if (Infection_level == 2)
+        {
+            Details_text.text = Details_text.text = "HP：0.7　　→　　0.8\n" +
+                "速度：7.5　 →　　5";
+        }
+        else
         {
             StartCoroutine(WarningLevelText());
             return;
         }
 
-        currentUpgrade = UpgradeType.CanonRange;
+        currentUpgrade = UpgradeType.Infection;
 
         DialogObj.SetActive(true);
         LayCastObj.SetActive(true);
 
-        DialogLevel_text1.text = ($"{CanonRange_level}");
-        DialogLevel_text2.text = ($"{CanonRange_level + 1}");
-        DialogMoney_text.text = ($"{CanonRangeMoney}");
+        DialogLevel_text1.text = ($"{Infection_level}");
+        DialogLevel_text2.text = ($"{Infection_level + 1}");
+        DialogMoney_text.text = ($"{InfectionMoney}");
         DialogMessege.text = "";
-        DialogMessege.text = "砲撃の範囲を強化しますか？";
+        DialogMessege.text = "感染を強化しますか？";
     }
 
     public void CostSkillEnhacement()
     {
-        if (Cost_level >= 3)
+        if (Cost_level == 0)
+        {
+            Details_text.text = "MAX：30　　→　　35\n" +
+                "回復量：1.6　 →　　1.4";
+        }
+        else if (Cost_level == 1)
+        {
+            Details_text.text = "MAX：35　　→　　40\n" +
+                "回復量：1.4　 →　　1.2";
+        }
+        else if (Cost_level == 2)
+        {
+            Details_text.text = "MAX：40　　→　　50\n" +
+                "回復量：1.2　 →　　1";
+        }
+        else
         {
             StartCoroutine(WarningLevelText());
             return;
@@ -182,8 +252,8 @@ public class ShopManager:MonoBehaviour
                 TryUpgradeCanon();
                 break;
 
-            case UpgradeType.CanonRange:
-                TryUpgradeCanonRange();
+            case UpgradeType.Infection:
+                TryUpgradeInfection();
                 break;
 
             case UpgradeType.Cost:
@@ -231,24 +301,34 @@ public class ShopManager:MonoBehaviour
             CastleButton.interactable = false;
         }
 
-        if (CastleMoney == 100)
+        if (CastleMoney ==300)
         {
-            CastleMoney = 500; // 次のコスト
+            CastleMoney = 800; // 次のコスト
         }
-        else if (CastleMoney == 500)
+        else if (CastleMoney == 800)
         {
-            CastleMoney = 1000;
+            CastleMoney = 1500;
         }
 
-        //レベルマックスでテキストをMAXにする
-        if (Castle_level >= 3)
+        if (Castle_level == 1)
         {
-            CastleMoney_text.text = "MAX";
-        }
-        else
-        {
+            CastleLevelUp = 300;
             CastleMoney_text.text = $"{CastleMoney}";
         }
+        else if (Castle_level == 2)
+        {
+            CastleLevelUp = 500;
+            CastleMoney_text.text = $"{CastleMoney}";
+        }
+        //レベルマックスでテキストをMAXにする
+        else if (Castle_level >= 3)
+        {
+            CastleMoney_text.text = "MAX";
+            CastleLevelUp = 1000;
+        }
+      
+       
+       
         DialogObj.SetActive(false);
         LayCastObj.SetActive(false);
     }
@@ -282,18 +362,26 @@ public class ShopManager:MonoBehaviour
             CanonButton.interactable = false;
         }
 
-        if (CanonMoney == 100)
+        if (CanonMoney == 300)
         {
-            CanonMoney = 500; // 次のコスト
+            CanonMoney = 800; // 次のコスト
         }
-        else if (CanonMoney == 500)
+        else if (CanonMoney == 800)
         {
-            CanonMoney = 1000;
+            CanonMoney = 1500;
         }
-
+        if (Canon_level == 1)
+        {
+            CanonLevelUp = 50;
+        }
+        else if (Canon_level == 2)
+        {
+            CanonLevelUp = 80;
+        }
         //レベルマックスでテキストをMAXにする
-        if (Canon_level >= 3)
+        else if (Canon_level >= 3)
         {
+            CanonLevelUp = 100;
             CanonMoney_text.text = "MAX";
         }
         else
@@ -305,52 +393,51 @@ public class ShopManager:MonoBehaviour
         LayCastObj.SetActive(false);
     }
 
-    private void TryUpgradeCanonRange()
+    private void TryUpgradeInfection()
     {
-        if (CanonRange_level >= 3)
+        if (Infection_level >= 3)
         {
             StartCoroutine(WarningLevelText());
             return;
         }
-        if (money < CanonRangeMoney)
+        if (money < InfectionMoney)
         {
             Debug.Log("所持金が足りません");
             StartCoroutine(WarningMoneyText());
             return;
         }
 
-        money -= CanonRangeMoney;
+        money -= InfectionMoney;
         money_text.text = $"{money}";
 
-        CanonRange_level++;
-        CanonRange_text.text = $"{CanonRange_level}";
+        Infection_level++;
+        Infection_text.text = $"{Infection_level}";
 
         //レベル３になった時文字を赤くする
-        if (CanonRange_level >= 3)
+        if (Infection_level >= 3)
         {
-            CanonRange_text.color = new Color(1f, 0.337f, 0.337f);
+            Infection_text.color = new Color(1f, 0.337f, 0.337f);
             //ボタンを押せなくする
-            CanonRangeButton.interactable = false;
+            InfectionButton.interactable = false;
         }
 
-        if (CanonRangeMoney == 100) 
-        { 
-        CanonRangeMoney = 500; // 次のコスト
-        }
-        else if(CanonRangeMoney == 500)
+        if (InfectionMoney == 300) 
         {
-            CanonRangeMoney = 1000;
+            InfectionMoney = 800; // 次のコスト
+            InfectionMoney_text.text = $"{InfectionMoney}";
+        }
+        else if(InfectionMoney == 800)
+        {
+            InfectionMoney = 1500;
+            InfectionMoney_text.text = $"{InfectionMoney}";
         }
 
         //レベルマックスでテキストをMAXにする
-        if (CanonRange_level >= 3)
+        if (Infection_level >= 3)
         {
-            CanonRangeMoney_text.text = "MAX";
+            InfectionMoney_text.text = "MAX";
         }
-        else
-        {
-            CanonRangeMoney_text.text = $"{CanonRangeMoney}";
-        }
+     
 
         DialogObj.SetActive(false);
         LayCastObj.SetActive(false);
@@ -384,13 +471,13 @@ public class ShopManager:MonoBehaviour
             CostButton.interactable = false;
         }
 
-        if (CostMoney == 100)
+        if (CostMoney == 300)
         {
-            CostMoney = 500; // 次のコスト
+            CostMoney = 800; // 次のコスト
         }
-        else if (CostMoney == 500)
+        else if (CostMoney == 800)
         {
-            CostMoney = 1000;
+            CostMoney = 1500;
         }
 
         //レベルマックスでテキストをMAXにする
