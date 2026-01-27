@@ -79,7 +79,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 10000
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 0.7058824, g: 0.3137255, b: 1, a: 0.39215687}
   m_FlipX: 0
@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1f3ad97a99aced49b89ef9289f22437, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InfectioningUnit
-  virusStats: {fileID: 11400000, guid: b1864040b59013a40a5d5f5f4fc74c25, type: 2}
+  infectionRange: 0.8
   skillTargetLayer:
     serializedVersion: 2
     m_Bits: 128

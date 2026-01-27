@@ -86,8 +86,6 @@ public class UnitStats
 
     [Header("召喚コスト")]
     public int summonCost;              // 召喚コスト
-    [Header("感染が完了する時間")]
-    public float infecitonTime;         // 感染するまでの時間
     [Header("ボスユニットか")]
     public bool bossUnit;               // ボスか
     [Header("攻撃時のSE")]

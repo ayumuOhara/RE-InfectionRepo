@@ -19,7 +19,8 @@ namespace CannonPointer
 
     public class CannonSkillPointer : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
     {
-        [SerializeField] CannonSkillStats cannonStats;
+        PlayerStatusData playerStatusData;
+
         [SerializeField] GameObject cannonPrefab;
         UnitManager unitManager;
         WaveSpawner waveSpawner;
@@ -39,6 +40,8 @@ namespace CannonPointer
 
         void Awake()
         {
+            playerStatusData = Resources.Load<PlayerStatusData>("PlayerStatusData");
+
             if (cannonPointerFilled != null) cannonPointerFilled.fillAmount = 0;
             canUseSkill = true;
 
@@ -46,7 +49,7 @@ namespace CannonPointer
             if (unitManager == null)
                 unitManager = GameObject.Find("UnitManager").GetComponent<UnitManager>();
             
-            StartCoroutine(SkillCoolTimer((int)cannonStats.coolTime / 2));
+            StartCoroutine(SkillCoolTimer(playerStatusData.cannonAbility.CoolTime / 2));
         }
 
         public void OnSkillUse(float coolTime)
@@ -62,7 +65,7 @@ namespace CannonPointer
             while (time > 0)
             {
                 time -= Time.deltaTime;
-                cannonPointerFilled.fillAmount = time / cannonStats.coolTime;
+                cannonPointerFilled.fillAmount = time / playerStatusData.cannonAbility.CoolTime;
 
                 yield return new WaitUntil(() => waveSpawner.IsStartWave);
             }

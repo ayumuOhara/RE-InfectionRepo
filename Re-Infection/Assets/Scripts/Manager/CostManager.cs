@@ -1,9 +1,12 @@
 using System.Collections;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CostManager : MonoBehaviour
 {
+    PlayerStatusData playerStatusData;
+
     WaveSpawner waveSpawner;
     InGameUIManager gameUIManager;
 
@@ -12,14 +15,19 @@ public class CostManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI costText;
 
     [SerializeField] int startCost;
-    [SerializeField] int maxCost;
-    [SerializeField] float generateInterbal;
+
+    int maxCost
+        => playerStatusData.costAbility.CostStats.maxCost;
+    float generateInterbal
+          => playerStatusData.costAbility.CostStats.interbal;
 
     public int currentCost { get; private set; } = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        playerStatusData = Resources.Load<PlayerStatusData>("PlayerStatusData");
+
         AddCost(startCost);
         waveSpawner = FindObjectOfType<WaveSpawner>();
         gameUIManager = FindObjectOfType<InGameUIManager>();
