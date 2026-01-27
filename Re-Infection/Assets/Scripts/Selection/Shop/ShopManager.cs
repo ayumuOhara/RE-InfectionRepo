@@ -50,11 +50,7 @@ public class ShopManager:MonoBehaviour
     public TextMeshProUGUI Warning_text;
     public TextMeshProUGUI Details_text; //レベルアップ詳細
 
-    [Header("レベルアップ詳細")]
-    public TextMeshProUGUI CastleDetails_text; //城
-    private int CastleLevelUp=100; //城の最大HP
-    public TextMeshProUGUI CanonDetails_text; //砲撃
-    private int CanonLevelUp=30; //砲撃威力
+   
 
     [Header("所持金")]
     public int money = 1000;
@@ -98,16 +94,10 @@ public class ShopManager:MonoBehaviour
         Warning_text.text = "";
         WarningObj.SetActive(false);
 
-        CastleDetails_text.text = $"城のHPがアップ\n最大HPは{CastleLevelUp}です";
-
-        CanonDetails_text.text = $"爆弾の威力アップ\n威力値は{CanonLevelUp}です";
+     
     }
-    private void Update()
-    {
-        CastleDetails_text.text = $"城の最大HPがアップ\n最大HPは{CastleLevelUp}です";
-
-        CanonDetails_text.text = $"爆弾の威力アップ\n威力値は{CanonLevelUp}です";
-    }
+   
+   
     //城の強化ボタン
     public void CastleSkillEnhancement()
     {
@@ -310,23 +300,17 @@ public class ShopManager:MonoBehaviour
             CastleMoney = 1500;
         }
 
-        if (Castle_level == 1)
-        {
-            CastleLevelUp = 300;
-            CastleMoney_text.text = $"{CastleMoney}";
-        }
-        else if (Castle_level == 2)
-        {
-            CastleLevelUp = 500;
-            CastleMoney_text.text = $"{CastleMoney}";
-        }
+     
         //レベルマックスでテキストをMAXにする
-        else if (Castle_level >= 3)
+         if (Castle_level >= 3)
         {
             CastleMoney_text.text = "MAX";
-            CastleLevelUp = 1000;
+           
         }
-      
+        else
+        {
+            CastleMoney_text.text = $"{CastleMoney}";
+        }
        
        
         DialogObj.SetActive(false);
@@ -370,18 +354,12 @@ public class ShopManager:MonoBehaviour
         {
             CanonMoney = 1500;
         }
-        if (Canon_level == 1)
-        {
-            CanonLevelUp = 50;
-        }
-        else if (Canon_level == 2)
-        {
-            CanonLevelUp = 80;
-        }
+       
+     
         //レベルマックスでテキストをMAXにする
-        else if (Canon_level >= 3)
+        if (Canon_level >= 3)
         {
-            CanonLevelUp = 100;
+         
             CanonMoney_text.text = "MAX";
         }
         else

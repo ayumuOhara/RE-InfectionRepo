@@ -715,7 +715,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u7206\u5F3E\u306E\u5A01\u529B\u30A2\u30C3\u30D7\n\u5A01\u529B\u5024\u306F30\u3067\u3059"
+  m_text: "\u7206\u5F3E\u306E\u5A01\u529B\u30A2\u30C3\u30D7\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bb779d5c1f115e44c82aa6f81b029f3f, type: 2}
   m_sharedMaterial: {fileID: -3649477919199228876, guid: bb779d5c1f115e44c82aa6f81b029f3f, type: 2}
@@ -4605,8 +4605,6 @@ MonoBehaviour:
   WarningObj: {fileID: 1069022764}
   Warning_text: {fileID: 1573365349}
   Details_text: {fileID: 1760809216}
-  CastleDetails_text: {fileID: 1487081545}
-  CanonDetails_text: {fileID: 41414613}
   money: 10000
 --- !u!1 &329589813
 GameObject:
@@ -8735,7 +8733,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &670263545
 RectTransform:
   m_ObjectHideFlags: 0
@@ -21505,7 +21503,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u57CE\u306EHP\u304C\u30A2\u30C3\u30D7\n\u6700\u5927HP\u306F100\u3067\u3059"
+  m_text: "\u57CE\u306EHP\u304C\u30A2\u30C3\u30D7\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bb779d5c1f115e44c82aa6f81b029f3f, type: 2}
   m_sharedMaterial: {fileID: -3649477919199228876, guid: bb779d5c1f115e44c82aa6f81b029f3f, type: 2}
