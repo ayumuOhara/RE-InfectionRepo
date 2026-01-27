@@ -1,5 +1,7 @@
 using JetBrains.Annotations;
+using System.Collections;
 using TMPro;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -11,8 +13,11 @@ public class BattleCanvas : MonoBehaviour
 
     public Image[] stageImage; //ステートの画像スプライト配列
     public Animator[] lockAnime; //ステージのロック中の表示にスプライト
+    public GameObject[] LightGlow;
+    public GameObject MessageBox; //ステージ解放時のメッセージボックス
 
     public TextMeshProUGUI conditionsText; //ステージの解放条件を表示するテキスト
+    public TextMeshProUGUI releaseText; //ステージ解放時のテキスト 
 
     public Button rightButton; //右矢印ボタン
     public Button leftButton; //左矢印ボタン
@@ -21,15 +26,23 @@ public class BattleCanvas : MonoBehaviour
     int stageNumber = 0; //現在表示しているステージ番号
     int stageLastNumber = 0; //ステージの最後の番号
 
+    private void Awake()
+    {
+       
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        MessageBox.SetActive(false);
 
         //最初は全てのステージを暗くする
         for (int i = 0; i < stageImage.Length; i++)
         {
             stageImage[i].color = new Color(0.1f, 0.1f, 0.1f, 0.9803922f);
+            LightGlow[i].SetActive(false);
         }
+
 
         //最初にステージ1を表示
         scrollChecker.scrollSnap.GoToPanel(0);
@@ -70,33 +83,50 @@ public class BattleCanvas : MonoBehaviour
             stageImage[stageNumber].color = new Color(1f, 1f, 1f, 1f);
             conditionsText.gameObject.SetActive(false);
             sortieButton.interactable = true;
-            return;
         }
         //前のステージがクリア済みか
-        if (stageDataManager.stage[stageNumber - 1].isClear == false)
+        if (stageNumber != 0 && stageDataManager.stage[stageNumber - 1].isClear == false)
         {
-            //lockAnime[stageNumber].gameObject.SetActive(false);
             conditionsText.text = $"ステージ{stageNumber}クリアで解放";
             conditionsText.gameObject.SetActive(true);
             sortieButton.interactable = false;
         }
-
-
+        else
+        {
+            conditionsText.gameObject.SetActive(false);
+            sortieButton.interactable = true;
+        }
     }
 
 
     //出撃ボタンを押したときの処理
     public void OnSortie()
     {
+        //TODO　データから呼び出すようにする
         //一旦これ
         if (stageNumber == 0)
         {
-            SceneManager.LoadScene("BetaScene");
+            SceneManager.LoadScene("MainScene");
             return;
         }
 
         //ステージ2以降
         SceneManager.LoadScene($"StageScene_{stageNumber + 1}");
+    }
+
+    //クリア済みステージの処理
+    public void OnClearedStage(int stage)
+    {
+        if (stage > 2)
+        {
+            Debug.LogError("ステージ数を超えている");
+            return;
+        }
+
+        lockAnime[stage].gameObject.SetActive(false);
+        stageImage[stage].color = new Color(1f, 1f, 1f, 1f);
+        conditionsText.gameObject.SetActive(false);
+        sortieButton.interactable = true;
     }
 
     //クリア後に解放されたステージに移る処理
@@ -107,16 +137,39 @@ public class BattleCanvas : MonoBehaviour
             Debug.LogError("ステージ数を超えている");
             return;
         }
+        StartCoroutine(PlayAnimetion(stage));
+    }
 
+    //鍵が外れるアニメーション
+    private IEnumerator PlayAnimetion(int openStage) 
+    {
+        scrollChecker.scrollSnap.GoToPanel(openStage);
 
-        scrollChecker.scrollSnap.GoToPanel(stage);
+        sortieButton.gameObject.SetActive(false);
 
-        //TODO　ここに鍵が外れるアニメーション
-        lockAnime[stage].SetBool("isOpen", true);
-        //lockAnime[stageNumber].gameObject.SetActive(false);
-        stageImage[stage].color = new Color(1f, 1f, 1f, 1f);
-        //conditionsText.gameObject.SetActive(false);
-        //sortieButton.interactable = true;
-        Debug.Log($"{stage + 1}ステージ解放");
+        yield return new WaitForSeconds(0.7f);
+        LightGlow[openStage].SetActive(true);
+        yield return new WaitForSeconds(0.7f);
+        lockAnime[openStage].SetBool("IsOpen", true);
+
+        yield return new WaitForSeconds(0.7f);
+        lockAnime[stageNumber].gameObject.SetActive(false);
+        stageImage[openStage].color = new Color(1f, 1f, 1f, 1f);
+
+        yield return new WaitForSeconds(0.5f);
+        Debug.Log($"{openStage + 1}ステージ解放");
+        MessageBox.SetActive(true);
+        releaseText.text = $"ステージ{openStage + 1}が解放された!";
+        Time.timeScale = 0f; 
+
+    }
+
+    //OKボタン
+    public void OnOkButton()
+    {
+        MessageBox.SetActive(false);
+        sortieButton.gameObject.SetActive(true);
+        sortieButton.interactable = true;
+        Time.timeScale = 1f; 
     }
 }
