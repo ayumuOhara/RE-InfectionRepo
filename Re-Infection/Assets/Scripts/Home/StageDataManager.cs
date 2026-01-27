@@ -4,10 +4,12 @@ using System.Collections;
 
 public class StageDataManager : MonoBehaviour
 {
-    public StageData stageData;
+    public static StageDataManager Instance;
 
     [SerializeField] public Stage[] stage;
     public BattleCanvas battleCanvas;
+
+    public bool[] saveisClear;//ステージのクリア情報保存用配列
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -16,56 +18,23 @@ public class StageDataManager : MonoBehaviour
         StartCoroutine(SceneStart());
     }
 
-
-    private void Update()
-    {
-
-        if (Input.GetKey(KeyCode.X))
-        {
-            for (int i = 0; i < stage.Length; i++)
-            {
-                stageData.isStageOpen[i] = false;
-            }
-        }
-
-        if (Input.GetKey(KeyCode.C))
-        {
-            //ステージのクリア情報を確認
-            for (int i = 0; i < stage.Length; i++)
-            {
-                //解放さたら
-                if (stageData.isStageClear[i] == true && stageData.isStageOpen[i] == false)
-                {
-                    battleCanvas.OnChangeStage(i + 1);
-                    stageData.isStageOpen[i] = true;
-                }
-            }
-        }
-    }
-
     IEnumerator SceneStart()
     {
+
         for (int i = 0; i < stage.Length; i++)
         {
-            stageData.isStageClear[i] = stage[i].isClear;
-            
-            //解放済みステージの処理
-            if (stageData.isStageClear[i] == true && stageData.isStageOpen[i] == true)
-            {
-                battleCanvas.OnClearedStage(i + 1);
-            }
+            saveisClear[i] = stage[i].isClear;
         }
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(4.5f);
 
         //ステージのクリア情報を確認
         for (int i = 0; i < stage.Length; i++)
         {
-            //解放さたら
-            if (stageData.isStageClear[i] == true && stageData.isStageOpen[i] == false)
+            if (saveisClear[i] == true)
             {
                 battleCanvas.OnChangeStage(i + 1);
-                stageData.isStageOpen[i] = true;
+
             }
         }
     }

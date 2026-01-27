@@ -17,7 +17,7 @@ public class ScrollChecker : MonoBehaviour
     void Update()
     {
         stagePage = scrollSnap.SelectedPanel;//今表示しているパネル番号を取得
-        Debug.Log($"パネル番号{stagePage} ステージ{stagePage + 1}");
+        Debug.Log($"ステージ{stagePage}");
 
     }
 
