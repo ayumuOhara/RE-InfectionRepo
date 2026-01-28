@@ -50,9 +50,7 @@ public class ShopManager:MonoBehaviour
     public TextMeshProUGUI Warning_text;
     public TextMeshProUGUI Detalise_text;
 
-
-    [Header("èäéùã‡")]
-    public int money = 1000;
+    PlayerStatusData playerStatusData;
 
     //èÈ
     private int Castle_level = 0;
@@ -72,10 +70,15 @@ public class ShopManager:MonoBehaviour
 
     private UpgradeType currentUpgrade;
 
+    private void Awake()
+    {
+        playerStatusData = Resources.Load<PlayerStatusData>("PlayerStatusData");
+    }
+
     private void Start()
     {
         DialogObj.SetActive(false);
-        money_text.text = ($"{money}");
+        money_text.text = ($"{playerStatusData.wallet.CurrentMoney}");
         LayCastObj.SetActive(false);
 
         Castle_text.text = ($"{Castle_level}");
@@ -267,15 +270,15 @@ public class ShopManager:MonoBehaviour
             return;
         }
 
-        if (money < CastleMoney)
+        if (playerStatusData.wallet.CanBuy(CastleMoney))
         {
             Debug.Log("èäéùã‡Ç™ë´ÇËÇ‹ÇπÇÒ");
             StartCoroutine(WarningMoneyText());
             return;
         }
       
-        money -= CastleMoney;
-        money_text.text = $"{money}";
+        playerStatusData.wallet.RemoveMoney(CastleMoney);
+        money_text.text = $"{playerStatusData.wallet.CurrentMoney}";
 
         Castle_level++;
         Castle_text.text = $"{Castle_level}";
@@ -323,15 +326,15 @@ public class ShopManager:MonoBehaviour
             StartCoroutine(WarningLevelText());
             return;
         }
-        if (money < CanonMoney)
+        if (playerStatusData.wallet.CanBuy(CanonMoney))
         {
             Debug.Log("èäéùã‡Ç™ë´ÇËÇ‹ÇπÇÒ");
             StartCoroutine(WarningMoneyText());
             return;
         }
 
-        money -= CanonMoney;
-        money_text.text = $"{money}";
+        playerStatusData.wallet.RemoveMoney(CanonMoney);
+        money_text.text = $"{playerStatusData.wallet.CurrentMoney}";
 
         Canon_level++;
         Canon_text.text = $"{Canon_level}";
@@ -378,15 +381,15 @@ public class ShopManager:MonoBehaviour
             StartCoroutine(WarningLevelText());
             return;
         }
-        if (money < CostMoney)
+        if (playerStatusData.wallet.CanBuy(CostMoney))
         {
             Debug.Log("èäéùã‡Ç™ë´ÇËÇ‹ÇπÇÒ");
             StartCoroutine(WarningMoneyText());
             return;
         }
 
-        money -= CostMoney;
-        money_text.text = $"{money}";
+        playerStatusData.wallet.RemoveMoney(CostMoney);
+        money_text.text = $"{playerStatusData.wallet.CurrentMoney}";
 
         Cost_level++;
         Cost_text.text = $"{Cost_level}";
@@ -432,15 +435,15 @@ public class ShopManager:MonoBehaviour
             StartCoroutine(WarningLevelText());
             return;
         }
-        if (money < InfectionMoney)
+        if (playerStatusData.wallet.CanBuy(InfectionMoney))
         {
             Debug.Log("èäéùã‡Ç™ë´ÇËÇ‹ÇπÇÒ");
             StartCoroutine(WarningMoneyText());
             return;
         }
 
-        money -= InfectionMoney;
-        money_text.text = $"{money}";
+        playerStatusData.wallet.RemoveMoney(InfectionMoney);
+        money_text.text = $"{playerStatusData.wallet.CurrentMoney}";
 
         Infection_level++;
         Infection_text.text = $"{Infection_level}";

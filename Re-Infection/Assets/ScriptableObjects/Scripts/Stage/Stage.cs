@@ -5,6 +5,7 @@ using System.Linq;
 [CreateAssetMenu(fileName = "Stage", menuName = "Scriptable Objects/Stage")]
 public class Stage : ScriptableObject
 {
+    public int stageNum;              // ステージ数
     public WaveData[] waveData;       // ステージのウェーブデータ
     public bool isClear;              // ステージクリアフラグ
 

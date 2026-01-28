@@ -15,8 +15,9 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField] Image castlePoint;
 
     [SerializeField] Stage stage;            // ステージのデータ
+    public Stage CurrentStage => stage;
 
-    int currentWaveIdx = 0;      // 現在のウェーブ
+    public int currentWaveIdx { get; private set; } = 0;      // 現在のウェーブ
     int currentWaveEnemySum = 0; // 現在のウェーブの敵の残りの合計数
 
     const float WAVE_START_CNT = 0.5f;
@@ -171,8 +172,6 @@ public class WaveSpawner : MonoBehaviour
         gameUIManager.InvisibleCombatUI();
         gameUIManager.VisibleAllUI();
         isSessionClear = true;
-        stage.isClear = true;
-
 
         yield break;
     }
