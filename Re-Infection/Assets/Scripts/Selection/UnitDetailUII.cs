@@ -15,17 +15,16 @@ public class UnitDetailUII : MonoBehaviour
     public TextMeshProUGUI rangeText; //射程
     public TextMeshProUGUI atkInterbalText; //攻撃速度
     public TextMeshProUGUI hitCntText; //ヒットする数
-    public GameObject LayCastObj; //ステータス表示した際、ほかのボタンが触れないように
+   
     public void Start()
     {
         UnitStatsObj.SetActive(false);
-        LayCastObj.SetActive(false);
+      
     }
     public void SetUnit(UnitStats stats)
     {
         UnitStatsObj.SetActive(true);
         unitImage.sprite = stats.unitSprite;
-        LayCastObj.SetActive(true);
 
         unitNameText.text = stats.unitName;
         unitHpText.text = $"{stats.maxHp}";
@@ -39,6 +38,6 @@ public class UnitDetailUII : MonoBehaviour
     public void BackButtonClick()
     {
         UnitStatsObj.SetActive(false);
-        LayCastObj.SetActive(false);
+  
     }
 }
