@@ -4620,7 +4620,6 @@ MonoBehaviour:
   WarningObj: {fileID: 1069022764}
   Warning_text: {fileID: 1573365349}
   Detalise_text: {fileID: 864920615}
-  money: 10000
 --- !u!1 &329589813
 GameObject:
   m_ObjectHideFlags: 0
@@ -17686,6 +17685,7 @@ MonoBehaviour:
   shopButton: {fileID: 1251878302}
   battleButton: {fileID: 981118438}
   selectionButton: {fileID: 1788002216}
+  shopCanvas: {fileID: 325302035}
   battleCanvas: {fileID: 1262412672}
   selectionCanvas: {fileID: 670263544}
 --- !u!1 &1206817214
@@ -18823,13 +18823,15 @@ MonoBehaviour:
   stageDataManager: {fileID: 1556152407}
   scrollChecker: {fileID: 5681489238170330433}
   stageData: {fileID: 11400000, guid: a9dee92a76df99143bf40defe66e5352, type: 2}
+  enemyAppearsSpace: {fileID: 0}
   stageImage:
   - {fileID: 446696949}
   - {fileID: 1206817216}
   - {fileID: 1734490919}
   lockAnime: []
-  LightGlow: []
-  MessageBox: {fileID: 1124495038}
+  lightGlow: []
+  messageBox: {fileID: 0}
+  homeTab: {fileID: 0}
   conditionsText: {fileID: 915037850}
   releaseText: {fileID: 1375711394}
   rightButton: {fileID: 2005414112}
