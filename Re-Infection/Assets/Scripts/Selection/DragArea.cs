@@ -9,7 +9,21 @@ public class DropArea : MonoBehaviour, IDropHandler
     public UnitStatsData currentUnitStats;
     public int slotIndex;
 
-  
+    private void Start()
+    {
+        if (UnitDataCarrier.Instance.selectedUnits.Count <= slotIndex)
+            return;
+
+        UnitStatsData saved = UnitDataCarrier.Instance.selectedUnits[slotIndex];
+
+        if (saved == null)
+            return;
+
+        currentUnitStats = saved;
+
+        CreateCloneFromExistingIcon(saved);
+    }
+
     public void OnDrop(PointerEventData eventData)
     {
         GameObject dropped = eventData.pointerDrag;
@@ -194,5 +208,63 @@ public class DropArea : MonoBehaviour, IDropHandler
         UnitDataCarrier.Instance.selectedUnits[slotIndex] = null;
 
         currentUnitStats = null;
+    }
+
+    private void CreateCloneFromExistingIcon(UnitStatsData stats)
+    {
+        // シーン内の DragIconController を全部探す
+        DragIconController[] icons = FindObjectsOfType<DragIconController>();
+
+        DragIconController source = null;
+
+        foreach (var icon in icons)
+        {
+            if (icon.unitStats == stats)
+            {
+                source = icon;
+                break;
+            }
+        }
+
+        if (source == null)
+        {
+            Debug.LogError("復元対象の DragIcon がシーン内に見つかりません");
+            return;
+        }
+
+        // Clone を作成
+        GameObject clone = Instantiate(source.gameObject, dropTargetParent);
+
+        // DragIconController を削除
+        Destroy(clone.GetComponent<DragIconController>());
+
+        // 子に DragIconController がいたら削除
+        foreach (var comp in clone.GetComponentsInChildren<DragIconController>())
+            Destroy(comp);
+
+        // 位置調整
+        RectTransform rt = clone.GetComponent<RectTransform>();
+        rt.anchoredPosition = new Vector2(53f, -49f);
+
+        // CanvasGroup を付ける
+        CanvasGroup cg = clone.GetComponent<CanvasGroup>();
+        if (cg == null) cg = clone.AddComponent<CanvasGroup>();
+        cg.blocksRaycasts = true;
+        cg.interactable = true;
+        cg.alpha = 1f;
+
+        // DropAreaIconDrag を付ける
+        DropAreaIconDrag dragScript = clone.AddComponent<DropAreaIconDrag>();
+        dragScript.slotIndex = slotIndex;
+        dragScript.unitStats = stats;
+        dragScript.originalDropArea = this;
+        dragScript.SetOriginalPos();
+
+        // CheckImage を非表示
+        foreach (var img in clone.GetComponentsInChildren<Image>(true))
+        {
+            if (img.gameObject.name == "CheckImage")
+                img.enabled = false;
+        }
     }
 }
