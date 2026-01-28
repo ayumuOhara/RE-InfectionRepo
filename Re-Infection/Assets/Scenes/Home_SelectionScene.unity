@@ -569,7 +569,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &22558678
 RectTransform:
   m_ObjectHideFlags: 0
@@ -765,7 +765,7 @@ PrefabInstance:
     - target: {fileID: 7491374937133148069, guid: 78e595d171d4b37409494f279f3145be, type: 3}
       propertyPath: unitStats
       value: 
-      objectReference: {fileID: 11400000, guid: 6b7696a2506e6254898ee43fc57898c2, type: 2}
+      objectReference: {fileID: 11400000, guid: fe15a39c45f5ba945931563260f1ba9f, type: 2}
     - target: {fileID: 7491374937133148069, guid: 78e595d171d4b37409494f279f3145be, type: 3}
       propertyPath: targetPosition.x
       value: 171
@@ -3137,7 +3137,7 @@ PrefabInstance:
     - target: {fileID: 7491374937133148069, guid: 78e595d171d4b37409494f279f3145be, type: 3}
       propertyPath: unitStats
       value: 
-      objectReference: {fileID: 11400000, guid: e6d3327307b2d5c4c9367da09a7e2d3b, type: 2}
+      objectReference: {fileID: 11400000, guid: a5b873a3a6c417b43aa7c5049c047649, type: 2}
     - target: {fileID: 7491374937133148069, guid: 78e595d171d4b37409494f279f3145be, type: 3}
       propertyPath: targetPosition.x
       value: -58
@@ -4494,7 +4494,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &325302036
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4603,23 +4603,24 @@ MonoBehaviour:
   LayCastObj: {fileID: 1870827094}
   CastleButton: {fileID: 2065376516}
   CanonButton: {fileID: 329589815}
-  CanonRangeButton: {fileID: 1896358129}
   CostButton: {fileID: 916456170}
+  InfectionButton: {fileID: 1896358129}
   Castle_text: {fileID: 273235831}
   CastleMoney_text: {fileID: 288042596}
   Canon_text: {fileID: 1926729858}
   CanonMoney_text: {fileID: 1013817239}
-  CanonRange_text: {fileID: 2094532241}
-  CanonRangeMoney_text: {fileID: 1341494909}
   Cost_text: {fileID: 1317711703}
   CostMoney_text: {fileID: 288492654}
+  Infection_text: {fileID: 2094532241}
+  InfectionMoney_text: {fileID: 1341494909}
   DialogMessege: {fileID: 764340342}
   DialogLevel_text1: {fileID: 2083524051}
   DialogLevel_text2: {fileID: 1608186071}
   DialogMoney_text: {fileID: 295227048}
   WarningObj: {fileID: 1069022764}
   Warning_text: {fileID: 1573365349}
-  money: 100000
+  Detalise_text: {fileID: 864920615}
+  money: 10000
 --- !u!1 &329589813
 GameObject:
   m_ObjectHideFlags: 0
@@ -7762,7 +7763,7 @@ PrefabInstance:
     - target: {fileID: 7491374937133148069, guid: 78e595d171d4b37409494f279f3145be, type: 3}
       propertyPath: unitStats
       value: 
-      objectReference: {fileID: 11400000, guid: e6d3327307b2d5c4c9367da09a7e2d3b, type: 2}
+      objectReference: {fileID: 11400000, guid: 8e79466c1b37ca44d944376febf5437b, type: 2}
     - target: {fileID: 7491374937133148069, guid: 78e595d171d4b37409494f279f3145be, type: 3}
       propertyPath: targetPosition.x
       value: 171
@@ -8709,7 +8710,7 @@ PrefabInstance:
     - target: {fileID: 7491374937133148069, guid: 78e595d171d4b37409494f279f3145be, type: 3}
       propertyPath: unitStats
       value: 
-      objectReference: {fileID: 11400000, guid: fe15a39c45f5ba945931563260f1ba9f, type: 2}
+      objectReference: {fileID: 11400000, guid: 0b6feea231edc7e4f8f13e0186533328, type: 2}
     - target: {fileID: 7491374937133148069, guid: 78e595d171d4b37409494f279f3145be, type: 3}
       propertyPath: targetPosition.x
       value: 406
@@ -10819,8 +10820,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000015258789, y: 202.99985}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 0, y: 202.99985}
+  m_SizeDelta: {x: 140, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &740979489
 MonoBehaviour:
@@ -15205,7 +15206,7 @@ PrefabInstance:
     - target: {fileID: 7491374937133148069, guid: 78e595d171d4b37409494f279f3145be, type: 3}
       propertyPath: unitStats
       value: 
-      objectReference: {fileID: 11400000, guid: 3ab42a19c04e3134fb12a71cceee2ccf, type: 2}
+      objectReference: {fileID: 11400000, guid: f02c22218b66c3d46a4373dc16d76277, type: 2}
     - target: {fileID: 7491374937133148069, guid: 78e595d171d4b37409494f279f3145be, type: 3}
       propertyPath: targetPosition.x
       value: -287
@@ -15996,7 +15997,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 169}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 140, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1038802950
 MonoBehaviour:
@@ -27292,7 +27293,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 325302040}
         m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
-        m_MethodName: CanonRangeSkillEnhacement
+        m_MethodName: InfectionSkillEnhacement
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
