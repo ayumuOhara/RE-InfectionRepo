@@ -156,8 +156,6 @@ MonoBehaviour:
   costAnimator: {fileID: 834038489}
   costText: {fileID: 99145687}
   startCost: 10
-  maxCost: 30
-  generateInterbal: 1.6
 --- !u!4 &20634379
 Transform:
   m_ObjectHideFlags: 0
@@ -9814,7 +9812,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dff2215e0ef0dd042ae89d1c8efbfe64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CannonPointer.CannonSkillPointer
-  cannonStats: {fileID: 11400000, guid: e9dc34fea9f005941a14199de50eef58, type: 2}
   cannonPrefab: {fileID: 4189163746107725710, guid: 290dfda7c01187b4e9b5fa11a26956e8, type: 3}
   cannonPointerFilled: {fileID: 1047223185}
 --- !u!1 &834038485
@@ -10807,7 +10804,7 @@ PrefabInstance:
     - target: {fileID: 871945039257164439, guid: 95d2408ff4febfe4d9a617269ecd28f6, type: 3}
       propertyPath: unitData
       value: 
-      objectReference: {fileID: 11400000, guid: e6d3327307b2d5c4c9367da09a7e2d3b, type: 2}
+      objectReference: {fileID: 11400000, guid: b92b3387e050d804c96d18a3d08de2a8, type: 2}
     - target: {fileID: 4552608072019839227, guid: 95d2408ff4febfe4d9a617269ecd28f6, type: 3}
       propertyPath: m_Name
       value: UnitIcon
@@ -17627,7 +17624,11 @@ PrefabInstance:
     - target: {fileID: 871945039257164439, guid: 95d2408ff4febfe4d9a617269ecd28f6, type: 3}
       propertyPath: unitData
       value: 
-      objectReference: {fileID: 11400000, guid: fe15a39c45f5ba945931563260f1ba9f, type: 2}
+      objectReference: {fileID: 11400000, guid: 841216df53d84be43a591e5d162cf195, type: 2}
+    - target: {fileID: 871945039257164439, guid: 95d2408ff4febfe4d9a617269ecd28f6, type: 3}
+      propertyPath: slotIndex
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4552608072019839227, guid: 95d2408ff4febfe4d9a617269ecd28f6, type: 3}
       propertyPath: m_Name
       value: UnitIcon (2)
@@ -23211,7 +23212,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.1, y: 0.1}
+  m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
 --- !u!1 &1635322122
 GameObject:
@@ -23981,6 +23982,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 337cc6eba6b3faa4dadb48a91c4bb154, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WaveSpawner
+  stageData: {fileID: 11400000, guid: a9dee92a76df99143bf40defe66e5352, type: 2}
   clearSe:
   - {fileID: 8300000, guid: 6b725274c4be74746b5753777d228f84, type: 3}
   - {fileID: 8300000, guid: ccf6c30f76603264a810dab0862c25a2, type: 3}
@@ -23990,7 +23992,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8194c0c31dd9bb246bfaedc8497395dc, type: 3}
   - {fileID: 8300000, guid: 88262d2f692ee6444b26602b51d61599, type: 3}
   castlePoint: {fileID: 1388665198}
-  stage: {fileID: 11400000, guid: 3699ce58f8ebc564f94a20bf9f4d6f9c, type: 2}
+  stage: {fileID: 11400000, guid: a0043c5581872544b91ade98c3ccb70c, type: 2}
 --- !u!4 &1750744199
 Transform:
   m_ObjectHideFlags: 0
@@ -25293,7 +25295,11 @@ PrefabInstance:
     - target: {fileID: 871945039257164439, guid: 95d2408ff4febfe4d9a617269ecd28f6, type: 3}
       propertyPath: unitData
       value: 
-      objectReference: {fileID: 11400000, guid: b92b3387e050d804c96d18a3d08de2a8, type: 2}
+      objectReference: {fileID: 11400000, guid: e6d3327307b2d5c4c9367da09a7e2d3b, type: 2}
+    - target: {fileID: 871945039257164439, guid: 95d2408ff4febfe4d9a617269ecd28f6, type: 3}
+      propertyPath: slotIndex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4552608072019839227, guid: 95d2408ff4febfe4d9a617269ecd28f6, type: 3}
       propertyPath: m_Name
       value: UnitIcon (1)

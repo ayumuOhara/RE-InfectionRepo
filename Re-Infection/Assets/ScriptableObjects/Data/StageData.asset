@@ -12,5 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71bbd25b00bb24643837e314ef25f00d, type: 3}
   m_Name: StageData
   m_EditorClassIdentifier: Assembly-CSharp::StageData
-  isStageClear: 010000
-  isStageOpen: 010000
+  Stage:
+  - {fileID: 11400000, guid: 3699ce58f8ebc564f94a20bf9f4d6f9c, type: 2}
+  - {fileID: 11400000, guid: 4ab16632466d4b84b9e7a62bfcbb2e8c, type: 2}
+  - {fileID: 11400000, guid: a0043c5581872544b91ade98c3ccb70c, type: 2}
+  isStageClear: 000000
+  isStageOpen: 000000
+  SelectStageNumber: 0

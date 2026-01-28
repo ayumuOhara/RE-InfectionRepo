@@ -6,6 +6,8 @@ using CannonPointer;
 
 public class CannonAttack : MonoBehaviour
 {
+    PlayerStatusData playerStatusData;
+
     public static event Action<float> OnSkillUsed;
 
     UnitManager unitManager;
@@ -13,7 +15,7 @@ public class CannonAttack : MonoBehaviour
 
     AudioSource audioSource;
 
-    [SerializeField] CannonSkillStats cannonSkillStats;
+    [SerializeField] float cannonRadius;
     [SerializeField] LayerMask skillTargetLayer;
     [SerializeField] GameObject cannonEffect;
     [SerializeField] AudioClip cannonSE;
@@ -22,8 +24,10 @@ public class CannonAttack : MonoBehaviour
 
     private void Awake()
     {
+        playerStatusData = Resources.Load<PlayerStatusData>("PlayerStatusData");
+
         cannonSkillPointer = GameObject.Find("CannonSkillPointer").GetComponent<CannonSkillPointer>();
-        transform.localScale = new Vector3(cannonSkillStats.cannonRadius * VISUAL_RANGE, cannonSkillStats.cannonRadius * VISUAL_RANGE);
+        transform.localScale = new Vector3(cannonRadius * VISUAL_RANGE, cannonRadius * VISUAL_RANGE);
 
         unitManager = GameObject.Find("UnitManager").GetComponent<UnitManager>();
         audioSource = GameObject.Find("WaveSpawner").GetComponent<AudioSource>();
@@ -38,7 +42,7 @@ public class CannonAttack : MonoBehaviour
             return;
         }
 
-        var targetUnits = Physics2D.OverlapCircleAll(transform.position, cannonSkillStats.cannonRadius, skillTargetLayer);
+        var targetUnits = Physics2D.OverlapCircleAll(transform.position, cannonRadius, skillTargetLayer);
 
         if (targetUnits.Length <= 0 || targetUnits == null)
         {
@@ -68,7 +72,7 @@ public class CannonAttack : MonoBehaviour
             // 範囲内にいるターゲット全てにダメージ
             if (enemy.IsDead == false)
             {
-                enemy.Damage(cannonSkillStats.cannonDamage);
+                enemy.Damage(playerStatusData.cannonAbility.Damage);
                 // 倒した敵の死体を複製(ボスユニット除外)
                 if (enemy.CurrentHealth <= 0 && !enemy.Stats.bossUnit)
                 {
@@ -81,7 +85,7 @@ public class CannonAttack : MonoBehaviour
         }
 
         OnSkillUsed += cannonSkillPointer.OnSkillUse;
-        OnSkillUsed?.Invoke(cannonSkillStats.coolTime);
+        OnSkillUsed?.Invoke(playerStatusData.cannonAbility.CoolTime);
         OnSkillUsed -= cannonSkillPointer.OnSkillUse;
 
         // 処理終了後、非アクティブ化

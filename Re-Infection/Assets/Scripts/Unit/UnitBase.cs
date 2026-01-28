@@ -76,7 +76,6 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
             moveSpeed = stats.moveSpeed,
             range = stats.range,
             radius = stats.radius,
-            infecitonTime = stats.infecitonTime,
             bossUnit = stats.bossUnit,
             attackSe = stats.attackSe,
         };

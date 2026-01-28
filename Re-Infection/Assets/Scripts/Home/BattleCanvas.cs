@@ -10,6 +10,7 @@ public class BattleCanvas : MonoBehaviour
 {
     public StageDataManager stageDataManager;
     public ScrollChecker scrollChecker;
+    public StageData stageData;
 
     public Image[] stageImage; //ステートの画像スプライト配列
     public Animator[] lockAnime; //ステージのロック中の表示にスプライト
@@ -102,26 +103,15 @@ public class BattleCanvas : MonoBehaviour
     //出撃ボタンを押したときの処理
     public void OnSortie()
     {
-        //TODO　データから呼び出すようにする
-        //一旦これ
-        if (stageNumber == 0)
-        {
-            SceneManager.LoadScene("MainScene");
-            return;
-        }
 
-        //ステージ2以降
-        SceneManager.LoadScene($"StageScene_{stageNumber + 1}");
+        stageData.SelectStageNumber = stageNumber;
+        SceneManager.LoadScene("MainScene");
     }
 
     //クリア済みステージの処理
     public void OnClearedStage(int stage)
     {
-        if (stage > 2)
-        {
-            Debug.LogError("ステージ数を超えている");
-            return;
-        }
+        if (stage >= 3) return;
 
         lockAnime[stage].gameObject.SetActive(false);
         stageImage[stage].color = new Color(1f, 1f, 1f, 1f);
@@ -132,11 +122,7 @@ public class BattleCanvas : MonoBehaviour
     //クリア後に解放されたステージに移る処理
     public void OnChangeStage(int stage)
     {
-        if (stage > 2)
-        {
-            Debug.LogError("ステージ数を超えている");
-            return;
-        }
+        if (stage >= 3) return;
         StartCoroutine(PlayAnimetion(stage));
     }
 

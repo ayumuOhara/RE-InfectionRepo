@@ -38,8 +38,7 @@ public class EnemyUnit : UnitBase, Iinfection
     public override void Start()
     {
         base.Start();
-        
-        if(Stats.bossUnit)
+        if (Stats.bossUnit)
             FindObjectOfType<WaveSpawner>().SetBoss(this);
     }
 
@@ -70,8 +69,6 @@ public class EnemyUnit : UnitBase, Iinfection
                 animator.enabled = false;
 
                 GetComponent<SpriteRenderer>().sprite = corpseSprite;
-
-                StartCoroutine(Infection());
             }
             else
             {
@@ -81,19 +78,24 @@ public class EnemyUnit : UnitBase, Iinfection
         }
     }
 
-    // ä¥êı
-    public IEnumerator Infection()
+    public void StartInfection(float infectionTime, float healthRate)
     {
-        yield return new WaitUntil(() => IsInfectioning);
+        StartCoroutine(Infection(infectionTime, healthRate));
+    }
+
+    // ä¥êı
+    public IEnumerator Infection(float infectionTime, float healthRate)
+    {
+        IsInfectioning = true;
 
         var timer = 0f;
         infecitonInfo.SetActive(true);
 
-        while (timer < Stats.infecitonTime)
+        while (timer < infectionTime)
         {
             timer += Time.deltaTime;
 
-            infectionBar.fillAmount = timer / Stats.infecitonTime;
+            infectionBar.fillAmount = timer / infectionTime;
 
             yield return null;
         }
@@ -105,7 +107,7 @@ public class EnemyUnit : UnitBase, Iinfection
         gameObject.layer = LayerMask.NameToLayer("PlayerUnit");
         targetLayer = LayerMask.GetMask("EnemyUnit");
 
-        Heal(Stats.maxHp * 0.5f);
+        Heal(Stats.maxHp * healthRate);
 
         FindObjectOfType<UnitManager>().RemoveCorpseList(this);
         FindObjectOfType<UnitManager>().AddUnitList(this, IsInfectioning);
