@@ -11,11 +11,13 @@ public class BattleCanvas : MonoBehaviour
     public StageDataManager stageDataManager;
     public ScrollChecker scrollChecker;
     public StageData stageData;
+    public EnemyAppearsSpace enemyAppearsSpace;
 
     public Image[] stageImage; //ステートの画像スプライト配列
     public Animator[] lockAnime; //ステージのロック中の表示にスプライト
-    public GameObject[] LightGlow;
-    public GameObject MessageBox; //ステージ解放時のメッセージボックス
+    public GameObject[] lightGlow;
+    public GameObject messageBox; //ステージ解放時のメッセージボックス
+    public GameObject homeTab;
 
     public TextMeshProUGUI conditionsText; //ステージの解放条件を表示するテキスト
     public TextMeshProUGUI releaseText; //ステージ解放時のテキスト 
@@ -29,19 +31,19 @@ public class BattleCanvas : MonoBehaviour
 
     private void Awake()
     {
-       
+        Time.timeScale = 1.0f;
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        MessageBox.SetActive(false);
+        messageBox.SetActive(false);
 
         //最初は全てのステージを暗くする
         for (int i = 0; i < stageImage.Length; i++)
         {
             stageImage[i].color = new Color(0.1f, 0.1f, 0.1f, 0.9803922f);
-            LightGlow[i].SetActive(false);
+            lightGlow[i].SetActive(false);
         }
 
 
@@ -123,6 +125,7 @@ public class BattleCanvas : MonoBehaviour
     public void OnChangeStage(int stage)
     {
         if (stage >= 3) return;
+        homeTab.SetActive(false);
         StartCoroutine(PlayAnimetion(stage));
     }
 
@@ -132,9 +135,10 @@ public class BattleCanvas : MonoBehaviour
         scrollChecker.scrollSnap.GoToPanel(openStage);
 
         sortieButton.gameObject.SetActive(false);
+        
 
         yield return new WaitForSeconds(0.7f);
-        LightGlow[openStage].SetActive(true);
+        lightGlow[openStage].SetActive(true);
         yield return new WaitForSeconds(0.7f);
         lockAnime[openStage].SetBool("IsOpen", true);
 
@@ -144,16 +148,17 @@ public class BattleCanvas : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
         Debug.Log($"{openStage + 1}ステージ解放");
-        MessageBox.SetActive(true);
+        messageBox.SetActive(true);
         releaseText.text = $"ステージ{openStage + 1}が解放された!";
         Time.timeScale = 0f; 
 
+        homeTab.SetActive(true);
     }
 
     //OKボタン
     public void OnOkButton()
     {
-        MessageBox.SetActive(false);
+        messageBox.SetActive(false);
         sortieButton.gameObject.SetActive(true);
         sortieButton.interactable = true;
         Time.timeScale = 1f; 
