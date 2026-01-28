@@ -2157,7 +2157,7 @@ GameObject:
   - component: {fileID: 161703689}
   - component: {fileID: 161703690}
   m_Layer: 5
-  m_Name: CanonRange_deco
+  m_Name: Infection_deco
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27219,7 +27219,7 @@ GameObject:
   - component: {fileID: 1896358130}
   - component: {fileID: 1896358129}
   m_Layer: 5
-  m_Name: CanonRange_button
+  m_Name: Infection_button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
