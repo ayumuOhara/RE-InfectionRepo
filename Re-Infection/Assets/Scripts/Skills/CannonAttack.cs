@@ -50,7 +50,7 @@ public class CannonAttack : MonoBehaviour
         }
         else
         {
-            StartCoroutine(AllTargetDamage(targetUnits));
+            AllTargetDamage(targetUnits);
         }
     }
 
@@ -60,7 +60,7 @@ public class CannonAttack : MonoBehaviour
     }
 
     // 取得したターゲットにダメージ
-    IEnumerator AllTargetDamage(Collider2D[] targetUnits)
+    void AllTargetDamage(Collider2D[] targetUnits)
     {
         Instantiate(cannonEffect, transform.position + new Vector3(0, -1.7f, 0), Quaternion.identity);
         audioSource.PlayOneShot(cannonSE);
@@ -80,8 +80,6 @@ public class CannonAttack : MonoBehaviour
                     clone.Initialize(enemy.Stats, true);
                 }
             }
-
-            yield return null;
         }
 
         OnSkillUsed += cannonSkillPointer.OnSkillUse;

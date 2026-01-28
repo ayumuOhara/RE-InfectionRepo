@@ -44,7 +44,7 @@ public class InfectioningUnit : MonoBehaviour
         }
         else
         {
-            StartCoroutine(AllTargetInfection(targetUnits));
+            AllTargetInfection(targetUnits);
         }
     }
 
@@ -54,7 +54,7 @@ public class InfectioningUnit : MonoBehaviour
     }
 
     // 取得したターゲットを感染
-    IEnumerator AllTargetInfection(Collider2D[] targetUnits)
+    void AllTargetInfection(Collider2D[] targetUnits)
     {
         var effectGenerated = false;
 
@@ -75,8 +75,6 @@ public class InfectioningUnit : MonoBehaviour
                     Instantiate(infectionEffect, transform.position, Quaternion.identity);
                 }
             }
-
-            yield return null;
         }
 
         // 処理終了後、非アクティブ化
