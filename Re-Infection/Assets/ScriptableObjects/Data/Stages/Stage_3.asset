@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d65f76e4a54ddcc46a23298e0df2c4ac, type: 3}
   m_Name: Stage_3
   m_EditorClassIdentifier: Assembly-CSharp::Stage
+  stageNum: 3
   waveData:
   - {fileID: 11400000, guid: 43d7cdc0603e6a34096c5ad3a7981c6f, type: 2}
   - {fileID: 11400000, guid: 266f4f85ce1b7ae4a8a6614e7714668e, type: 2}

@@ -89,6 +89,7 @@ public class VirusAbility : BaseAbility
 [CreateAssetMenu(fileName = "PlayerStatusData", menuName = "Scriptable Objects/PlayerStatusData")]
 public class PlayerStatusData : ScriptableObject
 {
+    public Wallet wallet;
     public CastleAbility castleAbility;
     public CannonAbility cannonAbility;
     public CostAbility costAbility;

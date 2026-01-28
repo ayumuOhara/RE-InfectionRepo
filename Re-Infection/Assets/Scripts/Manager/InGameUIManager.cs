@@ -17,6 +17,7 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] Canvas resultUI;
     [SerializeField] Canvas clearUI;
     [SerializeField] Canvas failedUI;
+    [SerializeField] Canvas rewardUI;
     [SerializeField] Canvas retireUI;
 
     [SerializeField] TextMeshProUGUI currentWaveText;
@@ -34,6 +35,13 @@ public class InGameUIManager : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI clearTimeText;
 
+    [SerializeField] TextMeshProUGUI waveCoinText;
+    [SerializeField] TextMeshProUGUI stageCoinText;
+    [SerializeField] GameObject stageClearReward;
+    [SerializeField] TextMeshProUGUI firstCoinText;
+    [SerializeField] GameObject firstClearReward;
+    [SerializeField] TextMeshProUGUI totalCoinText;
+
     AudioSource SeAudio;
     [SerializeField] AudioClip lordSe;
     [SerializeField] AudioClip decideSe;
@@ -41,6 +49,8 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] AudioClip stageClearSe;
     [SerializeField] AudioClip stageFailedSe;
     [SerializeField] AudioClip resultBgm;
+
+    string coinIconText = "<sprite=0>";
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -54,25 +64,25 @@ public class InGameUIManager : MonoBehaviour
         retireUI.enabled = false;
     }
 
-    // ‘SUI•\¦
+    // å…¨UIè¡¨ç¤º
     public void VisibleAllUI()
     {
         masterUI.enabled = true;
     }
 
-    // ‘SUI”ñ•\¦
+    // å…¨UIéè¡¨ç¤º
     public void InvisibleAllUI()
     {
         masterUI.enabled = false;
     }
 
-    // í“¬UI‚ğ”ñ•\¦
+    // æˆ¦é—˜UIã‚’éè¡¨ç¤º
     public void InvisibleCombatUI()
     {
         combatUI.enabled = false;
     }
 
-    // ƒXƒe[ƒWƒNƒŠƒAˆ—
+    // ã‚¹ãƒ†ãƒ¼ã‚¸ã‚¯ãƒªã‚¢å‡¦ç†
     public IEnumerator SessionClear()
     {
         clearTimeText.text = gameManager.timeManager.Minutes.ToString("D2") + ":" + gameManager.timeManager.Seconds.ToString("D2");
@@ -89,7 +99,7 @@ public class InGameUIManager : MonoBehaviour
         GetComponent<AudioSource>().Play();
     }
 
-    // ƒXƒe[ƒW¸”sˆ—
+    // ã‚¹ãƒ†ãƒ¼ã‚¸å¤±æ•—å‡¦ç†
     public IEnumerator SessionFailed()
     {
         combatUI.enabled = false;
@@ -106,49 +116,97 @@ public class InGameUIManager : MonoBehaviour
         GetComponent<AudioSource>().Play();
     }
 
-    // “G‚Ì‡Œv”ƒeƒLƒXƒg
-    public void WaveEnemyCntText(int value)
+    // å ±é…¬å‡¦ç†
+    public void SessionReward()
     {
-        currentEnemyCntText.text = $"c‚è {value} ‘Ì";
+        rewardUI.enabled = true;
+
+        var totalCoin = 0;
+        var waveCoin = gameManager.waveSpawner.currentWaveIdx
+                     * gameManager.waveSpawner.CurrentStage.stageNum
+                     * 100;
+        var stageCoin = gameManager.waveSpawner.CurrentStage.stageNum
+                      * 200;
+
+        totalCoin = gameManager.waveSpawner.IsSessionClear ? waveCoin + stageCoin : waveCoin;
+
+        if (gameManager.waveSpawner.IsSessionClear)
+        {
+            stageClearReward.SetActive(true);
+
+            if (!gameManager.waveSpawner.CurrentStage.isClear)
+            {
+                totalCoin *= 2;
+
+                gameManager.waveSpawner.CurrentStage.isClear = true;
+                firstClearReward.SetActive(true);
+            }
+            else
+            {
+                firstClearReward.SetActive(false);
+            }
+        }
+        else
+        {
+            stageClearReward.SetActive(false);
+            firstClearReward.SetActive(false);
+        }
+
+        GetCoinText(waveCoinText, waveCoin);
+        GetCoinText(stageCoinText, stageCoin);
+        GetCoinText(firstCoinText, waveCoin + stageCoin);
+
+        GetCoinText(totalCoinText, totalCoin);
+
+        Wallet wallet = Resources.Load<PlayerStatusData>("PlayerStatusData").wallet;
+        wallet.AddMoney(totalCoin);
+
+        rewardUI.transform.Find("Rewards").GetComponent<Animator>().SetTrigger("Reward");
     }
 
-    // “G‚Ì‡Œv”ƒeƒLƒXƒg•\¦
+    // æ•µã®åˆè¨ˆæ•°ãƒ†ã‚­ã‚¹ãƒˆ
+    public void WaveEnemyCntText(int value)
+    {
+        currentEnemyCntText.text = $"æ®‹ã‚Š {value} ä½“";
+    }
+
+    // æ•µã®åˆè¨ˆæ•°ãƒ†ã‚­ã‚¹ãƒˆè¡¨ç¤º
     public void VisibleWaveEnemyCntText()
     {
         currentEnemyCntText.enabled = true;
     }
 
-    // “G‚Ì‡Œv”ƒeƒLƒXƒg”ñ•\¦
+    // æ•µã®åˆè¨ˆæ•°ãƒ†ã‚­ã‚¹ãƒˆéè¡¨ç¤º
     public void InvisibleWaveEnemyCntText()
     {
         currentEnemyCntText.enabled = false;
     }
 
-    // Œ»İ‚ÌƒEƒF[ƒuƒeƒLƒXƒg
+    // ç¾åœ¨ã®ã‚¦ã‚§ãƒ¼ãƒ–ãƒ†ã‚­ã‚¹ãƒˆ
     public void CurrentWaveText(int value)
     {
         currentWaveText.text = "WAVE " + (value + 1);
     }
 
-    // Œ»İ‚ÌƒEƒF[ƒuƒeƒLƒXƒg•\¦
+    // ç¾åœ¨ã®ã‚¦ã‚§ãƒ¼ãƒ–ãƒ†ã‚­ã‚¹ãƒˆè¡¨ç¤º
     public void VisibleCurrentWaveText()
     {
         currentWaveText.enabled = true;
     }
 
-    // Œ»İ‚ÌƒEƒF[ƒuƒeƒLƒXƒg”ñ•\¦
+    // ç¾åœ¨ã®ã‚¦ã‚§ãƒ¼ãƒ–ãƒ†ã‚­ã‚¹ãƒˆéè¡¨ç¤º
     public void InvisibleCurrentWaveText()
     {
         currentWaveText.enabled = false;
     }
 
-    // Œ»İ‚ÌƒEƒF[ƒu‚Ìis“x
+    // ç¾åœ¨ã®ã‚¦ã‚§ãƒ¼ãƒ–ã®é€²è¡Œåº¦
     public void CurrentWaveProgress(int value, int max)
     {
         currentWaveProgress.value = (float)value / max;
     }
 
-    // ƒz[ƒ‹ƒhƒAƒCƒRƒ“‚ğƒ^ƒbƒvˆÊ’u‚É•\¦
+    // ãƒ›ãƒ¼ãƒ«ãƒ‰ã‚¢ã‚¤ã‚³ãƒ³ã‚’ã‚¿ãƒƒãƒ—ä½ç½®ã«è¡¨ç¤º
     public void VisibleHoldIcon()
     {
         if (holdProgressIcon.gameObject.activeSelf != false) return;
@@ -157,7 +215,7 @@ public class InGameUIManager : MonoBehaviour
         holdProgressIcon.rectTransform.position = Input.mousePosition;
     }
 
-    // ƒz[ƒ‹ƒhƒAƒCƒRƒ“‚ğ”ñ•\¦
+    // ãƒ›ãƒ¼ãƒ«ãƒ‰ã‚¢ã‚¤ã‚³ãƒ³ã‚’éè¡¨ç¤º
     public void InvisibleHoldIcon()
     {
         if (holdProgressIcon.gameObject.activeSelf != true) return;
@@ -165,73 +223,73 @@ public class InGameUIManager : MonoBehaviour
         holdProgressIcon.gameObject.SetActive(false);
     }
 
-    // ƒz[ƒ‹ƒhUI‚ğŠJ‚­ƒAƒjƒ[ƒVƒ‡ƒ“Ä¶
+    // ãƒ›ãƒ¼ãƒ«ãƒ‰UIã‚’é–‹ãã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³å†ç”Ÿ
     public void OpenHoldLabel()
     {
         holdTextLabel.GetComponent<Animator>().SetTrigger("Open");
     }
 
-    // ƒz[ƒ‹ƒhUI‚ğ•Â‚¶‚éƒAƒjƒ[ƒVƒ‡ƒ“Ä¶
+    // ãƒ›ãƒ¼ãƒ«ãƒ‰UIã‚’é–‰ã˜ã‚‹ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³å†ç”Ÿ
     public void CloseHoldLabel()
     {
         holdTextLabel.GetComponent<Animator>().SetTrigger("Close");
     }
 
-    // ƒz[ƒ‹ƒh‚Ìis“x
+    // ãƒ›ãƒ¼ãƒ«ãƒ‰ã®é€²è¡Œåº¦
     public void HoldProgressGauge(float value)
     {
         holdProgressGauge.fillAmount = value;
     }
 
-    // ƒRƒXƒg¶¬‚Ìis“x
+    // ã‚³ã‚¹ãƒˆç”Ÿæˆã®é€²è¡Œåº¦
     public void CostGenerateGauge(float value)
     {
         costIcon.fillAmount = value;
     }
 
-    // ƒ{ƒX‚Ì–¼‘O•\¦
+    // ãƒœã‚¹ã®åå‰è¡¨ç¤º
     public void VisibleBossNameText()
     {
         bossNameText.enabled = true;
     }
 
-    // ƒ{ƒX‚Ì–¼‘O”ñ•\¦
+    // ãƒœã‚¹ã®åå‰éè¡¨ç¤º
     public void InvisibleBossNameText()
     {
         bossNameText.enabled = false;
     }
 
-    // ƒ{ƒX‚Ì–¼‘O•\‹L
+    // ãƒœã‚¹ã®åå‰è¡¨è¨˜
     public void BossNameText(string name)
     {
         bossNameText.text = name;
     }
 
-    // ƒ{ƒXHP•\¦
+    // ãƒœã‚¹HPè¡¨ç¤º
     public void VisibleBossHealth()
     {
         bossHealthText.enabled = true;
     }
 
-    // ƒ{ƒXHP”ñ•\¦
+    // ãƒœã‚¹HPéè¡¨ç¤º
     public void InvisibleBossHealth()
     {
         bossHealthText.enabled = false;
     }
 
-    // ƒ{ƒXHP•Ï“®•\‹L
+    // ãƒœã‚¹HPå¤‰å‹•è¡¨è¨˜
     public void BossHealthText(int value)
     {
         bossHealthText.text = "HP " + value.ToString();
     }
 
-    // ƒ{ƒXHPƒo[•\‹L
+    // ãƒœã‚¹HPãƒãƒ¼è¡¨è¨˜
     public void BossHealthProgress(float progress)
     {
         currentWaveProgress.value = progress;
     }
 
-    // ƒŠƒ^ƒCƒAƒ{ƒ^ƒ“(Šm”F)
+    // ãƒªã‚¿ã‚¤ã‚¢ãƒœã‚¿ãƒ³(ç¢ºèª)
     public void OnRetireVerified()
     {
         SeAudio.PlayOneShot(decideSe);
@@ -241,7 +299,7 @@ public class InGameUIManager : MonoBehaviour
             gameManager.timeManager.GamePause();
     }
 
-    // ƒŠƒ^ƒCƒAƒLƒƒƒ“ƒZƒ‹
+    // ãƒªã‚¿ã‚¤ã‚¢ã‚­ãƒ£ãƒ³ã‚»ãƒ«
     public void OnRetireCanceled()
     {
         SeAudio.PlayOneShot(cancelSe);
@@ -251,7 +309,14 @@ public class InGameUIManager : MonoBehaviour
             gameManager.timeManager.GamePause();
     }
 
-    // ƒV[ƒ“ƒ[ƒh
+    // å–å¾—ã‚³ã‚¤ãƒ³è¡¨ç¤º
+    public void GetCoinText(TextMeshProUGUI text,int value)
+    {
+        Debug.Log("Coin" + value.ToString());
+        text.text = $"{coinIconText}{value}";
+    }
+
+    // ã‚·ãƒ¼ãƒ³ãƒ­ãƒ¼ãƒ‰
     public void OnLoadScene(string name)
     {
         if (gameManager.timeManager.isPause)
