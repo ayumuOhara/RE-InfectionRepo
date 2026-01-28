@@ -44,12 +44,16 @@ public class GameManager : MonoBehaviour
             {
                 StartCoroutine(inGameUIManager.SessionClear());
                 SessionEnd();
+                inGameUIManager.SessionReward();
+                timeManager.SpeedReset();
                 yield break;
             }
             if (castleWallManager.isBreak)
             {
                 StartCoroutine(inGameUIManager.SessionFailed());
                 SessionEnd();
+                inGameUIManager.SessionReward();
+                timeManager.SpeedReset();
                 yield break;
             }
 

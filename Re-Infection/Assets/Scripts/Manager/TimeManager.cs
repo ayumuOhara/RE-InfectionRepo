@@ -78,6 +78,12 @@ public class TimeManager : MonoBehaviour
             Time.timeScale = timeSpeed;
     }
 
+    public void SpeedReset()
+    {
+        timeSpeed = 1.0f;
+        Time.timeScale = timeSpeed;
+    }
+
     public void GamePause()
     {
         if (isPause)
