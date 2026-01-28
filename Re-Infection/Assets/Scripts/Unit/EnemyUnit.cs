@@ -65,6 +65,7 @@ public class EnemyUnit : UnitBase, Iinfection
                     FindObjectOfType<WaveSpawner>().DecreaseEnemySum();
                 }
 
+                gameObject.layer = LayerMask.NameToLayer("CorpseUnit");
                 unitManager.AddCorpseList(this);
                 animator.enabled = false;
 

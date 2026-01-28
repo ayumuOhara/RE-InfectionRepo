@@ -106,5 +106,5 @@ MonoBehaviour:
   infectionRange: 0.8
   skillTargetLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 256
   infectionEffect: {fileID: 3927760414995565203, guid: f3c81049afa9fbf44aed32a922b08cdc, type: 3}
