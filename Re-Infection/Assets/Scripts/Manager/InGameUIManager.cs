@@ -41,6 +41,7 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI firstCoinText;
     [SerializeField] GameObject firstClearReward;
     [SerializeField] TextMeshProUGUI totalCoinText;
+    [SerializeField] TextMeshProUGUI currentCoinText;
 
     AudioSource SeAudio;
     [SerializeField] AudioClip lordSe;
@@ -160,6 +161,8 @@ public class InGameUIManager : MonoBehaviour
 
         Wallet wallet = Resources.Load<PlayerStatusData>("PlayerStatusData").wallet;
         wallet.AddMoney(totalCoin);
+
+        currentCoinText.text = $"{wallet.CurrentMoney}";
 
         rewardUI.transform.Find("Rewards").GetComponent<Animator>().SetTrigger("Reward");
     }

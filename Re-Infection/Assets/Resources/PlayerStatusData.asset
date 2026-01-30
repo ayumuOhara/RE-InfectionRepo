@@ -12,15 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f5147572aec5af4fba6d9ac57615b32, type: 3}
   m_Name: PlayerStatusData
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStatusData
+  wallet:
+    currentMoney: 0
   castleAbility:
-    lv: 0
     healths: 640000002c010000f401000084030000
   cannonAbility:
-    lv: 0
-    damages: 28000000460000005a00000064000000
-    coolTime: 180
+    damages: 1027000028000000460000005a00000064000000
+    coolTime: 0
   costAbility:
-    lv: 3
     costStats:
     - maxCost: 30
       interbal: 1.6
@@ -31,7 +30,6 @@ MonoBehaviour:
     - maxCost: 50
       interbal: 1.2
   virusAbility:
-    lv: 0
     virusStats:
     - reviveHealthRate: 0.3
       infectionTime: 15
