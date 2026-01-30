@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using TMPro;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -17,6 +19,15 @@ public class DragIconController : MonoBehaviour,
 
     public UnitDetailUII detaUI;
 
+    [Header("ユニット購入")]
+    public bool isPaidUnit = false;//このユニットは購入が必要か
+    public int price = 0; //価格
+    public GameObject paidUnitKey;
+    public GameObject notEnoughMoneyObj;
+    public UnitPaidDialog paidDialog;
+    public TextMeshProUGUI price_text;
+    public Wallet wallet;
+
     private Transform returnTarget;
     private Vector2 originalPos;
     private Transform originalParent;
@@ -29,6 +40,48 @@ public class DragIconController : MonoBehaviour,
         unitIcon.sprite = unitStats.unitStats.unitSprite;
 
         CheckImage.SetActive(false);
+
+        notEnoughMoneyObj.SetActive(false);
+
+        //有料ユニット
+        if (isPaidUnit)
+        {
+            paidUnitKey.SetActive(true);
+            price_text.text = price.ToString();
+
+
+
+            paidDialog.onClickYes = () =>
+            {
+
+                //所持金✅
+                if (!wallet.CanBuy(price))
+                {
+                    Debug.Log("お金が足りません。現在の所持金: " + wallet.CurrentMoney);
+                    if (notEnoughMoneyObj != null)
+                    {
+                        StartCoroutine(NotEnoughMoney());
+                    }
+                    return;
+                }
+
+
+                //お金を引く
+                wallet.RemoveMoney(price);
+
+
+                //購入完了
+                isPaidUnit = false;
+                paidUnitKey.SetActive(false);
+
+                paidDialog.UnitPaidDialogObj.SetActive(false);
+            };
+        }
+        else
+        {
+            paidUnitKey.SetActive(false);
+
+        }
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -77,6 +130,28 @@ public class DragIconController : MonoBehaviour,
 
     public void OnClickUnitIcon()
     {
+        if (isPaidUnit)
+        {
+            // メッセージを作成
+            string msg = $"${price} を支払って\n「{unitStats.unitStats.unitName}」を\n購入しますか？";
+
+            // ダイアログにメッセージを渡す
+            paidDialog.SetDialogMessage(msg);
+
+            // ダイアログを表示（ボタンと同じ関数）
+            paidDialog.Dialog();
+            return;
+        }
+
+        // 無料ユニットなら詳細を開く
         detaUI.SetUnit(unitStats.unitStats);
     }
+
+    public IEnumerator NotEnoughMoney()
+    {
+        notEnoughMoneyObj.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        notEnoughMoneyObj.SetActive(false);
+    }
+
 }
