@@ -17150,9 +17150,9 @@ MonoBehaviour:
   shopButton: {fileID: 34973441}
   battleButton: {fileID: 1528406815}
   selectionButton: {fileID: 962835241}
-  shopCanvas: {fileID: 365912341}
-  battleCanvas: {fileID: 1262412672}
-  selectionCanvas: {fileID: 737501077}
+  shopCanvas: {fileID: 365912345}
+  battleCanvas: {fileID: 1262412676}
+  selectionCanvas: {fileID: 737501080}
 --- !u!114 &1173830517
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -4,6 +4,7 @@ using UnityEngine.Rendering;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
+using UnityEditor.U2D.Aseprite;
 
 public enum UpgradeType
 {
@@ -73,6 +74,10 @@ public class ShopManager:MonoBehaviour
     private void Awake()
     {
         playerStatusData = Resources.Load<PlayerStatusData>("PlayerStatusData");
+        playerStatusData.castleAbility.SetAbilityLevel(Castle_level);
+        playerStatusData.cannonAbility.SetAbilityLevel(Canon_level);
+        playerStatusData.costAbility.SetAbilityLevel(Cost_level);
+        playerStatusData.virusAbility.SetAbilityLevel(Infection_level);
     }
 
     private void Start()
@@ -282,6 +287,7 @@ public class ShopManager:MonoBehaviour
 
         Castle_level++;
         Castle_text.text = $"{Castle_level}";
+        playerStatusData.castleAbility.SetAbilityLevel(Castle_level);
 
         //ƒŒƒxƒ‹‚R‚É‚È‚Á‚½Žž•¶Žš‚ðÔ‚­‚·‚é
         if (Castle_level >= 3)
@@ -338,6 +344,7 @@ public class ShopManager:MonoBehaviour
 
         Canon_level++;
         Canon_text.text = $"{Canon_level}";
+        playerStatusData.cannonAbility.SetAbilityLevel(Canon_level);
 
         //ƒŒƒxƒ‹‚R‚É‚È‚Á‚½Žž•¶Žš‚ðÔ‚­‚·‚é
         if (Canon_level >= 3)
@@ -393,6 +400,7 @@ public class ShopManager:MonoBehaviour
 
         Cost_level++;
         Cost_text.text = $"{Cost_level}";
+        playerStatusData.costAbility.SetAbilityLevel(Cost_level);
 
         //ƒŒƒxƒ‹‚R‚É‚È‚Á‚½Žž•¶Žš‚ðÔ‚­‚·‚é
         if (Cost_level >= 3)
@@ -447,6 +455,7 @@ public class ShopManager:MonoBehaviour
 
         Infection_level++;
         Infection_text.text = $"{Infection_level}";
+        playerStatusData.virusAbility.SetAbilityLevel(Infection_level);
 
         //ƒŒƒxƒ‹‚R‚É‚È‚Á‚½Žž•¶Žš‚ðÔ‚­‚·‚é
         if (Infection_level >= 3)
