@@ -33,6 +33,7 @@ public class DragIconController : MonoBehaviour,
     private Transform originalParent;
     void Awake()
     {
+        wallet = Resources.Load<PlayerStatusData>("PlayerStatusData").wallet;
         rectTransform = GetComponent<RectTransform>();
         canvas = GetComponentInParent<Canvas>();
         canvasGroup = GetComponent<CanvasGroup>();
