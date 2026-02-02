@@ -17,8 +17,8 @@ MonoBehaviour:
   castleAbility:
     healths: 640000002c010000f401000084030000
   cannonAbility:
-    damages: 1027000028000000460000005a00000064000000
-    coolTime: 0
+    damages: 28000000460000005a00000064000000
+    coolTime: 180
   costAbility:
     costStats:
     - maxCost: 30
