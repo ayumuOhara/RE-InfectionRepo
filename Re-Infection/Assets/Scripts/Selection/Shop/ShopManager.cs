@@ -164,18 +164,15 @@ public class ShopManager:MonoBehaviour
     {
         if (Cost_level == 0)
         {
-            Detalise_text.text = "最大値：30　　→　　35\n"+
-                "回復量：1.6　　→　　1.4";
+            Detalise_text.text = "回復速度：1　　→　　1.3";
         }
         else if (Cost_level == 1)
         {
-            Detalise_text.text = "最大値：35　　→　　40\n" +
-                "回復量：1.4　　→　　1.2";
+            Detalise_text.text = "回復速度：1.3　　→　　1.5";
         }
         else if (Cost_level == 2)
         {
-            Detalise_text.text = "最大値：40　　→　　50\n" +
-                "回復量：1.2　　→　　1";
+            Detalise_text.text = "回復速度：1.5　　→　　1.7";
         }
         else
         {
