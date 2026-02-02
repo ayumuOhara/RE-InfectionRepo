@@ -270,7 +270,7 @@ public class ShopManager:MonoBehaviour
             return;
         }
 
-        if (playerStatusData.wallet.CanBuy(CastleMoney))
+        if (!playerStatusData.wallet.CanBuy(CastleMoney))
         {
             Debug.Log("Š‹à‚ª‘«‚è‚Ü‚¹‚ñ");
             StartCoroutine(WarningMoneyText());
@@ -326,7 +326,7 @@ public class ShopManager:MonoBehaviour
             StartCoroutine(WarningLevelText());
             return;
         }
-        if (playerStatusData.wallet.CanBuy(CanonMoney))
+        if (!playerStatusData.wallet.CanBuy(CanonMoney))
         {
             Debug.Log("Š‹à‚ª‘«‚è‚Ü‚¹‚ñ");
             StartCoroutine(WarningMoneyText());
@@ -381,7 +381,7 @@ public class ShopManager:MonoBehaviour
             StartCoroutine(WarningLevelText());
             return;
         }
-        if (playerStatusData.wallet.CanBuy(CostMoney))
+        if (!playerStatusData.wallet.CanBuy(CostMoney))
         {
             Debug.Log("Š‹à‚ª‘«‚è‚Ü‚¹‚ñ");
             StartCoroutine(WarningMoneyText());
@@ -406,12 +406,12 @@ public class ShopManager:MonoBehaviour
         if (Cost_level == 0)
         {
             CostMoney = 300;
-            CostMoney_text.text = $"{CanonMoney}";
+            CostMoney_text.text = $"{CostMoney}";
         }
         else if (Cost_level == 1)
         {
             CostMoney = 800;
-            CostMoney_text.text = $"{CanonMoney}";
+            CostMoney_text.text = $"{CostMoney}";
         }
         else if (Cost_level == 2)
         {
@@ -435,7 +435,7 @@ public class ShopManager:MonoBehaviour
             StartCoroutine(WarningLevelText());
             return;
         }
-        if (playerStatusData.wallet.CanBuy(InfectionMoney))
+        if (!playerStatusData.wallet.CanBuy(InfectionMoney))
         {
             Debug.Log("Š‹à‚ª‘«‚è‚Ü‚¹‚ñ");
             StartCoroutine(WarningMoneyText());
