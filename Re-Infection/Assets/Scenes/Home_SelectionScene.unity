@@ -765,6 +765,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: fe15a39c45f5ba945931563260f1ba9f, type: 2}
     - target: {fileID: 7491374937133148069, guid: 78e595d171d4b37409494f279f3145be, type: 3}
+      propertyPath: isPaidUnit
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7491374937133148069, guid: 78e595d171d4b37409494f279f3145be, type: 3}
       propertyPath: paidDialog
       value: 
       objectReference: {fileID: 301121246}
@@ -1024,6 +1028,10 @@ PrefabInstance:
       propertyPath: unitStats
       value: 
       objectReference: {fileID: 11400000, guid: b92b3387e050d804c96d18a3d08de2a8, type: 2}
+    - target: {fileID: 7491374937133148069, guid: 78e595d171d4b37409494f279f3145be, type: 3}
+      propertyPath: isPaidUnit
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7491374937133148069, guid: 78e595d171d4b37409494f279f3145be, type: 3}
       propertyPath: paidDialog
       value: 
@@ -3215,7 +3223,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: a5b873a3a6c417b43aa7c5049c047649, type: 2}
     - target: {fileID: 7491374937133148069, guid: 78e595d171d4b37409494f279f3145be, type: 3}
       propertyPath: isPaidUnit
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7491374937133148069, guid: 78e595d171d4b37409494f279f3145be, type: 3}
       propertyPath: paidDialog
@@ -8074,7 +8082,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 8e79466c1b37ca44d944376febf5437b, type: 2}
     - target: {fileID: 7491374937133148069, guid: 78e595d171d4b37409494f279f3145be, type: 3}
       propertyPath: isPaidUnit
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7491374937133148069, guid: 78e595d171d4b37409494f279f3145be, type: 3}
       propertyPath: paidDialog
@@ -9065,7 +9073,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 0b6feea231edc7e4f8f13e0186533328, type: 2}
     - target: {fileID: 7491374937133148069, guid: 78e595d171d4b37409494f279f3145be, type: 3}
       propertyPath: isPaidUnit
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7491374937133148069, guid: 78e595d171d4b37409494f279f3145be, type: 3}
       propertyPath: paidDialog
@@ -15908,7 +15916,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: f02c22218b66c3d46a4373dc16d76277, type: 2}
     - target: {fileID: 7491374937133148069, guid: 78e595d171d4b37409494f279f3145be, type: 3}
       propertyPath: isPaidUnit
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7491374937133148069, guid: 78e595d171d4b37409494f279f3145be, type: 3}
       propertyPath: paidDialog
@@ -32084,6 +32092,10 @@ PrefabInstance:
       propertyPath: detaUI
       value: 
       objectReference: {fileID: 285403939}
+    - target: {fileID: 7491374937133148069, guid: 78e595d171d4b37409494f279f3145be, type: 3}
+      propertyPath: isPaidUnit
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7491374937133148069, guid: 78e595d171d4b37409494f279f3145be, type: 3}
       propertyPath: paidDialog
       value: 
