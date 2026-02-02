@@ -17,6 +17,7 @@ public class BattleCanvas : MonoBehaviour
     public Animator[] lockAnime; //ステージのロック中の表示にスプライト
     public GameObject[] lightGlow;
     public GameObject messageBox; //ステージ解放時のメッセージボックス
+    public GameObject UnClickPanel;
     public GameObject homeTab;
 
     public TextMeshProUGUI conditionsText; //ステージの解放条件を表示するテキスト
@@ -37,6 +38,7 @@ public class BattleCanvas : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        UnClickPanel.SetActive(false);
         messageBox.SetActive(false);
 
         //最初は全てのステージを暗くする
@@ -125,7 +127,10 @@ public class BattleCanvas : MonoBehaviour
     public void OnChangeStage(int stage)
     {
         if (stage >= 3) return;
-        homeTab.SetActive(false);
+        UnClickPanel.SetActive(true);
+
+
+        //homeTab.SetActive(false);
         StartCoroutine(PlayAnimetion(stage));
     }
 
@@ -134,7 +139,7 @@ public class BattleCanvas : MonoBehaviour
     {
         scrollChecker.scrollSnap.GoToPanel(openStage);
 
-        sortieButton.gameObject.SetActive(false);
+        //sortieButton.gameObject.SetActive(false);
         
 
         yield return new WaitForSeconds(0.7f);
@@ -152,15 +157,17 @@ public class BattleCanvas : MonoBehaviour
         releaseText.text = $"ステージ{openStage + 1}が解放された!";
         Time.timeScale = 0f; 
 
-        homeTab.SetActive(true);
+        //homeTab.SetActive(true);
     }
 
     //OKボタン
     public void OnOkButton()
     {
         messageBox.SetActive(false);
-        sortieButton.gameObject.SetActive(true);
-        sortieButton.interactable = true;
+
+        UnClickPanel.SetActive(false);
+        //sortieButton.gameObject.SetActive(true);
+        //sortieButton.interactable = true;
         Time.timeScale = 1f; 
     }
 }
