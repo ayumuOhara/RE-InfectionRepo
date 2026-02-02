@@ -73,7 +73,7 @@ public class EnemyAppearsSpace : MonoBehaviour
         spawnedImages = new Image[units.Count];
 
         for (int i = 0; i < units.Count; i++)
-        {
+        {   
             var unit = units[i];
 
             GameObject go = Instantiate(EnemyImage.gameObject, content, false);
