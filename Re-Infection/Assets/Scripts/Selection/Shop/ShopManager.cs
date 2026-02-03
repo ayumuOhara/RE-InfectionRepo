@@ -74,6 +74,10 @@ public class ShopManager:MonoBehaviour
     private void Awake()
     {
         playerStatusData = Resources.Load<PlayerStatusData>("PlayerStatusData");
+        playerStatusData.castleAbility.SetAbilityLevel(Castle_level);
+        playerStatusData.cannonAbility.SetAbilityLevel(Canon_level);
+        playerStatusData.costAbility.SetAbilityLevel(Cost_level);
+        playerStatusData.virusAbility.SetAbilityLevel(Infection_level);
     }
 
     private void Start()
