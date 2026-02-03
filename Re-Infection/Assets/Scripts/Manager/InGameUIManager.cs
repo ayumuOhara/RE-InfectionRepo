@@ -19,6 +19,7 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] Canvas failedUI;
     [SerializeField] Canvas rewardUI;
     [SerializeField] Canvas retireUI;
+    [SerializeField] Canvas returnHomeUI;
 
     [SerializeField] TextMeshProUGUI currentWaveText;
     [SerializeField] TextMeshProUGUI currentEnemyCntText;
@@ -292,21 +293,21 @@ public class InGameUIManager : MonoBehaviour
         currentWaveProgress.value = progress;
     }
 
-    // リタイアボタン(確認)
-    public void OnRetireVerified()
+    // シーン遷移確認ボタン(確認)
+    public void OnVerified(Canvas ui)
     {
         SeAudio.PlayOneShot(decideSe);
-        retireUI.enabled = true;
+        ui.enabled = true;
 
         if (!gameManager.timeManager.isPause)
             gameManager.timeManager.GamePause();
     }
 
-    // リタイアキャンセル
-    public void OnRetireCanceled()
+    // シーン遷移キャンセル
+    public void OnCanceled(Canvas ui)
     {
         SeAudio.PlayOneShot(cancelSe);
-        retireUI.enabled = false;
+        ui.enabled = false;
 
         if (gameManager.timeManager.isPause)
             gameManager.timeManager.GamePause();
