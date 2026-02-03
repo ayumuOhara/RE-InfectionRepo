@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections;
 using UnityEditor.U2D.Aseprite;
+using Unity.VisualScripting;
 
 public enum UpgradeType
 {
@@ -54,19 +55,15 @@ public class ShopManager:MonoBehaviour
     PlayerStatusData playerStatusData;
 
     //城
-    private int Castle_level = 0;
     private int CastleMoney = 300;
 
     //砲撃
-    private int Canon_level = 0;
     private int CanonMoney = 300;
 
     //コスト
-    private int Cost_level = 0;
     private int CostMoney = 300;
 
     //感染
-    private int Infection_level = 0;
     private int InfectionMoney = 300;
 
     private UpgradeType currentUpgrade;
@@ -74,10 +71,10 @@ public class ShopManager:MonoBehaviour
     private void Awake()
     {
         playerStatusData = Resources.Load<PlayerStatusData>("PlayerStatusData");
-        playerStatusData.castleAbility.SetAbilityLevel(Castle_level);
-        playerStatusData.cannonAbility.SetAbilityLevel(Canon_level);
-        playerStatusData.costAbility.SetAbilityLevel(Cost_level);
-        playerStatusData.virusAbility.SetAbilityLevel(Infection_level);
+        playerStatusData.castleAbility.SetAbilityLevel(playerStatusData.castleAbility.lv);
+        playerStatusData.cannonAbility.SetAbilityLevel(playerStatusData.cannonAbility.lv);
+        playerStatusData.costAbility.SetAbilityLevel(playerStatusData.costAbility.lv);
+        playerStatusData.virusAbility.SetAbilityLevel(playerStatusData.virusAbility.lv);
     }
 
     private void Start()
@@ -86,16 +83,16 @@ public class ShopManager:MonoBehaviour
         money_text.text = ($"{playerStatusData.wallet.CurrentMoney}");
         LayCastObj.SetActive(false);
 
-        Castle_text.text = ($"{Castle_level}");
+        Castle_text.text = ($"{playerStatusData.castleAbility.lv}");
         CastleMoney_text.text = ($"{CastleMoney}");
 
-        Canon_text.text = ($"{Canon_level}");
+        Canon_text.text = ($"{playerStatusData.cannonAbility.lv}");
         CanonMoney_text.text = ($"{CanonMoney}");
 
-        Infection_text.text = ($"{Infection_level}");
+        Infection_text.text = ($"{playerStatusData.virusAbility.lv}");
         InfectionMoney_text.text = ($"{InfectionMoney}");
 
-        Cost_text.text = ($"{Cost_level}");
+        Cost_text.text = ($"{playerStatusData.costAbility.lv}");
         CostMoney_text.text = ($"{CostMoney}");
 
         Warning_text.text = "";
@@ -105,15 +102,15 @@ public class ShopManager:MonoBehaviour
     //城の強化ボタン
     public void CastleSkillEnhancement()
     {
-        if (Castle_level ==0)
+        if (playerStatusData.castleAbility.lv ==0)
         {
             Detalise_text.text = "HP：100　　→　　300";
         }
-        else if (Castle_level == 1)
+        else if (playerStatusData.castleAbility.lv == 1)
         {
             Detalise_text.text = "HP：300　　→　　500";
         }
-        else if(Castle_level==2)
+        else if(playerStatusData.castleAbility.lv==2)
         {
             Detalise_text.text = "HP：500　　→　　1000";
         }
@@ -126,8 +123,8 @@ public class ShopManager:MonoBehaviour
         DialogObj.SetActive(true);
         LayCastObj.SetActive(true);
 
-        DialogLevel_text1.text = ($"{Castle_level}");
-        DialogLevel_text2.text = ($"{Castle_level + 1}");
+        DialogLevel_text1.text = ($"{playerStatusData.castleAbility.lv}");
+        DialogLevel_text2.text = ($"{playerStatusData.castleAbility.lv + 1}");
         DialogMoney_text.text = ($"{CastleMoney}");
         DialogMessege.text = "";
         DialogMessege.text = "城のHPを強化しますか？";
@@ -135,15 +132,15 @@ public class ShopManager:MonoBehaviour
 
     public void CanonSkillEnhancement()
     {
-        if (Canon_level == 0)
+        if (playerStatusData.cannonAbility.lv == 0)
         {
             Detalise_text.text = "威力：30　　→　　50";
         }
-        else if (Canon_level == 1)
+        else if (playerStatusData.cannonAbility.lv == 1)
         {
             Detalise_text.text = "威力：50　　→　　80";
         }
-        else if (Canon_level == 2)
+        else if (playerStatusData.cannonAbility.lv == 2)
         {
             Detalise_text.text = "威力：80　　→　　100";
         }
@@ -158,8 +155,8 @@ public class ShopManager:MonoBehaviour
         DialogObj.SetActive(true);
         LayCastObj.SetActive(true);
 
-        DialogLevel_text1.text = ($"{Canon_level}");
-        DialogLevel_text2.text = ($"{Canon_level + 1}");
+        DialogLevel_text1.text = ($"{playerStatusData.cannonAbility.lv}");
+        DialogLevel_text2.text = ($"{playerStatusData.cannonAbility.lv + 1}");
         DialogMoney_text.text = ($"{CanonMoney}");
         DialogMessege.text = "";
         DialogMessege.text = "砲撃の攻撃力を強化しますか？";
@@ -167,15 +164,15 @@ public class ShopManager:MonoBehaviour
 
     public void CostSkillEnhacement()
     {
-        if (Cost_level == 0)
+        if (playerStatusData.costAbility.lv == 0)
         {
             Detalise_text.text = "回復速度：1　　→　　1.3";
         }
-        else if (Cost_level == 1)
+        else if (playerStatusData.costAbility.lv == 1)
         {
             Detalise_text.text = "回復速度：1.3　　→　　1.5";
         }
-        else if (Cost_level == 2)
+        else if (playerStatusData.costAbility.lv == 2)
         {
             Detalise_text.text = "回復速度：1.5　　→　　1.7";
         }
@@ -190,8 +187,8 @@ public class ShopManager:MonoBehaviour
         DialogObj.SetActive(true);
         LayCastObj.SetActive(true);
 
-        DialogLevel_text1.text = ($"{Cost_level}");
-        DialogLevel_text2.text = ($"{Cost_level + 1}");
+        DialogLevel_text1.text = ($"{playerStatusData.costAbility.lv}");
+        DialogLevel_text2.text = ($"{playerStatusData.costAbility.lv + 1}");
         DialogMoney_text.text = ($"{CostMoney}");
         DialogMessege.text = "";
         DialogMessege.text = "コストの回復力を強化しますか？";
@@ -200,17 +197,17 @@ public class ShopManager:MonoBehaviour
 
     public void InfectionSkillEnhacement()
     {
-        if (Infection_level == 0)
+        if (playerStatusData.virusAbility.lv == 0)
         {
             Detalise_text.text = "感染者HP：0.5　　→　　0.6\n"+
                 "感染速度：10　　→　　8";
         }
-        else if (Infection_level == 1)
+        else if (playerStatusData.virusAbility.lv == 1)
         {
             Detalise_text.text = "感染者HP：0.6　　→　　0.7\n" +
                 "感染速度：8　　→　　6.5";
         }
-        else if (Infection_level == 2)
+        else if (playerStatusData.virusAbility.lv == 2)
         {
             Detalise_text.text = "感染者HP：0.7　　→　　0.8\n" +
                 "感染速度：6.5　　→　　5";
@@ -226,8 +223,8 @@ public class ShopManager:MonoBehaviour
         DialogObj.SetActive(true);
         LayCastObj.SetActive(true);
 
-        DialogLevel_text1.text = ($"{Infection_level}");
-        DialogLevel_text2.text = ($"{Infection_level + 1}");
+        DialogLevel_text1.text = ($"{playerStatusData.virusAbility.lv}");
+        DialogLevel_text2.text = ($"{playerStatusData.virusAbility.lv + 1}");
         DialogMoney_text.text = ($"{InfectionMoney}");
         DialogMessege.text = "";
         DialogMessege.text = "感染を強化しますか？";
@@ -266,7 +263,7 @@ public class ShopManager:MonoBehaviour
     //城の強化処理
     private void  TryUpgradeCastle()
     {
-        if (Castle_level >= 3)
+        if (playerStatusData.castleAbility.lv >= 3)
         {
             StartCoroutine(WarningLevelText());
             return;
@@ -282,12 +279,11 @@ public class ShopManager:MonoBehaviour
         playerStatusData.wallet.RemoveMoney(CastleMoney);
         money_text.text = $"{playerStatusData.wallet.CurrentMoney}";
 
-        Castle_level++;
-        Castle_text.text = $"{Castle_level}";
-        playerStatusData.castleAbility.SetAbilityLevel(Castle_level);
+        playerStatusData.castleAbility.SetAbilityLevel(playerStatusData.castleAbility.lv + 1);
+        Castle_text.text = $"{playerStatusData.castleAbility.lv}";
 
         //レベル３になった時文字を赤くする
-        if (Castle_level >= 3)
+        if (playerStatusData.castleAbility.lv >= 3)
         {
             Castle_text.color = new Color(1f, 0.337f, 0.337f);
            
@@ -296,17 +292,17 @@ public class ShopManager:MonoBehaviour
         }
 
         //レベルアップに比例して値上げ
-        if (Castle_level == 0)
+        if (playerStatusData.castleAbility.lv == 0)
         {
             CastleMoney = 300;
             CastleMoney_text.text = $"{CastleMoney}";
         }
-        else if (Castle_level == 1)
+        else if (playerStatusData.castleAbility.lv == 1)
         {
             CastleMoney = 800;
             CastleMoney_text.text = $"{CastleMoney}";
         }
-        else if (Castle_level == 2)
+        else if (playerStatusData.castleAbility.lv == 2)
         {
             CastleMoney = 1500;
             CastleMoney_text.text = $"{CastleMoney}";
@@ -324,7 +320,7 @@ public class ShopManager:MonoBehaviour
     // 砲撃の強化処理
      private void TryUpgradeCanon()
     {
-        if (Canon_level >= 3)
+        if (playerStatusData.cannonAbility.lv >= 3)
         {
             StartCoroutine(WarningLevelText());
             return;
@@ -339,12 +335,11 @@ public class ShopManager:MonoBehaviour
         playerStatusData.wallet.RemoveMoney(CanonMoney);
         money_text.text = $"{playerStatusData.wallet.CurrentMoney}";
 
-        Canon_level++;
-        Canon_text.text = $"{Canon_level}";
-        playerStatusData.cannonAbility.SetAbilityLevel(Canon_level);
+        playerStatusData.cannonAbility.SetAbilityLevel(playerStatusData.cannonAbility.lv + 1);
+        Canon_text.text = $"{playerStatusData.cannonAbility.lv}";
 
         //レベル３になった時文字を赤くする
-        if (Canon_level >= 3)
+        if (playerStatusData.cannonAbility.lv >= 3)
         {
             Canon_text.color = new Color(1f, 0.337f, 0.337f);
             //ボタンを押せなくする
@@ -352,17 +347,17 @@ public class ShopManager:MonoBehaviour
         }
 
         //レベルアップに比例して値上げ
-        if (Canon_level == 0)
+        if (playerStatusData.cannonAbility.lv == 0)
         {
             CanonMoney = 300;
             CanonMoney_text.text = $"{CanonMoney}";
         }
-        else if (Canon_level == 1)
+        else if (playerStatusData.cannonAbility.lv == 1)
         {
             CanonMoney = 800;
             CanonMoney_text.text = $"{CanonMoney}";
         }
-        else if (Canon_level == 2)
+        else if (playerStatusData.cannonAbility.lv == 2)
         {
             CanonMoney = 1500;
             CanonMoney_text.text = $"{CanonMoney}";
@@ -380,7 +375,7 @@ public class ShopManager:MonoBehaviour
 
     private void TryUpgradeCost()
     {
-        if (Cost_level >= 3)
+        if (playerStatusData.costAbility.lv >= 3)
         {
             StartCoroutine(WarningLevelText());
             return;
@@ -395,12 +390,11 @@ public class ShopManager:MonoBehaviour
         playerStatusData.wallet.RemoveMoney(CostMoney);
         money_text.text = $"{playerStatusData.wallet.CurrentMoney}";
 
-        Cost_level++;
-        Cost_text.text = $"{Cost_level}";
-        playerStatusData.costAbility.SetAbilityLevel(Cost_level);
+        playerStatusData.costAbility.SetAbilityLevel(playerStatusData.costAbility.lv + 1);
+        Cost_text.text = $"{playerStatusData.costAbility.lv}";
 
         //レベル３になった時文字を赤くする
-        if (Cost_level >= 3)
+        if (playerStatusData.costAbility.lv >= 3)
         {
             Cost_text.color = new Color(1f, 0.337f, 0.337f);
             //ボタンを押せなくする
@@ -408,17 +402,17 @@ public class ShopManager:MonoBehaviour
         }
 
         //レベルアップに比例して値上げ
-        if (Cost_level == 0)
+        if (playerStatusData.costAbility.lv == 0)
         {
             CostMoney = 300;
             CostMoney_text.text = $"{CostMoney}";
         }
-        else if (Cost_level == 1)
+        else if (playerStatusData.costAbility.lv == 1)
         {
             CostMoney = 800;
             CostMoney_text.text = $"{CostMoney}";
         }
-        else if (Cost_level == 2)
+        else if (playerStatusData.costAbility.lv == 2)
         {
             CostMoney = 1500;
             CostMoney_text.text = $"{CostMoney}";
@@ -435,7 +429,7 @@ public class ShopManager:MonoBehaviour
 
     private void TryUpgradeInfection()
     {
-        if (Infection_level >= 3)
+        if (playerStatusData.virusAbility.lv >= 3)
         {
             StartCoroutine(WarningLevelText());
             return;
@@ -450,12 +444,11 @@ public class ShopManager:MonoBehaviour
         playerStatusData.wallet.RemoveMoney(InfectionMoney);
         money_text.text = $"{playerStatusData.wallet.CurrentMoney}";
 
-        Infection_level++;
-        Infection_text.text = $"{Infection_level}";
-        playerStatusData.virusAbility.SetAbilityLevel(Infection_level);
+        playerStatusData.virusAbility.SetAbilityLevel(playerStatusData.virusAbility.lv + 1);
+        Infection_text.text = $"{playerStatusData.virusAbility.lv}";
 
         //レベル３になった時文字を赤くする
-        if (Infection_level >= 3)
+        if (playerStatusData.virusAbility.lv >= 3)
         {
             Infection_text.color = new Color(1f, 0.337f, 0.337f);
             //ボタンを押せなくする
@@ -463,17 +456,17 @@ public class ShopManager:MonoBehaviour
         }
 
         //レベルアップに比例して値上げ
-        if (Infection_level == 0)
+        if (playerStatusData.virusAbility.lv == 0)
         {
             InfectionMoney = 300;
             InfectionMoney_text.text = $"{InfectionMoney}";
         }
-        else if (Infection_level == 1)
+        else if (playerStatusData.virusAbility.lv == 1)
         {
             InfectionMoney = 800;
             InfectionMoney_text.text = $"{InfectionMoney}";
         }
-        else if (Infection_level == 2)
+        else if (playerStatusData.virusAbility.lv == 2)
         {
             InfectionMoney = 1500;
             InfectionMoney_text.text = $"{InfectionMoney}";
