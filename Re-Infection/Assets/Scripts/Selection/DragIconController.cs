@@ -28,6 +28,9 @@ public class DragIconController : MonoBehaviour,
     public TextMeshProUGUI price_text;
     public Wallet wallet;
 
+    public TextMeshProUGUI cost_text;
+   
+
     private Transform returnTarget;
     private Vector2 originalPos;
     private Transform originalParent;
@@ -40,7 +43,10 @@ public class DragIconController : MonoBehaviour,
         returnTarget = transform.parent;
         unitIcon.sprite = unitStats.unitStats.unitSprite;
 
-        CheckImage.SetActive(false);
+        cost_text.text = $"{unitStats.unitStats.summonCost}";
+
+        //CheckImage.SetActive(false);
+        //CheckImage.SetActive(isUsedInDropArea);
 
         notEnoughMoneyObj.SetActive(false);
 
@@ -85,6 +91,7 @@ public class DragIconController : MonoBehaviour,
         }
     }
 
+  
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (isUsedInDropArea) return;

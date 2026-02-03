@@ -22,6 +22,8 @@ public class DropArea : MonoBehaviour, IDropHandler
         currentUnitStats = saved;
 
         CreateCloneFromExistingIcon(saved);
+
+        UpdateAllCheckImage();
     }
 
     public void OnDrop(PointerEventData eventData)
@@ -74,6 +76,8 @@ public class DropArea : MonoBehaviour, IDropHandler
 
             while (UnitDataCarrier.Instance.selectedUnits.Count <= slotIndex)
                 UnitDataCarrier.Instance.selectedUnits.Add(null);
+
+            fromList.isUsedInDropArea = true;
 
             UnitDataCarrier.Instance.selectedUnits[slotIndex] = currentUnitStats;
 
