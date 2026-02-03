@@ -55,22 +55,87 @@ public class ShopManager:MonoBehaviour
     PlayerStatusData playerStatusData;
 
     //城
-    private int CastleMoney = 300;
+    private int CastleMoney
+    {
+        get
+        {
+            switch (playerStatusData.castleAbility.lv)
+            {
+                case 0:
+                    return 300;
+                case 1:
+                    return 800;
+                case 2:
+                    return 1500;
+                default:
+                    return 0;
+            }
+        }
+    }
 
     //砲撃
-    private int CanonMoney = 300;
+    private int CanonMoney
+    {
+        get
+        {
+            switch (playerStatusData.cannonAbility.lv)
+            {
+                case 0:
+                    return 300;
+                case 1:
+                    return 800;
+                case 2:
+                    return 1500;
+                default:
+                    return 0;
+            }
+        }
+    }
 
     //コスト
-    private int CostMoney = 300;
+    private int CostMoney
+    {
+        get
+        {
+            switch (playerStatusData.costAbility.lv)
+            {
+                case 0:
+                    return 300;
+                case 1:
+                    return 800;
+                case 2:
+                    return 1500;
+                default:
+                    return 0;
+            }
+        }
+    }
 
     //感染
-    private int InfectionMoney = 300;
+    private int InfectionMoney
+    {
+        get
+        {
+            switch (playerStatusData.virusAbility.lv)
+            {
+                case 0:
+                    return 300;
+                case 1:
+                    return 800;
+                case 2:
+                    return 1500;
+                default:
+                    return 0;
+            }
+        }
+    }
 
     private UpgradeType currentUpgrade;
 
     private void Awake()
     {
         playerStatusData = Resources.Load<PlayerStatusData>("PlayerStatusData");
+
         playerStatusData.castleAbility.SetAbilityLevel(playerStatusData.castleAbility.lv);
         playerStatusData.cannonAbility.SetAbilityLevel(playerStatusData.cannonAbility.lv);
         playerStatusData.costAbility.SetAbilityLevel(playerStatusData.costAbility.lv);
@@ -83,20 +148,52 @@ public class ShopManager:MonoBehaviour
         money_text.text = ($"{playerStatusData.wallet.CurrentMoney}");
         LayCastObj.SetActive(false);
 
-        Castle_text.text = ($"{playerStatusData.castleAbility.lv}");
-        CastleMoney_text.text = ($"{CastleMoney}");
-
-        Canon_text.text = ($"{playerStatusData.cannonAbility.lv}");
-        CanonMoney_text.text = ($"{CanonMoney}");
-
-        Infection_text.text = ($"{playerStatusData.virusAbility.lv}");
-        InfectionMoney_text.text = ($"{InfectionMoney}");
-
-        Cost_text.text = ($"{playerStatusData.costAbility.lv}");
-        CostMoney_text.text = ($"{CostMoney}");
+        SetAbilityTextAndButton(playerStatusData.castleAbility);
+        SetAbilityTextAndButton(playerStatusData.cannonAbility);
+        SetAbilityTextAndButton(playerStatusData.costAbility);
+        SetAbilityTextAndButton(playerStatusData.virusAbility);
 
         Warning_text.text = "";
         WarningObj.SetActive(false);
+    }
+
+    // 渡された強化内容によってUI表示を操作
+    private void SetAbilityTextAndButton(BaseAbility ability)
+    {
+        switch (ability.GetType().ToString())
+        {
+            case "CastleAbility":
+                SetTextAndButton(Castle_text, CastleMoney_text, playerStatusData.castleAbility.lv, CastleMoney, CastleButton);
+                break;
+            case "CannonAbility":
+                SetTextAndButton(Canon_text, CanonMoney_text, playerStatusData.cannonAbility.lv, CanonMoney, CanonButton);
+                break;
+            case "CostAbility":
+                SetTextAndButton(Cost_text, CostMoney_text, playerStatusData.costAbility.lv, CostMoney, CostButton);
+                break;
+            case "VirusAbility":
+                SetTextAndButton(Infection_text, InfectionMoney_text, playerStatusData.virusAbility.lv, InfectionMoney, InfectionButton);
+                break;
+            default:
+                break;
+        }
+    }
+
+    // 指定の強化内容のLvと必要なお金の表示切替
+    // レベルが最大の時、ボタンが触れられなくなる
+    private void SetTextAndButton(TextMeshProUGUI lvText, TextMeshProUGUI moneyText, int lv, int money, Button button)
+    {
+        lvText.text = lv.ToString();
+        moneyText.text = lv >= 3 ? "MAX" : $"{money}";
+
+        //レベル３になった時文字を赤くする
+        if (lv >= 3)
+        {
+            lvText.color = new Color(1f, 0.337f, 0.337f);
+            moneyText.color = new Color(1f, 0.337f, 0.337f);
+            //ボタンを押せなくする
+            if(button != null) button.interactable = false;
+        }
     }
 
     //城の強化ボタン
@@ -235,19 +332,19 @@ public class ShopManager:MonoBehaviour
         switch (currentUpgrade)
         {
             case UpgradeType.Castle:
-                TryUpgradeCastle();
+                TryUpgrade(playerStatusData.castleAbility, CastleMoney);
                 break;
 
             case UpgradeType.Canon:
-                TryUpgradeCanon();
+                TryUpgrade(playerStatusData.cannonAbility, CanonMoney);
                 break;
 
             case UpgradeType.Infection:
-                TryUpgradeInfection();
+                TryUpgrade(playerStatusData.virusAbility, InfectionMoney);
                 break;
 
             case UpgradeType.Cost:
-                TryUpgradeCost();
+                TryUpgrade(playerStatusData.costAbility, CostMoney);
                 break;
 
         }
@@ -260,223 +357,28 @@ public class ShopManager:MonoBehaviour
         LayCastObj.SetActive(false);
     }
 
-    //城の強化処理
-    private void  TryUpgradeCastle()
+    // 渡された強化要素のアップグレードを行う
+    private void TryUpgrade(BaseAbility ability, int money)
     {
-        if (playerStatusData.castleAbility.lv >= 3)
+        if (ability.lv >= 3)
         {
             StartCoroutine(WarningLevelText());
             return;
         }
 
-        if (!playerStatusData.wallet.CanBuy(CastleMoney))
-        {
-            Debug.Log("所持金が足りません");
-            StartCoroutine(WarningMoneyText());
-            return;
-        }
-      
-        playerStatusData.wallet.RemoveMoney(CastleMoney);
-        money_text.text = $"{playerStatusData.wallet.CurrentMoney}";
-
-        playerStatusData.castleAbility.SetAbilityLevel(playerStatusData.castleAbility.lv + 1);
-        Castle_text.text = $"{playerStatusData.castleAbility.lv}";
-
-        //レベル３になった時文字を赤くする
-        if (playerStatusData.castleAbility.lv >= 3)
-        {
-            Castle_text.color = new Color(1f, 0.337f, 0.337f);
-           
-            //ボタンを押せなくする
-            CastleButton.interactable = false;
-        }
-
-        //レベルアップに比例して値上げ
-        if (playerStatusData.castleAbility.lv == 0)
-        {
-            CastleMoney = 300;
-            CastleMoney_text.text = $"{CastleMoney}";
-        }
-        else if (playerStatusData.castleAbility.lv == 1)
-        {
-            CastleMoney = 800;
-            CastleMoney_text.text = $"{CastleMoney}";
-        }
-        else if (playerStatusData.castleAbility.lv == 2)
-        {
-            CastleMoney = 1500;
-            CastleMoney_text.text = $"{CastleMoney}";
-        }
-        //レベルマックスでテキストをMAXにする
-        else
-        {
-            CastleMoney_text.text = "MAX";
-        }
-      
-        DialogObj.SetActive(false);
-        LayCastObj.SetActive(false);
-    }
-
-    // 砲撃の強化処理
-     private void TryUpgradeCanon()
-    {
-        if (playerStatusData.cannonAbility.lv >= 3)
-        {
-            StartCoroutine(WarningLevelText());
-            return;
-        }
-        if (!playerStatusData.wallet.CanBuy(CanonMoney))
+        if (!playerStatusData.wallet.CanBuy(money))
         {
             Debug.Log("所持金が足りません");
             StartCoroutine(WarningMoneyText());
             return;
         }
 
-        playerStatusData.wallet.RemoveMoney(CanonMoney);
+        playerStatusData.wallet.RemoveMoney(money);
         money_text.text = $"{playerStatusData.wallet.CurrentMoney}";
 
-        playerStatusData.cannonAbility.SetAbilityLevel(playerStatusData.cannonAbility.lv + 1);
-        Canon_text.text = $"{playerStatusData.cannonAbility.lv}";
+        ability.SetAbilityLevel(ability.lv + 1);
+        SetAbilityTextAndButton(ability);
 
-        //レベル３になった時文字を赤くする
-        if (playerStatusData.cannonAbility.lv >= 3)
-        {
-            Canon_text.color = new Color(1f, 0.337f, 0.337f);
-            //ボタンを押せなくする
-            CanonButton.interactable = false;
-        }
-
-        //レベルアップに比例して値上げ
-        if (playerStatusData.cannonAbility.lv == 0)
-        {
-            CanonMoney = 300;
-            CanonMoney_text.text = $"{CanonMoney}";
-        }
-        else if (playerStatusData.cannonAbility.lv == 1)
-        {
-            CanonMoney = 800;
-            CanonMoney_text.text = $"{CanonMoney}";
-        }
-        else if (playerStatusData.cannonAbility.lv == 2)
-        {
-            CanonMoney = 1500;
-            CanonMoney_text.text = $"{CanonMoney}";
-        }
-        //レベルマックスでテキストをMAXにする
-        else
-        {
-            CanonMoney_text.text = "MAX";
-        }
-      
-
-        DialogObj.SetActive(false);
-        LayCastObj.SetActive(false);
-    }
-
-    private void TryUpgradeCost()
-    {
-        if (playerStatusData.costAbility.lv >= 3)
-        {
-            StartCoroutine(WarningLevelText());
-            return;
-        }
-        if (!playerStatusData.wallet.CanBuy(CostMoney))
-        {
-            Debug.Log("所持金が足りません");
-            StartCoroutine(WarningMoneyText());
-            return;
-        }
-
-        playerStatusData.wallet.RemoveMoney(CostMoney);
-        money_text.text = $"{playerStatusData.wallet.CurrentMoney}";
-
-        playerStatusData.costAbility.SetAbilityLevel(playerStatusData.costAbility.lv + 1);
-        Cost_text.text = $"{playerStatusData.costAbility.lv}";
-
-        //レベル３になった時文字を赤くする
-        if (playerStatusData.costAbility.lv >= 3)
-        {
-            Cost_text.color = new Color(1f, 0.337f, 0.337f);
-            //ボタンを押せなくする
-            CostButton.interactable = false;
-        }
-
-        //レベルアップに比例して値上げ
-        if (playerStatusData.costAbility.lv == 0)
-        {
-            CostMoney = 300;
-            CostMoney_text.text = $"{CostMoney}";
-        }
-        else if (playerStatusData.costAbility.lv == 1)
-        {
-            CostMoney = 800;
-            CostMoney_text.text = $"{CostMoney}";
-        }
-        else if (playerStatusData.costAbility.lv == 2)
-        {
-            CostMoney = 1500;
-            CostMoney_text.text = $"{CostMoney}";
-        }
-        //レベルマックスでテキストをMAXにする
-        else
-        {
-            CostMoney_text.text = "MAX";
-        }
-      
-        DialogObj.SetActive(false);
-        LayCastObj.SetActive(false);
-    }
-
-    private void TryUpgradeInfection()
-    {
-        if (playerStatusData.virusAbility.lv >= 3)
-        {
-            StartCoroutine(WarningLevelText());
-            return;
-        }
-        if (!playerStatusData.wallet.CanBuy(InfectionMoney))
-        {
-            Debug.Log("所持金が足りません");
-            StartCoroutine(WarningMoneyText());
-            return;
-        }
-
-        playerStatusData.wallet.RemoveMoney(InfectionMoney);
-        money_text.text = $"{playerStatusData.wallet.CurrentMoney}";
-
-        playerStatusData.virusAbility.SetAbilityLevel(playerStatusData.virusAbility.lv + 1);
-        Infection_text.text = $"{playerStatusData.virusAbility.lv}";
-
-        //レベル３になった時文字を赤くする
-        if (playerStatusData.virusAbility.lv >= 3)
-        {
-            Infection_text.color = new Color(1f, 0.337f, 0.337f);
-            //ボタンを押せなくする
-            InfectionButton.interactable = false;
-        }
-
-        //レベルアップに比例して値上げ
-        if (playerStatusData.virusAbility.lv == 0)
-        {
-            InfectionMoney = 300;
-            InfectionMoney_text.text = $"{InfectionMoney}";
-        }
-        else if (playerStatusData.virusAbility.lv == 1)
-        {
-            InfectionMoney = 800;
-            InfectionMoney_text.text = $"{InfectionMoney}";
-        }
-        else if (playerStatusData.virusAbility.lv == 2)
-        {
-            InfectionMoney = 1500;
-            InfectionMoney_text.text = $"{InfectionMoney}";
-        }
-        //レベルマックスでテキストをMAXにする
-        else
-        {
-            InfectionMoney_text.text = "MAX";
-        }
-      
         DialogObj.SetActive(false);
         LayCastObj.SetActive(false);
     }
