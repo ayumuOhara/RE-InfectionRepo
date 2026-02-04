@@ -410,45 +410,28 @@ public class ShopManager:MonoBehaviour
 
     public void ButtonInteractable()
     {
-        //城
         money = playerStatusData.wallet.CurrentMoney;
-        if (CastleMoney > money)
-        {
-            CastleButton.interactable = false;
-        }
-        else
-        {
-            CastleButton.interactable = true;
-        }
 
-        //爆弾
-        if (CanonMoney > money)
-        {
-            CanonButton.interactable = false;
-        }
-        else
-        {
-            CanonButton.interactable = true;
-        }
-
-        //コスト
-        if (CostMoney > money)
-        {
-            CostButton.interactable = false;
-        }
-        else
-        {
-            CostButton.interactable = true;
-        }
-
-        //感染
-        if (InfectionMoney > money)
-        {
-            InfectionButton.interactable = false;
-        }
-        else
-        {
-            InfectionButton.interactable = true;
-        }
+        SetButtonState(CastleButton, CastleMoney <= money);
+        SetButtonState(CanonButton, CanonMoney <= money);
+        SetButtonState(CostButton, CostMoney <= money);
+        SetButtonState(InfectionButton, InfectionMoney <= money);
     }
+
+
+    private void SetButtonState(Button button, bool canUse)
+    {
+        // interactable はそのまま使う
+        button.interactable = canUse;
+
+        // 半透明にしたくないので、色を自分で変える
+        Image img = button.GetComponent<Image>();
+
+        if (canUse)
+            img.color = Color.white;
+        else
+            img.color = Color.gray;
+    }
+
+
 }
