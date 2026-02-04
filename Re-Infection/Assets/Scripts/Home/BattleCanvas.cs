@@ -1,7 +1,5 @@
-using JetBrains.Annotations;
 using System.Collections;
 using TMPro;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
