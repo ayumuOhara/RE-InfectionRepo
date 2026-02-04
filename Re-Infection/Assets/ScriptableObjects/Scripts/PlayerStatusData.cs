@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem.Layouts;
 
 [System.Serializable]
 public abstract class BaseAbility
@@ -94,4 +95,13 @@ public class PlayerStatusData : ScriptableObject
     public CannonAbility cannonAbility;
     public CostAbility costAbility;
     public VirusAbility virusAbility;
+
+    [ContextMenu("全アビリティのLvをリセット")]
+    public void ResetAllLevels()
+    {
+        castleAbility.SetAbilityLevel(0);
+        cannonAbility.SetAbilityLevel(0);
+        costAbility.SetAbilityLevel(0);
+        virusAbility.SetAbilityLevel(0);
+    }
 }
