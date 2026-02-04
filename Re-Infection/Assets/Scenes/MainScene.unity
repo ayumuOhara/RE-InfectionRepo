@@ -28369,7 +28369,7 @@ PrefabInstance:
     - target: {fileID: 871945039257164439, guid: 95d2408ff4febfe4d9a617269ecd28f6, type: 3}
       propertyPath: unitData
       value: 
-      objectReference: {fileID: 11400000, guid: 8e79466c1b37ca44d944376febf5437b, type: 2}
+      objectReference: {fileID: 11400000, guid: a5b873a3a6c417b43aa7c5049c047649, type: 2}
     - target: {fileID: 871945039257164439, guid: 95d2408ff4febfe4d9a617269ecd28f6, type: 3}
       propertyPath: slotIndex
       value: 2
