@@ -6554,7 +6554,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DropArea
   dropTargetParent: {fileID: 532703174}
   currentUnitStats: {fileID: 0}
-  slotIndex: 1
+  slotIndex: 0
 --- !u!114 &532703179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15348,7 +15348,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DropArea
   dropTargetParent: {fileID: 1287777761}
   currentUnitStats: {fileID: 0}
-  slotIndex: 0
+  slotIndex: 1
 --- !u!61 &1287777764
 BoxCollider2D:
   m_ObjectHideFlags: 0
