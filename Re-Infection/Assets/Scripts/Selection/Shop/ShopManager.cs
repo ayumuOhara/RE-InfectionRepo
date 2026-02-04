@@ -408,25 +408,32 @@ public class ShopManager:MonoBehaviour
     {
         money = playerStatusData.wallet.CurrentMoney;
 
-        SetButtonState(CastleButton, CastleMoney <= money);
-        SetButtonState(CanonButton, CanonMoney <= money);
-        SetButtonState(CostButton, CostMoney <= money);
-        SetButtonState(InfectionButton, InfectionMoney <= money);
+        SetButtonState(CastleButton, CastleMoney <= money,CastleMoney_text);
+        SetButtonState(CanonButton, CanonMoney <= money,CanonMoney_text);
+        SetButtonState(CostButton, CostMoney <= money,CostMoney_text);
+        SetButtonState(InfectionButton, InfectionMoney <= money,InfectionMoney_text);
     }
 
 
-    private void SetButtonState(Button button, bool canUse)
+    private void SetButtonState(Button button, bool canUse,TextMeshProUGUI text)
     {
-        // interactable ‚Í‚»‚Ì‚Ü‚ÜŽg‚¤
+        
         button.interactable = canUse;
 
-        // ”¼“§–¾‚É‚µ‚½‚­‚È‚¢‚Ì‚ÅAF‚ðŽ©•ª‚Å•Ï‚¦‚é
+       
         Image img = button.GetComponent<Image>();
 
         if (canUse)
+        {
             img.color = Color.white;
+            text.color = Color.black;
+        }
         else
+        {
             img.color = Color.gray;
+            text.color = new Color32(255, 88, 88, 255);
+
+        }
     }
 
 
