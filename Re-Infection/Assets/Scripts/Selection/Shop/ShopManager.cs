@@ -7,7 +7,7 @@ public enum UpgradeType
 {
     Castle,
     Canon,
-    Infection,
+    Virus,
     Cost
 }
 public class ShopManager:MonoBehaviour
@@ -22,7 +22,7 @@ public class ShopManager:MonoBehaviour
     public Button CastleButton; //城の強化ボタン
     public Button CanonButton; //砲撃強化ボタン
     public Button CostButton; //コスト回復ボタン
-    public Button InfectionButton; //感染ボタン
+    public Button VirusButton; //感染ボタン
 
     [Header("城のレベルとコスト")]
     public TextMeshProUGUI Castle_text;
@@ -37,8 +37,8 @@ public class ShopManager:MonoBehaviour
     public TextMeshProUGUI CostMoney_text;
 
     [Header("感染のレベルとコスト")]
-    public TextMeshProUGUI Infection_text;
-    public TextMeshProUGUI InfectionMoney_text;
+    public TextMeshProUGUI Virus_text;
+    public TextMeshProUGUI VirusMoney_text;
 
     [Header("ダイアログ表示用")]
     public TextMeshProUGUI DialogMessege;
@@ -109,7 +109,7 @@ public class ShopManager:MonoBehaviour
     }
 
     //感染
-    private int InfectionMoney
+    private int VirusMoney
     {
         get
         {
@@ -145,8 +145,6 @@ public class ShopManager:MonoBehaviour
         money_text.text = ($"{playerStatusData.wallet.CurrentMoney}");
         LayCastObj.SetActive(false);
 
-       
-      
         SetAbilityTextAndButton(playerStatusData.castleAbility);
         SetAbilityTextAndButton(playerStatusData.cannonAbility);
         SetAbilityTextAndButton(playerStatusData.costAbility);
@@ -156,10 +154,6 @@ public class ShopManager:MonoBehaviour
         WarningObj.SetActive(false);
     }
 
-    private void Update()
-    {
-        ButtonInteractable();
-    }
     // 渡された強化内容によってUI表示を操作
     private void SetAbilityTextAndButton(BaseAbility ability)
     {
@@ -175,7 +169,7 @@ public class ShopManager:MonoBehaviour
                 SetTextAndButton(Cost_text, CostMoney_text, playerStatusData.costAbility.lv, CostMoney, CostButton);
                 break;
             case "VirusAbility":
-                SetTextAndButton(Infection_text, InfectionMoney_text, playerStatusData.virusAbility.lv, InfectionMoney, InfectionButton);
+                SetTextAndButton(Virus_text, VirusMoney_text, playerStatusData.virusAbility.lv, VirusMoney, VirusButton);
                 break;
             default:
                 break;
@@ -187,15 +181,18 @@ public class ShopManager:MonoBehaviour
     private void SetTextAndButton(TextMeshProUGUI lvText, TextMeshProUGUI moneyText, int lv, int money, Button button)
     {
         lvText.text = lv.ToString();
-        moneyText.text = lv >= 3 ? "MAX" : $"{money}";
+        moneyText.text = lv >= 3 ? "MAX" : $"<size=40><sprite=0><size=45>{money}";
 
-        //レベル３になった時文字を赤くする
-        if (lv >= 3)
+        if (playerStatusData.wallet.CurrentMoney < money || lv >= 3)
         {
             lvText.color = new Color(1f, 0.337f, 0.337f);
             moneyText.color = new Color(1f, 0.337f, 0.337f);
+
             //ボタンを押せなくする
-            if(button != null) button.interactable = false;
+            if (button != null)
+            {
+                button.interactable = false;
+            }
         }
     }
 
@@ -295,7 +292,7 @@ public class ShopManager:MonoBehaviour
     }
 
 
-    public void InfectionSkillEnhacement()
+    public void VirusSkillEnhacement()
     {
         if (playerStatusData.virusAbility.lv == 0)
         {
@@ -318,14 +315,14 @@ public class ShopManager:MonoBehaviour
             return;
         }
 
-        currentUpgrade = UpgradeType.Infection;
+        currentUpgrade = UpgradeType.Virus;
 
         DialogObj.SetActive(true);
         LayCastObj.SetActive(true);
 
         DialogLevel_text1.text = ($"{playerStatusData.virusAbility.lv}");
         DialogLevel_text2.text = ($"{playerStatusData.virusAbility.lv + 1}");
-        DialogMoney_text.text = ($"{InfectionMoney}");
+        DialogMoney_text.text = ($"{VirusMoney}");
         DialogMessege.text = "";
         DialogMessege.text = "感染を強化しますか？";
     }
@@ -342,8 +339,8 @@ public class ShopManager:MonoBehaviour
                 TryUpgrade(playerStatusData.cannonAbility, CanonMoney);
                 break;
 
-            case UpgradeType.Infection:
-                TryUpgrade(playerStatusData.virusAbility, InfectionMoney);
+            case UpgradeType.Virus:
+                TryUpgrade(playerStatusData.virusAbility, VirusMoney);
                 break;
 
             case UpgradeType.Cost:
@@ -403,38 +400,4 @@ public class ShopManager:MonoBehaviour
         yield return new WaitForSeconds(1f);
         WarningObj.SetActive(false);
     }
-
-    public void ButtonInteractable()
-    {
-        money = playerStatusData.wallet.CurrentMoney;
-
-        SetButtonState(CastleButton, CastleMoney <= money,CastleMoney_text);
-        SetButtonState(CanonButton, CanonMoney <= money,CanonMoney_text);
-        SetButtonState(CostButton, CostMoney <= money,CostMoney_text);
-        SetButtonState(InfectionButton, InfectionMoney <= money,InfectionMoney_text);
-    }
-
-
-    private void SetButtonState(Button button, bool canUse,TextMeshProUGUI text)
-    {
-        
-        button.interactable = canUse;
-
-       
-        Image img = button.GetComponent<Image>();
-
-        if (canUse)
-        {
-            img.color = Color.white;
-            text.color = Color.black;
-        }
-        else
-        {
-            img.color = Color.gray;
-            text.color = new Color32(255, 88, 88, 255);
-
-        }
-    }
-
-
 }

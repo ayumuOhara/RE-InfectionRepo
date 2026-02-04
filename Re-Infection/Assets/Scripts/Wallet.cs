@@ -3,19 +3,13 @@ using UnityEngine;
 [System.Serializable]
 public class Wallet
 {
-    // Š‹à‰Šú‰»
-    public Wallet(int initialMoney = 0)
-    {
-        currentMoney = initialMoney;
-    }
-
     [SerializeField]
     // Š‹à
     private int currentMoney;
     public int CurrentMoney => currentMoney;
 
     // Š‹àÅ‘å’l
-    private const int MAX_HOLD_MONEY = 99999;
+    public static readonly int MAX_HOLD_MONEY = 99999;
 
     public void AddMoney(int amount)
     {
