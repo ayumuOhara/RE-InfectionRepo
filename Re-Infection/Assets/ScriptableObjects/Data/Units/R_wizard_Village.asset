@@ -23,12 +23,11 @@ MonoBehaviour:
     attackType: 2
     hitCnt: 3
     radius: 0.5
-    atk: 20
-    atkInterbal: 5
+    atk: 15
+    atkInterbal: 7
     range: 4
     moveType: 0
     moveSpeed: 1.8
     summonCost: 5
-    infecitonTime: 10
     bossUnit: 0
     attackSe: {fileID: 8300000, guid: dab120b7a12444d42b8454c3420e7830, type: 3}

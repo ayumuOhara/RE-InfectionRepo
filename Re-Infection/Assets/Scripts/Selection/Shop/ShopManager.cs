@@ -1,11 +1,7 @@
-using DanielLochner.Assets.SimpleScrollSnap;
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
-using UnityEditor.U2D.Aseprite;
-using Unity.VisualScripting;
 
 public enum UpgradeType
 {
