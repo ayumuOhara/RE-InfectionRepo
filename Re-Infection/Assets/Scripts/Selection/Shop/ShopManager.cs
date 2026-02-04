@@ -406,45 +406,35 @@ public class ShopManager:MonoBehaviour
 
     public void ButtonInteractable()
     {
-        //é
         money = playerStatusData.wallet.CurrentMoney;
-        if (CastleMoney > money)
-        {
-            CastleButton.interactable = false;
-        }
-        else
-        {
-            CastleButton.interactable = true;
-        }
 
-        //”š’e
-        if (CanonMoney > money)
-        {
-            CanonButton.interactable = false;
-        }
-        else
-        {
-            CanonButton.interactable = true;
-        }
+        SetButtonState(CastleButton, CastleMoney <= money,CastleMoney_text);
+        SetButtonState(CanonButton, CanonMoney <= money,CanonMoney_text);
+        SetButtonState(CostButton, CostMoney <= money,CostMoney_text);
+        SetButtonState(InfectionButton, InfectionMoney <= money,InfectionMoney_text);
+    }
 
-        //ƒRƒXƒg
-        if (CostMoney > money)
-        {
-            CostButton.interactable = false;
-        }
-        else
-        {
-            CostButton.interactable = true;
-        }
 
-        //Š´õ
-        if (InfectionMoney > money)
+    private void SetButtonState(Button button, bool canUse,TextMeshProUGUI text)
+    {
+        
+        button.interactable = canUse;
+
+       
+        Image img = button.GetComponent<Image>();
+
+        if (canUse)
         {
-            InfectionButton.interactable = false;
+            img.color = Color.white;
+            text.color = Color.black;
         }
         else
         {
-            InfectionButton.interactable = true;
+            img.color = Color.gray;
+            text.color = new Color32(255, 88, 88, 255);
+
         }
     }
+
+
 }
