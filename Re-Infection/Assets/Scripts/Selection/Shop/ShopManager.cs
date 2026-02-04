@@ -19,6 +19,7 @@ public class ShopManager:MonoBehaviour
     [Header("UI")]
     public GameObject DialogObj;
     public TextMeshProUGUI money_text;
+    private int money=0;
     public GameObject LayCastObj;
 
     [Header("Buttons")]
@@ -148,6 +149,8 @@ public class ShopManager:MonoBehaviour
         money_text.text = ($"{playerStatusData.wallet.CurrentMoney}");
         LayCastObj.SetActive(false);
 
+       
+      
         SetAbilityTextAndButton(playerStatusData.castleAbility);
         SetAbilityTextAndButton(playerStatusData.cannonAbility);
         SetAbilityTextAndButton(playerStatusData.costAbility);
@@ -157,6 +160,10 @@ public class ShopManager:MonoBehaviour
         WarningObj.SetActive(false);
     }
 
+    private void Update()
+    {
+        ButtonInteractable();
+    }
     // 渡された強化内容によってUI表示を操作
     private void SetAbilityTextAndButton(BaseAbility ability)
     {
@@ -399,5 +406,49 @@ public class ShopManager:MonoBehaviour
         Warning_text.text = ("レ ベ ル マ ッ ク ス で す ！");
         yield return new WaitForSeconds(1f);
         WarningObj.SetActive(false);
+    }
+
+    public void ButtonInteractable()
+    {
+        //城
+        money = playerStatusData.wallet.CurrentMoney;
+        if (CastleMoney > money)
+        {
+            CastleButton.interactable = false;
+        }
+        else
+        {
+            CastleButton.interactable = true;
+        }
+
+        //爆弾
+        if (CanonMoney > money)
+        {
+            CanonButton.interactable = false;
+        }
+        else
+        {
+            CanonButton.interactable = true;
+        }
+
+        //コスト
+        if (CostMoney > money)
+        {
+            CostButton.interactable = false;
+        }
+        else
+        {
+            CostButton.interactable = true;
+        }
+
+        //感染
+        if (InfectionMoney > money)
+        {
+            InfectionButton.interactable = false;
+        }
+        else
+        {
+            InfectionButton.interactable = true;
+        }
     }
 }
