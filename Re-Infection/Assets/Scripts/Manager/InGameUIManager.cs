@@ -124,11 +124,8 @@ public class InGameUIManager : MonoBehaviour
         rewardUI.enabled = true;
 
         var totalCoin = 0;
-        var waveCoin = gameManager.waveSpawner.currentWaveIdx
-                     * gameManager.waveSpawner.CurrentStage.stageNum
-                     * 100;
-        var stageCoin = gameManager.waveSpawner.CurrentStage.stageNum
-                      * 200;
+        var waveCoin = gameManager.waveSpawner.CurrentStage.waveClearCoin * gameManager.waveSpawner.currentWaveIdx;
+        var stageCoin = gameManager.waveSpawner.CurrentStage.stageClearCoin;
 
         totalCoin = gameManager.waveSpawner.IsSessionClear ? waveCoin + stageCoin : waveCoin;
 
@@ -138,7 +135,7 @@ public class InGameUIManager : MonoBehaviour
 
             if (!gameManager.waveSpawner.CurrentStage.isClear)
             {
-                totalCoin *= 2;
+                totalCoin += gameManager.waveSpawner.CurrentStage.firstClearCoin;
 
                 gameManager.waveSpawner.CurrentStage.isClear = true;
                 firstClearReward.SetActive(true);

@@ -13,7 +13,7 @@ public abstract class BaseUpgrade
     [Tooltip("各Lvからアップグレードする際に必要になるコインの数\nまた、配列のサイズがそのままレベルの最大値になる")]
     [SerializeField]
     private int[] upgradeMoney;
-    public int UpgradeMoney => upgradeMoney[lv != 0 ? lv - 1 : lv];
+    public int UpgradeMoney => upgradeMoney[lv >= MaxLevel ? lv - 1 : lv];
 
     public void SetUpgradeLevel(int level)
     {
