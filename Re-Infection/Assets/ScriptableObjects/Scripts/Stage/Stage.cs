@@ -9,6 +9,10 @@ public class Stage : ScriptableObject
     public WaveData[] waveData;       // ステージのウェーブデータ
     public bool isClear;              // ステージクリアフラグ
 
+    public int waveClearCoin;
+    public int stageClearCoin;
+    public int firstClearCoin;
+
     private List<UnitStats> spawnUnits;
     // スポーンするユニットの種類
     public List<UnitStats> SpawnUnits

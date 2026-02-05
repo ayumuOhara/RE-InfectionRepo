@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcf73ff0467ebad4b8d9a591c6ac54e0, type: 3}
+  m_Name: BossUnit_S0
+  m_EditorClassIdentifier: Assembly-CSharp::UnitStats
+  unitStats:
+    animatorController: {fileID: 0}
+    unitSprite: {fileID: 21300116, guid: f5f1c19ce87450f4b97f8b363746558d, type: 3}
+    attackEffect: {fileID: 9083634734492158199, guid: 1968969ccf1d2f64cb279a59b9297bae, type: 3}
+    unitName: "\u719F\u7DF4\u9B54\u6CD5\u4F7F\u3044"
+    jobType: 0
+    targetType: 0
+    maxHp: 1000
+    attackType: 0
+    hitCnt: 1
+    radius: 0
+    atk: 15
+    atkInterbal: 3
+    range: 2
+    moveType: 0
+    moveSpeed: 2
+    summonCost: 0
+    bossUnit: 1
+    attackSe: {fileID: 8300000, guid: dab120b7a12444d42b8454c3420e7830, type: 3}
