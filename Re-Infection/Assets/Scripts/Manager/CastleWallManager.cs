@@ -21,9 +21,9 @@ public class CastleWallManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        currentHp = playerStatusData.castleAbility.Health;
+        currentHp = playerStatusData.castleUpgrade.Health;
         currentHpText.text = currentHp.ToString("F0");
-        healthBar.value = currentHp / playerStatusData.castleAbility.Health;
+        healthBar.value = currentHp / playerStatusData.castleUpgrade.Health;
     }
 
     // Update is called once per frame
@@ -40,6 +40,6 @@ public class CastleWallManager : MonoBehaviour
             currentHp = 0;
         }
         currentHpText.text = currentHp.ToString("F0");
-        healthBar.value = currentHp / playerStatusData.castleAbility.Health;
+        healthBar.value = currentHp / playerStatusData.castleUpgrade.Health;
     }
 }
