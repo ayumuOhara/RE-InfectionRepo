@@ -66,7 +66,7 @@ public class InfectioningUnit : MonoBehaviour
             if (enemy?.IsDead == true && enemy.IsInfectioning == false)
             {
                 OnInfection += enemy.StartInfection;
-                OnInfection?.Invoke(playerStatusData.virusAbility.VirusStats.infectionTime, playerStatusData.virusAbility.VirusStats.reviveHealthRate);
+                OnInfection?.Invoke(playerStatusData.virusUpgrade.VirusStats.infectionTime, playerStatusData.virusUpgrade.VirusStats.reviveHealthRate);
                 OnInfection -= enemy.StartInfection;
 
                 if (!effectGenerated)

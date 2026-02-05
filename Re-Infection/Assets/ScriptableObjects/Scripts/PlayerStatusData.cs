@@ -1,21 +1,34 @@
+using JetBrains.Annotations;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem.Layouts;
 
 [System.Serializable]
-public abstract class BaseAbility
+public abstract class BaseUpgrade
 {
     public int lv { get; private set; }
+    public int MaxLevel => upgradeMoney.Length;
 
-    public void SetAbilityLevel(int level)
+    [Header("各Lv(0~)のアップグレードのコスト(※最大レベルを除く)")]
+    [Tooltip("各Lvからアップグレードする際に必要になるコインの数\nまた、配列のサイズがそのままレベルの最大値になる")]
+    [SerializeField]
+    private int[] upgradeMoney;
+    public int UpgradeMoney => upgradeMoney[lv != 0 ? lv - 1 : lv];
+
+    public void SetUpgradeLevel(int level)
     {
         lv = level;
+        if (lv >= MaxLevel)
+        {
+            lv = MaxLevel;
+        }
     }
 }
 
 [System.Serializable]
-public class CastleAbility : BaseAbility
+public class CastleUpgrade : BaseUpgrade
 {
+    [Header("各Lv(0~)のアップグレード内容")]
     [Tooltip("最大HP")]
     [SerializeField]
     // Lvごとの体力設定
@@ -26,8 +39,9 @@ public class CastleAbility : BaseAbility
 }
 
 [System.Serializable]
-public class CannonAbility : BaseAbility
+public class CannonUpgrade : BaseUpgrade
 {
+    [Header("各Lv(0~)のアップグレード内容")]
     [Tooltip("砲撃時のダメージ")]
     [SerializeField]
     // Lvごとの体力設定
@@ -44,7 +58,7 @@ public class CannonAbility : BaseAbility
 }
 
 [System.Serializable]
-public class CostAbility : BaseAbility
+public class CostUpgrade : BaseUpgrade
 {
     [System.Serializable]
     public struct CostContext
@@ -55,6 +69,7 @@ public class CostAbility : BaseAbility
         public float interbal;
     }
 
+    [Header("各Lv(0~)のアップグレード内容")]
     [Tooltip("コスト関連のスタッツ")]
     [SerializeField]
     // Lvごとの体力設定
@@ -65,7 +80,7 @@ public class CostAbility : BaseAbility
 }
 
 [System.Serializable]
-public class VirusAbility : BaseAbility
+public class VirusUpgrade : BaseUpgrade
 {
     [System.Serializable]
     public struct VirusContext
@@ -78,6 +93,7 @@ public class VirusAbility : BaseAbility
         public float infectionTime;
     }
 
+    [Header("各Lv(0~)のアップグレード内容")]
     [Tooltip("感染ウイルスのスタッツ")]
     [SerializeField]
     // Lvごとの体力設定
@@ -91,17 +107,17 @@ public class VirusAbility : BaseAbility
 public class PlayerStatusData : ScriptableObject
 {
     public Wallet wallet;
-    public CastleAbility castleAbility;
-    public CannonAbility cannonAbility;
-    public CostAbility costAbility;
-    public VirusAbility virusAbility;
+    public CastleUpgrade castleUpgrade;
+    public CannonUpgrade cannonUpgrade;
+    public CostUpgrade costUpgrade;
+    public VirusUpgrade virusUpgrade;
 
     [ContextMenu("全アビリティのLvをリセット")]
     public void ResetAllLevels()
     {
-        castleAbility.SetAbilityLevel(0);
-        cannonAbility.SetAbilityLevel(0);
-        costAbility.SetAbilityLevel(0);
-        virusAbility.SetAbilityLevel(0);
+        castleUpgrade.SetUpgradeLevel(0);
+        cannonUpgrade.SetUpgradeLevel(0);
+        costUpgrade.SetUpgradeLevel(0);
+        virusUpgrade.SetUpgradeLevel(0);
     }
 }
