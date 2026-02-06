@@ -13,7 +13,6 @@ public class BattleCanvas : MonoBehaviour
 
     public Image[] stageImage; //ステートの画像スプライト配列
     public Animator[] lockAnime; //ステージのロック中の表示にスプライト
-    public GameObject[] lightGlow;
     public GameObject messageBox; //ステージ解放時のメッセージボックス
     public GameObject messageCanvas;
 
@@ -42,7 +41,6 @@ public class BattleCanvas : MonoBehaviour
         for (int i = 0; i < stageImage.Length; i++)
         {
             stageImage[i].color = new Color(0.1f, 0.1f, 0.1f, 0.9803922f);
-            lightGlow[i].SetActive(false);
         }
 
 
@@ -90,6 +88,10 @@ public class BattleCanvas : MonoBehaviour
         if (stageNumber != 0 && stageDataManager.stage[stageNumber - 1].isClear == false)
         {
             conditionsText.text = $"ステージ{stageNumber}クリアで解放";
+            if(stageNumber == 1)
+            {
+                conditionsText.text = $"チュートリアルステージ\nをクリアで解放";
+            }
             conditionsText.gameObject.SetActive(true);
             sortieButton.interactable = false;
         }
@@ -112,7 +114,7 @@ public class BattleCanvas : MonoBehaviour
     //クリア済みステージの処理
     public void OnClearedStage(int stage)
     {
-        if (stage >= 3) return;
+        if (stage >= 4) return;
 
         lockAnime[stage].gameObject.SetActive(false);
         stageImage[stage].color = new Color(1f, 1f, 1f, 1f);
@@ -123,7 +125,7 @@ public class BattleCanvas : MonoBehaviour
     //クリア後に解放されたステージに移る処理
     public void OnChangeStage(int stage)
     {
-        if (stage >= 3) return;
+        if (stage >= 4) return;
         messageCanvas.SetActive(true);
 
 
@@ -137,7 +139,6 @@ public class BattleCanvas : MonoBehaviour
         
 
         yield return new WaitForSeconds(0.7f);
-        lightGlow[openStage].SetActive(true);
         yield return new WaitForSeconds(0.7f);
         lockAnime[openStage].SetBool("IsOpen", true);
 
