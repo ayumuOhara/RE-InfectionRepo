@@ -149,7 +149,7 @@ public class BattleCanvas : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         Debug.Log($"{openStage + 1}ステージ解放");
         messageBox.SetActive(true);
-        releaseText.text = $"ステージ{openStage + 1}が解放された!";
+        releaseText.text = $"ステージ{openStage}が解放された!";
         Time.timeScale = 0f; 
 
     }
