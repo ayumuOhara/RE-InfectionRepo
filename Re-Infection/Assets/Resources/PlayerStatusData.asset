@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: PlayerStatusData
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStatusData
   wallet:
-    currentMoney: 0
+    currentMoney: 6200
   castleUpgrade:
     upgradeMoney: 64000000f4010000a4060000
     healths: 640000002c010000f401000084030000
   cannonUpgrade:
     upgradeMoney: 6400000020030000b0040000
-    damages: 28000000460000005a00000064000000
-    coolTime: 180
+    damages: a0860100460000005a00000064000000
+    coolTime: 0
   costUpgrade:
     upgradeMoney: 2c01000084030000d0070000
     costStats:
