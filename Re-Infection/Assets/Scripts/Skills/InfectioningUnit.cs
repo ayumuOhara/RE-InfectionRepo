@@ -27,8 +27,10 @@ public class InfectioningUnit : MonoBehaviour
         unitManager = GameObject.Find("UnitManager").GetComponent<UnitManager>();
     }
 
-    async void OnEnable()
+    async private void Update()
     {
+        //UnitBase.DrawDebugCircle(transform.position, virusStats.infectionRange, Color.purple, 0.5f);
+
         await WaitEndDrag.WaitDragEndAsync();
         if (unitManager.GetCorpseList().Count <= 0)
         {
@@ -46,11 +48,6 @@ public class InfectioningUnit : MonoBehaviour
         {
             AllTargetInfection(targetUnits);
         }
-    }
-
-    private void Update()
-    {
-        //UnitBase.DrawDebugCircle(transform.position, virusStats.infectionRange, Color.purple, 0.5f);
     }
 
     // 取得したターゲットを感染
