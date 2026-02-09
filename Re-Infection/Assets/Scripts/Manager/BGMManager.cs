@@ -33,9 +33,11 @@ public class BGMManager : MonoBehaviour
     // EnumによるBGM管理
     public enum BGMType
     {
-        BGM_1,  // タイトル時のBGM
-        BGM_2,  // ホーム時のBGM
-        BGM_3,  // インゲーム時のBGM
+        Title,  // タイトル時のBGM
+        Home,  // ホーム時のBGM
+        InGame,  // インゲーム時のBGM
+        Result  //リザルト時のBGM
+
     }
 
     // BGM再生メソッド

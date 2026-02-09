@@ -26,14 +26,15 @@ public class BGMController : MonoBehaviour
         switch (scene.name)
         {
             case "TitleScene":
-                bgmManager.PlayBGM(BGMManager.BGMType.BGM_1);
+                bgmManager.PlayBGM(BGMManager.BGMType.Title);
                 break;
             case "Home":
-                bgmManager.PlayBGM(BGMManager.BGMType.BGM_2);
+                bgmManager.PlayBGM(BGMManager.BGMType.Home);
                 break;
             case "MainScene":
-                bgmManager.PlayBGM(BGMManager.BGMType.BGM_3);
+                bgmManager.PlayBGM(BGMManager.BGMType.InGame);
                 break;
         }
+
     }
 }
