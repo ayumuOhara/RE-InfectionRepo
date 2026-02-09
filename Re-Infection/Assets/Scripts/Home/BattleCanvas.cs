@@ -23,6 +23,7 @@ public class BattleCanvas : MonoBehaviour
     public Button leftButton; //左矢印ボタン
     public Button sortieButton; //出撃ボタン
 
+    private bool isInitialization = false; //最初の一回だけ実行するためのフラグ
     int stageNumber = 0; //現在表示しているステージ番号
     int stageLastNumber = 0; //ステージの最後の番号
 
@@ -43,15 +44,21 @@ public class BattleCanvas : MonoBehaviour
             stageImage[i].color = new Color(0.1f, 0.1f, 0.1f, 0.9803922f);
         }
 
-
-        //最初にステージ1を表示
-        scrollChecker.scrollSnap.GoToPanel(0);
+        scrollChecker.scrollSnap.GoToPanel(stageNumber);
 
     }
 
     // Update is called once per frame
     void Update()
     {
+        //最後にクリアしたステージを表示するようにする
+        if (isInitialization == false)
+        {
+            Debug.Log("ああ" + stageData.SelectStageNumber);
+            scrollChecker.scrollSnap.GoToPanel(stageData.SelectStageNumber);
+            isInitialization = true;
+        }
+
         stageNumber = scrollChecker.GetStagePage(); //現在のステージ番号を取得
         stageLastNumber = scrollChecker.GetStageLastPage(); //ステージの最後の番号を取得
 

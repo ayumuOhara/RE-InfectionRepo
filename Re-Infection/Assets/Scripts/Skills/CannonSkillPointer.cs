@@ -49,7 +49,7 @@ namespace CannonPointer
             if (unitManager == null)
                 unitManager = GameObject.Find("UnitManager").GetComponent<UnitManager>();
             
-            StartCoroutine(SkillCoolTimer(playerStatusData.cannonUpgrade.CoolTime / 2));
+            StartCoroutine(SkillCoolTimer(playerStatusData.cannonCoolTimeUpgrade.CoolTime / 2));
         }
 
         public void OnSkillUse(float coolTime)
@@ -65,7 +65,7 @@ namespace CannonPointer
             while (time > 0)
             {
                 time -= Time.deltaTime;
-                cannonPointerFilled.fillAmount = time / playerStatusData.cannonUpgrade.CoolTime;
+                cannonPointerFilled.fillAmount = time / playerStatusData.cannonCoolTimeUpgrade.CoolTime;
 
                 yield return new WaitUntil(() => waveSpawner.IsStartWave);
             }
@@ -75,7 +75,7 @@ namespace CannonPointer
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            if (!waveSpawner.IsStartWave || !canUseSkill) return;
+            if (!waveSpawner.IsStartWave || !canUseSkill || Time.timeScale == 0) return;
 
             dragEndTcs = new TaskCompletionSource<PointerEventData>();
 
@@ -92,7 +92,7 @@ namespace CannonPointer
 
         public void OnDrag(PointerEventData eventData)
         {
-            if (!waveSpawner.IsStartWave || !canUseSkill) return;
+            if (!waveSpawner.IsStartWave || !canUseSkill || Time.timeScale == 0) return;
 
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePos.z = 0;
@@ -104,7 +104,7 @@ namespace CannonPointer
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            if (!waveSpawner.IsStartWave || !canUseSkill) return;
+            if (!waveSpawner.IsStartWave || !canUseSkill || Time.timeScale == 0) return;
 
             dragEndTcs?.TrySetResult(eventData);
 
