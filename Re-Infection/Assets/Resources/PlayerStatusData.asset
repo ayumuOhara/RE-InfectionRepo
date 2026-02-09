@@ -23,9 +23,10 @@ MonoBehaviour:
   cannonCoolTimeUpgrade:
     upgradeMoney: 64000000e8030000b80b0000
     coolTime:
+    - 220
     - 180
-    - 160
-    - 140
+    - 150
+    - 120
   costLimitUpgrade:
     upgradeMoney: 64000000e8030000b80b0000
     maxCostCnt: 1e00000028000000320000003c000000
