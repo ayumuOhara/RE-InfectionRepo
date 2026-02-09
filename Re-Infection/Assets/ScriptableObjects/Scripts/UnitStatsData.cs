@@ -43,6 +43,8 @@ public class UnitStats
     public RuntimeAnimatorController animatorController;           // ユニットのアニメーター
     [Header("スプライト")]
     public Sprite unitSprite;           // ユニットのスプライト
+    [Header("アウトラインマテリアル")]
+    public Material outline;
     [Header("攻撃エフェクト")]
     public GameObject attackEffect;     // ユニット攻撃時のエフェクト
     [Header("名前")]

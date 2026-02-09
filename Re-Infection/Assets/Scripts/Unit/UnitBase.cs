@@ -85,6 +85,7 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
 
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = this.stats.unitSprite;
+        spriteRenderer.material = stats.outline;
 
         if (!isClone)
             currentHealth = stats.maxHp;

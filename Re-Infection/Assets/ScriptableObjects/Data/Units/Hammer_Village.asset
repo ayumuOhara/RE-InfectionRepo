@@ -15,6 +15,7 @@ MonoBehaviour:
   unitStats:
     animatorController: {fileID: 9100000, guid: d4abbc394fe250e4081e90099c69fc42, type: 2}
     unitSprite: {fileID: -8180171696930044909, guid: a465336e46b7ccf45a24b312c97387b6, type: 3}
+    outline: {fileID: 2100000, guid: d2d66868915b6fe49afceeefed76b8e3, type: 2}
     attackEffect: {fileID: 368088567968201606, guid: e0e947f3acec72d4ba441c1782bf3036, type: 3}
     unitName: "\u6751\u306E\u7BC4\u99AC\u30FC \u52C7\u6B21\u90CE"
     jobType: 1
@@ -29,6 +30,5 @@ MonoBehaviour:
     moveType: 0
     moveSpeed: 2
     summonCost: 4
-    infecitonTime: 10
     bossUnit: 0
     attackSe: {fileID: 8300000, guid: dab120b7a12444d42b8454c3420e7830, type: 3}
