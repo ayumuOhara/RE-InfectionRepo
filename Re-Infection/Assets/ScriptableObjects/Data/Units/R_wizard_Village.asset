@@ -15,6 +15,7 @@ MonoBehaviour:
   unitStats:
     animatorController: {fileID: 9100000, guid: 4e2a6267e66fb5a4d9cec1b8d34dcf9c, type: 2}
     unitSprite: {fileID: -1548542343388229337, guid: 0e7def79efff5a74b9bd5ccfa50ee410, type: 3}
+    outline: {fileID: 2100000, guid: 3d4fe67645bfd4c4b81a72bf8640abfd, type: 2}
     attackEffect: {fileID: 9083634734492158199, guid: 1968969ccf1d2f64cb279a59b9297bae, type: 3}
     unitName: "\u6751\u306EAoE\u9B54\u6CD5\u4F7F\u3044"
     jobType: 4
