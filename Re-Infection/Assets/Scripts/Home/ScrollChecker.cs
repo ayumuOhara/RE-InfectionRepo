@@ -33,6 +33,12 @@ public class ScrollChecker : MonoBehaviour
     }
 
 
+    //ステージの要素数を取得する関数
+    public int GetStageCount()
+    {
+        return stageCount;
+    }
+
     //現在のステージページ番号を取得する関数
     public int GetStagePage()
     {
