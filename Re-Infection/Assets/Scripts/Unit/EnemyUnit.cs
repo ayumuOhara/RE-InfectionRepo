@@ -8,11 +8,13 @@ public class EnemyUnit : UnitBase, Iinfection
     [SerializeField] Sprite corpseSprite;   // 死体スプライト
     [SerializeField] GameObject infecitonInfo;
     [SerializeField] Image infectionBar;
+    WaveSpawner waveSpawner;
 
     public bool IsInfectioning { get; set; } = false;
 
     private void Awake()
     {
+        waveSpawner = FindObjectOfType<WaveSpawner>();
         SetStateManager(new UnitStateManager(this, new EnemyUnitDecider(this)));
         castleObj = GameObject.Find("CastleWall");
     }
@@ -94,11 +96,11 @@ public class EnemyUnit : UnitBase, Iinfection
 
         while (timer < infectionTime)
         {
+            yield return new WaitUntil(() => waveSpawner.IsStartWave);
+
             timer += Time.deltaTime;
 
             infectionBar.fillAmount = timer / infectionTime;
-
-            yield return null;
         }
 
         infecitonInfo.SetActive(false);
