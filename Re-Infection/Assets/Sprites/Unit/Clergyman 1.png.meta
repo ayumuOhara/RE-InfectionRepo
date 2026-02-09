@@ -1,0 +1,416 @@
+fileFormatVersion: 2
+guid: e73a1c2cf7703764293d65b1d8f2fc18
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2345459419378931794
+    second: Clergyman 1_0
+  - first:
+      213: -335814096359649114
+    second: Clergyman 1_1
+  - first:
+      213: -2342631338153149478
+    second: Clergyman 1_2
+  - first:
+      213: 3236258299243408191
+    second: Clergyman 1_3
+  - first:
+      213: -165507519435858621
+    second: Clergyman 1_4
+  - first:
+      213: 6287522881221054004
+    second: Clergyman 1_5
+  - first:
+      213: -3619151394863835294
+    second: Clergyman 1_6
+  - first:
+      213: -3835479685367703021
+    second: Clergyman 1_7
+  - first:
+      213: -5125085087076913614
+    second: Clergyman 1_8
+  - first:
+      213: 6278084863574824555
+    second: Clergyman 1_9
+  - first:
+      213: -4424375508975750086
+    second: Clergyman 1_10
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 530
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Clergyman 1_0
+      rect:
+        serializedVersion: 2
+        x: 5919
+        y: 6228
+        width: 120
+        height: 413
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea723d8b511437fd0800000000000000
+      internalID: -2345459419378931794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Clergyman 1_1
+      rect:
+        serializedVersion: 2
+        x: 868
+        y: 5511
+        width: 662
+        height: 727
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a01aebcbd2f65bf0800000000000000
+      internalID: -335814096359649114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Clergyman 1_2
+      rect:
+        serializedVersion: 2
+        x: 3103
+        y: 5507
+        width: 674
+        height: 665
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: adbfea1b53d4d7fd0800000000000000
+      internalID: -2342631338153149478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Clergyman 1_3
+      rect:
+        serializedVersion: 2
+        x: 5383
+        y: 5517
+        width: 689
+        height: 1129
+      alignment: 9
+      pivot: {x: 0.4912308, y: 0.36084807}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3b20d7d6cf79ec20800000000000000
+      internalID: 3236258299243408191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Clergyman 1_4
+      rect:
+        serializedVersion: 2
+        x: 1319
+        y: 3936
+        width: 88
+        height: 167
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34d9e58b9cff3bdf0800000000000000
+      internalID: -165507519435858621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Clergyman 1_5
+      rect:
+        serializedVersion: 2
+        x: 1511
+        y: 3921
+        width: 132
+        height: 158
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43e425c6fb4c14750800000000000000
+      internalID: 6287522881221054004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Clergyman 1_6
+      rect:
+        serializedVersion: 2
+        x: 3665
+        y: 3975
+        width: 124
+        height: 258
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26718c04bf036cdc0800000000000000
+      internalID: -3619151394863835294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Clergyman 1_7
+      rect:
+        serializedVersion: 2
+        x: 893
+        y: 3261
+        width: 755
+        height: 851
+      alignment: 9
+      pivot: {x: 0.5, y: 0.46697733}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 31a5e622c83a5cac0800000000000000
+      internalID: -3835479685367703021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Clergyman 1_8
+      rect:
+        serializedVersion: 2
+        x: 3140
+        y: 3276
+        width: 668
+        height: 959
+      alignment: 9
+      pivot: {x: 0.50000036, y: 0.43699262}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23ee025644a00e8b0800000000000000
+      internalID: -5125085087076913614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Clergyman 1_9
+      rect:
+        serializedVersion: 2
+        x: 5381
+        y: 3288
+        width: 619
+        height: 674
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b665223bbec302750800000000000000
+      internalID: 6278084863574824555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Clergyman 1_10
+      rect:
+        serializedVersion: 2
+        x: 894
+        y: 1021
+        width: 624
+        height: 706
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a34ff8a7ae57992c0800000000000000
+      internalID: -4424375508975750086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 824c407a965f1a94a8bf1cb34504098d
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Clergyman 1_0: -2345459419378931794
+      Clergyman 1_1: -335814096359649114
+      Clergyman 1_10: -4424375508975750086
+      Clergyman 1_2: -2342631338153149478
+      Clergyman 1_3: 3236258299243408191
+      Clergyman 1_4: -165507519435858621
+      Clergyman 1_5: 6287522881221054004
+      Clergyman 1_6: -3619151394863835294
+      Clergyman 1_7: -3835479685367703021
+      Clergyman 1_8: -5125085087076913614
+      Clergyman 1_9: 6278084863574824555
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
