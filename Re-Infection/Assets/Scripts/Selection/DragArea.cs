@@ -8,22 +8,33 @@ public class DropArea : MonoBehaviour, IDropHandler
     [SerializeField] private Transform dropTargetParent;
     public UnitStatsData currentUnitStats;
     public int slotIndex;
+    [SerializeField] private UnitStatsData defaultUnit;
 
     private void Start()
     {
-        if (UnitDataCarrier.Instance.selectedUnits.Count <= slotIndex)
-            return;
+        // ▼ selectedUnits を slotIndex まで拡張
+        while (UnitDataCarrier.Instance.selectedUnits.Count <= slotIndex)
+            UnitDataCarrier.Instance.selectedUnits.Add(null);
 
+        // ▼ すでに保存されているデータがある場合（シーン復元）
         UnitStatsData saved = UnitDataCarrier.Instance.selectedUnits[slotIndex];
-
-        if (saved == null)
+        if (saved != null)
+        {
+            currentUnitStats = saved;
+            CreateCloneFromExistingIcon(saved);
+            UpdateAllCheckImage();
             return;
+        }
 
-        currentUnitStats = saved;
+        // ▼ 保存データが無い → defaultUnit を初期値として使う
+        if (defaultUnit != null)
+        {
+            currentUnitStats = defaultUnit;
+            UnitDataCarrier.Instance.selectedUnits[slotIndex] = defaultUnit;
 
-        CreateCloneFromExistingIcon(saved);
-
-        UpdateAllCheckImage();
+            CreateCloneFromExistingIcon(defaultUnit);
+            UpdateAllCheckImage();
+        }
     }
 
     public void OnDrop(PointerEventData eventData)
