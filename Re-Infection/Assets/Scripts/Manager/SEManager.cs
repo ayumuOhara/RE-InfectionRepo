@@ -33,16 +33,7 @@ public class SEManager : MonoBehaviour
     public enum SEType
     {
         Button_Click,  // ボタンをクリックしたときの音
-        Rocket_Set,    // ロケットを押し付けたときの音
-        Bumper,        // ジャンプ台の音
-        Landing,       // 着地したときの音
-        Collision_Dash_1,  // ぶつかりダッシュ使用時の音
-        Event_warp,    // 位置入れ替えの効果音
-        Event_ink,　　 // インクが画面に飛び散る効果音
-        Page,　　　　　// ページをめくる効果音
-        Win,           // リザルト遷移時の効果音
-        Countdown,     // ゲーム開始時のカウントダウン
-        Event_ChangeSpeed,
+        
     }
 
     // SE再生メソッド
