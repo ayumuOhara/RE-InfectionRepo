@@ -75,7 +75,7 @@ namespace CannonPointer
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            if (!waveSpawner.IsStartWave || !canUseSkill) return;
+            if (!waveSpawner.IsStartWave || !canUseSkill || Time.timeScale == 0) return;
 
             dragEndTcs = new TaskCompletionSource<PointerEventData>();
 
@@ -92,7 +92,7 @@ namespace CannonPointer
 
         public void OnDrag(PointerEventData eventData)
         {
-            if (!waveSpawner.IsStartWave || !canUseSkill) return;
+            if (!waveSpawner.IsStartWave || !canUseSkill || Time.timeScale == 0) return;
 
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePos.z = 0;
@@ -104,7 +104,7 @@ namespace CannonPointer
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            if (!waveSpawner.IsStartWave || !canUseSkill) return;
+            if (!waveSpawner.IsStartWave || !canUseSkill || Time.timeScale == 0) return;
 
             dragEndTcs?.TrySetResult(eventData);
 
