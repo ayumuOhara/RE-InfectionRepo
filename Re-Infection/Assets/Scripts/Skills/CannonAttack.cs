@@ -33,7 +33,7 @@ public class CannonAttack : MonoBehaviour
         audioSource = GameObject.Find("WaveSpawner").GetComponent<AudioSource>();
     }
 
-    async void OnEnable()
+    async private void Update()
     {
         await WaitEndDrag.WaitDragEndAsync();
         if (unitManager.EnemyCnt <= 0)
@@ -52,11 +52,6 @@ public class CannonAttack : MonoBehaviour
         {
             AllTargetDamage(targetUnits);
         }
-    }
-
-    private void Update()
-    {
-        //UnitBase.DrawDebugCircle(transform.position, cannonSkillStats.cannonRadius, Color.red, 0.5f);
     }
 
     // 取得したターゲットにダメージ

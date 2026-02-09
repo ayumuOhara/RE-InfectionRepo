@@ -7037,7 +7037,7 @@ MonoBehaviour:
   dropTargetParent: {fileID: 532703174}
   currentUnitStats: {fileID: 0}
   slotIndex: 0
-  defaultUnit: {fileID: 0}
+  defaultUnit: {fileID: 11400000, guid: e6d3327307b2d5c4c9367da09a7e2d3b, type: 2}
 --- !u!114 &532703179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8690,7 +8690,7 @@ MonoBehaviour:
   dropTargetParent: {fileID: 623078155}
   currentUnitStats: {fileID: 0}
   slotIndex: 2
-  defaultUnit: {fileID: 0}
+  defaultUnit: {fileID: 11400000, guid: b92b3387e050d804c96d18a3d08de2a8, type: 2}
 --- !u!114 &623078159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16407,7 +16407,7 @@ MonoBehaviour:
   dropTargetParent: {fileID: 1287777761}
   currentUnitStats: {fileID: 0}
   slotIndex: 1
-  defaultUnit: {fileID: 0}
+  defaultUnit: {fileID: 11400000, guid: fe15a39c45f5ba945931563260f1ba9f, type: 2}
 --- !u!61 &1287777764
 BoxCollider2D:
   m_ObjectHideFlags: 0

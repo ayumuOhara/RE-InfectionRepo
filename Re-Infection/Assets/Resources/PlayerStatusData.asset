@@ -15,30 +15,29 @@ MonoBehaviour:
   wallet:
     currentMoney: 0
   castleUpgrade:
-    upgradeMoney: 64000000f4010000a4060000
-    healths: 640000002c010000f401000084030000
+    upgradeMoney: 64000000e8030000b80b0000
+    healths: 640000002c010000f4010000e8030000
   cannonDamageUpgrade:
-    upgradeMoney: 000000000000000000000000
-    damages: 00000000000000000000000000000000
+    upgradeMoney: 64000000e8030000b80b0000
+    damages: 28000000460000005a00000064000000
   cannonCoolTimeUpgrade:
-    upgradeMoney: 000000000000000000000000
+    upgradeMoney: 64000000e8030000b80b0000
     coolTime:
-    - 0
-    - 0
-    - 0
-    - 0
+    - 180
+    - 160
+    - 140
   costLimitUpgrade:
-    upgradeMoney: 000000000000000000000000
-    maxCostCnt: 00000000000000000000000000000000
+    upgradeMoney: 64000000e8030000b80b0000
+    maxCostCnt: 1e00000028000000320000003c000000
   costGenerationSpeedUpgrade:
-    upgradeMoney: 000000000000000000000000
+    upgradeMoney: 64000000e8030000b80b0000
     generateSpeed:
-    - 0
-    - 0
-    - 0
-    - 0
+    - 1.6
+    - 1.5
+    - 1.4
+    - 1.2
   virusUpgrade:
-    upgradeMoney: c8000000bc020000fc080000
+    upgradeMoney: 64000000e8030000b80b0000
     virusStats:
     - reviveHealthRate: 0.3
       infectionTime: 15
