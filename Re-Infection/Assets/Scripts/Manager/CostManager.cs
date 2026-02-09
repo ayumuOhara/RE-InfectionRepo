@@ -17,9 +17,9 @@ public class CostManager : MonoBehaviour
     [SerializeField] int startCost;
 
     int maxCost
-        => playerStatusData.costUpgrade.CostStats.maxCost;
+        => playerStatusData.costLimitUpgrade.MaxCost;
     float generateInterbal
-          => playerStatusData.costUpgrade.CostStats.interbal;
+          => playerStatusData.costGenerationSpeedUpgrade.GenerateSpeed;
 
     public int currentCost { get; private set; } = 0;
 

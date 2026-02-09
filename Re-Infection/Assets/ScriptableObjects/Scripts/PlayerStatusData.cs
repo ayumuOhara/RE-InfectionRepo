@@ -29,7 +29,6 @@ public abstract class BaseUpgrade
 public class CastleUpgrade : BaseUpgrade
 {
     [Header("各Lv(0~)のアップグレード内容")]
-    [Tooltip("最大HP")]
     [SerializeField]
     // Lvごとの体力設定
     private int[] healths;
@@ -39,44 +38,49 @@ public class CastleUpgrade : BaseUpgrade
 }
 
 [System.Serializable]
-public class CannonUpgrade : BaseUpgrade
+public class CannonDamageUpgrade : BaseUpgrade
 {
     [Header("各Lv(0~)のアップグレード内容")]
-    [Tooltip("砲撃時のダメージ")]
     [SerializeField]
     // Lvごとの体力設定
     private int[] damages;
 
-    [Header("砲撃クールタイム")]
-    [SerializeField]
-    private float coolTime;
-
     // 現在のレベルに応じた値を返す
     public int Damage => damages[lv];
-
-    public int CoolTime => (int)coolTime;
 }
 
 [System.Serializable]
-public class CostUpgrade : BaseUpgrade
+public class CannonCoolTimeUpgrade : BaseUpgrade
 {
-    [System.Serializable]
-    public struct CostContext
-    {
-        [Tooltip("プレイヤーの持てるコストの最大値")]
-        public int maxCost;
-        [Tooltip("1コストが生成されるまでの時間(秒)")]
-        public float interbal;
-    }
-
     [Header("各Lv(0~)のアップグレード内容")]
-    [Tooltip("コスト関連のスタッツ")]
+    [SerializeField]
+    private float[] coolTime;
+
+    public int CoolTime => (int)coolTime[lv];
+}
+
+[System.Serializable]
+public class CostLimitUpgrade : BaseUpgrade
+{
+    [Header("各Lv(0~)のアップグレード内容")]
     [SerializeField]
     // Lvごとの体力設定
-    private CostContext[] costStats;
+    private int[] maxCostCnt;
 
     // 現在のレベルに応じた値を返す
-    public CostContext CostStats => costStats[lv];
+    public int MaxCost => maxCostCnt[lv];
+}
+
+[System.Serializable]
+public class CostGenerationSpeedUpgrade : BaseUpgrade
+{
+    [Header("各Lv(0~)のアップグレード内容")]
+    [SerializeField]
+    // Lvごとの体力設定
+    private float[] generateSpeed;
+
+    // 現在のレベルに応じた値を返す
+    public float GenerateSpeed => generateSpeed[lv];
 }
 
 [System.Serializable]
@@ -108,16 +112,20 @@ public class PlayerStatusData : ScriptableObject
 {
     public Wallet wallet;
     public CastleUpgrade castleUpgrade;
-    public CannonUpgrade cannonUpgrade;
-    public CostUpgrade costUpgrade;
+    public CannonDamageUpgrade cannonDamageUpgrade;
+    public CannonCoolTimeUpgrade cannonCoolTimeUpgrade;
+    public CostLimitUpgrade costLimitUpgrade;
+    public CostGenerationSpeedUpgrade costGenerationSpeedUpgrade;
     public VirusUpgrade virusUpgrade;
 
     [ContextMenu("全アビリティのLvをリセット")]
     public void ResetAllLevels()
     {
         castleUpgrade.SetUpgradeLevel(0);
-        cannonUpgrade.SetUpgradeLevel(0);
-        costUpgrade.SetUpgradeLevel(0);
+        cannonDamageUpgrade.SetUpgradeLevel(0);
+        cannonCoolTimeUpgrade.SetUpgradeLevel(0);
+        costLimitUpgrade.SetUpgradeLevel(0);
+        costGenerationSpeedUpgrade.SetUpgradeLevel(0);
         virusUpgrade.SetUpgradeLevel(0);
     }
 }
