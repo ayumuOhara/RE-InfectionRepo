@@ -19,7 +19,7 @@ public class StageDataManager : MonoBehaviour
 
     private void Update()
     {
-
+        //TODO 後で消すデバック用 
         if (Input.GetKey(KeyCode.X))
         {
             for (int i = 0; i < stage.Length; i++)
@@ -33,7 +33,7 @@ public class StageDataManager : MonoBehaviour
             //ステージのクリア情報を確認
             for (int i = 0; i < stage.Length; i++)
             {
-                //解放さたら
+                //解放されたら
                 if (stageData.isStageClear[i] == true && stageData.isStageOpen[i] == false)
                 {
                     battleCanvas.OnChangeStage(i + 1);
@@ -61,7 +61,7 @@ public class StageDataManager : MonoBehaviour
         //ステージのクリア情報を確認
         for (int i = 0; i < stage.Length; i++)
         {
-            //解放さたら
+            //解放されたら
             if (stageData.isStageClear[i] == true && stageData.isStageOpen[i] == false)
             {
                 battleCanvas.OnChangeStage(i + 1);
