@@ -72,7 +72,7 @@ public class CannonAttack : MonoBehaviour
             // 範囲内にいるターゲット全てにダメージ
             if (enemy.IsDead == false)
             {
-                enemy.Damage(playerStatusData.cannonUpgrade.Damage);
+                enemy.Damage(playerStatusData.cannonDamageUpgrade.Damage);
                 // 倒した敵の死体を複製(ボスユニット除外)
                 if (enemy.CurrentHealth <= 0 && !enemy.Stats.bossUnit)
                 {
@@ -83,7 +83,7 @@ public class CannonAttack : MonoBehaviour
         }
 
         OnSkillUsed += cannonSkillPointer.OnSkillUse;
-        OnSkillUsed?.Invoke(playerStatusData.cannonUpgrade.CoolTime);
+        OnSkillUsed?.Invoke(playerStatusData.cannonCoolTimeUpgrade.CoolTime);
         OnSkillUsed -= cannonSkillPointer.OnSkillUse;
 
         // 処理終了後、非アクティブ化

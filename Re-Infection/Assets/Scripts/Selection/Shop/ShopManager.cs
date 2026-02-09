@@ -1,45 +1,60 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
 
-public enum UpgradeType
+public class ShopManager : MonoBehaviour
 {
-    Castle,
-    Canon,
-    Virus,
-    Cost
-}
-public class ShopManager:MonoBehaviour
-{
+    private enum UpgradeType
+    {
+        Castle,
+        CannonDamage,
+        CannonCoolTime,
+        CostLimit,
+        CostGenerationSpeed,
+        Virus,
+    }
+
+    private UpgradeType upgradeType;
+
     [Header("UI")]
     public GameObject DialogObj;
     public TextMeshProUGUI money_text;
     public GameObject LayCastObj;
 
     [Header("Buttons")]
-    public Button CastleButton; //é‚Ì‹­‰»ƒ{ƒ^ƒ“
-    public Button CanonButton; //–CŒ‚‹­‰»ƒ{ƒ^ƒ“
-    public Button CostButton; //ƒRƒXƒg‰ñ•œƒ{ƒ^ƒ“
-    public Button VirusButton; //Š´õƒ{ƒ^ƒ“
+    public Button CastleButton; //åŸã®å¼·åŒ–ãƒœã‚¿ãƒ³
+    public Button CannonDamageButton; //ç ²æ’ƒå¼·åŒ–ãƒœã‚¿ãƒ³
+    public Button CannonCoolTimeButton; //ç ²æ’ƒå¼·åŒ–ãƒœã‚¿ãƒ³
+    public Button CostLimitButton; //ã‚³ã‚¹ãƒˆå›å¾©ãƒœã‚¿ãƒ³
+    public Button CostGenerationSpeedButton; //ã‚³ã‚¹ãƒˆå›å¾©ãƒœã‚¿ãƒ³
+    public Button VirusButton; //æ„ŸæŸ“ãƒœã‚¿ãƒ³
 
-    [Header("é‚ÌƒŒƒxƒ‹‚ÆƒRƒXƒg")]
-    public TextMeshProUGUI Castle_text;
-    public TextMeshProUGUI CastleMoney_text;
+    [Header("åŸã®ãƒ¬ãƒ™ãƒ«ã¨ã‚³ã‚¹ãƒˆ")]
+    public TextMeshProUGUI CastleLv_text;
+    public TextMeshProUGUI CastleUpgradeMoney_text;
 
-    [Header("–CŒ‚‚ÌUŒ‚—Í‚ÌƒŒƒxƒ‹‚ÆƒRƒXƒg")]
-    public TextMeshProUGUI Canon_text;
-    public TextMeshProUGUI CanonMoney_text;
+    [Header("ç ²æ’ƒã®æ”»æ’ƒåŠ›ã®ãƒ¬ãƒ™ãƒ«ã¨ã‚³ã‚¹ãƒˆ")]
+    public TextMeshProUGUI CannonDamageLv_text;
+    public TextMeshProUGUI CannonDamageUpgradeMoney_text;
 
-    [Header("ƒRƒXƒg‚Ì‰ñ•œ‘¬“x‚ÌƒŒƒxƒ‹‚ÆƒRƒXƒg")]
-    public TextMeshProUGUI Cost_text;
-    public TextMeshProUGUI CostMoney_text;
+    [Header("ç ²æ’ƒã®ã‚¯ãƒ¼ãƒ«ã‚¿ã‚¤ãƒ ã®ãƒ¬ãƒ™ãƒ«ã¨ã‚³ã‚¹ãƒˆ")]
+    public TextMeshProUGUI CannonCoolTimeLv_text;
+    public TextMeshProUGUI CannonCoolTimeUpgradeMoney_text;
 
-    [Header("Š´õ‚ÌƒŒƒxƒ‹‚ÆƒRƒXƒg")]
-    public TextMeshProUGUI Virus_text;
-    public TextMeshProUGUI VirusMoney_text;
+    [Header("ã‚³ã‚¹ãƒˆã®æœ€å¤§å€¤ã®ãƒ¬ãƒ™ãƒ«ã¨ã‚³ã‚¹ãƒˆ")]
+    public TextMeshProUGUI CostLimitLv_text;
+    public TextMeshProUGUI CostLimitUpgradeMoney_text;
 
-    [Header("ƒ_ƒCƒAƒƒO•\¦—p")]
+    [Header("ã‚³ã‚¹ãƒˆã®å›å¾©é€Ÿåº¦ã®ãƒ¬ãƒ™ãƒ«ã¨ã‚³ã‚¹ãƒˆ")]
+    public TextMeshProUGUI CostGenerationSpeedLv_text;
+    public TextMeshProUGUI CostGenerationSpeedUpgradeMoney_text;
+
+    [Header("æ„ŸæŸ“ã®ãƒ¬ãƒ™ãƒ«ã¨ã‚³ã‚¹ãƒˆ")]
+    public TextMeshProUGUI VirusLv_text;
+    public TextMeshProUGUI VirusUpgradeMoney_text;
+
+    [Header("ãƒ€ã‚¤ã‚¢ãƒ­ã‚°è¡¨ç¤ºç”¨")]
     public TextMeshProUGUI DialogMessege;
     public TextMeshProUGUI DialogLevel_text1;
     public TextMeshProUGUI DialogLevel_text2;
@@ -50,15 +65,15 @@ public class ShopManager:MonoBehaviour
 
     PlayerStatusData playerStatusData;
 
-    private UpgradeType currentUpgrade;
-
     private void Awake()
     {
         playerStatusData = Resources.Load<PlayerStatusData>("PlayerStatusData");
 
         playerStatusData.castleUpgrade.SetUpgradeLevel(playerStatusData.castleUpgrade.lv);
-        playerStatusData.cannonUpgrade.SetUpgradeLevel(playerStatusData.cannonUpgrade.lv);
-        playerStatusData.costUpgrade.SetUpgradeLevel(playerStatusData.costUpgrade.lv);
+        playerStatusData.cannonDamageUpgrade.SetUpgradeLevel(playerStatusData.cannonDamageUpgrade.lv);
+        playerStatusData.cannonCoolTimeUpgrade.SetUpgradeLevel(playerStatusData.cannonCoolTimeUpgrade.lv);
+        playerStatusData.costLimitUpgrade.SetUpgradeLevel(playerStatusData.costLimitUpgrade.lv);
+        playerStatusData.costGenerationSpeedUpgrade.SetUpgradeLevel(playerStatusData.costGenerationSpeedUpgrade.lv);
         playerStatusData.virusUpgrade.SetUpgradeLevel(playerStatusData.virusUpgrade.lv);
     }
 
@@ -69,209 +84,90 @@ public class ShopManager:MonoBehaviour
         LayCastObj.SetActive(false);
 
         SetUpgradeTextAndButton(playerStatusData.castleUpgrade);
-        SetUpgradeTextAndButton(playerStatusData.cannonUpgrade);
-        SetUpgradeTextAndButton(playerStatusData.costUpgrade);
+        SetUpgradeTextAndButton(playerStatusData.cannonDamageUpgrade);
+        SetUpgradeTextAndButton(playerStatusData.cannonCoolTimeUpgrade);
+        SetUpgradeTextAndButton(playerStatusData.costLimitUpgrade);
+        SetUpgradeTextAndButton(playerStatusData.costGenerationSpeedUpgrade);
         SetUpgradeTextAndButton(playerStatusData.virusUpgrade);
 
         Warning_text.text = "";
         WarningObj.SetActive(false);
     }
 
-    // “n‚³‚ê‚½‹­‰»“à—e‚É‚æ‚Á‚ÄUI•\¦‚ğ‘€ì
+    // æ¸¡ã•ã‚ŒãŸå¼·åŒ–å†…å®¹ã«ã‚ˆã£ã¦UIè¡¨ç¤ºã‚’æ“ä½œ
     private void SetUpgradeTextAndButton(BaseUpgrade Upgrade)
     {
         switch (Upgrade.GetType().ToString())
         {
             case "CastleUpgrade":
-                SetTextAndButton(playerStatusData.castleUpgrade, Castle_text, CastleMoney_text, CastleButton);
+                SetTextAndButton(playerStatusData.castleUpgrade, CastleLv_text, CastleUpgradeMoney_text, CastleButton);
                 break;
-            case "CannonUpgrade":
-                SetTextAndButton(playerStatusData.cannonUpgrade, Canon_text, CanonMoney_text, CanonButton);
+            case "CannonDamageUpgrade":
+                SetTextAndButton(playerStatusData.cannonDamageUpgrade, CannonDamageLv_text, CannonDamageUpgradeMoney_text, CannonDamageButton);
                 break;
-            case "CostUpgrade":
-                SetTextAndButton(playerStatusData.costUpgrade, Cost_text, CostMoney_text, CostButton);
+            case "CannonCoolTimeUpgrade":
+                SetTextAndButton(playerStatusData.cannonCoolTimeUpgrade, CannonCoolTimeLv_text, CannonCoolTimeUpgradeMoney_text, CannonCoolTimeButton);
+                break;
+            case "CostLimitUpgrade":
+                SetTextAndButton(playerStatusData.costLimitUpgrade, CostLimitLv_text, CostLimitUpgradeMoney_text, CostLimitButton);
+                break;
+            case "CostGenerationSpeedUpgrade":
+                SetTextAndButton(playerStatusData.costGenerationSpeedUpgrade, CostGenerationSpeedLv_text, CostGenerationSpeedUpgradeMoney_text, CostGenerationSpeedButton);
                 break;
             case "VirusUpgrade":
-                SetTextAndButton(playerStatusData.virusUpgrade, Virus_text, VirusMoney_text, VirusButton);
+                SetTextAndButton(playerStatusData.virusUpgrade, VirusLv_text, VirusUpgradeMoney_text, VirusButton);
                 break;
             default:
                 break;
         }
     }
 
-    // w’è‚Ì‹­‰»“à—e‚ÌLv‚Æ•K—v‚È‚¨‹à‚Ì•\¦Ø‘Ö
-    // ƒŒƒxƒ‹‚ªÅ‘å‚ÌAƒ{ƒ^ƒ“‚ªG‚ê‚ç‚ê‚È‚­‚È‚é
-    private void SetTextAndButton(BaseUpgrade Upgrade, TextMeshProUGUI lvText, TextMeshProUGUI moneyText, Button button)
+    // ã‚¢ãƒƒãƒ—ã‚°ãƒ¬ãƒ¼ãƒ‰ã‚’æ‰¿èªã™ã‚‹ãƒœã‚¿ãƒ³ã®é–¢æ•°
+    public void UndoUpgrade()
     {
-        lvText.text = Upgrade.lv.ToString();
-        moneyText.text = Upgrade.lv >= 3 ? "MAX" : $"<size=40><sprite=0><size=45>{Upgrade.UpgradeMoney}";
+        switch (upgradeType)
+        {
+            case UpgradeType.Castle:
+                TryUpgrade(playerStatusData.castleUpgrade, playerStatusData.castleUpgrade.UpgradeMoney);
+                break;
+            case UpgradeType.CannonDamage:
+                TryUpgrade(playerStatusData.cannonDamageUpgrade, playerStatusData.cannonDamageUpgrade.UpgradeMoney);
+                break;
+            case UpgradeType.CannonCoolTime:
+                TryUpgrade(playerStatusData.cannonCoolTimeUpgrade, playerStatusData.cannonCoolTimeUpgrade.UpgradeMoney);
+                break;
+            case UpgradeType.CostLimit:
+                TryUpgrade(playerStatusData.costLimitUpgrade, playerStatusData.costLimitUpgrade.UpgradeMoney);
+                break;
+            case UpgradeType.CostGenerationSpeed:
+                TryUpgrade(playerStatusData.costGenerationSpeedUpgrade, playerStatusData.costGenerationSpeedUpgrade.UpgradeMoney);
+                break;
+            case UpgradeType.Virus:
+                TryUpgrade(playerStatusData.virusUpgrade, playerStatusData.virusUpgrade.UpgradeMoney);
+                break;
+            default:
+                break;
+        }
+    }
 
-        if (playerStatusData.wallet.CurrentMoney < Upgrade.UpgradeMoney || Upgrade.lv >= Upgrade.MaxLevel)
+    // æŒ‡å®šã®å¼·åŒ–å†…å®¹ã®Lvã¨å¿…è¦ãªãŠé‡‘ã®è¡¨ç¤ºåˆ‡æ›¿
+    // ãƒ¬ãƒ™ãƒ«ãŒæœ€å¤§ã®æ™‚ã€ãƒœã‚¿ãƒ³ãŒè§¦ã‚Œã‚‰ã‚Œãªããªã‚‹
+    private void SetTextAndButton(BaseUpgrade upgrade, TextMeshProUGUI lvText, TextMeshProUGUI moneyText, Button button)
+    {
+        lvText.text = upgrade.lv.ToString();
+        moneyText.text = upgrade.lv >= 3 ? "MAX" : $"<size=40><sprite=0><size=45>{upgrade.UpgradeMoney}";
+
+        if (playerStatusData.wallet.CurrentMoney < upgrade.UpgradeMoney || upgrade.lv >= upgrade.MaxLevel)
         {
             lvText.color = new Color(1f, 0.337f, 0.337f);
             moneyText.color = new Color(1f, 0.337f, 0.337f);
 
-            //ƒ{ƒ^ƒ“‚ğ‰Ÿ‚¹‚È‚­‚·‚é
+            //ãƒœã‚¿ãƒ³ã‚’æŠ¼ã›ãªãã™ã‚‹
             if (button != null)
             {
                 button.interactable = false;
             }
         }
-    }
-
-    //é‚Ì‹­‰»ƒ{ƒ^ƒ“
-    public void CastleSkillEnhancement()
-    {
-        if (playerStatusData.castleUpgrade.lv ==0)
-        {
-            Detalise_text.text = "HPF100@@¨@@300";
-        }
-        else if (playerStatusData.castleUpgrade.lv == 1)
-        {
-            Detalise_text.text = "HPF300@@¨@@500";
-        }
-        else if(playerStatusData.castleUpgrade.lv==2)
-        {
-            Detalise_text.text = "HPF500@@¨@@1000";
-        }
-        else
-        {
-            StartCoroutine(WarningLevelText());
-            return;
-        }
-        currentUpgrade = UpgradeType.Castle;
-        DialogObj.SetActive(true);
-        LayCastObj.SetActive(true);
-
-        DialogLevel_text1.text = ($"{playerStatusData.castleUpgrade.lv}");
-        DialogLevel_text2.text = ($"{playerStatusData.castleUpgrade.lv + 1}");
-        DialogMoney_text.text = ($"{playerStatusData.castleUpgrade.UpgradeMoney}");
-        DialogMessege.text = "";
-        DialogMessege.text = "é‚ÌHP‚ğ‹­‰»‚µ‚Ü‚·‚©H";
-    }
-
-    public void CanonSkillEnhancement()
-    {
-        if (playerStatusData.cannonUpgrade.lv == 0)
-        {
-            Detalise_text.text = "ˆĞ—ÍF30@@¨@@50";
-        }
-        else if (playerStatusData.cannonUpgrade.lv == 1)
-        {
-            Detalise_text.text = "ˆĞ—ÍF50@@¨@@80";
-        }
-        else if (playerStatusData.cannonUpgrade.lv == 2)
-        {
-            Detalise_text.text = "ˆĞ—ÍF80@@¨@@100";
-        }
-        else
-        {
-            StartCoroutine(WarningLevelText());
-            return;
-        }
-
-        currentUpgrade = UpgradeType.Canon;
-
-        DialogObj.SetActive(true);
-        LayCastObj.SetActive(true);
-
-        DialogLevel_text1.text = ($"{playerStatusData.cannonUpgrade.lv}");
-        DialogLevel_text2.text = ($"{playerStatusData.cannonUpgrade.lv + 1}");
-        DialogMoney_text.text = ($"{playerStatusData.cannonUpgrade.UpgradeMoney}");
-        DialogMessege.text = "";
-        DialogMessege.text = "–CŒ‚‚ÌUŒ‚—Í‚ğ‹­‰»‚µ‚Ü‚·‚©H";
-    }
-
-    public void CostSkillEnhacement()
-    {
-        if (playerStatusData.costUpgrade.lv == 0)
-        {
-            Detalise_text.text = "‰ñ•œ‘¬“xF1@@¨@@1.3";
-        }
-        else if (playerStatusData.costUpgrade.lv == 1)
-        {
-            Detalise_text.text = "‰ñ•œ‘¬“xF1.3@@¨@@1.5";
-        }
-        else if (playerStatusData.costUpgrade.lv == 2)
-        {
-            Detalise_text.text = "‰ñ•œ‘¬“xF1.5@@¨@@1.7";
-        }
-        else
-        {
-            StartCoroutine(WarningLevelText());
-            return;
-        }
-
-        currentUpgrade = UpgradeType.Cost;
-
-        DialogObj.SetActive(true);
-        LayCastObj.SetActive(true);
-
-        DialogLevel_text1.text = ($"{playerStatusData.costUpgrade.lv}");
-        DialogLevel_text2.text = ($"{playerStatusData.costUpgrade.lv + 1}");
-        DialogMoney_text.text = ($"{playerStatusData.costUpgrade.UpgradeMoney}");
-        DialogMessege.text = "";
-        DialogMessege.text = "ƒRƒXƒg‚Ì‰ñ•œ—Í‚ğ‹­‰»‚µ‚Ü‚·‚©H";
-    }
-
-
-    public void VirusSkillEnhacement()
-    {
-        if (playerStatusData.virusUpgrade.lv == 0)
-        {
-            Detalise_text.text = "Š´õÒHPF0.5@@¨@@0.6\n"+
-                "Š´õ‘¬“xF10@@¨@@8";
-        }
-        else if (playerStatusData.virusUpgrade.lv == 1)
-        {
-            Detalise_text.text = "Š´õÒHPF0.6@@¨@@0.7\n" +
-                "Š´õ‘¬“xF8@@¨@@6.5";
-        }
-        else if (playerStatusData.virusUpgrade.lv == 2)
-        {
-            Detalise_text.text = "Š´õÒHPF0.7@@¨@@0.8\n" +
-                "Š´õ‘¬“xF6.5@@¨@@5";
-        }
-        else
-        {
-            StartCoroutine(WarningLevelText());
-            return;
-        }
-
-        currentUpgrade = UpgradeType.Virus;
-
-        DialogObj.SetActive(true);
-        LayCastObj.SetActive(true);
-
-        DialogLevel_text1.text = ($"{playerStatusData.virusUpgrade.lv}");
-        DialogLevel_text2.text = ($"{playerStatusData.virusUpgrade.lv + 1}");
-        DialogMoney_text.text = ($"{playerStatusData.virusUpgrade.UpgradeMoney}");
-        DialogMessege.text = "";
-        DialogMessege.text = "Š´õ‚ğ‹­‰»‚µ‚Ü‚·‚©H";
-    }
-
-    public void YesButton()
-    {
-        switch (currentUpgrade)
-        {
-            case UpgradeType.Castle:
-                TryUpgrade(playerStatusData.castleUpgrade, playerStatusData.castleUpgrade.UpgradeMoney);
-                break;
-
-            case UpgradeType.Canon:
-                TryUpgrade(playerStatusData.cannonUpgrade, playerStatusData.cannonUpgrade.UpgradeMoney);
-                break;
-
-            case UpgradeType.Virus:
-                TryUpgrade(playerStatusData.virusUpgrade, playerStatusData.virusUpgrade.UpgradeMoney);
-                break;
-
-            case UpgradeType.Cost:
-                TryUpgrade(playerStatusData.costUpgrade, playerStatusData.costUpgrade.UpgradeMoney);
-                break;
-
-        }
-
     }
 
     public void NoButton()
@@ -280,7 +176,7 @@ public class ShopManager:MonoBehaviour
         LayCastObj.SetActive(false);
     }
 
-    // “n‚³‚ê‚½‹­‰»—v‘f‚ÌƒAƒbƒvƒOƒŒ[ƒh‚ğs‚¤
+    // æ¸¡ã•ã‚ŒãŸå¼·åŒ–è¦ç´ ã®ã‚¢ãƒƒãƒ—ã‚°ãƒ¬ãƒ¼ãƒ‰ã‚’è¡Œã†
     private void TryUpgrade(BaseUpgrade Upgrade, int money)
     {
         if (Upgrade.lv >= Upgrade.MaxLevel)
@@ -291,7 +187,7 @@ public class ShopManager:MonoBehaviour
 
         if (!playerStatusData.wallet.CanBuy(money))
         {
-            Debug.Log("Š‹à‚ª‘«‚è‚Ü‚¹‚ñ");
+            Debug.Log("æ‰€æŒé‡‘ãŒè¶³ã‚Šã¾ã›ã‚“");
             StartCoroutine(WarningMoneyText());
             return;
         }
@@ -306,11 +202,206 @@ public class ShopManager:MonoBehaviour
         LayCastObj.SetActive(false);
     }
 
+    public void CastleSkillEnhancement()
+    {
+        upgradeType = UpgradeType.Castle;
+
+        if (playerStatusData.castleUpgrade.lv == 0)
+        {
+            Detalise_text.text = "HPï¼š100ã€€ã€€â†’ã€€ã€€300";
+        }
+        else if (playerStatusData.castleUpgrade.lv == 1)
+        {
+            Detalise_text.text = "HPï¼š300ã€€ã€€â†’ã€€ã€€500";
+        }
+        else if (playerStatusData.castleUpgrade.lv == 2)
+        {
+            Detalise_text.text = "HPï¼š500ã€€ã€€â†’ã€€ã€€1000";
+        }
+        else
+        {
+            StartCoroutine(WarningLevelText());
+            return;
+        }
+
+        DialogObj.SetActive(true);
+        LayCastObj.SetActive(true);
+
+        DialogLevel_text1.text = ($"{playerStatusData.castleUpgrade.lv}");
+        DialogLevel_text2.text = ($"{playerStatusData.castleUpgrade.lv + 1}");
+        DialogMoney_text.text = ($"{playerStatusData.castleUpgrade.UpgradeMoney}");
+        DialogMessege.text = "";
+        DialogMessege.text = "åŸã®HPã‚’å¼·åŒ–ã—ã¾ã™ã‹ï¼Ÿ";
+    }
+
+    public void CannonDamageSkillEnhancement()
+    {
+        upgradeType = UpgradeType.CannonDamage;
+
+        if (playerStatusData.cannonDamageUpgrade.lv == 0)
+        {
+            Detalise_text.text = "å¨åŠ›ï¼š40ã€€ã€€â†’ã€€ã€€50";
+        }
+        else if (playerStatusData.cannonDamageUpgrade.lv == 1)
+        {
+            Detalise_text.text = "å¨åŠ›ï¼š50ã€€ã€€â†’ã€€ã€€80";
+        }
+        else if (playerStatusData.cannonDamageUpgrade.lv == 2)
+        {
+            Detalise_text.text = "å¨åŠ›ï¼š80ã€€ã€€â†’ã€€ã€€100";
+        }
+        else
+        {
+            StartCoroutine(WarningLevelText());
+            return;
+        }
+
+        DialogObj.SetActive(true);
+        LayCastObj.SetActive(true);
+
+        DialogLevel_text1.text = ($"{playerStatusData.cannonDamageUpgrade.lv}");
+        DialogLevel_text2.text = ($"{playerStatusData.cannonDamageUpgrade.lv + 1}");
+        DialogMoney_text.text = ($"{playerStatusData.cannonDamageUpgrade.UpgradeMoney}");
+        DialogMessege.text = "";
+        DialogMessege.text = "ç ²æ’ƒã®æ”»æ’ƒåŠ›ã‚’å¼·åŒ–ã—ã¾ã™ã‹ï¼Ÿ";
+    }
+
+    public void CannonCoolTimeSkillEnhancement()
+    {
+        upgradeType = UpgradeType.CannonCoolTime;
+
+        if (playerStatusData.cannonCoolTimeUpgrade.lv == 0)
+        {
+            Detalise_text.text = "ã‚¯ãƒ¼ãƒ«ã‚¿ã‚¤ãƒ ï¼š";
+        }
+        else if (playerStatusData.cannonCoolTimeUpgrade.lv == 1)
+        {
+            Detalise_text.text = "ã‚¯ãƒ¼ãƒ«ã‚¿ã‚¤ãƒ ï¼š";
+        }
+        else if (playerStatusData.cannonCoolTimeUpgrade.lv == 2)
+        {
+            Detalise_text.text = "ã‚¯ãƒ¼ãƒ«ã‚¿ã‚¤ãƒ ï¼š";
+        }
+        else
+        {
+            StartCoroutine(WarningLevelText());
+            return;
+        }
+
+        DialogObj.SetActive(true);
+        LayCastObj.SetActive(true);
+
+        DialogLevel_text1.text = ($"{playerStatusData.cannonCoolTimeUpgrade.lv}");
+        DialogLevel_text2.text = ($"{playerStatusData.cannonCoolTimeUpgrade.lv + 1}");
+        DialogMoney_text.text = ($"{playerStatusData.cannonCoolTimeUpgrade.UpgradeMoney}");
+        DialogMessege.text = "";
+        DialogMessege.text = "ã‚¯ãƒ¼ãƒ«ã‚¿ã‚¤ãƒ ã‚’å¼·åŒ–ã—ã¾ã™ã‹ï¼Ÿ";
+    }
+
+    public void CostLimitSkillEnhacement()
+    {
+        upgradeType = UpgradeType.CostLimit;
+
+        if (playerStatusData.costLimitUpgrade.lv == 0)
+        {
+            Detalise_text.text = "ã‚³ã‚¹ãƒˆæœ€å¤§å€¤ï¼š30ã€€ã€€â†’ã€€ã€€40";
+        }
+        else if (playerStatusData.costLimitUpgrade.lv == 1)
+        {
+            Detalise_text.text = "ã‚³ã‚¹ãƒˆæœ€å¤§å€¤ï¼š40ã€€ã€€â†’ã€€ã€€50";
+        }
+        else if (playerStatusData.costLimitUpgrade.lv == 2)
+        {
+            Detalise_text.text = "ã‚³ã‚¹ãƒˆæœ€å¤§å€¤ï¼š50ã€€ã€€â†’ã€€ã€€60";
+        }
+        else
+        {
+            StartCoroutine(WarningLevelText());
+            return;
+        }
+
+        DialogObj.SetActive(true);
+        LayCastObj.SetActive(true);
+
+        DialogLevel_text1.text = ($"{playerStatusData.costLimitUpgrade.lv}");
+        DialogLevel_text2.text = ($"{playerStatusData.costLimitUpgrade.lv + 1}");
+        DialogMoney_text.text = ($"{playerStatusData.costLimitUpgrade.UpgradeMoney}");
+        DialogMessege.text = "";
+        DialogMessege.text = "ã‚³ã‚¹ãƒˆã®æœ€å¤§å€¤ã‚’å¼·åŒ–ã—ã¾ã™ã‹ï¼Ÿ";
+    }
+
+    public void CostGenerationSpeedSkillEnhacement()
+    {
+        upgradeType = UpgradeType.CostGenerationSpeed;
+
+        if (playerStatusData.costGenerationSpeedUpgrade.lv == 0)
+        {
+            Detalise_text.text = "ç”Ÿæˆé€Ÿåº¦ï¼š1.6ã€€ã€€â†’ã€€ã€€1.4";
+        }
+        else if (playerStatusData.costGenerationSpeedUpgrade.lv == 1)
+        {
+            Detalise_text.text = "ç”Ÿæˆé€Ÿåº¦ï¼š1.4ã€€ã€€â†’ã€€ã€€1.3";
+        }
+        else if (playerStatusData.costGenerationSpeedUpgrade.lv == 2)
+        {
+            Detalise_text.text = "ç”Ÿæˆé€Ÿåº¦ï¼š1.3ã€€ã€€â†’ã€€ã€€1.2";
+        }
+        else
+        {
+            StartCoroutine(WarningLevelText());
+            return;
+        }
+
+        DialogObj.SetActive(true);
+        LayCastObj.SetActive(true);
+
+        DialogLevel_text1.text = ($"{playerStatusData.costGenerationSpeedUpgrade.lv}");
+        DialogLevel_text2.text = ($"{playerStatusData.costGenerationSpeedUpgrade.lv + 1}");
+        DialogMoney_text.text = ($"{playerStatusData.costGenerationSpeedUpgrade.UpgradeMoney}");
+        DialogMessege.text = "";
+        DialogMessege.text = "ã‚³ã‚¹ãƒˆã®ç”Ÿæˆé€Ÿåº¦ã‚’å¼·åŒ–ã—ã¾ã™ã‹ï¼Ÿ";
+    }
+
+    public void VirusSkillEnhacement()
+    {
+        upgradeType = UpgradeType.Virus;
+
+        if (playerStatusData.virusUpgrade.lv == 0)
+        {
+            Detalise_text.text = "æ„ŸæŸ“è€…HPï¼š0.5ã€€ã€€â†’ã€€ã€€0.6\n" +
+                "æ„ŸæŸ“é€Ÿåº¦ï¼š10ã€€ã€€â†’ã€€ã€€8";
+        }
+        else if (playerStatusData.virusUpgrade.lv == 1)
+        {
+            Detalise_text.text = "æ„ŸæŸ“è€…HPï¼š0.6ã€€ã€€â†’ã€€ã€€0.7\n" +
+                "æ„ŸæŸ“é€Ÿåº¦ï¼š8ã€€ã€€â†’ã€€ã€€6.5";
+        }
+        else if (playerStatusData.virusUpgrade.lv == 2)
+        {
+            Detalise_text.text = "æ„ŸæŸ“è€…HPï¼š0.7ã€€ã€€â†’ã€€ã€€0.8\n" +
+                "æ„ŸæŸ“é€Ÿåº¦ï¼š6.5ã€€ã€€â†’ã€€ã€€5";
+        }
+        else
+        {
+            StartCoroutine(WarningLevelText());
+            return;
+        }
+
+        DialogObj.SetActive(true);
+        LayCastObj.SetActive(true);
+
+        DialogLevel_text1.text = ($"{playerStatusData.virusUpgrade.lv}");
+        DialogLevel_text2.text = ($"{playerStatusData.virusUpgrade.lv + 1}");
+        DialogMoney_text.text = ($"{playerStatusData.virusUpgrade.UpgradeMoney}");
+        DialogMessege.text = "";
+        DialogMessege.text = "æ„ŸæŸ“ã‚’å¼·åŒ–ã—ã¾ã™ã‹ï¼Ÿ";
+    }
+
     public IEnumerator WarningMoneyText()
     {
        
         WarningObj.SetActive(true);
-        Warning_text.text = ("‚¨ ‹à ‚ª ‘« ‚è ‚Ü ‚¹ ‚ñ I");
+        Warning_text.text = ("ãŠ é‡‘ ãŒ è¶³ ã‚Š ã¾ ã› ã‚“ ï¼");
         yield return new WaitForSeconds(1f);
         WarningObj.SetActive(false);
     }
@@ -319,7 +410,7 @@ public class ShopManager:MonoBehaviour
     {
 
         WarningObj.SetActive(true);
-        Warning_text.text = ("ƒŒ ƒx ƒ‹ ƒ} ƒb ƒN ƒX ‚Å ‚· I");
+        Warning_text.text = ("ãƒ¬ ãƒ™ ãƒ« ãƒ ãƒƒ ã‚¯ ã‚¹ ã§ ã™ ï¼");
         yield return new WaitForSeconds(1f);
         WarningObj.SetActive(false);
     }

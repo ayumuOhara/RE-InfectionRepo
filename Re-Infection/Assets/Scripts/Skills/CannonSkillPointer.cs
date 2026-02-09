@@ -49,7 +49,7 @@ namespace CannonPointer
             if (unitManager == null)
                 unitManager = GameObject.Find("UnitManager").GetComponent<UnitManager>();
             
-            StartCoroutine(SkillCoolTimer(playerStatusData.cannonUpgrade.CoolTime / 2));
+            StartCoroutine(SkillCoolTimer(playerStatusData.cannonCoolTimeUpgrade.CoolTime / 2));
         }
 
         public void OnSkillUse(float coolTime)
@@ -65,7 +65,7 @@ namespace CannonPointer
             while (time > 0)
             {
                 time -= Time.deltaTime;
-                cannonPointerFilled.fillAmount = time / playerStatusData.cannonUpgrade.CoolTime;
+                cannonPointerFilled.fillAmount = time / playerStatusData.cannonCoolTimeUpgrade.CoolTime;
 
                 yield return new WaitUntil(() => waveSpawner.IsStartWave);
             }

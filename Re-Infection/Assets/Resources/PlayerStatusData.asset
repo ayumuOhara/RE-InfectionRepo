@@ -17,21 +17,26 @@ MonoBehaviour:
   castleUpgrade:
     upgradeMoney: 64000000f4010000a4060000
     healths: 640000002c010000f401000084030000
-  cannonUpgrade:
-    upgradeMoney: 6400000020030000b0040000
-    damages: 28000000460000005a00000064000000
-    coolTime: 180
-  costUpgrade:
-    upgradeMoney: 2c01000084030000d0070000
-    costStats:
-    - maxCost: 30
-      interbal: 1.6
-    - maxCost: 40
-      interbal: 1.5
-    - maxCost: 40
-      interbal: 1.4
-    - maxCost: 50
-      interbal: 1.2
+  cannonDamageUpgrade:
+    upgradeMoney: 000000000000000000000000
+    damages: 00000000000000000000000000000000
+  cannonCoolTimeUpgrade:
+    upgradeMoney: 000000000000000000000000
+    coolTime:
+    - 0
+    - 0
+    - 0
+    - 0
+  costLimitUpgrade:
+    upgradeMoney: 000000000000000000000000
+    maxCostCnt: 00000000000000000000000000000000
+  costGenerationSpeedUpgrade:
+    upgradeMoney: 000000000000000000000000
+    generateSpeed:
+    - 0
+    - 0
+    - 0
+    - 0
   virusUpgrade:
     upgradeMoney: c8000000bc020000fc080000
     virusStats:
