@@ -9,6 +9,7 @@ public class InfectioningUnit : MonoBehaviour
     PlayerStatusData playerStatusData;
 
     public static event Action<float, float> OnInfection;
+    private bool endSkill = true;
 
     UnitManager unitManager;
 
@@ -27,10 +28,11 @@ public class InfectioningUnit : MonoBehaviour
         unitManager = GameObject.Find("UnitManager").GetComponent<UnitManager>();
     }
 
-    async private void Update()
+    async private void OnEnable()
     {
         //UnitBase.DrawDebugCircle(transform.position, virusStats.infectionRange, Color.purple, 0.5f);
 
+        endSkill = false;
         await WaitEndDrag.WaitDragEndAsync();
         if (unitManager.GetCorpseList().Count <= 0)
         {
@@ -50,10 +52,19 @@ public class InfectioningUnit : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (endSkill)
+        {
+            gameObject.SetActive(false);
+        }
+    }
+
     // 取得したターゲットを感染
     void AllTargetInfection(Collider2D[] targetUnits)
     {
         var effectGenerated = false;
+        endSkill = false;
 
         foreach (Collider2D target in targetUnits)
         {
@@ -74,7 +85,6 @@ public class InfectioningUnit : MonoBehaviour
             }
         }
 
-        // 処理終了後、非アクティブ化
-        gameObject.SetActive(false);
+        endSkill = true;
     }
 }

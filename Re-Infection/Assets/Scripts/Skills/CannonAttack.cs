@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using CannonPointer;
+using Unity.VisualScripting;
 
 public class CannonAttack : MonoBehaviour
 {
     PlayerStatusData playerStatusData;
 
     public static event Action<float> OnSkillUsed;
+    private bool endSkill = true;
 
     UnitManager unitManager;
     CannonSkillPointer cannonSkillPointer;
@@ -33,8 +35,9 @@ public class CannonAttack : MonoBehaviour
         audioSource = GameObject.Find("WaveSpawner").GetComponent<AudioSource>();
     }
 
-    async private void Update()
+    async private void OnEnable()
     {
+        endSkill = false;
         await WaitEndDrag.WaitDragEndAsync();
         if (unitManager.EnemyCnt <= 0)
         {
@@ -54,9 +57,19 @@ public class CannonAttack : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (endSkill)
+        {
+            gameObject.SetActive(false);
+        }
+    }
+
     // 取得したターゲットにダメージ
     void AllTargetDamage(Collider2D[] targetUnits)
     {
+        endSkill = false;
+
         Instantiate(cannonEffect, transform.position + new Vector3(0, -1.7f, 0), Quaternion.identity);
         audioSource.PlayOneShot(cannonSE);
 
@@ -81,7 +94,6 @@ public class CannonAttack : MonoBehaviour
         OnSkillUsed?.Invoke(playerStatusData.cannonCoolTimeUpgrade.CoolTime);
         OnSkillUsed -= cannonSkillPointer.OnSkillUse;
 
-        // 処理終了後、非アクティブ化
-        gameObject.SetActive(false);
+        endSkill = true;
     }
 }
