@@ -11,7 +11,6 @@ public class WaveSpawner : MonoBehaviour
     UnitManager unitManager;
     public StageData stageData;
 
-    [SerializeField] AudioClip[] clearSe;
     [SerializeField] Image castlePoint;
 
     [SerializeField] Stage stage;            // ステージのデータ
@@ -158,13 +157,11 @@ public class WaveSpawner : MonoBehaviour
     {
         gameUIManager.InvisibleAllUI();
         gameUIManager.BossHealthProgress(0);
-        FindAnyObjectByType<GameManager>().GetComponent<AudioSource>().Pause();
+        FindObjectOfType<BGMManager>().StopBGM();
 
         Time.timeScale = 0.4f;
 
-        AudioSource audio =  GetComponent<AudioSource>();
-        foreach(var se in clearSe)
-            audio.PlayOneShot(se);
+        FindObjectOfType<SEManager>().PlaySE(SEManager.SEType.BossDefeat);
 
         yield return new WaitForSeconds(1.0f);
 

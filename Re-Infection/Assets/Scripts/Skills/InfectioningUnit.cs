@@ -9,7 +9,7 @@ public class InfectioningUnit : MonoBehaviour
     PlayerStatusData playerStatusData;
 
     public static event Action<float, float> OnInfection;
-    private bool endSkill = true;
+    private bool endSkill = false;
 
     UnitManager unitManager;
 

@@ -53,6 +53,8 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
     AttackBase attackBase;
 
     public UnitStateManager stateManager { get; private set; }
+    
+    private SEManager seManager;
 
     public void Initialize(UnitStats stats, bool isClone = false)
     {
@@ -100,7 +102,8 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
 
     public virtual void Start()
     {
-        if(!isClone) FindObjectOfType<UnitManager>().AddUnitList(this);
+        seManager = FindObjectOfType<SEManager>();
+        if (!isClone) FindObjectOfType<UnitManager>().AddUnitList(this);
         stateManager.StateMachine.Initialize(stateManager.StateMachine.moveState);
         StartCoroutine(UsingVirusSkillTransparency());
     }
@@ -136,7 +139,6 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
 
     public virtual void Attack()
     {
-        GetComponent<AudioSource>().PlayOneShot(stats.attackSe);
         if(animator.enabled) animator.SetTrigger("Attack");
 
         attackBase?.Attack(this);
@@ -144,6 +146,7 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
 
     public virtual void Damage(float damage)
     {
+        seManager.PlaySE(SEManager.SEType.Damage);
         Instantiate(damageEffect, transform.position, Quaternion.identity);
 
         currentHealth -= damage;

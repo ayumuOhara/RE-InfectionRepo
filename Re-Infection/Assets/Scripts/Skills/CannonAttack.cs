@@ -10,12 +10,11 @@ public class CannonAttack : MonoBehaviour
     PlayerStatusData playerStatusData;
 
     public static event Action<float> OnSkillUsed;
-    private bool endSkill = true;
+    private bool endSkill = false;
 
     UnitManager unitManager;
     CannonSkillPointer cannonSkillPointer;
-
-    AudioSource audioSource;
+    SEManager seManager;
 
     [SerializeField] float cannonRadius;
     [SerializeField] LayerMask skillTargetLayer;
@@ -31,8 +30,8 @@ public class CannonAttack : MonoBehaviour
         cannonSkillPointer = GameObject.Find("CannonSkillPointer").GetComponent<CannonSkillPointer>();
         transform.localScale = new Vector3(cannonRadius * VISUAL_RANGE, cannonRadius * VISUAL_RANGE);
 
+        seManager = FindObjectOfType<SEManager>();
         unitManager = GameObject.Find("UnitManager").GetComponent<UnitManager>();
-        audioSource = GameObject.Find("WaveSpawner").GetComponent<AudioSource>();
     }
 
     async private void OnEnable()
@@ -71,7 +70,7 @@ public class CannonAttack : MonoBehaviour
         endSkill = false;
 
         Instantiate(cannonEffect, transform.position + new Vector3(0, -1.7f, 0), Quaternion.identity);
-        audioSource.PlayOneShot(cannonSE);
+        seManager.PlaySE(SEManager.SEType.Explosion);
 
         foreach (Collider2D target in targetUnits)
         {
