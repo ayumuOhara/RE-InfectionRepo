@@ -20,8 +20,8 @@ public class DragIconController : MonoBehaviour,
     public UnitDetailUII detaUI;
 
     [Header("ユニット購入")]
-    public bool isPaidUnit = false;//このユニットは購入が必要か
-    public int price = 0; //価格
+    public bool isPaidUnit = false;
+    public int price = 0;
     public GameObject paidUnitKey;
     public GameObject notEnoughMoneyObj;
     public UnitPaidDialog paidDialog;
@@ -29,55 +29,39 @@ public class DragIconController : MonoBehaviour,
     public Wallet wallet;
 
     public TextMeshProUGUI cost_text;
-   
 
-    private Transform returnTarget;
-    private Vector2 originalPos;
     private Transform originalParent;
+    private Vector2 originalPos;
+
     void Awake()
     {
         wallet = Resources.Load<PlayerStatusData>("PlayerStatusData").wallet;
         rectTransform = GetComponent<RectTransform>();
         canvas = GetComponentInParent<Canvas>();
         canvasGroup = GetComponent<CanvasGroup>();
-        returnTarget = transform.parent;
+
+        originalParent = transform.parent;
         unitIcon.sprite = unitStats.unitStats.unitSprite;
-
         cost_text.text = $"{unitStats.unitStats.summonCost}";
-
-        //CheckImage.SetActive(false);
-        //CheckImage.SetActive(isUsedInDropArea);
 
         notEnoughMoneyObj.SetActive(false);
 
-        //有料ユニット
         if (isPaidUnit)
         {
             paidUnitKey.SetActive(true);
             price_text.text = price.ToString();
 
-
-
             paidDialog.onClickYes = () =>
             {
-
-                //所持金✅
                 if (!wallet.CanBuy(price))
                 {
-                    Debug.Log("お金が足りません。現在の所持金: " + wallet.CurrentMoney);
                     if (notEnoughMoneyObj != null)
-                    {
                         StartCoroutine(NotEnoughMoney());
-                    }
                     return;
                 }
 
-
-                //お金を引く
                 wallet.RemoveMoney(price);
 
-
-                //購入完了
                 isPaidUnit = false;
                 paidUnitKey.SetActive(false);
 
@@ -87,18 +71,23 @@ public class DragIconController : MonoBehaviour,
         else
         {
             paidUnitKey.SetActive(false);
-
         }
     }
 
-  
+    // ★ ドラッグ可能/不可能を切り替える
+    public void SetDraggable(bool canDrag)
+    {
+        canvasGroup.blocksRaycasts = canDrag;
+        unitIcon.raycastTarget = canDrag;
+    }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (isUsedInDropArea) return;
+        if (isUsedInDropArea)
+            return; // ★ DropArea に入っているならドラッグ開始禁止
 
         originalParent = transform.parent;
-        originalPos = GetComponent<RectTransform>().anchoredPosition;
-
+        originalPos = rectTransform.anchoredPosition;
 
         CheckImage.SetActive(false);
 
@@ -110,10 +99,13 @@ public class DragIconController : MonoBehaviour,
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (isUsedInDropArea)
+            return; // ★ DropArea に入っているならドラッグ中も禁止
+
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             canvas.transform as RectTransform,
             eventData.position,
-            null,
+            eventData.pressEventCamera,
             out Vector2 localPoint
         );
 
@@ -122,11 +114,8 @@ public class DragIconController : MonoBehaviour,
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        // 親を元に戻す
         transform.SetParent(originalParent, false);
-
-        // 位置も元に戻す
-        GetComponent<RectTransform>().anchoredPosition = originalPos;
+        rectTransform.anchoredPosition = originalPos;
 
         canvasGroup.blocksRaycasts = true;
     }
@@ -140,18 +129,12 @@ public class DragIconController : MonoBehaviour,
     {
         if (isPaidUnit)
         {
-            // メッセージを作成
             string msg = $"${price} を支払って\n「{unitStats.unitStats.unitName}」を\n購入しますか？";
-
-            // ダイアログにメッセージを渡す
             paidDialog.SetDialogMessage(msg);
-
-            // ダイアログを表示（ボタンと同じ関数）
             paidDialog.Dialog();
             return;
         }
 
-        // 無料ユニットなら詳細を開く
         detaUI.SetUnit(unitStats.unitStats);
     }
 
@@ -161,5 +144,4 @@ public class DragIconController : MonoBehaviour,
         yield return new WaitForSeconds(1f);
         notEnoughMoneyObj.SetActive(false);
     }
-
 }
