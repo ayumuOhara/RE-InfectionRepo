@@ -18,14 +18,10 @@ public class DropArea : MonoBehaviour, IDropHandler
 
         // ▼ すでに保存されているデータがある場合（シーン復元）
         UnitStatsData saved = UnitDataCarrier.Instance.selectedUnits[slotIndex];
-
         if (saved != null)
         {
             currentUnitStats = saved;
             CreateCloneFromExistingIcon(saved);
-
-            MarkDragIconAsUsed(saved);
-
             UpdateAllCheckImage();
             return;
         }
@@ -37,9 +33,6 @@ public class DropArea : MonoBehaviour, IDropHandler
             UnitDataCarrier.Instance.selectedUnits[slotIndex] = defaultUnit;
 
             CreateCloneFromExistingIcon(defaultUnit);
-
-            MarkDragIconAsUsed(defaultUnit);
-
             UpdateAllCheckImage();
         }
     }
@@ -47,12 +40,10 @@ public class DropArea : MonoBehaviour, IDropHandler
     public void OnDrop(PointerEventData eventData)
     {
         GameObject dropped = eventData.pointerDrag;
+        if (dropped == null) return;
+
         DragIconController fromList = dropped.GetComponent<DragIconController>();
-        DropAreaIconDrag fromDropArea = eventData.pointerDrag?.GetComponent<DropAreaIconDrag>();
-
-        if (eventData.pointerDrag == null) return;
-
-       
+        DropAreaIconDrag fromDropArea = dropped.GetComponent<DropAreaIconDrag>();
 
         // ▼ selectedUnits を slotIndex まで拡張（どのケースでも必ず必要）
         while (UnitDataCarrier.Instance.selectedUnits.Count <= slotIndex)
@@ -75,38 +66,29 @@ public class DropArea : MonoBehaviour, IDropHandler
             }
         }
 
-
+        
+        //  既存の Clone があれば削除（上書き用）
         if (dropTargetParent.childCount > 0)
         {
-            foreach (var icon in FindObjectsOfType<DragIconController>())
-            {
-                if (icon.unitStats == currentUnitStats)
-                {
-                    icon.isUsedInDropArea = false;
-                    icon.SetDraggable(true);   // ★ これがないと一生動かない
-                    icon.CheckObj(false);
-                }
-            }
-
             Destroy(dropTargetParent.GetChild(0).gameObject);
             currentUnitStats = null;
+
+            while (UnitDataCarrier.Instance.selectedUnits.Count <= slotIndex)
+                UnitDataCarrier.Instance.selectedUnits.Add(null);
+
             UnitDataCarrier.Instance.selectedUnits[slotIndex] = null;
         }
 
-
+       
         //  DragIconController → DropArea（新規登録）
         if (fromList != null)
         {
             currentUnitStats = fromList.unitStats;
 
-            fromList.isUsedInDropArea = true;
-            fromList.SetDraggable(false);
-
-
             while (UnitDataCarrier.Instance.selectedUnits.Count <= slotIndex)
                 UnitDataCarrier.Instance.selectedUnits.Add(null);
 
-         
+            fromList.isUsedInDropArea = true;
 
             UnitDataCarrier.Instance.selectedUnits[slotIndex] = currentUnitStats;
 
@@ -228,22 +210,18 @@ public class DropArea : MonoBehaviour, IDropHandler
 
     public void CreateUnit()
     {
-        // DragIconController の制限解除
-        foreach (var icon in FindObjectsOfType<DragIconController>())
+       //DragIconControllerの制限解除
+       foreach(var icon in FindObjectsOfType<DragIconController>())
         {
             if (icon.unitStats == currentUnitStats)
             {
                 icon.isUsedInDropArea = false;
-                icon.SetDraggable(true); 
                 icon.CheckObj(false);
             }
         }
-
-       
-       
-
-        // データ削除
+        //データ削除
         UnitDataCarrier.Instance.selectedUnits[slotIndex] = null;
+
         currentUnitStats = null;
     }
 
@@ -302,19 +280,6 @@ public class DropArea : MonoBehaviour, IDropHandler
         {
             if (img.gameObject.name == "CheckImage")
                 img.enabled = false;
-        }
-    }
-
-    private void MarkDragIconAsUsed(UnitStatsData stats)
-    {
-        foreach (var icon in FindObjectsOfType<DragIconController>())
-        {
-            if (icon.unitStats == stats)
-            {
-                icon.isUsedInDropArea = true;
-                icon.SetDraggable(false); // ★ ドラッグ禁止
-                icon.CheckObj(true);      // チェックON
-            }
         }
     }
 }
