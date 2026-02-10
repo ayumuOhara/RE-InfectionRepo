@@ -33,7 +33,14 @@ public class SEManager : MonoBehaviour
     public enum SEType
     {
         Button_Click,  // ボタンをクリックしたときの音
-        
+        Lord,          // シーンロード
+        StageClear,    // ステージクリア
+        StageFailed,   // ステージ失敗
+        Summon,        // ユニット召喚
+        SummonFailed,  // ユニット召喚失敗
+        Damage,        // ユニットがダメージを受けた時
+        Explosion,     // 爆弾
+        BossDefeat,    // ボス撃破
     }
 
     // SE再生メソッド
