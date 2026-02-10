@@ -8,6 +8,7 @@ public class EnemyUnit : UnitBase, Iinfection
     [SerializeField] Sprite corpseSprite;   // 死体スプライト
     [SerializeField] GameObject infecitonInfo;
     [SerializeField] Image infectionBar;
+    [SerializeField] GameObject defeatedEffect;
     WaveSpawner waveSpawner;
 
     public bool IsInfectioning { get; set; } = false;
@@ -54,6 +55,7 @@ public class EnemyUnit : UnitBase, Iinfection
         if (Stats.bossUnit)
         {
             FindObjectOfType<UnitManager>().RemoveUnitList(this, IsInfectioning);
+            Instantiate(defeatedEffect, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
         else
