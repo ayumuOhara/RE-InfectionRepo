@@ -94,14 +94,10 @@ public class DragIconController : MonoBehaviour,
   
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (isUsedInDropArea)
-        {
-            return;
-        }
+        if (isUsedInDropArea) return;
 
         originalParent = transform.parent;
-        originalPos = rectTransform.anchoredPosition;
-
+        originalPos = GetComponent<RectTransform>().anchoredPosition;
 
 
         CheckImage.SetActive(false);
@@ -114,8 +110,6 @@ public class DragIconController : MonoBehaviour,
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (isUsedInDropArea)
-            return;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             canvas.transform as RectTransform,
             eventData.position,
@@ -167,9 +161,5 @@ public class DragIconController : MonoBehaviour,
         yield return new WaitForSeconds(1f);
         notEnoughMoneyObj.SetActive(false);
     }
-    public void SetDraggable(bool canDrag)
-    {
-        canvasGroup.blocksRaycasts = canDrag;
-        unitIcon.raycastTarget = canDrag;
-    }
+
 }
