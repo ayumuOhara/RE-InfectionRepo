@@ -192,6 +192,8 @@ public class ShopManager : MonoBehaviour
             return;
         }
 
+        SEManager.Instance.PlaySE(SEManager.SEType.Upgrade);
+
         playerStatusData.wallet.RemoveMoney(money);
         money_text.text = $"{playerStatusData.wallet.CurrentMoney}";
 

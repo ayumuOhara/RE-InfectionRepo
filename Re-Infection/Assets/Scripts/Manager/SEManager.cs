@@ -10,12 +10,27 @@ public class SEManager : MonoBehaviour
     [SerializeField] private Slider seSlider;
     [SerializeField] private SESetting seSetting;
 
+    public static SEManager Instance;
+
     private void Start()
     {
         if (seSlider != null)
         {
             seSlider.value = seSetting.volume;
             seSlider.onValueChanged.AddListener(OnVolumeChenged);
+        }
+    }
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject); // シーン跨ぎたいなら
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
 
@@ -41,6 +56,7 @@ public class SEManager : MonoBehaviour
         Damage,        // ユニットがダメージを受けた時
         Explosion,     // 爆弾
         BossDefeat,    // ボス撃破
+        Upgrade,       // 強化
     }
 
     // SE再生メソッド
