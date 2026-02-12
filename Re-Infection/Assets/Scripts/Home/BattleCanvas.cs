@@ -16,6 +16,7 @@ public class BattleCanvas : MonoBehaviour
     public GameObject messageBox; //ステージ解放時のメッセージボックス
     public GameObject messageCanvas;
 
+    public TextMeshProUGUI stageTitleText; //ステージのタイトルを表示するテキスト
     public TextMeshProUGUI conditionsText; //ステージの解放条件を表示するテキスト
     public TextMeshProUGUI releaseText; //ステージ解放時のテキスト 
 
@@ -62,6 +63,16 @@ public class BattleCanvas : MonoBehaviour
         stageNumber = scrollChecker.GetStagePage(); //現在のステージ番号を取得
         stageLastNumber = scrollChecker.GetStageLastPage(); //ステージの最後の番号を取得
 
+        //ステージのテキスト判別
+        if(stageNumber == 0)
+        {
+            stageTitleText.text = "チュートリアル";
+        }
+        else
+        {
+            stageTitleText.text = $"ステージ{stageNumber}";
+        }
+
         //ページの端に来たら矢印ボタンを押せなくする
         //左端のとき
         if (stageNumber == 0)
@@ -94,10 +105,10 @@ public class BattleCanvas : MonoBehaviour
         //前のステージがクリア済みか
         if (stageNumber != 0 && stageDataManager.stage[stageNumber - 1].isClear == false)
         {
-            conditionsText.text = $"ステージ{stageNumber}クリアで解放";
+            conditionsText.text = $"ステージ{stageNumber - 1}クリアで解放";
             if(stageNumber == 1)
             {
-                conditionsText.text = $"チュートリアルステージ\nをクリアで解放";
+                conditionsText.text = $"チュートリアル\nをクリアで解放";
             }
             conditionsText.gameObject.SetActive(true);
             sortieButton.interactable = false;
