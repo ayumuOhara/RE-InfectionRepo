@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd3f85a1c1795bc43878a896177f0bf7, type: 3}
   m_Name: SESetting
   m_EditorClassIdentifier: Assembly-CSharp::SESetting
-  volume: 2.5
+  volume: 0.5
