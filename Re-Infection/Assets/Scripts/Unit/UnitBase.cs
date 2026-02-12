@@ -66,6 +66,7 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
         this.stats = new UnitStats()
         {
             unitSprite = stats.unitSprite,
+            outline = stats.outline,
             attackEffect = stats.attackEffect,
             unitName = stats.unitName,
             jobType = stats.jobType,
@@ -87,7 +88,7 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
 
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = this.stats.unitSprite;
-        spriteRenderer.material = stats.outline;
+        spriteRenderer.material = this.stats.outline;
 
         if (!isClone)
             currentHealth = stats.maxHp;
