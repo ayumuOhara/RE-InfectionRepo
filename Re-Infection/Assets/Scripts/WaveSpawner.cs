@@ -31,7 +31,7 @@ public class WaveSpawner : MonoBehaviour
 
     // ウェーブが始まったか
     bool isStartWave = false;
-    public bool IsStartWave => isStartWave;
+    public bool IsStartWave => isStartWave && !stage.waveData[currentWaveIdx].tutorial;
 
     // 周回をクリアしたか
     bool isSessionClear = false;
@@ -166,7 +166,6 @@ public class WaveSpawner : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
 
         Time.timeScale = 1.0f;
-        gameUIManager.InvisibleCombatUI();
         gameUIManager.VisibleAllUI();
         isSessionClear = true;
 
