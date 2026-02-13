@@ -8,7 +8,7 @@ public class InfectioningUnit : MonoBehaviour
 {
     PlayerStatusData playerStatusData;
 
-    public static event Action<float, float> OnInfection;
+    public static event Action<float> OnInfection;
     private bool endSkill = false;
 
     UnitManager unitManager;
@@ -74,7 +74,7 @@ public class InfectioningUnit : MonoBehaviour
             if (enemy?.IsDead == true && enemy.IsInfectioning == false)
             {
                 OnInfection += enemy.StartInfection;
-                OnInfection?.Invoke(playerStatusData.virusUpgrade.VirusStats.infectionTime, playerStatusData.virusUpgrade.VirusStats.reviveHealthRate);
+                OnInfection?.Invoke(playerStatusData.virusUpgrade.ReviveHealthRate);
                 OnInfection -= enemy.StartInfection;
 
                 if (!effectGenerated)

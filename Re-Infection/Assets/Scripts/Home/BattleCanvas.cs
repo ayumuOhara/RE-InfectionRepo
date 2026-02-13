@@ -17,6 +17,7 @@ public class BattleCanvas : MonoBehaviour
     public Animator[] lockAnime; //ステージのロック中の表示にスプライト
     public GameObject messageBox; //ステージ解放時のメッセージボックス
     public GameObject messageCanvas;
+    public GameObject responsePanel; //ステージクリアの判別の処理が終わるまで表示するパネル
 
     public TextMeshProUGUI stageTitleText; //ステージのタイトルを表示するテキスト
     public TextMeshProUGUI conditionsText; //ステージの解放条件を表示するテキスト
@@ -33,6 +34,7 @@ public class BattleCanvas : MonoBehaviour
     private void Awake()
     {
         Time.timeScale = 1.0f;
+        responsePanel.SetActive(false);
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -66,7 +68,7 @@ public class BattleCanvas : MonoBehaviour
         stageLastNumber = scrollChecker.GetStageLastPage(); //ステージの最後の番号を取得
 
         //ステージのテキスト判別
-        if(stageNumber == 0)
+        if (stageNumber == 0)
         {
             stageTitleText.text = "チュートリアル";
         }
@@ -108,7 +110,7 @@ public class BattleCanvas : MonoBehaviour
         if (stageNumber != 0 && stageDataManager.stage[stageNumber - 1].isClear == false)
         {
             conditionsText.text = $"ステージ{stageNumber - 1}クリアで解放";
-            if(stageNumber == 1)
+            if (stageNumber == 1)
             {
                 conditionsText.text = $"チュートリアル\nをクリアで解放";
             }
@@ -154,10 +156,10 @@ public class BattleCanvas : MonoBehaviour
     }
 
     //鍵が外れるアニメーション
-    private IEnumerator PlayAnimetion(int openStage) 
+    private IEnumerator PlayAnimetion(int openStage)
     {
         scrollChecker.scrollSnap.GoToPanel(openStage);
-        
+
 
         yield return new WaitForSeconds(0.7f);
         yield return new WaitForSeconds(0.7f);
@@ -171,7 +173,7 @@ public class BattleCanvas : MonoBehaviour
         Debug.Log($"{openStage + 1}ステージ解放");
         messageBox.SetActive(true);
         releaseText.text = $"ステージ{openStage}が解放された!";
-        Time.timeScale = 0f; 
+        Time.timeScale = 0f;
 
     }
 
@@ -181,6 +183,6 @@ public class BattleCanvas : MonoBehaviour
         messageBox.SetActive(false);
 
         messageCanvas.SetActive(false);
-        Time.timeScale = 1f; 
+        Time.timeScale = 1f;
     }
 }
