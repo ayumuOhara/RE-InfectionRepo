@@ -15,15 +15,16 @@ public class UnitIconClick : MonoBehaviour, IPointerClickHandler
     [SerializeField] TextMeshProUGUI unitCostText;
     [SerializeField] TextMeshProUGUI unitCntText;
     [SerializeField] Image assertLabel;
-    [SerializeField] AudioClip summonSe;
-    [SerializeField] AudioClip failedSe;
     GameManager gameManager;
+    SEManager seManager;
 
     Vector3 spawnPos = new Vector3(0, -2.0f, 0);  // プレイヤーユニットの生成座標
     Vector2 defaltSize;
 
     void Awake()
     {
+        seManager = FindObjectOfType<SEManager>();
+
         //インスペクターで設定したサイズを保存
         defaltSize = unitIcon.rectTransform.sizeDelta;
 
@@ -66,13 +67,13 @@ public class UnitIconClick : MonoBehaviour, IPointerClickHandler
             {
                 if (gameManager.costManager.EnoughCost(unitData.unitStats.summonCost))
                 {
-                    GetComponent<AudioSource>().PlayOneShot(summonSe);
+                    seManager.PlaySE(SEManager.SEType.Summon);
                     GetComponent<Animator>().SetTrigger("Tap");
                     GenerateUnit();
                 }
                 else
                 {
-                    GetComponent<AudioSource>().PlayOneShot(failedSe);
+                    seManager.PlaySE(SEManager.SEType.SummonFailed);
                     GetComponent<Animator>().SetTrigger("Tap");
 
                     assertLabel.gameObject.SetActive(true);

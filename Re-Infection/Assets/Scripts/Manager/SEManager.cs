@@ -10,12 +10,27 @@ public class SEManager : MonoBehaviour
     [SerializeField] private Slider seSlider;
     [SerializeField] private SESetting seSetting;
 
+    public static SEManager Instance;
+
     private void Start()
     {
         if (seSlider != null)
         {
             seSlider.value = seSetting.volume;
             seSlider.onValueChanged.AddListener(OnVolumeChenged);
+        }
+    }
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject); // シーン跨ぎたいなら
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
 
@@ -33,7 +48,15 @@ public class SEManager : MonoBehaviour
     public enum SEType
     {
         Button_Click,  // ボタンをクリックしたときの音
-        
+        Lord,          // シーンロード
+        StageClear,    // ステージクリア
+        StageFailed,   // ステージ失敗
+        Summon,        // ユニット召喚
+        SummonFailed,  // ユニット召喚失敗
+        Damage,        // ユニットがダメージを受けた時
+        Explosion,     // 爆弾
+        BossDefeat,    // ボス撃破
+        Upgrade,       // 強化
     }
 
     // SE再生メソッド

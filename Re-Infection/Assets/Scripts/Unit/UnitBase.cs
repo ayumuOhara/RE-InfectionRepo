@@ -53,6 +53,8 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
     AttackBase attackBase;
 
     public UnitStateManager stateManager { get; private set; }
+    
+    private SEManager seManager;
 
     public void Initialize(UnitStats stats, bool isClone = false)
     {
@@ -64,6 +66,7 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
         this.stats = new UnitStats()
         {
             unitSprite = stats.unitSprite,
+            outline = stats.outline,
             attackEffect = stats.attackEffect,
             unitName = stats.unitName,
             jobType = stats.jobType,
@@ -85,7 +88,7 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
 
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = this.stats.unitSprite;
-        spriteRenderer.material = stats.outline;
+        spriteRenderer.material = this.stats.outline;
 
         if (!isClone)
             currentHealth = stats.maxHp;
@@ -100,7 +103,8 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
 
     public virtual void Start()
     {
-        if(!isClone) FindObjectOfType<UnitManager>().AddUnitList(this);
+        seManager = FindObjectOfType<SEManager>();
+        if (!isClone) FindObjectOfType<UnitManager>().AddUnitList(this);
         stateManager.StateMachine.Initialize(stateManager.StateMachine.moveState);
         StartCoroutine(UsingVirusSkillTransparency());
     }
@@ -136,7 +140,6 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
 
     public virtual void Attack()
     {
-        GetComponent<AudioSource>().PlayOneShot(stats.attackSe);
         if(animator.enabled) animator.SetTrigger("Attack");
 
         attackBase?.Attack(this);
@@ -144,6 +147,7 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
 
     public virtual void Damage(float damage)
     {
+        seManager.PlaySE(SEManager.SEType.Damage);
         Instantiate(damageEffect, transform.position, Quaternion.identity);
 
         currentHealth -= damage;

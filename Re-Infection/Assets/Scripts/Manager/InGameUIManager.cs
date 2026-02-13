@@ -14,6 +14,7 @@ public class InGameUIManager : MonoBehaviour
 
     [SerializeField] Canvas masterUI;
     [SerializeField] Canvas combatUI;
+    [SerializeField] Canvas timeUI;
     [SerializeField] Canvas resultUI;
     [SerializeField] Canvas clearUI;
     [SerializeField] Canvas failedUI;
@@ -44,13 +45,7 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI totalCoinText;
     [SerializeField] TextMeshProUGUI currentCoinText;
 
-    AudioSource SeAudio;
-    [SerializeField] AudioClip lordSe;
-    [SerializeField] AudioClip decideSe;
-    [SerializeField] AudioClip cancelSe;
-    [SerializeField] AudioClip stageClearSe;
-    [SerializeField] AudioClip stageFailedSe;
-    [SerializeField] AudioClip resultBgm;
+    private SEManager seManager;
 
     string coinIconText = "<sprite=0>";
 
@@ -58,7 +53,7 @@ public class InGameUIManager : MonoBehaviour
     void Awake()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        SeAudio = GetComponent<AudioSource>();
+        seManager = FindObjectOfType<SEManager>();
 
         resultUI.enabled = false;
         clearUI.enabled = false;
@@ -69,53 +64,55 @@ public class InGameUIManager : MonoBehaviour
     // 全UI表示
     public void VisibleAllUI()
     {
-        masterUI.enabled = true;
+        masterUI.gameObject.SetActive(true);
     }
 
     // 全UI非表示
     public void InvisibleAllUI()
     {
-        masterUI.enabled = false;
-    }
-
-    // 戦闘UIを非表示
-    public void InvisibleCombatUI()
-    {
-        combatUI.enabled = false;
+        masterUI.gameObject.SetActive(false);
     }
 
     // ステージクリア処理
     public IEnumerator SessionClear()
     {
+        timeUI.enabled = false;
+        combatUI.enabled = false;
+
         clearTimeText.text = gameManager.timeManager.Minutes.ToString("D2") + ":" + gameManager.timeManager.Seconds.ToString("D2");
 
-        GetComponent<AudioSource>().Pause();
+        var audio = FindObjectOfType<BGMManager>();
+        audio.StopBGM();
 
         resultUI.enabled = true;
         clearUI.enabled = true;
-        GetComponent<AudioSource>().PlayOneShot(stageClearSe);
+        failedUI.enabled = false;
+
+        seManager.PlaySE(SEManager.SEType.StageClear);
 
         yield return new WaitForSeconds(2.5f);
 
-        GetComponent<AudioSource>().clip = resultBgm;
-        GetComponent<AudioSource>().Play();
+        audio.PlayBGM(BGMManager.BGMType.Result);
     }
 
     // ステージ失敗処理
     public IEnumerator SessionFailed()
     {
+        timeUI.enabled = false;
         combatUI.enabled = false;
-        GetComponent<AudioSource>().Pause();
-        FindAnyObjectByType<GameManager>().GetComponent<AudioSource>().Pause();
+
+        var audio = FindObjectOfType<BGMManager>();
+        audio.StopBGM();
 
         resultUI.enabled = true;
+        clearUI.enabled = false;
         failedUI.enabled = true;
-        GetComponent<AudioSource>().PlayOneShot(stageFailedSe);
+
+        seManager.PlaySE(SEManager.SEType.StageFailed);
 
         yield return new WaitForSeconds(2.5f);
 
-        GetComponent<AudioSource>().clip = resultBgm;
-        GetComponent<AudioSource>().Play();
+        audio.PlayBGM(BGMManager.BGMType.Result);
     }
 
     // 報酬処理
@@ -293,7 +290,7 @@ public class InGameUIManager : MonoBehaviour
     // シーン遷移確認ボタン(確認)
     public void OnVerified(Canvas ui)
     {
-        SeAudio.PlayOneShot(decideSe);
+        seManager.PlaySE(SEManager.SEType.Button_Click);
         ui.enabled = true;
 
         if (!gameManager.timeManager.isPause)
@@ -303,7 +300,7 @@ public class InGameUIManager : MonoBehaviour
     // シーン遷移キャンセル
     public void OnCanceled(Canvas ui)
     {
-        SeAudio.PlayOneShot(cancelSe);
+        seManager.PlaySE(SEManager.SEType.Button_Click);
         ui.enabled = false;
 
         if (gameManager.timeManager.isPause)
@@ -323,7 +320,7 @@ public class InGameUIManager : MonoBehaviour
         if (gameManager.timeManager.isPause)
             gameManager.timeManager.GamePause();
 
-        SeAudio.PlayOneShot(lordSe);
+        seManager.PlaySE(SEManager.SEType.Lord);
         SceneTransitionner transitonner = Instantiate(transitionUIprefab).GetComponent<SceneTransitionner>();
         transitonner.OnLoadScene(name);
     }

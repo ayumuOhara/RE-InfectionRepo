@@ -11,7 +11,6 @@ public class WaveSpawner : MonoBehaviour
     UnitManager unitManager;
     public StageData stageData;
 
-    [SerializeField] AudioClip[] clearSe;
     [SerializeField] Image castlePoint;
 
     [SerializeField] Stage stage;            // ステージのデータ
@@ -32,7 +31,7 @@ public class WaveSpawner : MonoBehaviour
 
     // ウェーブが始まったか
     bool isStartWave = false;
-    public bool IsStartWave => isStartWave;
+    public bool IsStartWave => isStartWave && !stage.waveData[currentWaveIdx].tutorial;
 
     // 周回をクリアしたか
     bool isSessionClear = false;
@@ -158,18 +157,15 @@ public class WaveSpawner : MonoBehaviour
     {
         gameUIManager.InvisibleAllUI();
         gameUIManager.BossHealthProgress(0);
-        FindAnyObjectByType<GameManager>().GetComponent<AudioSource>().Pause();
+        FindObjectOfType<BGMManager>().StopBGM();
 
         Time.timeScale = 0.4f;
 
-        AudioSource audio =  GetComponent<AudioSource>();
-        foreach(var se in clearSe)
-            audio.PlayOneShot(se);
+        FindObjectOfType<SEManager>().PlaySE(SEManager.SEType.BossDefeat);
 
         yield return new WaitForSeconds(1.0f);
 
         Time.timeScale = 1.0f;
-        gameUIManager.InvisibleCombatUI();
         gameUIManager.VisibleAllUI();
         isSessionClear = true;
 
