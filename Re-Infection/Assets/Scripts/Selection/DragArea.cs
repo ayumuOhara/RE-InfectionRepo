@@ -46,11 +46,36 @@ public class DropArea : MonoBehaviour, IDropHandler
 
     public void OnDrop(PointerEventData eventData)
     {
-        if (eventData.pointerDrag == null) return;
 
+
+        if (eventData.pointerDrag == null)
+        {
+            return;
+           
+        }
         GameObject dropped = eventData.pointerDrag;
         DragIconController fromList = dropped.GetComponent<DragIconController>();
         DropAreaIconDrag fromDropArea = dropped.GetComponent<DropAreaIconDrag>();
+
+        // ▼ 重複チェック（同じユニットなら弾く）
+        UnitStatsData incomingStats =
+            fromList != null ? fromList.unitStats :
+            fromDropArea != null ? fromDropArea.unitStats : null;
+
+        // ▼ 他の DropArea に同じユニットが入っていないかチェック
+        if (incomingStats != null)
+        {
+            // すでにどこかの DropArea に入っている
+            if (IsUnitInAnyDropArea(incomingStats))
+            {
+                // ただし、今の DropArea がそのユニットを持っている場合は OK
+                if (currentUnitStats != incomingStats)
+                {
+                    Debug.Log($"【重複禁止】ユニット {incomingStats.name} はすでに編成されています");
+                    return;
+                }
+            }
+        }
 
         // selectedUnits サイズ保証
         while (UnitDataCarrier.Instance.selectedUnits.Count <= slotIndex)
