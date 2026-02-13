@@ -34,6 +34,8 @@ namespace VirusPointer
 
         void Awake()
         {
+            dragEndTcs = new TaskCompletionSource<PointerEventData>();
+
             waveSpawner = FindObjectOfType<WaveSpawner>();
             if (unitManager == null)
                 unitManager = GameObject.Find("UnitManager").GetComponent<UnitManager>();
@@ -44,7 +46,6 @@ namespace VirusPointer
             if (!waveSpawner.IsStartWave || Time.timeScale == 0)
             {
                 dragObj.SetActive(false);
-                dragEndTcs?.TrySetResult(eventData);
                 return;
             }
 
@@ -66,7 +67,6 @@ namespace VirusPointer
             if (!waveSpawner.IsStartWave || Time.timeScale == 0)
             {
                 dragObj.SetActive(false);
-                dragEndTcs?.TrySetResult(eventData);
                 return;
             }
 
@@ -83,7 +83,6 @@ namespace VirusPointer
             if (!waveSpawner.IsStartWave || Time.timeScale == 0)
             {
                 dragObj.SetActive(false);
-                dragEndTcs?.TrySetResult(eventData);
                 return;
             }
 

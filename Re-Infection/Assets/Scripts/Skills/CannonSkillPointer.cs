@@ -41,6 +41,7 @@ namespace CannonPointer
         void Awake()
         {
             playerStatusData = Resources.Load<PlayerStatusData>("PlayerStatusData");
+            dragEndTcs = new TaskCompletionSource<PointerEventData>();
 
             if (cannonPointerFilled != null) cannonPointerFilled.fillAmount = 0;
             canUseSkill = true;
@@ -75,14 +76,12 @@ namespace CannonPointer
 
         public void OnBeginDrag(PointerEventData eventData)
         {
+            dragEndTcs = new TaskCompletionSource<PointerEventData>();
             if (!waveSpawner.IsStartWave || !canUseSkill || Time.timeScale == 0)
             {
                 dragObj.SetActive(false);
-                dragEndTcs?.TrySetResult(eventData);
                 return;
             }
-
-            dragEndTcs = new TaskCompletionSource<PointerEventData>();
 
             if (dragObj == null)
             {
@@ -100,7 +99,6 @@ namespace CannonPointer
             if (!waveSpawner.IsStartWave || !canUseSkill || Time.timeScale == 0)
             {
                 dragObj.SetActive(false);
-                dragEndTcs?.TrySetResult(eventData);
                 return;
             }
 
@@ -117,7 +115,6 @@ namespace CannonPointer
             if (!waveSpawner.IsStartWave || !canUseSkill || Time.timeScale == 0)
             {
                 dragObj.SetActive(false);
-                dragEndTcs?.TrySetResult(eventData);
                 return;
             }
 

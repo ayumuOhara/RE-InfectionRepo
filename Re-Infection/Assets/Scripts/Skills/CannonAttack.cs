@@ -10,7 +10,7 @@ public class CannonAttack : MonoBehaviour
     PlayerStatusData playerStatusData;
 
     public static event Action<float> OnSkillUsed;
-    private bool endSkill = false;
+    private bool endSkill = true;
 
     UnitManager unitManager;
     CannonSkillPointer cannonSkillPointer;
@@ -36,6 +36,8 @@ public class CannonAttack : MonoBehaviour
 
     async private void OnEnable()
     {
+        if (!endSkill) return;
+
         endSkill = false;
         await WaitEndDrag.WaitDragEndAsync();
         if (unitManager.EnemyCnt <= 0)
@@ -46,22 +48,12 @@ public class CannonAttack : MonoBehaviour
 
         var targetUnits = Physics2D.OverlapCircleAll(transform.position, cannonRadius, skillTargetLayer);
 
-        if (targetUnits.Length <= 0 || targetUnits == null)
-        {
-            gameObject.SetActive(false);
-        }
-        else
+        if (targetUnits.Length >= 0 || targetUnits != null)
         {
             AllTargetDamage(targetUnits);
         }
-    }
 
-    private void Update()
-    {
-        if (endSkill)
-        {
-            gameObject.SetActive(false);
-        }
+        gameObject.SetActive(false);
     }
 
     // 取得したターゲットにダメージ
@@ -80,6 +72,7 @@ public class CannonAttack : MonoBehaviour
             if (enemy.IsDead == false)
             {
                 enemy.Damage(playerStatusData.cannonDamageUpgrade.Damage);
+                Debug.Log("爆発");
                 // 倒した敵の死体を複製(ボスユニット除外)
                 if (enemy.CurrentHealth <= 0 && !enemy.Stats.bossUnit)
                 {
