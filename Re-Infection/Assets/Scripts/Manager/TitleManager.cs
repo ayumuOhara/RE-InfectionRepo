@@ -4,7 +4,6 @@ using UnityEngine.UI;
 public class TitleManager : MonoBehaviour
 {
     [SerializeField] Canvas transitionUIprefab;
-    [SerializeField] AudioClip startSe;
 
     private void Awake()
     {
@@ -14,9 +13,7 @@ public class TitleManager : MonoBehaviour
     // シーンロード
     public void OnLoadScene(string name)
     {
-        AudioSource source = GetComponent<AudioSource>();
-        source.PlayOneShot(startSe);
-
+        SEManager.Instance.PlaySE(SEManager.SEType.Lord);
         SceneTransitionner transitonner = Instantiate(transitionUIprefab).GetComponent<SceneTransitionner>();
         transitonner.OnLoadScene(name);
     }
