@@ -9,7 +9,8 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
     [SerializeField] GameObject deadEffect;
     [SerializeField] private int precision = 100; // ê∏ìxÅi100î{Ç∑ÇÍÇŒ0.01íPà Ç‹Ç≈îΩâfÅj
 
-    private SpriteRenderer spriteRenderer;
+    protected SpriteRenderer spriteRenderer;
+    [SerializeField] protected Material defaultMaterial;
     public Animator animator {  get; private set; }
 
     UnitStats stats;
@@ -60,7 +61,7 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
     {
         this.isClone = isClone;
         animator = GetComponent<Animator>();
-        if(stats.animatorController != null)
+        if (stats.animatorController != null)
         animator.runtimeAnimatorController = (RuntimeAnimatorController)stats.animatorController;
 
         this.stats = new UnitStats()
@@ -88,12 +89,17 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
 
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = this.stats.unitSprite;
-        spriteRenderer.material = this.stats.outline;
+        //spriteRenderer.material = this.stats.outline;
 
         if (!isClone)
+        {
             currentHealth = stats.maxHp;
+        }
         else
+        {
+            //spriteRenderer.material = defaultMaterial;
             currentHealth = 0;
+        }
     }
 
     public void SetStateManager(UnitStateManager unitStateManager)
