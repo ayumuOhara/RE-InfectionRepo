@@ -16,7 +16,7 @@ MonoBehaviour:
     animatorController: {fileID: 0}
     unitSprite: {fileID: 21300112, guid: f5f1c19ce87450f4b97f8b363746558d, type: 3}
     outline: {fileID: 2100000, guid: a01f773aa1da9f649851cb36b923d9b7, type: 2}
-    attackEffect: {fileID: 0}
+    attackEffect: {fileID: 8549444337655066593, guid: afd28ace7832acf44baffb2dec58157e, type: 3}
     unitName: "\u738B\u56FD\u9A0E\u58EB"
     jobType: 0
     targetType: 0

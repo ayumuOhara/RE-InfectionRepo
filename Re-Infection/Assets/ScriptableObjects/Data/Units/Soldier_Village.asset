@@ -17,7 +17,7 @@ MonoBehaviour:
     unitSprite: {fileID: 3613407544420638092, guid: 7f5ae49a99a833940abc9ef28f2f9f56, type: 3}
     outline: {fileID: 2100000, guid: 59ece935cc5abff428c47bd3439e0419, type: 2}
     attackEffect: {fileID: 0}
-    unitName: "\u6751\u306E\u5263\u58EB"
+    unitName: "\u5263\u58EB"
     jobType: 0
     targetType: 0
     maxHp: 100

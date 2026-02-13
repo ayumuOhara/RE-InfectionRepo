@@ -25,7 +25,7 @@ public class WaveData : ScriptableObject
             p.GetComponent<Animator>().SetTrigger("Close");
             tutorial = false;
 
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(1);
             Destroy(p.gameObject);
         }
 
