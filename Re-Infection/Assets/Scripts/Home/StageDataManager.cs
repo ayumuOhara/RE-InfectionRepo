@@ -1,6 +1,7 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Collections;
+using static UnityEngine.Rendering.DebugUI;
 
 public class StageDataManager : MonoBehaviour
 {
@@ -45,6 +46,8 @@ public class StageDataManager : MonoBehaviour
 
     IEnumerator SceneStart()
     {
+        StartCoroutine(StartPanel());
+
         for (int i = 0; i < stage.Length; i++)
         {
             stageData.isStageClear[i] = stage[i].isClear;
@@ -56,7 +59,7 @@ public class StageDataManager : MonoBehaviour
             }
         }
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
 
         //ステージのクリア情報を確認
         for (int i = 0; i < stage.Length; i++)
@@ -68,5 +71,13 @@ public class StageDataManager : MonoBehaviour
                 stageData.isStageOpen[i] = true;
             }
         }
+    }
+
+    //ステージクリアの処理が終わるまで表示する
+    private IEnumerator StartPanel()
+    {
+        battleCanvas.responsePanel.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        battleCanvas.responsePanel.SetActive(false);
     }
 }
