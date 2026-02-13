@@ -127,6 +127,7 @@ public class BattleCanvas : MonoBehaviour
     public void OnSortie()
     {
         stageData.SelectStageNumber = stageNumber;
+        SEManager.Instance.PlaySE(SEManager.SEType.Lord);
         SceneTransitionner transitonner = Instantiate(transitionUIprefab).GetComponent<SceneTransitionner>();
         transitonner.OnLoadScene("MainScene");
     }
