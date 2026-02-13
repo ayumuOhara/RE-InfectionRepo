@@ -46,67 +46,45 @@ public class DropArea : MonoBehaviour, IDropHandler
 
     public void OnDrop(PointerEventData eventData)
     {
-        GameObject dropped = eventData.pointerDrag;
-        DragIconController fromList = dropped.GetComponent<DragIconController>();
-        DropAreaIconDrag fromDropArea = eventData.pointerDrag?.GetComponent<DropAreaIconDrag>();
-
         if (eventData.pointerDrag == null) return;
 
-       
+        GameObject dropped = eventData.pointerDrag;
+        DragIconController fromList = dropped.GetComponent<DragIconController>();
+        DropAreaIconDrag fromDropArea = dropped.GetComponent<DropAreaIconDrag>();
 
-        // ▼ selectedUnits を slotIndex まで拡張（どのケースでも必ず必要）
+        // selectedUnits サイズ保証
         while (UnitDataCarrier.Instance.selectedUnits.Count <= slotIndex)
-        {
             UnitDataCarrier.Instance.selectedUnits.Add(null);
-        }
 
-        // DragIconController → DropArea のときだけ重複チェック
+        // ▼ DragIconController → DropArea（リストからの新規 or 上書き）
         if (fromList != null)
         {
-            UnitStatsData incoming = fromList.unitStats;
-
-            // 他の DropArea に同じユニットが入っていたら拒否
-            foreach (var da in FindObjectsOfType<DropArea>())
+            // 古い Clone があるなら解除
+            if (dropTargetParent.childCount > 0)
             {
-                if (da != this && da.currentUnitStats == incoming)
-                {
-                    return; // 重複禁止
-                }
-            }
-        }
+                var oldClone = dropTargetParent.GetChild(0);
+                var oldDrag = oldClone.GetComponent<DropAreaIconDrag>();
 
-
-        if (dropTargetParent.childCount > 0)
-        {
-            foreach (var icon in FindObjectsOfType<DragIconController>())
-            {
-                if (icon.unitStats == currentUnitStats)
+                if (oldDrag != null)
                 {
-                    icon.isUsedInDropArea = false;
-                    icon.SetDraggable(true);   // ★ これがないと一生動かない
-                    icon.CheckObj(false);
+                    foreach (var icon in FindObjectsOfType<DragIconController>())
+                    {
+                        if (icon.unitStats == oldDrag.unitStats)
+                        {
+                            icon.isUsedInDropArea = false;
+                            icon.SetDraggable(true);
+                            icon.CheckObj(false);
+                        }
+                    }
                 }
+
+                Destroy(oldClone.gameObject);
             }
 
-            Destroy(dropTargetParent.GetChild(0).gameObject);
-            currentUnitStats = null;
-            UnitDataCarrier.Instance.selectedUnits[slotIndex] = null;
-        }
-
-
-        //  DragIconController → DropArea（新規登録）
-        if (fromList != null)
-        {
+            // 新しいユニット登録
             currentUnitStats = fromList.unitStats;
-
             fromList.isUsedInDropArea = true;
             fromList.SetDraggable(false);
-
-
-            while (UnitDataCarrier.Instance.selectedUnits.Count <= slotIndex)
-                UnitDataCarrier.Instance.selectedUnits.Add(null);
-
-         
 
             UnitDataCarrier.Instance.selectedUnits[slotIndex] = currentUnitStats;
 
@@ -115,13 +93,12 @@ public class DropArea : MonoBehaviour, IDropHandler
             return;
         }
 
-     
-        //  DropAreaIconDrag → DropArea（Clone を新しく作らず移動）
-
+        // ▼ DropAreaIconDrag → DropArea（Clone の移動）※1回だけ
         if (fromDropArea != null)
         {
-            // 元の DropArea のデータを消す
             DropArea oldArea = fromDropArea.originalDropArea;
+
+            // 元の DropArea のデータを消す
             if (oldArea != null && oldArea != this)
             {
                 oldArea.currentUnitStats = null;
@@ -136,18 +113,13 @@ public class DropArea : MonoBehaviour, IDropHandler
             currentUnitStats = fromDropArea.unitStats;
             UnitDataCarrier.Instance.selectedUnits[slotIndex] = currentUnitStats;
 
-           
             fromDropArea.originalDropArea = this;
-
-            // 移動成功
             fromDropArea.droppedSuccessfully = true;
             fromDropArea.slotIndex = slotIndex;
 
             UpdateAllCheckImage();
             return;
         }
-
-
     }
 
     private void CreateClone(GameObject original)
@@ -155,19 +127,19 @@ public class DropArea : MonoBehaviour, IDropHandler
         GameObject clone = Instantiate(original, dropTargetParent);
         RectTransform rt = clone.GetComponent<RectTransform>();
 
-        // Clone の初期位置
         rt.anchoredPosition = new Vector2(53f, -49f);
 
-        
         // DragIconController を削除
         Destroy(clone.GetComponent<DragIconController>());
         foreach (var comp in clone.GetComponentsInChildren<DragIconController>())
             Destroy(comp);
 
-        // ★ CanvasGroup を必ず付ける（これが無いとドラッグできない）
+        // ★ CanvasGroup を必ず付ける
         CanvasGroup cg = clone.GetComponent<CanvasGroup>();
         if (cg == null) cg = clone.AddComponent<CanvasGroup>();
-        cg.blocksRaycasts = true;   // ← DropAreaIconDrag が OnBeginDrag で false にする
+
+        // ★ ここを false にすることで、DropArea に Raycast を通す
+        cg.blocksRaycasts = false;
         cg.interactable = true;
         cg.alpha = 1f;
 
@@ -177,20 +149,13 @@ public class DropArea : MonoBehaviour, IDropHandler
         dragScript.unitStats = currentUnitStats;
         dragScript.SetOriginalPos();
 
-        // ★ Clone の CheckImage を非表示にする
+        // Clone の CheckImage を非表示
         var checkImages = clone.GetComponentsInChildren<Image>(true);
-        bool found = false;
-
         foreach (var img in checkImages)
         {
             if (img.gameObject.name == "CheckImage")
-            {
                 img.enabled = false;
-                found = true;
-                  }
         }
-
-       
     }
 
     public static bool IsUnitInAnyDropArea(UnitStatsData target)
@@ -286,7 +251,7 @@ public class DropArea : MonoBehaviour, IDropHandler
         // CanvasGroup を付ける
         CanvasGroup cg = clone.GetComponent<CanvasGroup>();
         if (cg == null) cg = clone.AddComponent<CanvasGroup>();
-        cg.blocksRaycasts = true;
+        cg.blocksRaycasts = false;
         cg.interactable = true;
         cg.alpha = 1f;
 
