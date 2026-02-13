@@ -41,7 +41,12 @@ namespace VirusPointer
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            if (!waveSpawner.IsStartWave || Time.timeScale == 0) return;
+            if (!waveSpawner.IsStartWave || Time.timeScale == 0)
+            {
+                dragObj.SetActive(false);
+                dragEndTcs?.TrySetResult(eventData);
+                return;
+            }
 
             dragEndTcs = new TaskCompletionSource<PointerEventData>();
 
@@ -58,7 +63,12 @@ namespace VirusPointer
 
         public void OnDrag(PointerEventData eventData)
         {
-            if (!waveSpawner.IsStartWave || Time.timeScale == 0) return;
+            if (!waveSpawner.IsStartWave || Time.timeScale == 0)
+            {
+                dragObj.SetActive(false);
+                dragEndTcs?.TrySetResult(eventData);
+                return;
+            }
 
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePos.z = 0;
@@ -70,7 +80,12 @@ namespace VirusPointer
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            if (!waveSpawner.IsStartWave || Time.timeScale == 0) return;
+            if (!waveSpawner.IsStartWave || Time.timeScale == 0)
+            {
+                dragObj.SetActive(false);
+                dragEndTcs?.TrySetResult(eventData);
+                return;
+            }
 
             dragEndTcs?.TrySetResult(eventData);
 

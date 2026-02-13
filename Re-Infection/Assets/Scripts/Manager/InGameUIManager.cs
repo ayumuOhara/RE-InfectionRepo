@@ -71,6 +71,9 @@ public class InGameUIManager : MonoBehaviour
     // 全UI非表示
     public void InvisibleAllUI()
     {
+        combatUI.enabled = false;
+        timeUI.enabled = false;
+        tutorialUI.enabled = false;
         masterUI.gameObject.SetActive(false);
     }
 
