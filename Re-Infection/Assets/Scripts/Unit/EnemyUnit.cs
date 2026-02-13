@@ -62,6 +62,7 @@ public class EnemyUnit : UnitBase, Iinfection
         {
             if (!IsInfectioning)
             {
+                //spriteRenderer.material = defaultMaterial;
                 var unitManager = FindObjectOfType<UnitManager>();
                 if (!isClone)
                 {
@@ -118,6 +119,7 @@ public class EnemyUnit : UnitBase, Iinfection
         FindObjectOfType<UnitManager>().AddUnitList(this, IsInfectioning);
 
         GetComponent<SpriteRenderer>().sprite = Stats.unitSprite;
+        //spriteRenderer.material = Stats.outline;
         animator.enabled = true;
     }
 }

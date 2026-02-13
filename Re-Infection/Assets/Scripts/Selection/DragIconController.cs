@@ -78,7 +78,7 @@ public class DragIconController : MonoBehaviour,
     public void SetDraggable(bool canDrag)
     {
         canvasGroup.blocksRaycasts = canDrag;
-        unitIcon.raycastTarget = canDrag;
+        unitIcon.raycastTarget = true;
     }
 
     public void OnBeginDrag(PointerEventData eventData)

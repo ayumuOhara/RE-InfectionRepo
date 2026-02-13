@@ -13050,14 +13050,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1011840229}
     m_Modifications:
-    - target: {fileID: 871945039257164439, guid: 95d2408ff4febfe4d9a617269ecd28f6, type: 3}
-      propertyPath: unitData
-      value: 
-      objectReference: {fileID: 11400000, guid: e6d3327307b2d5c4c9367da09a7e2d3b, type: 2}
-    - target: {fileID: 871945039257164439, guid: 95d2408ff4febfe4d9a617269ecd28f6, type: 3}
-      propertyPath: slotIndex
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4552608072019839227, guid: 95d2408ff4febfe4d9a617269ecd28f6, type: 3}
       propertyPath: m_Name
       value: UnitIcon
@@ -20686,6 +20678,7 @@ MonoBehaviour:
   rewardUI: {fileID: 439737721}
   retireUI: {fileID: 814334189}
   returnHomeUI: {fileID: 1081658505}
+  tutorialUI: {fileID: 1666377851}
   currentWaveText: {fileID: 1193414587}
   currentEnemyCntText: {fileID: 2142550856}
   currentWaveProgress: {fileID: 2052936059}
@@ -27197,7 +27190,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 7609811419394783740, guid: 12c7ee7a153b80e459933263e2a26be6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 12c7ee7a153b80e459933263e2a26be6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
