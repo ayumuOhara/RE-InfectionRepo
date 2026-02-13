@@ -64,20 +64,13 @@ public class InGameUIManager : MonoBehaviour
     // 全UI表示
     public void VisibleAllUI()
     {
-        masterUI.enabled = true;
+        masterUI.gameObject.SetActive(true);
     }
 
     // 全UI非表示
     public void InvisibleAllUI()
     {
-        masterUI.enabled = false;
-        timeUI.enabled = false;
-    }
-
-    // 戦闘UIを非表示
-    public void InvisibleCombatUI()
-    {
-        combatUI.enabled = false;
+        masterUI.gameObject.SetActive(false);
     }
 
     // ステージクリア処理
@@ -93,6 +86,7 @@ public class InGameUIManager : MonoBehaviour
 
         resultUI.enabled = true;
         clearUI.enabled = true;
+        failedUI.enabled = false;
 
         seManager.PlaySE(SEManager.SEType.StageClear);
 
@@ -111,6 +105,7 @@ public class InGameUIManager : MonoBehaviour
         audio.StopBGM();
 
         resultUI.enabled = true;
+        clearUI.enabled = false;
         failedUI.enabled = true;
 
         seManager.PlaySE(SEManager.SEType.StageFailed);

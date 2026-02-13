@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class BattleCanvas : MonoBehaviour
 {
+    [SerializeField] private Canvas transitionUIprefab;
+
     public StageDataManager stageDataManager;
     public ScrollChecker scrollChecker;
     public StageData stageData;
@@ -124,9 +126,10 @@ public class BattleCanvas : MonoBehaviour
     //出撃ボタンを押したときの処理
     public void OnSortie()
     {
-
         stageData.SelectStageNumber = stageNumber;
-        SceneManager.LoadScene("MainScene");
+        SEManager.Instance.PlaySE(SEManager.SEType.Lord);
+        SceneTransitionner transitonner = Instantiate(transitionUIprefab).GetComponent<SceneTransitionner>();
+        transitonner.OnLoadScene("MainScene");
     }
 
     //クリア済みステージの処理

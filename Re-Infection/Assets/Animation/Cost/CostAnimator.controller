@@ -37,7 +37,7 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 475282259330840266}
-    m_Position: {x: 350, y: 60, z: 0}
+    m_Position: {x: 350, y: 70, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6857462330128153971}
     m_Position: {x: 349, y: 170, z: 0}
@@ -138,7 +138,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: CostIconBackGround
+  m_Name: CostAnimator
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Generate
@@ -173,7 +173,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: CostGenerateAnim
+  m_Name: GenerateCost
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -186,7 +186,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 8638aba0d907d0a49ae847875a34eb63, type: 2}
+  m_Motion: {fileID: 7400000, guid: d94d844226e87ba4880ff12c92c3389d, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

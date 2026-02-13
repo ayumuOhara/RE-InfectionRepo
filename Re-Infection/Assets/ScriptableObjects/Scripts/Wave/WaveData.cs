@@ -2,16 +2,30 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using System.Collections;
+using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "Wave", menuName = "Scriptable Objects/Wave")]
 public class WaveData : ScriptableObject
 {
     public WaveLevel[] waveLevels;   // ウェーブでスポーンさせるレベルのリスト
     public bool bossWave;            // ボスウェーブか
+    public bool tutorial;            // チュートリアルをするか
+    public GameObject tutorialPrefab;// 表示するチュートリアルUI
 
     // レベル生成コルーチン
     public IEnumerator SpawnLevels()
     {
+        if (tutorial)
+        {
+            Canvas parent = GameObject.Find("TutorialUI").GetComponent<Canvas>();
+            var p = Instantiate(tutorialPrefab, parent.transform, parent).GetComponent<RectTransform>();
+            p.localPosition = new Vector2(0, 200);
+
+            yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
+            p.GetComponent<Animator>().SetTrigger("Close");
+            tutorial = false;
+        }
+
         // ウェーブ内の全てのレベルを生成するまでループ
         for (int level = 0; level < waveLevels.Length; level++)
         {
@@ -26,7 +40,6 @@ public class WaveData : ScriptableObject
 
         yield break;
     }
-
 
     private List<UnitStats> spawnUnitsList;
     // スポーンするユニットの種類
