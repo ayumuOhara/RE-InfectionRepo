@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UnitStats
   unitStats:
     animatorController: {fileID: 0}
-    unitSprite: {fileID: 21300112, guid: f5f1c19ce87450f4b97f8b363746558d, type: 3}
+    unitSprite: {fileID: 21300016, guid: b08e570699f1c8a4f9cc388204aef3bc, type: 3}
     outline: {fileID: 2100000, guid: a01f773aa1da9f649851cb36b923d9b7, type: 2}
-    attackEffect: {fileID: 0}
-    unitName: "\u738B\u56FD\u9A0E\u58EB"
+    attackEffect: {fileID: 3713537085768187261, guid: ffe8e55bd5ab9a94494f263bd34e8d5f, type: 3}
+    unitName: "\u68EE\u306E\u738B"
     jobType: 0
     targetType: 0
     maxHp: 10000
