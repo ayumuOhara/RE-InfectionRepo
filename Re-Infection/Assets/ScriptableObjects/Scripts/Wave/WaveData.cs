@@ -24,6 +24,9 @@ public class WaveData : ScriptableObject
             yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
             p.GetComponent<Animator>().SetTrigger("Close");
             tutorial = false;
+
+            yield return new WaitForSeconds(1);
+            Destroy(p.gameObject);
         }
 
         // ウェーブ内の全てのレベルを生成するまでループ
