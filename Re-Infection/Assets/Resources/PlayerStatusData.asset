@@ -19,15 +19,13 @@ MonoBehaviour:
     healths: 640000002c010000f4010000e8030000
   cannonDamageUpgrade:
     upgradeMoney: 64000000e8030000b80b0000
-    damages: 1027000028000000460000005a00000064000000
+    damages: 28000000460000005a00000064000000
   cannonCoolTimeUpgrade:
     upgradeMoney: 64000000e8030000b80b0000
     coolTime:
-    - 0
     - 220
     - 180
     - 150
-    - 120
     - 120
   costLimitUpgrade:
     upgradeMoney: 64000000e8030000b80b0000

@@ -242,15 +242,15 @@ public class ShopManager : MonoBehaviour
 
         if (playerStatusData.cannonDamageUpgrade.lv == 0)
         {
-            Detalise_text.text = "威力：40　　→　　50";
+            Detalise_text.text = "威力：40　　→　　70";
         }
         else if (playerStatusData.cannonDamageUpgrade.lv == 1)
         {
-            Detalise_text.text = "威力：50　　→　　80";
+            Detalise_text.text = "威力：70　　→　　90";
         }
         else if (playerStatusData.cannonDamageUpgrade.lv == 2)
         {
-            Detalise_text.text = "威力：80　　→　　100";
+            Detalise_text.text = "威力：90　　→　　100";
         }
         else
         {
@@ -274,15 +274,15 @@ public class ShopManager : MonoBehaviour
 
         if (playerStatusData.cannonCoolTimeUpgrade.lv == 0)
         {
-            Detalise_text.text = "クールタイム：";
+            Detalise_text.text = "クールタイム：220　　→　　180";
         }
         else if (playerStatusData.cannonCoolTimeUpgrade.lv == 1)
         {
-            Detalise_text.text = "クールタイム：";
+            Detalise_text.text = "クールタイム：180　　→　　150";
         }
         else if (playerStatusData.cannonCoolTimeUpgrade.lv == 2)
         {
-            Detalise_text.text = "クールタイム：";
+            Detalise_text.text = "クールタイム：150　　→　　120";
         }
         else
         {
@@ -338,15 +338,15 @@ public class ShopManager : MonoBehaviour
 
         if (playerStatusData.costGenerationSpeedUpgrade.lv == 0)
         {
-            Detalise_text.text = "生成速度：1.6　　→　　1.4";
+            Detalise_text.text = "生成速度：1.6　　→　　1.5";
         }
         else if (playerStatusData.costGenerationSpeedUpgrade.lv == 1)
         {
-            Detalise_text.text = "生成速度：1.4　　→　　1.3";
+            Detalise_text.text = "生成速度：1.5　　→　　1.4";
         }
         else if (playerStatusData.costGenerationSpeedUpgrade.lv == 2)
         {
-            Detalise_text.text = "生成速度：1.3　　→　　1.2";
+            Detalise_text.text = "生成速度：1.4　　→　　1.2";
         }
         else
         {
@@ -370,18 +370,18 @@ public class ShopManager : MonoBehaviour
 
         if (playerStatusData.virusUpgrade.lv == 0)
         {
-            Detalise_text.text = "感染者HP：0.5　　→　　0.6\n" +
-                "感染速度：10　　→　　8";
+            Detalise_text.text = "感染者HP：0.3　　→　　0.5\n" +
+                "感染速度：15　　→　　10";
         }
         else if (playerStatusData.virusUpgrade.lv == 1)
         {
-            Detalise_text.text = "感染者HP：0.6　　→　　0.7\n" +
-                "感染速度：8　　→　　6.5";
+            Detalise_text.text = "感染者HP：0.5　　→　　0.6\n" +
+                "感染速度：10　　→　　7";
         }
         else if (playerStatusData.virusUpgrade.lv == 2)
         {
-            Detalise_text.text = "感染者HP：0.7　　→　　0.8\n" +
-                "感染速度：6.5　　→　　5";
+            Detalise_text.text = "感染者HP：0.6　　→　　0.8\n" +
+                "感染速度：7　　→　　5";
         }
         else
         {
