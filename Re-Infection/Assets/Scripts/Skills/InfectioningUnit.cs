@@ -42,14 +42,12 @@ public class InfectioningUnit : MonoBehaviour
 
         var targetUnits = Physics2D.OverlapCircleAll(transform.position, infectionRange, skillTargetLayer);
 
-        if (targetUnits.Length <= 0 || targetUnits == null)
-        {
-            gameObject.SetActive(false);
-        }
-        else
+        if (targetUnits.Length >= 0 || targetUnits != null)
         {
             AllTargetInfection(targetUnits);
         }
+
+        gameObject.SetActive(false);
     }
 
     private void Update()
