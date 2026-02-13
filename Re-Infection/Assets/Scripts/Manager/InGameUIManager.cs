@@ -21,6 +21,7 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] Canvas rewardUI;
     [SerializeField] Canvas retireUI;
     [SerializeField] Canvas returnHomeUI;
+    [SerializeField] Canvas tutorialUI;
 
     [SerializeField] TextMeshProUGUI currentWaveText;
     [SerializeField] TextMeshProUGUI currentEnemyCntText;
@@ -76,6 +77,7 @@ public class InGameUIManager : MonoBehaviour
     // ステージクリア処理
     public IEnumerator SessionClear()
     {
+        tutorialUI.enabled = false;
         timeUI.enabled = false;
         combatUI.enabled = false;
 
@@ -98,6 +100,7 @@ public class InGameUIManager : MonoBehaviour
     // ステージ失敗処理
     public IEnumerator SessionFailed()
     {
+        tutorialUI.enabled = false;
         timeUI.enabled = false;
         combatUI.enabled = false;
 
