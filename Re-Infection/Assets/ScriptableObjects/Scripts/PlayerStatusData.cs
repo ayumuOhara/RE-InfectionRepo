@@ -33,6 +33,11 @@ public class CastleUpgrade : BaseUpgrade
     // Lvごとの体力設定
     private int[] healths;
 
+    public int GetHealth(int level)
+    {
+        return healths[level];
+    }
+
     // 現在のレベルに応じた値を返す
     public int Health => healths[lv];
 }
@@ -45,6 +50,11 @@ public class CannonDamageUpgrade : BaseUpgrade
     // Lvごとの体力設定
     private int[] damages;
 
+    public int GetDamage(int level)
+    {
+        return damages[level];
+    }
+
     // 現在のレベルに応じた値を返す
     public int Damage => damages[lv];
 }
@@ -55,7 +65,10 @@ public class CannonCoolTimeUpgrade : BaseUpgrade
     [Header("各Lv(0~)のアップグレード内容")]
     [SerializeField]
     private float[] coolTime;
-
+    public int GetCoolTime(int level)
+    {
+        return (int)coolTime[level];
+    }
     public int CoolTime => (int)coolTime[lv];
 }
 
@@ -66,6 +79,11 @@ public class CostLimitUpgrade : BaseUpgrade
     [SerializeField]
     // Lvごとの体力設定
     private int[] maxCostCnt;
+
+    public int GetMaxCost(int level)
+    {
+        return maxCostCnt[level];
+    }
 
     // 現在のレベルに応じた値を返す
     public int MaxCost => maxCostCnt[lv];
@@ -79,6 +97,11 @@ public class CostGenerationSpeedUpgrade : BaseUpgrade
     // Lvごとの体力設定
     private float[] generateSpeed;
 
+    public float GetGenerateSpeed(int level)
+    {
+        return generateSpeed[level];
+    }
+
     // 現在のレベルに応じた値を返す
     public float GenerateSpeed => generateSpeed[lv];
 }
@@ -86,25 +109,20 @@ public class CostGenerationSpeedUpgrade : BaseUpgrade
 [System.Serializable]
 public class VirusUpgrade : BaseUpgrade
 {
-    [System.Serializable]
-    public struct VirusContext
-    {
-        [Tooltip("ユニット感染完了時の体力回復の割合")]
-        [Range(0, 1)]
-        [SerializeField]
-        public float reviveHealthRate;
-        [Tooltip("ユニットの感染完了までの時間")]
-        public float infectionTime;
-    }
-
     [Header("各Lv(0~)のアップグレード内容")]
     [Tooltip("感染ウイルスのスタッツ")]
+    [Range(0, 1)]
     [SerializeField]
     // Lvごとの体力設定
-    private VirusContext[] virusStats;
+    private float[] reviveHealthRate;
+
+    public float GetHealthRate(int level)
+    {
+        return reviveHealthRate[level];
+    }
 
     // 現在のレベルに応じた値を返す
-    public VirusContext VirusStats => virusStats[lv];
+    public float ReviveHealthRate => reviveHealthRate[lv];
 }
 
 [CreateAssetMenu(fileName = "PlayerStatusData", menuName = "Scriptable Objects/PlayerStatusData")]

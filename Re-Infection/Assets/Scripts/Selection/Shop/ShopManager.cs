@@ -208,24 +208,8 @@ public class ShopManager : MonoBehaviour
     {
         upgradeType = UpgradeType.Castle;
 
-        if (playerStatusData.castleUpgrade.lv == 0)
-        {
-            Detalise_text.text = "HP：100　　→　　300";
-        }
-        else if (playerStatusData.castleUpgrade.lv == 1)
-        {
-            Detalise_text.text = "HP：300　　→　　500";
-        }
-        else if (playerStatusData.castleUpgrade.lv == 2)
-        {
-            Detalise_text.text = "HP：500　　→　　1000";
-        }
-        else
-        {
-            StartCoroutine(WarningLevelText());
-            return;
-        }
-
+        Detalise_text.text = $"HP : {playerStatusData.castleUpgrade.Health}\n強化後のHP : {playerStatusData.castleUpgrade.GetHealth(playerStatusData.castleUpgrade.lv + 1)}";
+        
         DialogObj.SetActive(true);
         LayCastObj.SetActive(true);
 
@@ -240,23 +224,7 @@ public class ShopManager : MonoBehaviour
     {
         upgradeType = UpgradeType.CannonDamage;
 
-        if (playerStatusData.cannonDamageUpgrade.lv == 0)
-        {
-            Detalise_text.text = "威力：40　　→　　70";
-        }
-        else if (playerStatusData.cannonDamageUpgrade.lv == 1)
-        {
-            Detalise_text.text = "威力：70　　→　　90";
-        }
-        else if (playerStatusData.cannonDamageUpgrade.lv == 2)
-        {
-            Detalise_text.text = "威力：90　　→　　100";
-        }
-        else
-        {
-            StartCoroutine(WarningLevelText());
-            return;
-        }
+        Detalise_text.text = $"ダメージ : {playerStatusData.cannonDamageUpgrade.Damage}\n強化後のダメージ : {playerStatusData.cannonDamageUpgrade.GetDamage(playerStatusData.cannonDamageUpgrade.lv + 1)}";
 
         DialogObj.SetActive(true);
         LayCastObj.SetActive(true);
@@ -272,23 +240,8 @@ public class ShopManager : MonoBehaviour
     {
         upgradeType = UpgradeType.CannonCoolTime;
 
-        if (playerStatusData.cannonCoolTimeUpgrade.lv == 0)
-        {
-            Detalise_text.text = "クールタイム：220　　→　　180";
-        }
-        else if (playerStatusData.cannonCoolTimeUpgrade.lv == 1)
-        {
-            Detalise_text.text = "クールタイム：180　　→　　150";
-        }
-        else if (playerStatusData.cannonCoolTimeUpgrade.lv == 2)
-        {
-            Detalise_text.text = "クールタイム：150　　→　　120";
-        }
-        else
-        {
-            StartCoroutine(WarningLevelText());
-            return;
-        }
+        Detalise_text.text = $"クールタイム : {playerStatusData.cannonCoolTimeUpgrade.CoolTime}\n強化後のクールタイム : {playerStatusData.cannonCoolTimeUpgrade.GetCoolTime(playerStatusData.cannonCoolTimeUpgrade.lv + 1)}";
+
 
         DialogObj.SetActive(true);
         LayCastObj.SetActive(true);
@@ -304,23 +257,7 @@ public class ShopManager : MonoBehaviour
     {
         upgradeType = UpgradeType.CostLimit;
 
-        if (playerStatusData.costLimitUpgrade.lv == 0)
-        {
-            Detalise_text.text = "コスト最大値：30　　→　　40";
-        }
-        else if (playerStatusData.costLimitUpgrade.lv == 1)
-        {
-            Detalise_text.text = "コスト最大値：40　　→　　50";
-        }
-        else if (playerStatusData.costLimitUpgrade.lv == 2)
-        {
-            Detalise_text.text = "コスト最大値：50　　→　　60";
-        }
-        else
-        {
-            StartCoroutine(WarningLevelText());
-            return;
-        }
+        Detalise_text.text = $"最大値 : {playerStatusData.costLimitUpgrade.MaxCost}\n強化後の最大値 : {playerStatusData.costLimitUpgrade.GetMaxCost(playerStatusData.costLimitUpgrade.lv + 1)}";
 
         DialogObj.SetActive(true);
         LayCastObj.SetActive(true);
@@ -336,23 +273,7 @@ public class ShopManager : MonoBehaviour
     {
         upgradeType = UpgradeType.CostGenerationSpeed;
 
-        if (playerStatusData.costGenerationSpeedUpgrade.lv == 0)
-        {
-            Detalise_text.text = "生成速度：1.6　　→　　1.5";
-        }
-        else if (playerStatusData.costGenerationSpeedUpgrade.lv == 1)
-        {
-            Detalise_text.text = "生成速度：1.5　　→　　1.4";
-        }
-        else if (playerStatusData.costGenerationSpeedUpgrade.lv == 2)
-        {
-            Detalise_text.text = "生成速度：1.4　　→　　1.2";
-        }
-        else
-        {
-            StartCoroutine(WarningLevelText());
-            return;
-        }
+        Detalise_text.text = $"生成速度 : {playerStatusData.costGenerationSpeedUpgrade.GenerateSpeed}\n強化後の生成速度 : {playerStatusData.costGenerationSpeedUpgrade.GetGenerateSpeed(playerStatusData.costGenerationSpeedUpgrade.lv + 1)}";
 
         DialogObj.SetActive(true);
         LayCastObj.SetActive(true);
@@ -368,26 +289,7 @@ public class ShopManager : MonoBehaviour
     {
         upgradeType = UpgradeType.Virus;
 
-        if (playerStatusData.virusUpgrade.lv == 0)
-        {
-            Detalise_text.text = "感染者HP：0.3　　→　　0.5\n" +
-                "感染速度：15　　→　　10";
-        }
-        else if (playerStatusData.virusUpgrade.lv == 1)
-        {
-            Detalise_text.text = "感染者HP：0.5　　→　　0.6\n" +
-                "感染速度：10　　→　　7";
-        }
-        else if (playerStatusData.virusUpgrade.lv == 2)
-        {
-            Detalise_text.text = "感染者HP：0.6　　→　　0.8\n" +
-                "感染速度：7　　→　　5";
-        }
-        else
-        {
-            StartCoroutine(WarningLevelText());
-            return;
-        }
+        Detalise_text.text = $"感染時のHP割合 : {playerStatusData.virusUpgrade.ReviveHealthRate * 100}%\n強化後の感染時のHP割合 : {playerStatusData.virusUpgrade.GetHealthRate(playerStatusData.virusUpgrade.lv + 1) * 100}%";
 
         DialogObj.SetActive(true);
         LayCastObj.SetActive(true);

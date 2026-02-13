@@ -84,9 +84,9 @@ public class EnemyUnit : UnitBase, Iinfection
         }
     }
 
-    public void StartInfection(float infectionTime, float healthRate)
+    public void StartInfection(float healthRate)
     {
-        StartCoroutine(Infection(infectionTime, healthRate));
+        StartCoroutine(Infection(10, healthRate));
     }
 
     // ä¥êı

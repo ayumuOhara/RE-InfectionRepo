@@ -33,18 +33,14 @@ MonoBehaviour:
   costGenerationSpeedUpgrade:
     upgradeMoney: 64000000e8030000b80b0000
     generateSpeed:
+    - 1.8
     - 1.6
-    - 1.5
     - 1.4
     - 1.2
   virusUpgrade:
     upgradeMoney: 64000000e8030000b80b0000
-    virusStats:
-    - reviveHealthRate: 0.3
-      infectionTime: 15
-    - reviveHealthRate: 0.5
-      infectionTime: 10
-    - reviveHealthRate: 0.6
-      infectionTime: 7
-    - reviveHealthRate: 0.8
-      infectionTime: 5
+    reviveHealthRate:
+    - 0.3
+    - 0.5
+    - 0.6
+    - 0.8
