@@ -45,24 +45,20 @@ public class DropAreaIconDrag : MonoBehaviour,
 
         if (!droppedSuccessfully)
         {
-            // ★ 元の DropArea のデータを確実にクリア
             if (originalDropArea != null)
             {
+                int oldIndex = originalDropArea.slotIndex;
+
                 originalDropArea.currentUnitStats = null;
-
-                while (UnitDataCarrier.Instance.selectedUnits.Count <= slotIndex)
-                    UnitDataCarrier.Instance.selectedUnits.Add(null);
-
-                UnitDataCarrier.Instance.selectedUnits[slotIndex] = null;
+                UnitDataCarrier.Instance.selectedUnits[oldIndex] = null;
             }
 
-
-            // DragIconController の制限解除
             foreach (var icon in FindObjectsOfType<DragIconController>())
             {
                 if (icon.unitStats == unitStats)
                 {
                     icon.isUsedInDropArea = false;
+                    icon.SetDraggable(true);
                     icon.CheckObj(false);
                 }
             }

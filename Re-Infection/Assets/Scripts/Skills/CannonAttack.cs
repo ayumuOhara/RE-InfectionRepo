@@ -36,10 +36,8 @@ public class CannonAttack : MonoBehaviour
 
     async private void OnEnable()
     {
-        if (!endSkill) return;
-
-        endSkill = false;
         await WaitEndDrag.WaitDragEndAsync();
+        if (!endSkill) return;
         if (unitManager.EnemyCnt <= 0)
         {
             gameObject.SetActive(false);
@@ -48,12 +46,16 @@ public class CannonAttack : MonoBehaviour
 
         var targetUnits = Physics2D.OverlapCircleAll(transform.position, cannonRadius, skillTargetLayer);
 
-        if (targetUnits.Length >= 0 || targetUnits != null)
+        if (targetUnits.Length <= 0 || targetUnits == null)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+        else
         {
             AllTargetDamage(targetUnits);
+            gameObject.SetActive(false);
         }
-
-        gameObject.SetActive(false);
     }
 
     // 取得したターゲットにダメージ
