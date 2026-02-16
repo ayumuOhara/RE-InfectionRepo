@@ -57,13 +57,15 @@ public class DropArea : MonoBehaviour, IDropHandler
         DragIconController fromList = dropped.GetComponent<DragIconController>();
         DropAreaIconDrag fromDropArea = dropped.GetComponent<DropAreaIconDrag>();
 
-        // ▼ 重複チェック（同じユニットなら弾く）
+        //重複チェック（同じユニットなら弾く）
         UnitStatsData incomingStats =
             fromList != null ? fromList.unitStats :
             fromDropArea != null ? fromDropArea.unitStats : null;
 
-        // ▼ 他の DropArea に同じユニットが入っていないかチェック
-        if (incomingStats != null)
+
+
+        //他の DropArea に同じユニットが入っていないかチェック
+        if (incomingStats != null&&fromList!=null)
         {
             // すでにどこかの DropArea に入っている
             if (IsUnitInAnyDropArea(incomingStats))
@@ -118,23 +120,25 @@ public class DropArea : MonoBehaviour, IDropHandler
             return;
         }
 
-        // ▼ DropAreaIconDrag → DropArea（Clone の移動）※1回だけ
+        // ▼ DropAreaIconDrag → DropArea（Clone の移動）
         if (fromDropArea != null)
         {
+
             DropArea oldArea = fromDropArea.originalDropArea;
 
-            // 元の DropArea のデータを消す
             if (oldArea != null && oldArea != this)
             {
                 oldArea.currentUnitStats = null;
                 UnitDataCarrier.Instance.selectedUnits[fromDropArea.slotIndex] = null;
             }
 
-            // Clone を移動
+            if (dropTargetParent.childCount > 0)
+            {
+                Destroy(dropTargetParent.GetChild(0).gameObject);
+            }
             dropped.transform.SetParent(dropTargetParent);
             dropped.GetComponent<RectTransform>().anchoredPosition = new Vector2(53, -49);
 
-            // データ更新
             currentUnitStats = fromDropArea.unitStats;
             UnitDataCarrier.Instance.selectedUnits[slotIndex] = currentUnitStats;
 
@@ -172,6 +176,8 @@ public class DropArea : MonoBehaviour, IDropHandler
         DropAreaIconDrag dragScript = clone.AddComponent<DropAreaIconDrag>();
         dragScript.slotIndex = slotIndex;
         dragScript.unitStats = currentUnitStats;
+
+        dragScript.originalDropArea = this;
         dragScript.SetOriginalPos();
 
         // Clone の CheckImage を非表示
