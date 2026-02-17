@@ -130,8 +130,7 @@ public class DragIconController : MonoBehaviour,
         // ★ Drop が成功していない場合 → Clone を復元
         if (!droppedSuccessfully && removedClone != null && hoveredArea != null)
         {
-            Debug.Log("★ Drop 失敗 → Clone を復元");
-
+           
             Transform parent = hoveredArea.transform.GetChild(0);
             removedClone.transform.SetParent(parent);
             removedClone.SetActive(true);
@@ -186,8 +185,7 @@ public class DragIconController : MonoBehaviour,
         if (area != null && area != hoveredArea)
         {
             hoveredArea = area;
-            Debug.Log($"DragIcon が DropArea[{area.slotIndex}] に侵入");
-
+            
             // Clone を削除して保存
             Transform parent = area.transform.GetChild(0); // dropTargetParent
             if (parent.childCount > 0)
@@ -200,8 +198,7 @@ public class DragIconController : MonoBehaviour,
         // ★ DropArea から出た瞬間（＝範囲外）
         if (area == null && hoveredArea != null)
         {
-            Debug.Log("DropArea 範囲外に出た → Clone を復元");
-
+           
             if (removedClone != null)
             {
                 Transform parent = hoveredArea.transform.GetChild(0);

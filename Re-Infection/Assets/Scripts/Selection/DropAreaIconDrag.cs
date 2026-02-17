@@ -14,6 +14,9 @@ public class DropAreaIconDrag : MonoBehaviour,
 
     public DropArea originalDropArea; // ★ 追加
 
+    private DropArea hoveredArea = null;
+    private GameObject removedClone = null;
+
     private void Start()
     {
         canvasGroup = GetComponent<CanvasGroup>();
