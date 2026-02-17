@@ -46,8 +46,6 @@ public class DropArea : MonoBehaviour, IDropHandler
 
     public void OnDrop(PointerEventData eventData)
     {
-
-
         if (eventData.pointerDrag == null)
         {
             return;
@@ -65,17 +63,12 @@ public class DropArea : MonoBehaviour, IDropHandler
 
 
         //他の DropArea に同じユニットが入っていないかチェック
-        if (incomingStats != null&&fromList!=null)
+        if (incomingStats != null && fromList != null)
         {
-            // すでにどこかの DropArea に入っている
-            if (IsUnitInAnyDropArea(incomingStats))
+            if (IsUnitInAnyDropArea(incomingStats) && currentUnitStats != incomingStats)
             {
-                // ただし、今の DropArea がそのユニットを持っている場合は OK
-                if (currentUnitStats != incomingStats)
-                {
-                    Debug.Log($"【重複禁止】ユニット {incomingStats.name} はすでに編成されています");
-                    return;
-                }
+                Debug.Log($"【重複禁止】ユニット {incomingStats.name} はすでに編成されています");
+                return;
             }
         }
 
@@ -148,6 +141,7 @@ public class DropArea : MonoBehaviour, IDropHandler
 
             UpdateAllCheckImage();
             return;
+
         }
     }
 
@@ -163,11 +157,11 @@ public class DropArea : MonoBehaviour, IDropHandler
         foreach (var comp in clone.GetComponentsInChildren<DragIconController>())
             Destroy(comp);
 
-        // ★ CanvasGroup を必ず付ける
+        //CanvasGroup を必ず付ける
         CanvasGroup cg = clone.GetComponent<CanvasGroup>();
         if (cg == null) cg = clone.AddComponent<CanvasGroup>();
 
-        // ★ ここを false にすることで、DropArea に Raycast を通す
+        //ここを false にすることで、DropArea に Raycast を通す
         cg.blocksRaycasts = false;
         cg.interactable = true;
         cg.alpha = 1f;
@@ -313,4 +307,5 @@ public class DropArea : MonoBehaviour, IDropHandler
             }
         }
     }
+
 }
