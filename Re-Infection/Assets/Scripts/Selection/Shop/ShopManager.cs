@@ -148,6 +148,13 @@ public class ShopManager : MonoBehaviour
             default:
                 break;
         }
+
+        SetUpgradeTextAndButton(playerStatusData.castleUpgrade);
+        SetUpgradeTextAndButton(playerStatusData.cannonDamageUpgrade);
+        SetUpgradeTextAndButton(playerStatusData.cannonCoolTimeUpgrade);
+        SetUpgradeTextAndButton(playerStatusData.costLimitUpgrade);
+        SetUpgradeTextAndButton(playerStatusData.costGenerationSpeedUpgrade);
+        SetUpgradeTextAndButton(playerStatusData.virusUpgrade);
     }
 
     // 指定の強化内容のLvと必要なお金の表示切替
