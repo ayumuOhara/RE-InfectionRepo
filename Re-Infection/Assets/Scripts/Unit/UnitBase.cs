@@ -57,17 +57,18 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
     
     private SEManager seManager;
 
-    public void Initialize(UnitStats stats, bool isClone = false)
+    public virtual void Initialize(UnitStats stats, bool isClone = false)
     {
         this.isClone = isClone;
         animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
         if (stats.animatorController != null)
         animator.runtimeAnimatorController = (RuntimeAnimatorController)stats.animatorController;
 
         this.stats = new UnitStats()
         {
             unitSprite = stats.unitSprite,
-            outline = stats.outline,
             attackEffect = stats.attackEffect,
             unitName = stats.unitName,
             jobType = stats.jobType,
@@ -87,9 +88,7 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
         movementBase = stats.MovementBase;
         attackBase = stats.AttackBase;
 
-        spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = this.stats.unitSprite;
-        //spriteRenderer.material = this.stats.outline;
 
         if (!isClone)
         {
@@ -97,7 +96,7 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
         }
         else
         {
-            //spriteRenderer.material = defaultMaterial;
+            spriteRenderer.material = defaultMaterial;
             currentHealth = 0;
         }
     }

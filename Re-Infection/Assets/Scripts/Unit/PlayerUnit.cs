@@ -3,6 +3,13 @@ using UnityEngine;
 
 public class PlayerUnit : UnitBase
 {
+    public override void Initialize(UnitStats stats, bool isClone = false)
+    {
+        base.Initialize(stats, isClone);
+
+        spriteRenderer.material = Stats.GetOutline("PlayerUnitOutline");
+    }
+
     private void Awake()
     {
         SetStateManager(new UnitStateManager(this, new PlayerUnitDecider(this)));
