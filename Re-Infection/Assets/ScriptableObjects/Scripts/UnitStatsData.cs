@@ -1,3 +1,4 @@
+using System.Text;
 using UnityEngine;
 
 public class Types
@@ -43,8 +44,6 @@ public class UnitStats
     public RuntimeAnimatorController animatorController;           // ユニットのアニメーター
     [Header("スプライト")]
     public Sprite unitSprite;           // ユニットのスプライト
-    [Header("アウトラインマテリアル")]
-    public Material outline;
     [Header("攻撃エフェクト")]
     public GameObject attackEffect;     // ユニット攻撃時のエフェクト
     [Header("名前")]
@@ -92,6 +91,29 @@ public class UnitStats
     public bool bossUnit;               // ボスか
     [Header("攻撃時のSE")]
     public AudioClip attackSe;          // 攻撃音
+
+    public Material GetOutline(string targetOutline)
+    {
+        switch (unitName)
+        {
+            case "弓使い":
+                return Resources.Load<Material>($"Materials/{targetOutline}/Archer");
+            case "鈍器使い":
+                return Resources.Load<Material>($"Materials/{targetOutline}/Warrior");
+            case "大弓使い":
+                return Resources.Load<Material>($"Materials/{targetOutline}/Bow");
+            case "上級魔法使い":
+                return Resources.Load<Material>($"Materials/{targetOutline}/Witch");
+            case "剣士":
+                return Resources.Load<Material>($"Materials/{targetOutline}/Swordsman");
+            case "盾兵":
+                return Resources.Load<Material>($"Materials/{targetOutline}/Tank");
+            case "魔法使い":
+                return Resources.Load<Material>($"Materials/{targetOutline}/Clergyman");
+            default:
+                return null;
+        }
+    }
 
     public Sprite JobSprite
     {

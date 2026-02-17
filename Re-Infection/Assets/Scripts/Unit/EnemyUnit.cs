@@ -13,6 +13,13 @@ public class EnemyUnit : UnitBase, Iinfection
 
     public bool IsInfectioning { get; set; } = false;
 
+    public override void Initialize(UnitStats stats, bool isClone = false)
+    {
+        base.Initialize(stats, isClone);
+
+        spriteRenderer.material = Stats.GetOutline("EnemyUnitOutline");
+    }
+
     private void Awake()
     {
         waveSpawner = FindObjectOfType<WaveSpawner>();
@@ -62,7 +69,8 @@ public class EnemyUnit : UnitBase, Iinfection
         {
             if (!IsInfectioning)
             {
-                //spriteRenderer.material = defaultMaterial;
+                spriteRenderer.material = defaultMaterial;
+
                 var unitManager = FindObjectOfType<UnitManager>();
                 if (!isClone)
                 {
@@ -119,7 +127,9 @@ public class EnemyUnit : UnitBase, Iinfection
         FindObjectOfType<UnitManager>().AddUnitList(this, IsInfectioning);
 
         GetComponent<SpriteRenderer>().sprite = Stats.unitSprite;
-        //spriteRenderer.material = Stats.outline;
+
+        spriteRenderer.material = Stats.GetOutline("PlayerUnitOutline");
+        
         animator.enabled = true;
     }
 }
