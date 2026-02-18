@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using TMPro;
 using Unity.VisualScripting;
@@ -23,14 +24,31 @@ public class CostManager : MonoBehaviour
 
     public int currentCost { get; private set; } = 0;
 
+    public static Action<int> onAddCost;
+    public static Action<int> onRemoveCost;
+
+    public void OnDisable()
+    {
+        onAddCost -= AddCost;
+        onRemoveCost -= RemoveCost;
+    }
+
+    private void Awake()
+    {
+        onAddCost += AddCost;
+        onRemoveCost += RemoveCost;
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         playerStatusData = Resources.Load<PlayerStatusData>("PlayerStatusData");
 
-        AddCost(startCost);
+        onAddCost?.Invoke(startCost);
+
         waveSpawner = FindObjectOfType<WaveSpawner>();
         gameUIManager = FindObjectOfType<InGameUIManager>();
+
         StartCoroutine(GenerateCost());
     }
 
@@ -53,7 +71,7 @@ public class CostManager : MonoBehaviour
             {
                 costAnimator.SetTrigger("Generate");
                 timer = 0f;
-                AddCost(1);
+                onAddCost?.Invoke(1);
             }
 
             yield return new WaitUntil(() => waveSpawner.IsStartWave);
@@ -61,7 +79,7 @@ public class CostManager : MonoBehaviour
     }
 
     // コスト追加
-    public void AddCost(int value)
+    private void AddCost(int value)
     {
         currentCost += value;
         if (currentCost >= maxCost)
@@ -72,7 +90,7 @@ public class CostManager : MonoBehaviour
     }
 
     // コスト減少
-    public void RemoveCost(int value)
+    private void RemoveCost(int value)
     {
         costAnimator.SetTrigger("Used");
         currentCost -= value;

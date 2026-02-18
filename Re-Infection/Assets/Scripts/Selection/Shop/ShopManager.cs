@@ -211,101 +211,69 @@ public class ShopManager : MonoBehaviour
         LayCastObj.SetActive(false);
     }
 
-    public void CastleSkillEnhancement()
+    // TはBaseUpgradeを継承している必要がある
+    private void SetDialogText<T>(T upgrade, string message, string unitName) where T : BaseUpgrade
     {
-        upgradeType = UpgradeType.Castle;
-
-        Detalise_text.text = $"HP : {playerStatusData.castleUpgrade.Health}\n強化後のHP : {playerStatusData.castleUpgrade.GetHealth(playerStatusData.castleUpgrade.lv + 1)}";
-        
         DialogObj.SetActive(true);
         LayCastObj.SetActive(true);
 
-        DialogLevel_text1.text = ($"{playerStatusData.castleUpgrade.lv}");
-        DialogLevel_text2.text = ($"{playerStatusData.castleUpgrade.lv + 1}");
-        DialogMoney_text.text = ($"{playerStatusData.castleUpgrade.UpgradeMoney}");
-        DialogMessege.text = "";
-        DialogMessege.text = "城のHPを強化しますか？";
+        // 基本情報の設定
+        DialogLevel_text1.text = upgrade.lv.ToString();
+        DialogLevel_text2.text = (upgrade.lv + 1).ToString();
+        DialogMoney_text.text = upgrade.UpgradeMoney.ToString();
+        DialogMessege.text = message;
+
+        // 詳細テキストの構築
+        object currentValue = upgrade.GetLevelofUpgrade(upgrade.lv);
+        object nextValue = upgrade.GetLevelofUpgrade(upgrade.lv + 1);
+
+        // 感染(Virus)などの割合表示への対応（必要に応じて）
+        if (upgrade is VirusUpgrade)
+        {
+            float cur = (float)currentValue * 100;
+            float nxt = (float)nextValue * 100;
+            Detalise_text.text = $"{unitName} : {cur}%\n強化後の{unitName} : {nxt}%";
+        }
+        else
+        {
+            Detalise_text.text = $"{unitName} : {currentValue}\n強化後の{unitName} : {nextValue}";
+        }
+    }
+
+    public void CastleSkillEnhancement()
+    {
+        upgradeType = UpgradeType.Castle;
+        SetDialogText(playerStatusData.castleUpgrade, "城のHPを強化しますか？", "HP");
     }
 
     public void CannonDamageSkillEnhancement()
     {
         upgradeType = UpgradeType.CannonDamage;
-
-        Detalise_text.text = $"ダメージ : {playerStatusData.cannonDamageUpgrade.Damage}\n強化後のダメージ : {playerStatusData.cannonDamageUpgrade.GetDamage(playerStatusData.cannonDamageUpgrade.lv + 1)}";
-
-        DialogObj.SetActive(true);
-        LayCastObj.SetActive(true);
-
-        DialogLevel_text1.text = ($"{playerStatusData.cannonDamageUpgrade.lv}");
-        DialogLevel_text2.text = ($"{playerStatusData.cannonDamageUpgrade.lv + 1}");
-        DialogMoney_text.text = ($"{playerStatusData.cannonDamageUpgrade.UpgradeMoney}");
-        DialogMessege.text = "";
-        DialogMessege.text = "砲撃の攻撃力を強化しますか？";
+        SetDialogText(playerStatusData.cannonDamageUpgrade, "砲撃の攻撃力を強化しますか？", "ダメージ");
     }
 
     public void CannonCoolTimeSkillEnhancement()
     {
         upgradeType = UpgradeType.CannonCoolTime;
-
-        Detalise_text.text = $"クールタイム : {playerStatusData.cannonCoolTimeUpgrade.CoolTime}\n強化後のクールタイム : {playerStatusData.cannonCoolTimeUpgrade.GetCoolTime(playerStatusData.cannonCoolTimeUpgrade.lv + 1)}";
-
-
-        DialogObj.SetActive(true);
-        LayCastObj.SetActive(true);
-
-        DialogLevel_text1.text = ($"{playerStatusData.cannonCoolTimeUpgrade.lv}");
-        DialogLevel_text2.text = ($"{playerStatusData.cannonCoolTimeUpgrade.lv + 1}");
-        DialogMoney_text.text = ($"{playerStatusData.cannonCoolTimeUpgrade.UpgradeMoney}");
-        DialogMessege.text = "";
-        DialogMessege.text = "クールタイムを強化しますか？";
+        SetDialogText(playerStatusData.cannonCoolTimeUpgrade, "クールタイムを強化しますか？", "クールタイム");
     }
 
     public void CostLimitSkillEnhacement()
     {
         upgradeType = UpgradeType.CostLimit;
-
-        Detalise_text.text = $"最大値 : {playerStatusData.costLimitUpgrade.MaxCost}\n強化後の最大値 : {playerStatusData.costLimitUpgrade.GetMaxCost(playerStatusData.costLimitUpgrade.lv + 1)}";
-
-        DialogObj.SetActive(true);
-        LayCastObj.SetActive(true);
-
-        DialogLevel_text1.text = ($"{playerStatusData.costLimitUpgrade.lv}");
-        DialogLevel_text2.text = ($"{playerStatusData.costLimitUpgrade.lv + 1}");
-        DialogMoney_text.text = ($"{playerStatusData.costLimitUpgrade.UpgradeMoney}");
-        DialogMessege.text = "";
-        DialogMessege.text = "コストの最大値を強化しますか？";
+        SetDialogText(playerStatusData.costLimitUpgrade, "コストの最大値を強化しますか？", "最大値");
     }
 
     public void CostGenerationSpeedSkillEnhacement()
     {
         upgradeType = UpgradeType.CostGenerationSpeed;
-
-        Detalise_text.text = $"生成速度 : {playerStatusData.costGenerationSpeedUpgrade.GenerateSpeed}\n強化後の生成速度 : {playerStatusData.costGenerationSpeedUpgrade.GetGenerateSpeed(playerStatusData.costGenerationSpeedUpgrade.lv + 1)}";
-
-        DialogObj.SetActive(true);
-        LayCastObj.SetActive(true);
-
-        DialogLevel_text1.text = ($"{playerStatusData.costGenerationSpeedUpgrade.lv}");
-        DialogLevel_text2.text = ($"{playerStatusData.costGenerationSpeedUpgrade.lv + 1}");
-        DialogMoney_text.text = ($"{playerStatusData.costGenerationSpeedUpgrade.UpgradeMoney}");
-        DialogMessege.text = "";
-        DialogMessege.text = "コストの生成速度を強化しますか？";
+        SetDialogText(playerStatusData.costGenerationSpeedUpgrade, "コストの生成速度を強化しますか？", "生成速度");
     }
 
     public void VirusSkillEnhacement()
     {
         upgradeType = UpgradeType.Virus;
-
-        Detalise_text.text = $"感染時のHP割合 : {playerStatusData.virusUpgrade.ReviveHealthRate * 100}%\n強化後の感染時のHP割合 : {playerStatusData.virusUpgrade.GetHealthRate(playerStatusData.virusUpgrade.lv + 1) * 100}%";
-
-        DialogObj.SetActive(true);
-        LayCastObj.SetActive(true);
-
-        DialogLevel_text1.text = ($"{playerStatusData.virusUpgrade.lv}");
-        DialogLevel_text2.text = ($"{playerStatusData.virusUpgrade.lv + 1}");
-        DialogMoney_text.text = ($"{playerStatusData.virusUpgrade.UpgradeMoney}");
-        DialogMessege.text = "";
-        DialogMessege.text = "感染を強化しますか？";
+        SetDialogText(playerStatusData.virusUpgrade, "感染を強化しますか？", "感染時のHP割合");
     }
 
     public IEnumerator WarningMoneyText()

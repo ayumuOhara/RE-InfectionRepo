@@ -13,7 +13,7 @@ public abstract class UnitBase : PooledObject, IHealth, IMovable, IAttackable
     [SerializeField] protected Material defaultMaterial;
     public Animator animator {  get; private set; }
 
-    UnitStats stats;
+    private UnitStats stats;
     public UnitStats Stats => stats;
 
     public LayerMask targetLayer;
@@ -35,7 +35,8 @@ public abstract class UnitBase : PooledObject, IHealth, IMovable, IAttackable
         }
     }
 
-    float currentHealth;
+    [SerializeField]
+    private float currentHealth;
     public float CurrentHealth => currentHealth;
     public float HealthRate => currentHealth / stats.maxHp;
     public bool IsDead => currentHealth <= 0;

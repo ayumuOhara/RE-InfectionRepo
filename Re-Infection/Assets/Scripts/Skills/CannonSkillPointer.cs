@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Threading.Tasks;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -27,6 +28,9 @@ namespace CannonPointer
         GameObject dragObj;
 
         [SerializeField] Image cannonPointerFilled;
+        [SerializeField] TextMeshProUGUI coolTimeProgressText;
+
+        [SerializeField, Range(0, 1f)] private float firstCoolTimeRate;
 
         bool canUseSkill;
 
@@ -50,7 +54,7 @@ namespace CannonPointer
             if (unitManager == null)
                 unitManager = GameObject.Find("UnitManager").GetComponent<UnitManager>();
             
-            StartCoroutine(SkillCoolTimer(playerStatusData.cannonCoolTimeUpgrade.CoolTime / 2));
+            StartCoroutine(SkillCoolTimer(playerStatusData.cannonCoolTimeUpgrade.CoolTime * (1 - firstCoolTimeRate)));
         }
 
         public void OnSkillUse(float coolTime)
@@ -61,17 +65,29 @@ namespace CannonPointer
         IEnumerator SkillCoolTimer(float coolTime)
         {
             canUseSkill = false;
+            cannonPointerFilled.fillAmount = 1;
             var time = coolTime;
+            coolTimeProgressText.enabled = true;
 
             while (time > 0)
             {
-                time -= Time.deltaTime;
-                cannonPointerFilled.fillAmount = time / playerStatusData.cannonCoolTimeUpgrade.CoolTime;
+                CoolTimeProgress(time);
 
                 yield return new WaitUntil(() => waveSpawner.IsStartWave);
+
+                time -= Time.deltaTime;
             }
 
+            FindObjectOfType<SEManager>().PlaySE(SEManager.SEType.CanExplosion);
+            cannonPointerFilled.fillAmount = 0;
             canUseSkill = true;
+            coolTimeProgressText.enabled = false;
+        }
+
+        private void CoolTimeProgress(float time)
+        {
+            coolTimeProgressText.text = (100 - (time / playerStatusData.cannonCoolTimeUpgrade.CoolTime) * 100).ToString("F0") + " <size=25>%";
+            cannonPointerFilled.fillAmount = time / playerStatusData.cannonCoolTimeUpgrade.CoolTime;
         }
 
         public void OnBeginDrag(PointerEventData eventData)
@@ -79,17 +95,17 @@ namespace CannonPointer
             dragEndTcs = new TaskCompletionSource<PointerEventData>();
             if (!waveSpawner.IsStartWave || !canUseSkill || Time.timeScale == 0)
             {
-                dragObj.SetActive(false);
+                dragObj?.SetActive(false);
                 return;
             }
 
             if (dragObj == null)
             {
                 dragObj = Instantiate(cannonPrefab);
-                dragObj.SetActive(false);
+                dragObj?.SetActive(false);
             }
 
-            dragObj.SetActive(true);
+            dragObj?.SetActive(true);
 
             _ = WaitEndDrag.WaitDragEndAsync();
         }
@@ -98,7 +114,7 @@ namespace CannonPointer
         {
             if (!waveSpawner.IsStartWave || !canUseSkill || Time.timeScale == 0)
             {
-                dragObj.SetActive(false);
+                dragObj?.SetActive(false);
                 return;
             }
 
@@ -114,7 +130,7 @@ namespace CannonPointer
         {
             if (!waveSpawner.IsStartWave || !canUseSkill || Time.timeScale == 0)
             {
-                dragObj.SetActive(false);
+                dragObj?.SetActive(false);
                 return;
             }
 
@@ -122,7 +138,7 @@ namespace CannonPointer
 
             if (isDragCancel)
             {
-                dragObj.SetActive(false);
+                dragObj?.SetActive(false);
             }
 
             isDragging = false;
@@ -132,7 +148,7 @@ namespace CannonPointer
         {
             if (isDragging)
             {
-                SpriteRenderer sr = dragObj.GetComponent<SpriteRenderer>();
+                SpriteRenderer sr = dragObj?.GetComponent<SpriteRenderer>();
                 sr.enabled = false;
                 isDragCancel = true;
             }
@@ -142,7 +158,7 @@ namespace CannonPointer
         {
             if (isDragging)
             {
-                SpriteRenderer sr = dragObj.GetComponent<SpriteRenderer>();
+                SpriteRenderer sr = dragObj?.GetComponent<SpriteRenderer>();
                 sr.enabled = true;
                 isDragCancel = false;
             }

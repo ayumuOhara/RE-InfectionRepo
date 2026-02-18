@@ -33,7 +33,7 @@ public class WaveLevel : ScriptableObject
 
                 // LayerMask
                 // 7 == EnemyUnit
-                UnitManager.OnSpawnUnit?.Invoke(Lstats.statsData.unitStats, 7, spawnPos);
+                UnitManager.onSpawnUnit?.Invoke(Lstats.statsData.unitStats, 7, spawnPos);
                 yield return null;
             }
         }

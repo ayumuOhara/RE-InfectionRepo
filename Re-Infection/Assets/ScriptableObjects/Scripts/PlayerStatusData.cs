@@ -18,10 +18,18 @@ public abstract class BaseUpgrade
     public void SetUpgradeLevel(int level)
     {
         lv = level;
-        if (lv >= MaxLevel)
-        {
-            lv = MaxLevel;
-        }
+        ClampLevel(level);
+    }
+
+    // アップグレードの性能を取得
+    public virtual object GetLevelofUpgrade(int level)
+    {
+        return null;
+    }
+
+    protected int ClampLevel(int level)
+    {
+        return Mathf.Clamp(level, 0, MaxLevel - 1);
     }
 }
 
@@ -33,8 +41,9 @@ public class CastleUpgrade : BaseUpgrade
     // Lvごとの体力設定
     private int[] healths;
 
-    public int GetHealth(int level)
+    public override object GetLevelofUpgrade(int level)
     {
+        ClampLevel(level);
         return healths[level];
     }
 
@@ -50,8 +59,9 @@ public class CannonDamageUpgrade : BaseUpgrade
     // Lvごとの体力設定
     private int[] damages;
 
-    public int GetDamage(int level)
+    public override object GetLevelofUpgrade(int level)
     {
+        ClampLevel(level);
         return damages[level];
     }
 
@@ -65,10 +75,13 @@ public class CannonCoolTimeUpgrade : BaseUpgrade
     [Header("各Lv(0~)のアップグレード内容")]
     [SerializeField]
     private float[] coolTime;
-    public int GetCoolTime(int level)
+
+    public override object GetLevelofUpgrade(int level)
     {
+        ClampLevel(level);
         return (int)coolTime[level];
     }
+
     public int CoolTime => (int)coolTime[lv];
 }
 
@@ -80,8 +93,9 @@ public class CostLimitUpgrade : BaseUpgrade
     // Lvごとの体力設定
     private int[] maxCostCnt;
 
-    public int GetMaxCost(int level)
+    public override object GetLevelofUpgrade(int level)
     {
+        ClampLevel(level);
         return maxCostCnt[level];
     }
 
@@ -97,8 +111,9 @@ public class CostGenerationSpeedUpgrade : BaseUpgrade
     // Lvごとの体力設定
     private float[] generateSpeed;
 
-    public float GetGenerateSpeed(int level)
+    public override object GetLevelofUpgrade(int level)
     {
+        ClampLevel(level);
         return generateSpeed[level];
     }
 
@@ -116,8 +131,9 @@ public class VirusUpgrade : BaseUpgrade
     // Lvごとの体力設定
     private float[] reviveHealthRate;
 
-    public float GetHealthRate(int level)
+    public override object GetLevelofUpgrade(int level)
     {
+        ClampLevel(level);
         return reviveHealthRate[level];
     }
 

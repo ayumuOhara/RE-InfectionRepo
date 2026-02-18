@@ -45,7 +45,7 @@ namespace VirusPointer
         {
             if (!waveSpawner.IsStartWave || Time.timeScale == 0)
             {
-                dragObj.SetActive(false);
+                dragObj?.SetActive(false);
                 return;
             }
 
@@ -54,10 +54,10 @@ namespace VirusPointer
             if (dragObj == null)
             {
                 dragObj = Instantiate(virusPrefab);
-                dragObj.SetActive(false);
+                dragObj?.SetActive(false);
             }
 
-            dragObj.SetActive(true);
+            dragObj?.SetActive(true);
 
             _ = WaitEndDrag.WaitDragEndAsync();
         }
@@ -66,7 +66,7 @@ namespace VirusPointer
         {
             if (!waveSpawner.IsStartWave || Time.timeScale == 0)
             {
-                dragObj.SetActive(false);
+                dragObj?.SetActive(false);
                 return;
             }
 
@@ -82,7 +82,7 @@ namespace VirusPointer
         {
             if (!waveSpawner.IsStartWave || Time.timeScale == 0)
             {
-                dragObj.SetActive(false);
+                dragObj?.SetActive(false);
                 return;
             }
 
@@ -90,7 +90,7 @@ namespace VirusPointer
 
             if (isDragCancel)
             {
-                dragObj.SetActive(false);
+                dragObj?.SetActive(false);
             }
 
             isDragging = false;
@@ -100,7 +100,7 @@ namespace VirusPointer
         {
             if (isDragging)
             {
-                SpriteRenderer sr = dragObj.GetComponent<SpriteRenderer>();
+                SpriteRenderer sr = dragObj?.GetComponent<SpriteRenderer>();
                 sr.enabled = false;
                 isDragCancel = true;
             }
@@ -110,7 +110,7 @@ namespace VirusPointer
         {
             if (isDragging)
             {
-                SpriteRenderer sr = dragObj.GetComponent<SpriteRenderer>();
+                SpriteRenderer sr = dragObj?.GetComponent<SpriteRenderer>();
                 sr.enabled = true;
                 isDragCancel = false;
             }

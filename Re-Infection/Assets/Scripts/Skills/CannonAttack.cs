@@ -77,7 +77,7 @@ public class CannonAttack : MonoBehaviour
                 // 倒した敵の死体を複製(ボスユニット除外)
                 if (enemy.CurrentHealth <= 0 && !enemy.Stats.bossUnit)
                 {
-                    UnitManager.OnCloneUnit?.Invoke(enemy.Stats, target.transform.position + new Vector3(0.1f, 0, 0));
+                    UnitManager.onCloneUnit?.Invoke(enemy.Stats, target.transform.position + new Vector3(0.1f, 0, 0));
                 }
             }
         }

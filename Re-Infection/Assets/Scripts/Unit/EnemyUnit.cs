@@ -7,7 +7,7 @@ public class EnemyUnit : UnitBase, Iinfection
 {
     GameObject castleObj;
     [SerializeField] Sprite corpseSprite;   // 死体スプライト
-    [SerializeField] GameObject infecitonInfo;
+    [SerializeField] Canvas infecitonInfo;
     [SerializeField] Image infectionBar;
     [SerializeField] GameObject defeatedEffect;
     WaveSpawner waveSpawner;
@@ -75,6 +75,7 @@ public class EnemyUnit : UnitBase, Iinfection
             FindObjectOfType<UnitManager>().RemoveEnemyUnitList(this);
 
             Instantiate(defeatedEffect, transform.position, Quaternion.identity);
+            Release();
         }
         else
         {
@@ -119,7 +120,7 @@ public class EnemyUnit : UnitBase, Iinfection
         IsInfectioning = true;
 
         var timer = 0f;
-        infecitonInfo.SetActive(true);
+        infecitonInfo.enabled = true;
 
         while (timer < infectionTime)
         {
@@ -130,7 +131,7 @@ public class EnemyUnit : UnitBase, Iinfection
             infectionBar.fillAmount = timer / infectionTime;
         }
 
-        infecitonInfo.SetActive(false);
+        infecitonInfo.enabled = false;
 
         stateManager.SetUnitAI(new PlayerUnitDecider(this));
 
