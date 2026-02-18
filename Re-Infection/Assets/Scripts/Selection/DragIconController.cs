@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -33,6 +34,10 @@ public class DragIconController : MonoBehaviour,
     private Transform originalParent;
     private Vector2 originalPos;
 
+    private DropArea lastHoveredDropArea = null;
+    private GameObject removedClone = null;
+    private DropArea hoveredArea = null;
+    private bool droppedSuccessfully = false;
     void Awake()
     {
         wallet = Resources.Load<PlayerStatusData>("PlayerStatusData").wallet;
@@ -110,6 +115,10 @@ public class DragIconController : MonoBehaviour,
         );
 
         rectTransform.localPosition = localPoint;
+
+        DetectDropAreaAndClearClone(eventData);
+
+
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -118,6 +127,20 @@ public class DragIconController : MonoBehaviour,
         rectTransform.anchoredPosition = originalPos;
 
         canvasGroup.blocksRaycasts = true;
+
+        // ★ Drop が成功していない場合 → Clone を復元
+        if (!droppedSuccessfully && removedClone != null && hoveredArea != null)
+        {
+           
+            Transform parent = hoveredArea.transform.GetChild(0);
+            removedClone.transform.SetParent(parent);
+            removedClone.SetActive(true);
+        }
+
+        // リセット
+        removedClone = null;
+        hoveredArea = null;
+        droppedSuccessfully = false;
     }
 
     public void CheckObj(bool isOn)
@@ -143,5 +166,54 @@ public class DragIconController : MonoBehaviour,
         notEnoughMoneyObj.SetActive(true);
         yield return new WaitForSeconds(1f);
         notEnoughMoneyObj.SetActive(false);
+    }
+
+    private void DetectDropAreaAndClearClone(PointerEventData eventData)
+    {
+        var results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventData, results);
+
+        DropArea hitArea = null;
+
+        foreach (var r in results)
+        {
+            hitArea = r.gameObject.GetComponentInParent<DropArea>();
+            if (hitArea != null)
+                break;
+        }
+
+        // DropArea が変わった瞬間
+        if (hitArea != hoveredArea)
+        {
+            // ① 前の DropArea の clone を復元
+            if (hoveredArea != null && removedClone != null)
+            {
+                Transform prevParent = hoveredArea.dropTargetParent;
+                removedClone.transform.SetParent(prevParent);
+                removedClone.SetActive(true);
+            }
+
+            // ② 新しい DropArea に入った場合
+            if (hitArea != null)
+            {
+                Transform newParent = hitArea.dropTargetParent;
+
+                if (newParent.childCount > 0)
+                {
+                    removedClone = newParent.GetChild(0).gameObject;
+                    removedClone.SetActive(false);
+                }
+                else
+                {
+                    removedClone = null;
+                }
+            }
+            else
+            {
+                removedClone = null;
+            }
+
+            hoveredArea = hitArea;
+        }
     }
 }
