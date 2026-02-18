@@ -1,9 +1,17 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using System;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
+using Unity.VisualScripting;
 
 public class UnitManager : MonoBehaviour
 {
+    [SerializeField]
+    private ObjectPool player_pool;
+    [SerializeField]
+    private ObjectPool enemy_pool;
+
     public List<UnitBase> playerUnitList { get; private set; } = new List<UnitBase>();    // プレイヤーユニット格納リスト
     public List<UnitBase> enemyUnitList { get; private set; } = new List<UnitBase>();     // エネミーユニット格納リスト
     public List<EnemyUnit> corpseUnitList { get; private set; } = new List<EnemyUnit>();    // 死体ユニット格納リスト
@@ -20,36 +28,61 @@ public class UnitManager : MonoBehaviour
     // 敵がいないか返す
     public bool IsAllEnemyDefeated => enemyUnitList.Count <= 0;
 
-    // ユニットをリストに追加
-    public void AddUnitList(UnitBase unit, bool infection = false)
+    public static Action<UnitStats, LayerMask, Vector3> OnSpawnUnit;
+    public static Action<UnitStats, Vector3> OnCloneUnit;
+
+    public void OnDisable()
     {
-        switch (unit)
-        {
-            case PlayerUnit:
-                playerUnitList.Add(unit); break;
-            case EnemyUnit:
-                if (infection)
-                    playerUnitList.Add(unit);
-                else
-                    enemyUnitList.Add(unit);
-                break;
-        }
+        OnSpawnUnit -= SpawnUnit;
+        OnCloneUnit -= CloneUnit;
     }
 
-    // ユニットをリストから削除
-    public void RemoveUnitList(UnitBase unit, bool infection = false)
+    private void Awake()
     {
-        switch (unit)
-        {
-            case PlayerUnit:
-                playerUnitList.Remove(unit); break;
-            case EnemyUnit:
-                if (infection)
-                    playerUnitList.Remove(unit);
-                else
-                    enemyUnitList.Remove(unit);
-                break;
-        }
+        OnSpawnUnit += SpawnUnit;
+        OnCloneUnit += CloneUnit;
+    }
+
+    // 指定された場所にユニットをスポーン
+    public void SpawnUnit(UnitStats stats, LayerMask unitLayer, Vector3 spawnPos)
+    {
+        var pool = LayerMask.LayerToName(unitLayer) == "PlayerUnit" ? player_pool : enemy_pool;
+
+        UnitBase unit = pool.GetPooledObject().GetComponent<UnitBase>();
+        unit.transform.position = spawnPos;
+        unit.Initialize(stats);
+    }
+
+    // ユニットのクローン生成
+    public void CloneUnit(UnitStats stats, Vector3 spawnPos)
+    {
+        var pool = enemy_pool;
+
+        UnitBase unit = pool.GetPooledObject().GetComponent<UnitBase>();
+        unit.transform.position = spawnPos;
+        unit.Initialize(stats, true);
+
+        Debug.Log("ユニットをクローン生成します");
+    }
+
+    public void AddPlayerUnitList(UnitBase unit)
+    {
+        playerUnitList.Add(unit);
+    }
+
+    public void AddEnemyUnitList(UnitBase unit)
+    {
+        enemyUnitList.Add(unit);
+    }
+
+    public void RemovePlayerUnitList(UnitBase unit)
+    {
+        playerUnitList.Remove(unit);
+    }
+
+    public void RemoveEnemyUnitList(UnitBase unit)
+    {
+        enemyUnitList.Remove(unit);
     }
 
     // 指定された味方ユニットの数を返す
@@ -83,13 +116,13 @@ public class UnitManager : MonoBehaviour
         {
             case "Player":
                 foreach (var unit in playerUnitList)
-                    Destroy(unit.gameObject);
+                    unit.Release();
 
                 playerUnitList.Clear();
                 break;
             case "Enemy":
                 foreach (var unit in enemyUnitList)
-                    Destroy(unit.gameObject);
+                    unit.Release();
 
                 enemyUnitList.Clear();
                 break;

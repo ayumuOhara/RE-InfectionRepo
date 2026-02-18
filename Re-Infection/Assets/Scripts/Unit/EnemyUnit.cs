@@ -1,3 +1,4 @@
+using NUnit.Framework.Constraints;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,17 +14,31 @@ public class EnemyUnit : UnitBase, Iinfection
 
     public bool IsInfectioning { get; set; } = false;
 
-    public override void Initialize(UnitStats stats, bool isClone = false)
+    public override void Initialize(UnitStats stats)
     {
-        base.Initialize(stats, isClone);
+        base.Initialize(stats);
 
-        spriteRenderer.material = Stats.GetOutline("EnemyUnitOutline");
+        FindObjectOfType<UnitManager>().AddEnemyUnitList(this);
+    }
+
+    public override void SetStats(UnitStats stats)
+    {
+        targetLayer = LayerMask.GetMask("PlayerUnit");
+        gameObject.layer = 7;
+
+        base.SetStats(stats);
+
+        IsInfectioning = false;
+
+        SetStateManager(new UnitStateManager(this, new EnemyUnitDecider(this)));
+
+        if (Stats.bossUnit)
+            FindObjectOfType<WaveSpawner>().SetBoss(this);
     }
 
     private void Awake()
     {
         waveSpawner = FindObjectOfType<WaveSpawner>();
-        SetStateManager(new UnitStateManager(this, new EnemyUnitDecider(this)));
         castleObj = GameObject.Find("CastleWall");
     }
 
@@ -45,13 +60,6 @@ public class EnemyUnit : UnitBase, Iinfection
         }
     }
 
-    public override void Start()
-    {
-        base.Start();
-        if (Stats.bossUnit)
-            FindObjectOfType<WaveSpawner>().SetBoss(this);
-    }
-
     public override void Move()
     {
         transform.position = Movement.Movement(MyPos, TargetPos, Stats.MoveSpeed);
@@ -59,11 +67,14 @@ public class EnemyUnit : UnitBase, Iinfection
 
     public override void Dead()
     {
+        // éÄñSéûÇÃèàóù
+        Instantiate(deadEffect, transform.position, Quaternion.identity);
+
         if (Stats.bossUnit)
         {
-            FindObjectOfType<UnitManager>().RemoveUnitList(this, IsInfectioning);
+            FindObjectOfType<UnitManager>().RemoveEnemyUnitList(this);
+
             Instantiate(defeatedEffect, transform.position, Quaternion.identity);
-            Destroy(gameObject);
         }
         else
         {
@@ -74,7 +85,8 @@ public class EnemyUnit : UnitBase, Iinfection
                 var unitManager = FindObjectOfType<UnitManager>();
                 if (!isClone)
                 {
-                    unitManager.RemoveUnitList(this, IsInfectioning);
+                    unitManager.RemoveEnemyUnitList(this);
+
                     FindObjectOfType<WaveSpawner>().DecreaseEnemySum();
                 }
 
@@ -83,13 +95,17 @@ public class EnemyUnit : UnitBase, Iinfection
                 animator.enabled = false;
 
                 GetComponent<SpriteRenderer>().sprite = corpseSprite;
+
+                return;
             }
             else
             {
-                FindObjectOfType<UnitManager>().RemoveUnitList(this, IsInfectioning);
-                Destroy(gameObject);
+                FindObjectOfType<UnitManager>().RemovePlayerUnitList(this);
+                
+                Release();
             }
         }
+
     }
 
     public void StartInfection(float healthRate)
@@ -124,12 +140,12 @@ public class EnemyUnit : UnitBase, Iinfection
         Heal(Stats.maxHp * healthRate);
 
         FindObjectOfType<UnitManager>().RemoveCorpseList(this);
-        FindObjectOfType<UnitManager>().AddUnitList(this, IsInfectioning);
 
-        GetComponent<SpriteRenderer>().sprite = Stats.unitSprite;
+        FindObjectOfType<UnitManager>().AddPlayerUnitList(this);
 
-        spriteRenderer.material = Stats.GetOutline("PlayerUnitOutline");
-        
+        spriteRenderer.sprite = Stats.unitSprite;
+        SetOutline();
+
         animator.enabled = true;
     }
 }

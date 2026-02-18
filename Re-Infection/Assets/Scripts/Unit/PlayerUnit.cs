@@ -3,15 +3,17 @@ using UnityEngine;
 
 public class PlayerUnit : UnitBase
 {
-    public override void Initialize(UnitStats stats, bool isClone = false)
+    public override void Initialize(UnitStats stats)
     {
-        base.Initialize(stats, isClone);
+        base.Initialize(stats);
 
-        spriteRenderer.material = Stats.GetOutline("PlayerUnitOutline");
+        FindObjectOfType<UnitManager>().AddPlayerUnitList(this);
     }
 
-    private void Awake()
+    public override void SetStats(UnitStats stats)
     {
+        base.SetStats(stats);
+
         SetStateManager(new UnitStateManager(this, new PlayerUnitDecider(this)));
     }
 
@@ -35,7 +37,8 @@ public class PlayerUnit : UnitBase
 
     public override void Dead()
     {
+        FindObjectOfType<UnitManager>().RemovePlayerUnitList(this);
+
         base.Dead();
-        Destroy(gameObject);
     }
 }
