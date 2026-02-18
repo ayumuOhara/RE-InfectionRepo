@@ -52,16 +52,25 @@ public class UnitIconClick : MonoBehaviour, IPointerClickHandler
             unitIcon.sprite = unitData.unitStats.unitSprite;
             unitIcon.rectTransform.sizeDelta = defaltSize;
             jobIcon.sprite = unitData.unitStats.JobSprite;
+
+            unitCostText.text = unitData.unitStats.summonCost.ToString("F0");
+
+            StartCoroutine(UnitCntText());
+            StartCoroutine(ShortageCost());
         }
-
-        unitCostText.text = unitData.unitStats.summonCost.ToString("F0");
-
-        StartCoroutine(UnitCntText());
-        StartCoroutine(ShortageCost());
+        else
+        {
+            unitIcon.enabled = false;
+            jobIcon.enabled = false;
+            unitCostText.enabled = false;
+            unitCntText.enabled = false;
+        }
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (unitData == null) return;
+
         if(!gameManager.timeManager.isPause && gameManager.waveSpawner.IsStartWave)
             if (eventData.button == PointerEventData.InputButton.Left)
             {
@@ -107,7 +116,6 @@ public class UnitIconClick : MonoBehaviour, IPointerClickHandler
 
             cnt = gameManager.unitManager.GetUnitCnt(unitData.unitStats);
             unitCntText.text = cnt + " ‘Ì";
-            yield return null;
         }
     }
 
@@ -131,9 +139,6 @@ public class UnitIconClick : MonoBehaviour, IPointerClickHandler
 
             yield return new WaitUntil(() => cnt < gameManager.costManager.currentCost
                                           || cnt > gameManager.costManager.currentCost);
-
-
-            yield return null;
         }
     }
 }
