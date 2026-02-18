@@ -3,10 +3,10 @@ using UnityEngine;
 
 using VirusPointer;
 
-public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
+public abstract class UnitBase : PooledObject, IHealth, IMovable, IAttackable
 {
     [SerializeField] GameObject damageEffect;
-    [SerializeField] GameObject deadEffect;
+    [SerializeField] protected GameObject deadEffect;
     [SerializeField] private int precision = 100; // ê∏ìxÅi100î{Ç∑ÇÍÇŒ0.01íPà Ç‹Ç≈îΩâfÅj
 
     protected SpriteRenderer spriteRenderer;
@@ -57,17 +57,39 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
     
     private SEManager seManager;
 
-    public virtual void Initialize(UnitStats stats, bool isClone = false)
+    public virtual void Initialize(UnitStats stats)
     {
+        isClone = false;
+
+        SetComponent();
+        SetStats(stats);
+        SetOutline();
+
+        currentHealth = this.stats.maxHp;
+    }
+
+    public virtual void Initialize(UnitStats stats, bool isClone)
+    {
+        SetComponent();
+        SetStats(stats);
+
         this.isClone = isClone;
+        spriteRenderer.material = defaultMaterial;
+
+        currentHealth = 0;
+    }
+
+    private void SetComponent()
+    {
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+    }
 
-        if (stats.animatorController != null)
-        animator.runtimeAnimatorController = (RuntimeAnimatorController)stats.animatorController;
-
+    public virtual void SetStats(UnitStats stats)
+    {
         this.stats = new UnitStats()
         {
+            animatorController = stats.animatorController,
             unitSprite = stats.unitSprite,
             attackEffect = stats.attackEffect,
             unitName = stats.unitName,
@@ -88,17 +110,15 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
         movementBase = stats.MovementBase;
         attackBase = stats.AttackBase;
 
-        spriteRenderer.sprite = this.stats.unitSprite;
+        if (stats.animatorController != null)
+            animator.runtimeAnimatorController = (RuntimeAnimatorController)stats.animatorController;
 
-        if (!isClone)
-        {
-            currentHealth = stats.maxHp;
-        }
-        else
-        {
-            spriteRenderer.material = defaultMaterial;
-            currentHealth = 0;
-        }
+        spriteRenderer.sprite = this.stats.unitSprite;
+    }
+
+    protected void SetOutline()
+    {
+        spriteRenderer.material = Stats.GetOutline(LayerMask.LayerToName(gameObject.layer) + "Outline");
     }
 
     public void SetStateManager(UnitStateManager unitStateManager)
@@ -109,7 +129,6 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
     public virtual void Start()
     {
         seManager = FindObjectOfType<SEManager>();
-        if (!isClone) FindObjectOfType<UnitManager>().AddUnitList(this);
         stateManager.StateMachine.Initialize(stateManager.StateMachine.moveState);
         StartCoroutine(UsingVirusSkillTransparency());
     }
@@ -175,7 +194,8 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
     {
         // éÄñSéûÇÃèàóù
         Instantiate(deadEffect, transform.position, Quaternion.identity);
-        FindObjectOfType<UnitManager>().RemoveUnitList(this);
+
+        Release();
     }
 
     Vector3 GetTargetPos()

@@ -3,6 +3,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine.UI;
 using Unity.VisualScripting;
+using System;
 
 public class WaveSpawner : MonoBehaviour
 {
@@ -187,19 +188,6 @@ public class WaveSpawner : MonoBehaviour
         gameUIManager.BossHealthText((int)bossUnit.CurrentHealth);
 
         yield break;
-    }
-
-    // ユニット生成
-    public static void SpawnUnit(UnitStats unitStats)
-    {
-        var spawnPos = new Vector3(0, 4.5f, 0);
-        spawnPos.x = Random.Range(-2f, 2f);
-
-        var enemyObj = Instantiate(Resources.Load("EnemyUnit"), spawnPos, Quaternion.identity);
-        EnemyUnit enemy = enemyObj.GetComponent<EnemyUnit>();
-
-        enemy.transform.position = spawnPos;
-        enemy.Initialize(unitStats);    // 生成したユニットにステータスを代入
     }
 
     // ボスユニット設定

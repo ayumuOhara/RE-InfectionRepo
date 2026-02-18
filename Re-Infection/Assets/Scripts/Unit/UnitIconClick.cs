@@ -69,6 +69,7 @@ public class UnitIconClick : MonoBehaviour, IPointerClickHandler
                 {
                     seManager.PlaySE(SEManager.SEType.Summon);
                     GetComponent<Animator>().SetTrigger("Tap");
+
                     GenerateUnit();
                 }
                 else
@@ -89,11 +90,9 @@ public class UnitIconClick : MonoBehaviour, IPointerClickHandler
 
         spawnPos.x = Random.Range(-1.7f, 1.7f);
 
-        // 対応するインデックスのユニットのステータスを渡す
-        var unitObj = Instantiate(Resources.Load("PlayerUnit"), spawnPos, Quaternion.identity);
-        UnitBase unit = unitObj.GetComponent<UnitBase>();
-        unit.transform.position = spawnPos;
-        unit.Initialize(unitData.unitStats);
+        // LayerMask
+        // 6 == PlayerUnit
+        UnitManager.OnSpawnUnit?.Invoke(unitData.unitStats, 6, spawnPos);
     }
 
     // ユニットの数を表示
