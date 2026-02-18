@@ -55,6 +55,7 @@ public class SEManager : MonoBehaviour
         SummonFailed,  // ユニット召喚失敗
         Damage,        // ユニットがダメージを受けた時
         Explosion,     // 爆弾
+        CanExplosion,  // 爆弾が使用可能
         BossDefeat,    // ボス撃破
         Upgrade,       // 強化
     }

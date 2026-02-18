@@ -95,13 +95,12 @@ public class UnitIconClick : MonoBehaviour, IPointerClickHandler
     // ユニット生成
     void GenerateUnit()
     {
-        gameManager.costManager.RemoveCost(unitData.unitStats.summonCost);
-
+        CostManager.onRemoveCost?.Invoke(unitData.unitStats.summonCost);
         spawnPos.x = Random.Range(-1.7f, 1.7f);
 
         // LayerMask
         // 6 == PlayerUnit
-        UnitManager.OnSpawnUnit?.Invoke(unitData.unitStats, 6, spawnPos);
+        UnitManager.onSpawnUnit?.Invoke(unitData.unitStats, 6, spawnPos);
     }
 
     // ユニットの数を表示

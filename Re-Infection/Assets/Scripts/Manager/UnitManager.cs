@@ -28,19 +28,19 @@ public class UnitManager : MonoBehaviour
     // 敵がいないか返す
     public bool IsAllEnemyDefeated => enemyUnitList.Count <= 0;
 
-    public static Action<UnitStats, LayerMask, Vector3> OnSpawnUnit;
-    public static Action<UnitStats, Vector3> OnCloneUnit;
+    public static Action<UnitStats, LayerMask, Vector3> onSpawnUnit;
+    public static Action<UnitStats, Vector3> onCloneUnit;
 
     public void OnDisable()
     {
-        OnSpawnUnit -= SpawnUnit;
-        OnCloneUnit -= CloneUnit;
+        onSpawnUnit -= SpawnUnit;
+        onCloneUnit -= CloneUnit;
     }
 
     private void Awake()
     {
-        OnSpawnUnit += SpawnUnit;
-        OnCloneUnit += CloneUnit;
+        onSpawnUnit += SpawnUnit;
+        onCloneUnit += CloneUnit;
     }
 
     // 指定された場所にユニットをスポーン
