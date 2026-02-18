@@ -21,7 +21,7 @@ MonoBehaviour:
     upgradeMoney: 64000000f4010000dc050000
     damages: 28000000460000005a00000064000000
   cannonCoolTimeUpgrade:
-    upgradeMoney: 64000000f4010000b80b0000
+    upgradeMoney: 64000000f4010000dc050000
     coolTime:
     - 220
     - 180
