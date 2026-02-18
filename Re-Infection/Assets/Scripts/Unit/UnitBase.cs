@@ -209,25 +209,32 @@ public abstract class UnitBase : PooledObject, IHealth, IMovable, IAttackable
     // ウイルス使用中、スプライトを透過
     IEnumerator UsingVirusSkillTransparency()
     {
-        var drag = GameObject.Find("VirusSkillPointer").GetComponent<VirusSkillPointer>();
-        SpriteRenderer sprite = GetComponent<SpriteRenderer>();
-        Color color = sprite.color;
-
-        while (true)
+        var drag = GameObject.Find("VirusSkillPointer")?.GetComponent<VirusSkillPointer>();
+        if (drag != null)
         {
-            if (drag.IsDragging && !IsDead)
-            {
-                color.a = 0.4f;
-                sprite.color = color;
-            }
-            else
-            {
-                color.a = 1.0f;
-                sprite.color = color;
-            }
+            SpriteRenderer sprite = GetComponent<SpriteRenderer>();
+            Color color = sprite.color;
 
-            yield return null;
+            while (true)
+            {
+                if (drag.IsDragging && !IsDead)
+                {
+                    color.a = 0.4f;
+                    sprite.color = color;
+                }
+                else
+                {
+                    color.a = 1.0f;
+                    sprite.color = color;
+                }
+
+                yield return null;
+            }
         }
+        else
+        {
+            yield break;
+        }        
     }
 
     // エフェクト生成
