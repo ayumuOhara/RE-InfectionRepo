@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class DropArea : MonoBehaviour, IDropHandler
 {
-    [SerializeField] private Transform dropTargetParent;
+    [SerializeField] public Transform dropTargetParent;
     public UnitStatsData currentUnitStats;
     public int slotIndex;
     [SerializeField] private UnitStatsData defaultUnit;
@@ -24,8 +24,7 @@ public class DropArea : MonoBehaviour, IDropHandler
             currentUnitStats = saved;
             CreateCloneFromExistingIcon(saved);
 
-            MarkDragIconAsUsed(saved);
-
+          
             UpdateAllCheckImage();
             return;
         }
@@ -37,8 +36,6 @@ public class DropArea : MonoBehaviour, IDropHandler
             UnitDataCarrier.Instance.selectedUnits[slotIndex] = defaultUnit;
 
             CreateCloneFromExistingIcon(defaultUnit);
-
-            MarkDragIconAsUsed(defaultUnit);
 
             UpdateAllCheckImage();
         }
@@ -212,6 +209,8 @@ public class DropArea : MonoBehaviour, IDropHandler
                 }
             }
 
+            icon.isUsedInDropArea = isUsed;   
+            icon.SetDraggable(!isUsed);       
             icon.CheckObj(isUsed);
         }
     }
@@ -295,17 +294,5 @@ public class DropArea : MonoBehaviour, IDropHandler
         }
     }
 
-    private void MarkDragIconAsUsed(UnitStatsData stats)
-    {
-        foreach (var icon in FindObjectsOfType<DragIconController>())
-        {
-            if (icon.unitStats == stats)
-            {
-                icon.isUsedInDropArea = true;
-                icon.SetDraggable(false); // ★ ドラッグ禁止
-                icon.CheckObj(true);      // チェックON
-            }
-        }
-    }
 
 }

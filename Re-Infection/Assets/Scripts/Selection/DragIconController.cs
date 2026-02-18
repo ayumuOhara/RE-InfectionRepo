@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -169,46 +170,50 @@ public class DragIconController : MonoBehaviour,
 
     private void DetectDropAreaAndClearClone(PointerEventData eventData)
     {
-        var results = new System.Collections.Generic.List<RaycastResult>();
+        var results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(eventData, results);
 
-        DropArea area = null;
+        DropArea hitArea = null;
 
         foreach (var r in results)
         {
-            area = r.gameObject.GetComponent<DropArea>();
-            if (area != null)
+            hitArea = r.gameObject.GetComponentInParent<DropArea>();
+            if (hitArea != null)
                 break;
         }
 
-        // ★ DropArea に入った瞬間
-        if (area != null && area != hoveredArea)
+        // DropArea が変わった瞬間
+        if (hitArea != hoveredArea)
         {
-            hoveredArea = area;
-            
-            // Clone を削除して保存
-            Transform parent = area.transform.GetChild(0); // dropTargetParent
-            if (parent.childCount > 0)
+            // ① 前の DropArea の clone を復元
+            if (hoveredArea != null && removedClone != null)
             {
-                removedClone = parent.GetChild(0).gameObject;
-                removedClone.SetActive(false);
-            }
-        }
-
-        // ★ DropArea から出た瞬間（＝範囲外）
-        if (area == null && hoveredArea != null)
-        {
-           
-            if (removedClone != null)
-            {
-                Transform parent = hoveredArea.transform.GetChild(0);
-                removedClone.transform.SetParent(parent);
+                Transform prevParent = hoveredArea.dropTargetParent;
+                removedClone.transform.SetParent(prevParent);
                 removedClone.SetActive(true);
             }
 
-            // 状態リセット
-            removedClone = null;
-            hoveredArea = null;
+            // ② 新しい DropArea に入った場合
+            if (hitArea != null)
+            {
+                Transform newParent = hitArea.dropTargetParent;
+
+                if (newParent.childCount > 0)
+                {
+                    removedClone = newParent.GetChild(0).gameObject;
+                    removedClone.SetActive(false);
+                }
+                else
+                {
+                    removedClone = null;
+                }
+            }
+            else
+            {
+                removedClone = null;
+            }
+
+            hoveredArea = hitArea;
         }
     }
 }
