@@ -74,12 +74,10 @@ public class CannonAttack : MonoBehaviour
             if (enemy.IsDead == false)
             {
                 enemy.Damage(playerStatusData.cannonDamageUpgrade.Damage);
-                Debug.Log("爆発");
                 // 倒した敵の死体を複製(ボスユニット除外)
                 if (enemy.CurrentHealth <= 0 && !enemy.Stats.bossUnit)
                 {
-                    EnemyUnit clone = Instantiate(target.gameObject, target.transform.position + new Vector3(0.1f, 0, 0), Quaternion.identity).GetComponent<EnemyUnit>();
-                    clone.Initialize(enemy.Stats, true);
+                    UnitManager.onCloneUnit?.Invoke(enemy.Stats, target.transform.position + new Vector3(0.1f, 0, 0));
                 }
             }
         }

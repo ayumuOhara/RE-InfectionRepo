@@ -14,7 +14,7 @@ public abstract class AttackBase
             UnitBase unit = target.GetComponent<UnitBase>();
             unit.Damage(attacker.Stats.atk);
 
-            Debug.Log($"{attacker.Stats.unitName}が{target.GetComponent<UnitBase>().Stats.unitName}に{attacker.Stats.atk}ダメージ");
+            //Debug.Log($"{attacker.Stats.unitName}が{target.GetComponent<UnitBase>().Stats.unitName}に{attacker.Stats.atk}ダメージ");
         }
     }
 

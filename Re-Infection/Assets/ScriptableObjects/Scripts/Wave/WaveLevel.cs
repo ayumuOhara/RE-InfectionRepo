@@ -28,7 +28,12 @@ public class WaveLevel : ScriptableObject
                     yield break;
                 }
 
-                WaveSpawner.SpawnUnit(Lstats.statsData.unitStats);
+                var spawnPos = new Vector3(0, 4.5f, 0);
+                spawnPos.x = Random.Range(-2f, 2f);
+
+                // LayerMask
+                // 7 == EnemyUnit
+                UnitManager.onSpawnUnit?.Invoke(Lstats.statsData.unitStats, 7, spawnPos);
                 yield return null;
             }
         }

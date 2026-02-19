@@ -52,16 +52,25 @@ public class UnitIconClick : MonoBehaviour, IPointerClickHandler
             unitIcon.sprite = unitData.unitStats.unitSprite;
             unitIcon.rectTransform.sizeDelta = defaltSize;
             jobIcon.sprite = unitData.unitStats.JobSprite;
+
+            unitCostText.text = unitData.unitStats.summonCost.ToString("F0");
+
+            StartCoroutine(UnitCntText());
+            StartCoroutine(ShortageCost());
         }
-
-        unitCostText.text = unitData.unitStats.summonCost.ToString("F0");
-
-        StartCoroutine(UnitCntText());
-        StartCoroutine(ShortageCost());
+        else
+        {
+            unitIcon.enabled = false;
+            jobIcon.enabled = false;
+            unitCostText.enabled = false;
+            unitCntText.enabled = false;
+        }
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (unitData == null) return;
+
         if(!gameManager.timeManager.isPause && gameManager.waveSpawner.IsStartWave)
             if (eventData.button == PointerEventData.InputButton.Left)
             {
@@ -69,6 +78,7 @@ public class UnitIconClick : MonoBehaviour, IPointerClickHandler
                 {
                     seManager.PlaySE(SEManager.SEType.Summon);
                     GetComponent<Animator>().SetTrigger("Tap");
+
                     GenerateUnit();
                 }
                 else
@@ -85,15 +95,12 @@ public class UnitIconClick : MonoBehaviour, IPointerClickHandler
     // ユニット生成
     void GenerateUnit()
     {
-        gameManager.costManager.RemoveCost(unitData.unitStats.summonCost);
-
+        CostManager.onRemoveCost?.Invoke(unitData.unitStats.summonCost);
         spawnPos.x = Random.Range(-1.7f, 1.7f);
 
-        // 対応するインデックスのユニットのステータスを渡す
-        var unitObj = Instantiate(Resources.Load("PlayerUnit"), spawnPos, Quaternion.identity);
-        UnitBase unit = unitObj.GetComponent<UnitBase>();
-        unit.transform.position = spawnPos;
-        unit.Initialize(unitData.unitStats);
+        // LayerMask
+        // 6 == PlayerUnit
+        UnitManager.onSpawnUnit?.Invoke(unitData.unitStats, 6, spawnPos);
     }
 
     // ユニットの数を表示
@@ -108,7 +115,6 @@ public class UnitIconClick : MonoBehaviour, IPointerClickHandler
 
             cnt = gameManager.unitManager.GetUnitCnt(unitData.unitStats);
             unitCntText.text = cnt + " 体";
-            yield return null;
         }
     }
 
@@ -132,9 +138,6 @@ public class UnitIconClick : MonoBehaviour, IPointerClickHandler
 
             yield return new WaitUntil(() => cnt < gameManager.costManager.currentCost
                                           || cnt > gameManager.costManager.currentCost);
-
-
-            yield return null;
         }
     }
 }

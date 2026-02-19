@@ -94,21 +94,21 @@ public class UnitStats
 
     public Material GetOutline(string targetOutline)
     {
-        switch (unitName)
+        switch (this.unitSprite.name)
         {
-            case "弓使い":
+            case "Archer_0":
                 return Resources.Load<Material>($"Materials/{targetOutline}/Archer");
-            case "鈍器使い":
+            case "Warrior_0":
                 return Resources.Load<Material>($"Materials/{targetOutline}/Warrior");
-            case "大弓使い":
+            case "Bow_0":
                 return Resources.Load<Material>($"Materials/{targetOutline}/Bow");
-            case "上級魔法使い":
+            case "Witch_0":
                 return Resources.Load<Material>($"Materials/{targetOutline}/Witch");
-            case "剣士":
+            case "Swordsman_0":
                 return Resources.Load<Material>($"Materials/{targetOutline}/Swordsman");
-            case "盾兵":
+            case "Tank_0":
                 return Resources.Load<Material>($"Materials/{targetOutline}/Tank");
-            case "魔法使い":
+            case "Clergyman_0":
                 return Resources.Load<Material>($"Materials/{targetOutline}/Clergyman");
             default:
                 return null;

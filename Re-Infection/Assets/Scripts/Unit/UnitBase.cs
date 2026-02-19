@@ -3,17 +3,17 @@ using UnityEngine;
 
 using VirusPointer;
 
-public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
+public abstract class UnitBase : PooledObject, IHealth, IMovable, IAttackable
 {
     [SerializeField] GameObject damageEffect;
-    [SerializeField] GameObject deadEffect;
+    [SerializeField] protected GameObject deadEffect;
     [SerializeField] private int precision = 100; // 精度（100倍すれば0.01単位まで反映）
 
     protected SpriteRenderer spriteRenderer;
     [SerializeField] protected Material defaultMaterial;
     public Animator animator {  get; private set; }
 
-    UnitStats stats;
+    private UnitStats stats;
     public UnitStats Stats => stats;
 
     public LayerMask targetLayer;
@@ -35,7 +35,8 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
         }
     }
 
-    float currentHealth;
+    [SerializeField]
+    private float currentHealth;
     public float CurrentHealth => currentHealth;
     public float HealthRate => currentHealth / stats.maxHp;
     public bool IsDead => currentHealth <= 0;
@@ -57,17 +58,39 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
     
     private SEManager seManager;
 
-    public virtual void Initialize(UnitStats stats, bool isClone = false)
+    public virtual void Initialize(UnitStats stats)
     {
+        isClone = false;
+
+        SetComponent();
+        SetStats(stats);
+        SetOutline();
+
+        currentHealth = this.stats.maxHp;
+    }
+
+    public virtual void Initialize(UnitStats stats, bool isClone)
+    {
+        SetComponent();
+        SetStats(stats);
+
         this.isClone = isClone;
+        spriteRenderer.material = defaultMaterial;
+
+        currentHealth = 0;
+    }
+
+    private void SetComponent()
+    {
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+    }
 
-        if (stats.animatorController != null)
-        animator.runtimeAnimatorController = (RuntimeAnimatorController)stats.animatorController;
-
+    public virtual void SetStats(UnitStats stats)
+    {
         this.stats = new UnitStats()
         {
+            animatorController = stats.animatorController,
             unitSprite = stats.unitSprite,
             attackEffect = stats.attackEffect,
             unitName = stats.unitName,
@@ -88,17 +111,15 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
         movementBase = stats.MovementBase;
         attackBase = stats.AttackBase;
 
-        spriteRenderer.sprite = this.stats.unitSprite;
+        if (stats.animatorController != null)
+            animator.runtimeAnimatorController = (RuntimeAnimatorController)stats.animatorController;
 
-        if (!isClone)
-        {
-            currentHealth = stats.maxHp;
-        }
-        else
-        {
-            spriteRenderer.material = defaultMaterial;
-            currentHealth = 0;
-        }
+        spriteRenderer.sprite = this.stats.unitSprite;
+    }
+
+    protected void SetOutline()
+    {
+        spriteRenderer.material = Stats.GetOutline(LayerMask.LayerToName(gameObject.layer) + "Outline");
     }
 
     public void SetStateManager(UnitStateManager unitStateManager)
@@ -109,7 +130,6 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
     public virtual void Start()
     {
         seManager = FindObjectOfType<SEManager>();
-        if (!isClone) FindObjectOfType<UnitManager>().AddUnitList(this);
         stateManager.StateMachine.Initialize(stateManager.StateMachine.moveState);
         StartCoroutine(UsingVirusSkillTransparency());
     }
@@ -175,7 +195,8 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
     {
         // 死亡時の処理
         Instantiate(deadEffect, transform.position, Quaternion.identity);
-        FindObjectOfType<UnitManager>().RemoveUnitList(this);
+
+        Release();
     }
 
     Vector3 GetTargetPos()
@@ -189,25 +210,32 @@ public abstract class UnitBase : MonoBehaviour, IHealth, IMovable, IAttackable
     // ウイルス使用中、スプライトを透過
     IEnumerator UsingVirusSkillTransparency()
     {
-        var drag = GameObject.Find("VirusSkillPointer").GetComponent<VirusSkillPointer>();
-        SpriteRenderer sprite = GetComponent<SpriteRenderer>();
-        Color color = sprite.color;
-
-        while (true)
+        var drag = GameObject.Find("VirusSkillPointer")?.GetComponent<VirusSkillPointer>();
+        if (drag != null)
         {
-            if (drag.IsDragging && !IsDead)
-            {
-                color.a = 0.4f;
-                sprite.color = color;
-            }
-            else
-            {
-                color.a = 1.0f;
-                sprite.color = color;
-            }
+            SpriteRenderer sprite = GetComponent<SpriteRenderer>();
+            Color color = sprite.color;
 
-            yield return null;
+            while (true)
+            {
+                if (drag.IsDragging && !IsDead)
+                {
+                    color.a = 0.4f;
+                    sprite.color = color;
+                }
+                else
+                {
+                    color.a = 1.0f;
+                    sprite.color = color;
+                }
+
+                yield return null;
+            }
         }
+        else
+        {
+            yield break;
+        }        
     }
 
     // エフェクト生成
