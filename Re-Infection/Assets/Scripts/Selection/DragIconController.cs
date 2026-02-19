@@ -4,6 +4,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.Events;
+
 
 public class DragIconController : MonoBehaviour,
     IBeginDragHandler, IDragHandler, IEndDragHandler
@@ -77,9 +79,10 @@ public class DragIconController : MonoBehaviour,
         {
             paidUnitKey.SetActive(false);
         }
+        canvasGroup.blocksRaycasts = true;
     }
 
-    // ★ ドラッグ可能/不可能を切り替える
+  
     public void SetDraggable(bool canDrag)
     {
         canvasGroup.blocksRaycasts = canDrag;
@@ -89,7 +92,9 @@ public class DragIconController : MonoBehaviour,
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (isUsedInDropArea)
-            return; // ★ DropArea に入っているならドラッグ開始禁止
+            return; //DropArea に入っているならドラッグ開始禁止
+
+        canvasGroup.ignoreParentGroups = true;
 
         originalParent = transform.parent;
         originalPos = rectTransform.anchoredPosition;
@@ -105,7 +110,7 @@ public class DragIconController : MonoBehaviour,
     public void OnDrag(PointerEventData eventData)
     {
         if (isUsedInDropArea)
-            return; // ★ DropArea に入っているならドラッグ中も禁止
+            return; //DropArea に入っているならドラッグ中も禁止
 
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             canvas.transform as RectTransform,
@@ -128,7 +133,7 @@ public class DragIconController : MonoBehaviour,
 
         canvasGroup.blocksRaycasts = true;
 
-        // ★ Drop が成功していない場合 → Clone を復元
+        //Drop が成功していない場合 → Clone を復元
         if (!droppedSuccessfully && removedClone != null && hoveredArea != null)
         {
            
@@ -150,14 +155,6 @@ public class DragIconController : MonoBehaviour,
 
     public void OnClickUnitIcon()
     {
-        if (isPaidUnit)
-        {
-            string msg = $"${price} を支払って\n「{unitStats.unitStats.unitName}」を\n購入しますか？";
-            paidDialog.SetDialogMessage(msg);
-            paidDialog.Dialog();
-            return;
-        }
-
         detaUI.SetUnit(unitStats.unitStats);
     }
 
