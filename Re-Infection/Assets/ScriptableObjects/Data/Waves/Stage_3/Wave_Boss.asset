@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: Wave_Boss
   m_EditorClassIdentifier: Assembly-CSharp::WaveData
   waveLevels:
-  - {fileID: 11400000, guid: b21b2f2f735224f47bc48259e9ee0725, type: 2}
+  - {fileID: 11400000, guid: b3093137ad4afbe48893a82851a42c9d, type: 2}
   bossWave: 1
+  tutorial: 0
+  tutorialPrefab: {fileID: 0}
