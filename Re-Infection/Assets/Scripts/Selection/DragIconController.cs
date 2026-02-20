@@ -153,10 +153,10 @@ public class DragIconController : MonoBehaviour,
         CheckImage.SetActive(isOn);
     }
 
-    public void OnClickUnitIcon()
-    {
-        detaUI.SetUnit(unitStats.unitStats);
-    }
+    //public void OnClickUnitIcon()
+    //{
+    //    detaUI.SetUnit(unitStats.unitStats);
+    //}
 
     public IEnumerator NotEnoughMoney()
     {
