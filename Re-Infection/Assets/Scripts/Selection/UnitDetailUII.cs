@@ -15,10 +15,15 @@ public class UnitDetailUII : MonoBehaviour
     public TextMeshProUGUI rangeText; //射程
     public TextMeshProUGUI atkInterbalText; //攻撃速度
     public TextMeshProUGUI hitCntText; //ヒットする数
-   
+
+    [Header("初期表示するユニット")]
+    public UnitStatsData defaltUnit;
     public void Start()
     {
-        UnitStatsObj.SetActive(false);
+        if (defaltUnit != null)
+        {
+            SetUnit(defaltUnit.unitStats);
+        }
       
     }
     public void SetUnit(UnitStats stats)
@@ -35,9 +40,4 @@ public class UnitDetailUII : MonoBehaviour
 
     }
 
-    public void BackButtonClick()
-    {
-        UnitStatsObj.SetActive(false);
-  
-    }
 }
