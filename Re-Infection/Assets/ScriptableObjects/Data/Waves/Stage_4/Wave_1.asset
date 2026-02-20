@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a13b8b7d745f9774ca90705af610f89e, type: 3}
-  m_Name: Wave_2
+  m_Name: Wave_1
   m_EditorClassIdentifier: Assembly-CSharp::WaveData
   waveLevels:
-  - {fileID: 11400000, guid: 03988de0cc48fc347b6d74a74d21d82a, type: 2}
-  - {fileID: 11400000, guid: 9e8d8cf0a4df1f04c88b2d0f4302d6e6, type: 2}
-  - {fileID: 11400000, guid: 5fc8212966bcbdb40bc2752e089340a5, type: 2}
+  - {fileID: 11400000, guid: 53d9b8fd9b80e5c4a8e3c9bf4eeaa586, type: 2}
+  - {fileID: 11400000, guid: 02ac3b5434abd9340a6bfc8525481e47, type: 2}
+  - {fileID: 11400000, guid: 81b071415016d9e478f27af3c8948a82, type: 2}
   bossWave: 0
