@@ -1,0 +1,494 @@
+fileFormatVersion: 2
+guid: b478d699903f9e24fb0bd362d61511b5
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8640049886207440008
+    second: Jockey 1_0
+  - first:
+      213: 6844642107704462547
+    second: Jockey 1_1
+  - first:
+      213: 7125198823366637485
+    second: Jockey 1_2
+  - first:
+      213: -2959295339388734876
+    second: Jockey 1_3
+  - first:
+      213: -6542697458287375792
+    second: Jockey 1_4
+  - first:
+      213: 2667595088483740428
+    second: Jockey 1_5
+  - first:
+      213: 4236234501521157822
+    second: Jockey 1_6
+  - first:
+      213: 2433992969501831439
+    second: Jockey 1_7
+  - first:
+      213: 598678709237387665
+    second: Jockey 1_8
+  - first:
+      213: 7161579734505749880
+    second: Jockey 1_9
+  - first:
+      213: -6975931852843425763
+    second: Jockey 1_10
+  - first:
+      213: 2077432040807689329
+    second: Jockey 1_11
+  - first:
+      213: 5325151163043725945
+    second: Jockey 1_12
+  - first:
+      213: -850925804127292533
+    second: Jockey 1_13
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 530
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Jockey 1_0
+      rect:
+        serializedVersion: 2
+        x: 6846
+        y: 6617
+        width: 26
+        height: 23
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87b83fac760681880800000000000000
+      internalID: -8640049886207440008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Jockey 1_1
+      rect:
+        serializedVersion: 2
+        x: 7076
+        y: 6615
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3dcc7648bbd0dfe50800000000000000
+      internalID: 6844642107704462547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Jockey 1_2
+      rect:
+        serializedVersion: 2
+        x: 7306
+        y: 6616
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da7bcc4349ac1e260800000000000000
+      internalID: 7125198823366637485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Jockey 1_3
+      rect:
+        serializedVersion: 2
+        x: 7538
+        y: 6616
+        width: 22
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 462f34e51987ee6d0800000000000000
+      internalID: -2959295339388734876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Jockey 1_4
+      rect:
+        serializedVersion: 2
+        x: 7766
+        y: 6616
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05a0eed835ba335a0800000000000000
+      internalID: -6542697458287375792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Jockey 1_5
+      rect:
+        serializedVersion: 2
+        x: 7996
+        y: 6618
+        width: 26
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0b66a57993350520800000000000000
+      internalID: 2667595088483740428
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Jockey 1_6
+      rect:
+        serializedVersion: 2
+        x: 735
+        y: 5277
+        width: 1031
+        height: 1042
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ebe2c68a5d02aca30800000000000000
+      internalID: 4236234501521157822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Jockey 1_7
+      rect:
+        serializedVersion: 2
+        x: 2966
+        y: 5288
+        width: 1068
+        height: 1031
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0174fcb5b747c120800000000000000
+      internalID: 2433992969501831439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Jockey 1_8
+      rect:
+        serializedVersion: 2
+        x: 5118
+        y: 5277
+        width: 995
+        height: 1121
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1911fa63d1fee4800800000000000000
+      internalID: 598678709237387665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Jockey 1_9
+      rect:
+        serializedVersion: 2
+        x: 719
+        y: 3015
+        width: 1068
+        height: 1068
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87df9d923da036360800000000000000
+      internalID: 7161579734505749880
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Jockey 1_10
+      rect:
+        serializedVersion: 2
+        x: 2924
+        y: 3015
+        width: 1037
+        height: 1110
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d106fed90f2803f90800000000000000
+      internalID: -6975931852843425763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Jockey 1_11
+      rect:
+        serializedVersion: 2
+        x: 5212
+        y: 3020
+        width: 1121
+        height: 1090
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17c6b553f6584dc10800000000000000
+      internalID: 2077432040807689329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Jockey 1_12
+      rect:
+        serializedVersion: 2
+        x: 692
+        y: 768
+        width: 1105
+        height: 1076
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 972ca78d4ccb6e940800000000000000
+      internalID: 5325151163043725945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Jockey 1_13
+      rect:
+        serializedVersion: 2
+        x: 2957
+        y: 762
+        width: 1093
+        height: 1105
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8377c25d77e034f0800000000000000
+      internalID: -850925804127292533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 78b79c7f3c3238a47b6a4919f1b798bc
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Jockey 1_0: -8640049886207440008
+      Jockey 1_1: 6844642107704462547
+      Jockey 1_10: -6975931852843425763
+      Jockey 1_11: 2077432040807689329
+      Jockey 1_12: 5325151163043725945
+      Jockey 1_13: -850925804127292533
+      Jockey 1_2: 7125198823366637485
+      Jockey 1_3: -2959295339388734876
+      Jockey 1_4: -6542697458287375792
+      Jockey 1_5: 2667595088483740428
+      Jockey 1_6: 4236234501521157822
+      Jockey 1_7: 2433992969501831439
+      Jockey 1_8: 598678709237387665
+      Jockey 1_9: 7161579734505749880
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
