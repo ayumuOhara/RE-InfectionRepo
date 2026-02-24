@@ -16,5 +16,7 @@ MonoBehaviour:
   - statsData: {fileID: 11400000, guid: e6d3327307b2d5c4c9367da09a7e2d3b, type: 2}
     spawnCnt: 4
   - statsData: {fileID: 11400000, guid: 6b7696a2506e6254898ee43fc57898c2, type: 2}
-    spawnCnt: 3
+    spawnCnt: 4
+  - statsData: {fileID: 11400000, guid: f02c22218b66c3d46a4373dc16d76277, type: 2}
+    spawnCnt: 4
   spawnInterbal: 10

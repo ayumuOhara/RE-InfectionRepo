@@ -14,20 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UnitStats
   unitStats:
     animatorController: {fileID: 0}
-    unitSprite: {fileID: 21300014, guid: e48ddf4fb7304ce4ab48711eb6617a57, type: 3}
-    attackEffect: {fileID: 1158980101858124, guid: 7107c018d7a73af459cb58c37fd6972a, type: 3}
+    unitSprite: {fileID: 21300010, guid: f5f1c19ce87450f4b97f8b363746558d, type: 3}
+    attackEffect: {fileID: 0}
     unitName: "\u738B\u56FD\u306E\u30A8\u30EA\u30FC\u30C8\u9A0E\u58EB"
     jobType: 0
     targetType: 0
     maxHp: 6000
     attackType: 0
-    hitCnt: 2
-    radius: 0.05
-    atk: 40
-    atkInterbal: 1
+    hitCnt: 1
+    radius: 0
+    atk: 60
+    atkInterbal: 0.7
     range: 0.3
     moveType: 0
-    moveSpeed: 5
+    moveSpeed: 3
     summonCost: 0
     bossUnit: 1
     attackSe: {fileID: 8300000, guid: dab120b7a12444d42b8454c3420e7830, type: 3}
