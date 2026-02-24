@@ -19,6 +19,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 48c4a63fd40540143944a5bac900df27, type: 2}
   - {fileID: 11400000, guid: 2aa76ed0d3cd3d2458b4fd8f3ec8d620, type: 2}
   isClear: 0
-  waveClearCoin: 300
-  stageClearCoin: 600
-  firstClearCoin: 1500
+  waveClearCoin: 400
+  stageClearCoin: 800
+  firstClearCoin: 2000
