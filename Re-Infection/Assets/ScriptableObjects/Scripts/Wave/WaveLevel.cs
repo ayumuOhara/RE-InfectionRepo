@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
 [System.Serializable]
 public class LevelStats
@@ -13,6 +14,8 @@ public class WaveLevel : ScriptableObject
 {
     public LevelStats[] levelStats;
     public float spawnInterbal;       // スポーンする時間
+
+    public static event Action<UnitStats, LayerMask, Vector3> OnSpawnUnit;
 
     // レベル生成コルーチン
     public IEnumerator SpawnLevel()
@@ -29,11 +32,11 @@ public class WaveLevel : ScriptableObject
                 }
 
                 var spawnPos = new Vector3(0, 4.5f, 0);
-                spawnPos.x = Random.Range(-2f, 2f);
+                spawnPos.x = UnityEngine.Random.Range(-2f, 2f);
 
                 // LayerMask
                 // 7 == EnemyUnit
-                UnitManager.onSpawnUnit?.Invoke(Lstats.statsData.unitStats, 7, spawnPos);
+                OnSpawnUnit?.Invoke(Lstats.statsData.unitStats, 7, spawnPos);
                 yield return null;
             }
         }

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using System;
 using System.Collections.Generic;
 using TMPro;
 using System.Collections;
@@ -20,6 +21,8 @@ public class UnitIconClick : MonoBehaviour, IPointerClickHandler
 
     Vector3 spawnPos = new Vector3(0, -2.0f, 0);  // プレイヤーユニットの生成座標
     Vector2 defaltSize;
+
+    public static event Action<UnitStats, LayerMask, Vector3> OnClickIcon;
 
     void Awake()
     {
@@ -96,11 +99,11 @@ public class UnitIconClick : MonoBehaviour, IPointerClickHandler
     void GenerateUnit()
     {
         CostManager.onRemoveCost?.Invoke(unitData.unitStats.summonCost);
-        spawnPos.x = Random.Range(-1.7f, 1.7f);
+        spawnPos.x = UnityEngine.Random.Range(-1.7f, 1.7f);
 
         // LayerMask
         // 6 == PlayerUnit
-        UnitManager.onSpawnUnit?.Invoke(unitData.unitStats, 6, spawnPos);
+        OnClickIcon?.Invoke(unitData.unitStats, 6, spawnPos);
     }
 
     // ユニットの数を表示

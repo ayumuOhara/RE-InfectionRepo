@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Wave_2
   m_EditorClassIdentifier: Assembly-CSharp::WaveData
   waveLevels:
-  - {fileID: 11400000, guid: fcc4a1e04a598b74ea99fb3ca09040e1, type: 2}
-  - {fileID: 11400000, guid: 99bac9afebb939042a461304bd5c5e9a, type: 2}
-  - {fileID: 11400000, guid: a40ea300c502a7249b9279182eed0a45, type: 2}
+  - {fileID: 11400000, guid: 03988de0cc48fc347b6d74a74d21d82a, type: 2}
+  - {fileID: 11400000, guid: 9e8d8cf0a4df1f04c88b2d0f4302d6e6, type: 2}
+  - {fileID: 11400000, guid: 5fc8212966bcbdb40bc2752e089340a5, type: 2}
   bossWave: 0
