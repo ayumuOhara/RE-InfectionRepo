@@ -95,9 +95,9 @@ public class ShopManager : MonoBehaviour
     }
 
     // 渡された強化内容によってUI表示を操作
-    private void SetUpgradeTextAndButton(BaseUpgrade Upgrade)
+    private void SetUpgradeTextAndButton<T>(T upgrade) where T : BaseUpgrade
     {
-        switch (Upgrade.GetType().ToString())
+        switch (upgrade.GetType().ToString())
         {
             case "CastleUpgrade":
                 SetTextAndButton(playerStatusData.castleUpgrade, CastleLv_text, CastleUpgradeMoney_text, CastleButton);
@@ -157,26 +157,6 @@ public class ShopManager : MonoBehaviour
         SetUpgradeTextAndButton(playerStatusData.virusUpgrade);
     }
 
-    // 指定の強化内容のLvと必要なお金の表示切替
-    // レベルが最大の時、ボタンが触れられなくなる
-    private void SetTextAndButton(BaseUpgrade upgrade, TextMeshProUGUI lvText, TextMeshProUGUI moneyText, Button button)
-    {
-        lvText.text = upgrade.lv.ToString();
-        moneyText.text = upgrade.lv >= 3 ? "MAX" : $"<size=40><sprite=0><size=45>{upgrade.UpgradeMoney}";
-
-        if (playerStatusData.wallet.CurrentMoney < upgrade.UpgradeMoney || upgrade.lv >= upgrade.MaxLevel)
-        {
-            lvText.color = new Color(1f, 0.337f, 0.337f);
-            moneyText.color = new Color(1f, 0.337f, 0.337f);
-
-            //ボタンを押せなくする
-            if (button != null)
-            {
-                button.interactable = false;
-            }
-        }
-    }
-
     public void NoButton()
     {
         DialogObj.SetActive(false);
@@ -184,7 +164,7 @@ public class ShopManager : MonoBehaviour
     }
 
     // 渡された強化要素のアップグレードを行う
-    private void TryUpgrade(BaseUpgrade Upgrade, int money)
+    private void TryUpgrade<T>(T Upgrade, int money) where T : BaseUpgrade
     {
         if (Upgrade.lv >= Upgrade.MaxLevel)
         {
@@ -209,6 +189,26 @@ public class ShopManager : MonoBehaviour
 
         DialogObj.SetActive(false);
         LayCastObj.SetActive(false);
+    }
+
+    // 指定の強化内容のLvと必要なお金の表示切替
+    // レベルが最大の時、ボタンが触れられなくなる
+    private void SetTextAndButton<T>(T upgrade, TextMeshProUGUI lvText, TextMeshProUGUI moneyText, Button button) where T : BaseUpgrade
+    {
+        lvText.text = upgrade.lv.ToString();
+        moneyText.text = upgrade.lv >= 3 ? "MAX" : $"<size=40><sprite=0><size=45>{upgrade.UpgradeMoney}";
+
+        if (playerStatusData.wallet.CurrentMoney < upgrade.UpgradeMoney || upgrade.lv >= upgrade.MaxLevel)
+        {
+            lvText.color = new Color(1f, 0.337f, 0.337f);
+            moneyText.color = new Color(1f, 0.337f, 0.337f);
+
+            //ボタンを押せなくする
+            if (button != null)
+            {
+                button.interactable = false;
+            }
+        }
     }
 
     // TはBaseUpgradeを継承している必要がある

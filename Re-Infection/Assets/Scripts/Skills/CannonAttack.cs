@@ -10,6 +10,7 @@ public class CannonAttack : MonoBehaviour
     PlayerStatusData playerStatusData;
 
     public static event Action<float> OnSkillUsed;
+    public static event Action<UnitStats, Vector3> OnCloneUnit;
     private bool endSkill = true;
 
     UnitManager unitManager;
@@ -77,7 +78,7 @@ public class CannonAttack : MonoBehaviour
                 // 倒した敵の死体を複製(ボスユニット除外)
                 if (enemy.CurrentHealth <= 0 && !enemy.Stats.bossUnit)
                 {
-                    UnitManager.onCloneUnit?.Invoke(enemy.Stats, target.transform.position + new Vector3(0.1f, 0, 0));
+                    OnCloneUnit?.Invoke(enemy.Stats, target.transform.position + new Vector3(0.1f, 0, 0));
                 }
             }
         }
