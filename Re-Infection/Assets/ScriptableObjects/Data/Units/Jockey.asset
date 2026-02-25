@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UnitStats
   unitStats:
     animatorController: {fileID: 9100000, guid: ec837d4df03d5e4489257964b30de201, type: 2}
-    unitSprite: {fileID: 4236234501521157822, guid: b478d699903f9e24fb0bd362d61511b5, type: 3}
+    unitSprite: {fileID: -8640049886207440008, guid: b478d699903f9e24fb0bd362d61511b5, type: 3}
     attackEffect: {fileID: 0}
     unitName: "\u9A0E\u99AC\u5175"
     jobType: 5
