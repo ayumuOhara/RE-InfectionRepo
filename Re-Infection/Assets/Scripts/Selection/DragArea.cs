@@ -12,108 +12,78 @@ public class DropArea : MonoBehaviour, IDropHandler
 
     private void Start()
     {
-        // ▼ selectedUnits を slotIndex まで拡張
         while (UnitDataCarrier.Instance.selectedUnits.Count <= slotIndex)
             UnitDataCarrier.Instance.selectedUnits.Add(null);
 
-        // ▼ すでに保存されているデータがある場合（シーン復元）
         UnitStatsData saved = UnitDataCarrier.Instance.selectedUnits[slotIndex];
 
         if (saved != null)
         {
             currentUnitStats = saved;
             CreateCloneFromExistingIcon(saved);
-
-          
             UpdateAllCheckImage();
             return;
         }
 
-        // ▼ 保存データが無い → defaultUnit を初期値として使う
         if (defaultUnit != null)
         {
             currentUnitStats = defaultUnit;
             UnitDataCarrier.Instance.selectedUnits[slotIndex] = defaultUnit;
 
             CreateCloneFromExistingIcon(defaultUnit);
-
             UpdateAllCheckImage();
         }
+    }
+
+    //タップ編成・ドラッグ編成共通処理
+    public void SetUnitFromList(DragIconController fromList)
+    {
+        if (dropTargetParent.childCount > 0)
+            Destroy(dropTargetParent.GetChild(0).gameObject);
+
+        currentUnitStats = fromList.unitStats;
+        fromList.isUsedInDropArea = true;
+        //fromList.SetDraggable(false);
+
+        UnitDataCarrier.Instance.selectedUnits[slotIndex] = currentUnitStats;
+
+        CreateClone(fromList.gameObject);
+        UpdateAllCheckImage();
+    }
+
+    //空きスロットを slotIndex 昇順で探す
+    public static DropArea GetFirstEmptySlot()
+    {
+        DropArea[] areas = FindObjectsOfType<DropArea>();
+        System.Array.Sort(areas, (a, b) => a.slotIndex.CompareTo(b.slotIndex));
+
+        foreach (var area in areas)
+        {
+            if (area.currentUnitStats == null)
+                return area;
+        }
+
+        return null;
     }
 
     public void OnDrop(PointerEventData eventData)
     {
         if (eventData.pointerDrag == null)
-        {
             return;
-           
-        }
-        GameObject dropped = eventData.pointerDrag;
-        DragIconController fromList = dropped.GetComponent<DragIconController>();
-        DropAreaIconDrag fromDropArea = dropped.GetComponent<DropAreaIconDrag>();
 
-        //重複チェック（同じユニットなら弾く）
-        UnitStatsData incomingStats =
-            fromList != null ? fromList.unitStats :
-            fromDropArea != null ? fromDropArea.unitStats : null;
+        DragIconController fromList = eventData.pointerDrag.GetComponent<DragIconController>();
+        DropAreaIconDrag fromDropArea = eventData.pointerDrag.GetComponent<DropAreaIconDrag>();
 
-
-
-        //他の DropArea に同じユニットが入っていないかチェック
-        if (incomingStats != null && fromList != null)
-        {
-            if (IsUnitInAnyDropArea(incomingStats) && currentUnitStats != incomingStats)
-            {
-                Debug.Log($"【重複禁止】ユニット {incomingStats.name} はすでに編成されています");
-                return;
-            }
-        }
-
-        // selectedUnits サイズ保証
-        while (UnitDataCarrier.Instance.selectedUnits.Count <= slotIndex)
-            UnitDataCarrier.Instance.selectedUnits.Add(null);
-
-        // ▼ DragIconController → DropArea（リストからの新規 or 上書き）
+        //リスト → DropArea
         if (fromList != null)
         {
-            // 古い Clone があるなら解除
-            if (dropTargetParent.childCount > 0)
-            {
-                var oldClone = dropTargetParent.GetChild(0);
-                var oldDrag = oldClone.GetComponent<DropAreaIconDrag>();
-
-                if (oldDrag != null)
-                {
-                    foreach (var icon in FindObjectsOfType<DragIconController>())
-                    {
-                        if (icon.unitStats == oldDrag.unitStats)
-                        {
-                            icon.isUsedInDropArea = false;
-                            icon.SetDraggable(true);
-                            icon.CheckObj(false);
-                        }
-                    }
-                }
-
-                Destroy(oldClone.gameObject);
-            }
-
-            // 新しいユニット登録
-            currentUnitStats = fromList.unitStats;
-            fromList.isUsedInDropArea = true;
-            fromList.SetDraggable(false);
-
-            UnitDataCarrier.Instance.selectedUnits[slotIndex] = currentUnitStats;
-
-            CreateClone(dropped);
-            UpdateAllCheckImage();
+            SetUnitFromList(fromList);
             return;
         }
 
-        // ▼ DropAreaIconDrag → DropArea（Clone の移動）
+        //DropArea → DropArea（clone 移動）
         if (fromDropArea != null)
         {
-
             DropArea oldArea = fromDropArea.originalDropArea;
 
             if (oldArea != null && oldArea != this)
@@ -123,22 +93,18 @@ public class DropArea : MonoBehaviour, IDropHandler
             }
 
             if (dropTargetParent.childCount > 0)
-            {
                 Destroy(dropTargetParent.GetChild(0).gameObject);
-            }
-            dropped.transform.SetParent(dropTargetParent);
-            dropped.GetComponent<RectTransform>().anchoredPosition = new Vector2(53, -49);
+
+            eventData.pointerDrag.transform.SetParent(dropTargetParent);
+            eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = new Vector2(53, -49);
 
             currentUnitStats = fromDropArea.unitStats;
             UnitDataCarrier.Instance.selectedUnits[slotIndex] = currentUnitStats;
 
             fromDropArea.originalDropArea = this;
-            fromDropArea.droppedSuccessfully = true;
             fromDropArea.slotIndex = slotIndex;
 
             UpdateAllCheckImage();
-            return;
-
         }
     }
 
@@ -146,7 +112,6 @@ public class DropArea : MonoBehaviour, IDropHandler
     {
         GameObject clone = Instantiate(original, dropTargetParent);
         RectTransform rt = clone.GetComponent<RectTransform>();
-
         rt.anchoredPosition = new Vector2(53f, -49f);
 
         // DragIconController を削除
@@ -154,41 +119,79 @@ public class DropArea : MonoBehaviour, IDropHandler
         foreach (var comp in clone.GetComponentsInChildren<DragIconController>())
             Destroy(comp);
 
-        //CanvasGroup を必ず付ける
+        // CanvasGroup（Raycast 有効）
         CanvasGroup cg = clone.GetComponent<CanvasGroup>();
         if (cg == null) cg = clone.AddComponent<CanvasGroup>();
-
-        //ここを false にすることで、DropArea に Raycast を通す
-        cg.blocksRaycasts = false;
+        cg.blocksRaycasts = true;
         cg.interactable = true;
         cg.alpha = 1f;
+
+        //透明 Image を追加（クリック判定用）
+        Image img = clone.GetComponent<Image>();
+        if (img == null)
+            img = clone.AddComponent<Image>();
+
+        img.color = new Color(0, 0, 0, 0); // 完全透明
+        img.raycastTarget = true;
 
         // DropAreaIconDrag を付ける
         DropAreaIconDrag dragScript = clone.AddComponent<DropAreaIconDrag>();
         dragScript.slotIndex = slotIndex;
         dragScript.unitStats = currentUnitStats;
-
         dragScript.originalDropArea = this;
-        dragScript.SetOriginalPos();
 
-        // Clone の CheckImage を非表示
-        var checkImages = clone.GetComponentsInChildren<Image>(true);
-        foreach (var img in checkImages)
+        // CheckImage を非表示
+        foreach (var i in clone.GetComponentsInChildren<Image>(true))
+        {
+            if (i.gameObject.name == "CheckImage")
+                i.enabled = false;
+        }
+    }
+
+    private void CreateCloneFromExistingIcon(UnitStatsData stats)
+    {
+        DragIconController[] icons = FindObjectsOfType<DragIconController>();
+        DragIconController source = null;
+
+        foreach (var icon in icons)
+        {
+            if (icon.unitStats == stats)
+            {
+                source = icon;
+                break;
+            }
+        }
+
+        if (source == null)
+        {
+            Debug.LogError("復元対象の DragIcon が見つかりません");
+            return;
+        }
+
+        GameObject clone = Instantiate(source.gameObject, dropTargetParent);
+
+        Destroy(clone.GetComponent<DragIconController>());
+        foreach (var comp in clone.GetComponentsInChildren<DragIconController>())
+            Destroy(comp);
+
+        RectTransform rt = clone.GetComponent<RectTransform>();
+        rt.anchoredPosition = new Vector2(53f, -49f);
+
+        CanvasGroup cg = clone.GetComponent<CanvasGroup>();
+        if (cg == null) cg = clone.AddComponent<CanvasGroup>();
+        cg.blocksRaycasts = true;
+
+        DropAreaIconDrag dragScript = clone.AddComponent<DropAreaIconDrag>();
+        dragScript.slotIndex = slotIndex;
+        dragScript.unitStats = stats;
+        dragScript.originalDropArea = this;
+        //dragScript.SetOriginalPos();
+
+        foreach (var img in clone.GetComponentsInChildren<Image>(true))
         {
             if (img.gameObject.name == "CheckImage")
                 img.enabled = false;
         }
-    }
-
-    public static bool IsUnitInAnyDropArea(UnitStatsData target)
-    {
-        DropArea[] areas = FindObjectsOfType<DropArea>();
-        foreach (var da in areas)
-        {
-            if (da.currentUnitStats == target)
-                return true;
-        }
-        return false;
     }
 
     public static void UpdateAllCheckImage()
@@ -209,90 +212,9 @@ public class DropArea : MonoBehaviour, IDropHandler
                 }
             }
 
-            icon.isUsedInDropArea = isUsed;   
-            icon.SetDraggable(!isUsed);       
+            icon.isUsedInDropArea = isUsed;
+            //icon.SetDraggable(!isUsed);
             icon.CheckObj(isUsed);
         }
     }
-
-    public void CreateUnit()
-    {
-        // DragIconController の制限解除
-        foreach (var icon in FindObjectsOfType<DragIconController>())
-        {
-            if (icon.unitStats == currentUnitStats)
-            {
-                icon.isUsedInDropArea = false;
-                icon.SetDraggable(true); 
-                icon.CheckObj(false);
-            }
-        }
-
-       
-       
-
-        // データ削除
-        UnitDataCarrier.Instance.selectedUnits[slotIndex] = null;
-        currentUnitStats = null;
-    }
-
-    private void CreateCloneFromExistingIcon(UnitStatsData stats)
-    {
-        // シーン内の DragIconController を全部探す
-        DragIconController[] icons = FindObjectsOfType<DragIconController>();
-
-        DragIconController source = null;
-
-        foreach (var icon in icons)
-        {
-            if (icon.unitStats == stats)
-            {
-                source = icon;
-                break;
-            }
-        }
-
-        if (source == null)
-        {
-            Debug.LogError("復元対象の DragIcon がシーン内に見つかりません");
-            return;
-        }
-
-        // Clone を作成
-        GameObject clone = Instantiate(source.gameObject, dropTargetParent);
-
-        // DragIconController を削除
-        Destroy(clone.GetComponent<DragIconController>());
-
-        // 子に DragIconController がいたら削除
-        foreach (var comp in clone.GetComponentsInChildren<DragIconController>())
-            Destroy(comp);
-
-        // 位置調整
-        RectTransform rt = clone.GetComponent<RectTransform>();
-        rt.anchoredPosition = new Vector2(53f, -49f);
-
-        // CanvasGroup を付ける
-        CanvasGroup cg = clone.GetComponent<CanvasGroup>();
-        if (cg == null) cg = clone.AddComponent<CanvasGroup>();
-        cg.blocksRaycasts = false;
-        cg.interactable = true;
-        cg.alpha = 1f;
-
-        // DropAreaIconDrag を付ける
-        DropAreaIconDrag dragScript = clone.AddComponent<DropAreaIconDrag>();
-        dragScript.slotIndex = slotIndex;
-        dragScript.unitStats = stats;
-        dragScript.originalDropArea = this;
-        dragScript.SetOriginalPos();
-
-        // CheckImage を非表示
-        foreach (var img in clone.GetComponentsInChildren<Image>(true))
-        {
-            if (img.gameObject.name == "CheckImage")
-                img.enabled = false;
-        }
-    }
-
-
 }
