@@ -110,6 +110,8 @@ public class UnitStats
                 return Resources.Load<Material>($"Materials/{targetOutline}/Tank");
             case "Clergyman_0":
                 return Resources.Load<Material>($"Materials/{targetOutline}/Clergyman");
+            case "Jockey_0":
+                return Resources.Load<Material>($"Materials/{targetOutline}/Jockey");
             default:
                 return null;
         }
