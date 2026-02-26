@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WaveLevel
   levelStats:
   - statsData: {fileID: 11400000, guid: b92b3387e050d804c96d18a3d08de2a8, type: 2}
-    spawnCnt: 3
-  - statsData: {fileID: 11400000, guid: f02c22218b66c3d46a4373dc16d76277, type: 2}
+    spawnCnt: 2
+  - statsData: {fileID: 11400000, guid: e6d3327307b2d5c4c9367da09a7e2d3b, type: 2}
     spawnCnt: 4
   - statsData: {fileID: 11400000, guid: a5b873a3a6c417b43aa7c5049c047649, type: 2}
-    spawnCnt: 4
-  spawnInterbal: 15
+    spawnCnt: 2
+  spawnInterbal: 25
