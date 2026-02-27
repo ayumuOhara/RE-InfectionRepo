@@ -29,6 +29,8 @@ namespace VirusPointer
 
         bool isDragCancel = false;  // 使用キャンセルフラグ
 
+        private bool isActive = true;
+
         // ドラッグ終了待機
         public static TaskCompletionSource<PointerEventData> dragEndTcs;
 
@@ -114,6 +116,12 @@ namespace VirusPointer
                 sr.enabled = true;
                 isDragCancel = false;
             }
+        }
+
+        public void SetSkillActive(bool active)
+        {
+            isActive = active;
+            gameObject.SetActive(active);
         }
     }
 }
