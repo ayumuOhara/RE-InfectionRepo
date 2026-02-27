@@ -41,15 +41,15 @@ public class Types
 [Serializable]
 public class StatusScaler
 {
-    [Header("最大HPのLv補正(%)")]
+    [Header("最大HPの上昇値")]
     [SerializeField]
     private float maxHpScaler;
-    public float MaxHPScaler => maxHpScaler / 100;
+    public float MaxHPScaler => maxHpScaler;
 
-    [Header("攻撃力のLv補正(%)")]
+    [Header("攻撃力の上昇値")]
     [SerializeField]
     private float atkScaler;
-    public float AtkScaler => atkScaler / 100;
+    public float AtkScaler => atkScaler;
 
     [Header("次のレベルアップに必要なお金(※最大レベルでは無効)")]
     [SerializeField]
@@ -80,7 +80,7 @@ public class UnitStats
     [Header("攻撃/移動 目標")]
     public Types.TargetType targetType; // 攻撃または移動対象
 
-    [Header("Lv毎の補正値")]
+    [Header("Lv毎の上昇値")]
     public StatusScaler[] statusScaler;
     [Header("最大HP")]
     public float maxHp;                 // 最大HP
@@ -188,32 +188,32 @@ public class UnitStats
         }
     }
 
-    // 現在のレベルの体力の補正値
+    // 現在のレベルの体力の上昇値
     public float GetCurrentLevelMaxHp()
     {
         if (statusScaler == null) return maxHp;
-        return maxHp * (1 + statusScaler[LvIdx].MaxHPScaler);
+        return maxHp +  statusScaler[LvIdx].MaxHPScaler;
     }
 
-    // 現在のレベルの攻撃力の補正値
+    // 現在のレベルの攻撃力の上昇値
     public float GetCurrentLevelAtk()
     {
         if (statusScaler == null) return atk;
-        return atk * (1 + statusScaler[LvIdx].AtkScaler);
+        return atk + statusScaler[LvIdx].AtkScaler;
     }
 
-    // 渡されたレベルの体力の補正値
+    // 渡されたレベルの体力の上昇値
     public float GetLevelofMaxHp(int lv)
     {
         if (statusScaler == null) return maxHp;
-        return maxHp * (1 + statusScaler[level.ClampLevelIndex(lv)].MaxHPScaler);
+        return maxHp + statusScaler[level.ClampLevelIndex(lv)].MaxHPScaler;
     }
 
-    // 渡されたレベルの攻撃力の補正値
+    // 渡されたレベルの攻撃力の上昇値
     public float GetLevelofAtk(int lv)
     {
         if (statusScaler == null) return atk;
-        return atk * (1 + statusScaler[level.ClampLevelIndex(lv)].AtkScaler);
+        return atk + statusScaler[level.ClampLevelIndex(lv)].AtkScaler;
     }
 }
 
