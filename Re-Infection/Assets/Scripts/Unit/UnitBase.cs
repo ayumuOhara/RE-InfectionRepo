@@ -13,7 +13,7 @@ public abstract class UnitBase : PooledObject, IHealth, IMovable, IAttackable
     [SerializeField] protected Material defaultMaterial;
     public Animator animator {  get; private set; }
 
-    private UnitStats stats;
+    protected UnitStats stats;
     public UnitStats Stats => stats;
 
     public LayerMask targetLayer;
@@ -49,10 +49,10 @@ public abstract class UnitBase : PooledObject, IHealth, IMovable, IAttackable
 
     public Vector3 TargetPos => GetTargetPos();
 
-    MovementBase movementBase;
+    protected MovementBase movementBase;
     public MovementBase Movement => movementBase;
 
-    AttackBase attackBase;
+    protected AttackBase attackBase;
 
     public UnitStateManager stateManager { get; private set; }
     

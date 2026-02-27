@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 using UnityEngine;
 
@@ -37,6 +38,21 @@ public class Types
     }
 }
 
+[Serializable]
+public struct StatusScaler
+{
+    [Header("最大HPのLv補正")]
+    [Range(0f, 2f)]
+    public float maxHpScaler;
+
+    [Header("攻撃力のLv補正")]
+    [Range(0f, 2f)]
+    public float atkScaler;
+
+    [Header("次のレベルアップに必要なお金(※最大レベルでは無効)")]
+    public uint levelUpCost;
+}
+
 [System.Serializable]
 public class UnitStats
 {
@@ -54,6 +70,8 @@ public class UnitStats
     [Header("攻撃/移動 目標")]
     public Types.TargetType targetType; // 攻撃または移動対象
 
+    [Header("Lv毎の補正値")]
+    public StatusScaler[] statusScaler;
     [Header("最大HP")]
     public float maxHp;                 // 最大HP
     [Header("攻撃タイプ")]
@@ -92,52 +110,45 @@ public class UnitStats
     [Header("攻撃時のSE")]
     public AudioClip attackSe;          // 攻撃音
 
+    private Level level = new Level();
+    public int lv => level.lv;  // ユニットのレベル
+    public int LvIdx => level.LvIdx;    // 配列の添え字に使うレベル
+    public int MaxLevel => statusScaler.Length;     // レベルの最大値 
+    public void SetLevel(int lv) => level.SetLevel(lv);     // 引数をレベルに設定
+    public void SetMaxLevel(int lv) => level.SetMaxLevel(lv);   // 最大レベルを設定
+    public void LevelUP() => level.SetLevel(lv + 1);    // 次のレベルへアップ
+    public int GetNextLevelCost() => (int)statusScaler[LvIdx].levelUpCost; // レベルアップに必要なコストを取得
+
     public Material GetOutline(string targetOutline)
     {
-        switch (this.unitSprite.name)
+        return this.unitSprite.name switch
         {
-            case "Archer_0":
-                return Resources.Load<Material>($"Materials/{targetOutline}/Archer");
-            case "Warrior_0":
-                return Resources.Load<Material>($"Materials/{targetOutline}/Warrior");
-            case "Bow_0":
-                return Resources.Load<Material>($"Materials/{targetOutline}/Bow");
-            case "Witch_0":
-                return Resources.Load<Material>($"Materials/{targetOutline}/Witch");
-            case "Swordsman_0":
-                return Resources.Load<Material>($"Materials/{targetOutline}/Swordsman");
-            case "Tank_0":
-                return Resources.Load<Material>($"Materials/{targetOutline}/Tank");
-            case "Clergyman_0":
-                return Resources.Load<Material>($"Materials/{targetOutline}/Clergyman");
-            case "Jockey_0":
-                return Resources.Load<Material>($"Materials/{targetOutline}/Jockey");
-            default:
-                return null;
-        }
+            "Archer_0" => Resources.Load<Material>($"Materials/{targetOutline}/Archer"),
+            "Warrior_0" => Resources.Load<Material>($"Materials/{targetOutline}/Warrior"),
+            "Bow_0" => Resources.Load<Material>($"Materials/{targetOutline}/Bow"),
+            "Witch_0" => Resources.Load<Material>($"Materials/{targetOutline}/Witch"),
+            "Swordsman_0" => Resources.Load<Material>($"Materials/{targetOutline}/Swordsman"),
+            "Tank_0" => Resources.Load<Material>($"Materials/{targetOutline}/Tank"),
+            "Clergyman_0" => Resources.Load<Material>($"Materials/{targetOutline}/Clergyman"),
+            "Jockey_0" => Resources.Load<Material>($"Materials/{targetOutline}/Jockey"),
+            _ => null
+        };
     }
 
     public Sprite JobSprite
     {
         get
         {
-            switch (jobType)
+            return jobType switch
             {
-                case Types.JobType.SOLDIER:
-                    return Resources.Load<Sprite>("Sprites/SoldierIcon");
-                case Types.JobType.HAMMER:
-                    return Resources.Load<Sprite>("Sprites/HammerIcon");
-                case Types.JobType.TANK:
-                    return Resources.Load<Sprite>("Sprites/TankIcon");
-                case Types.JobType.ARCHER:
-                    return Resources.Load<Sprite>("Sprites/ArcherIcon");
-                case Types.JobType.MAGE:
-                    return Resources.Load<Sprite>("Sprites/MageIcon");
-                case Types.JobType.CAVALRY:
-                    return Resources.Load<Sprite>("Sprites/CavalryIcon");
-                default:
-                    return Resources.Load<Sprite>("Sprites/DefaultIcon");
-            }
+                Types.JobType.SOLDIER => Resources.Load<Sprite>("Sprites/SoldierIcon"),
+                Types.JobType.HAMMER => Resources.Load<Sprite>("Sprites/HammerIcon"),
+                Types.JobType.TANK => Resources.Load<Sprite>("Sprites/TankIcon"),
+                Types.JobType.ARCHER => Resources.Load<Sprite>("Sprites/ArcherIcon"),
+                Types.JobType.MAGE => Resources.Load<Sprite>("Sprites/MageIcon"),
+                Types.JobType.CAVALRY => Resources.Load<Sprite>("Sprites/CavalryIcon"),
+                _ => Resources.Load<Sprite>("Sprites/DefaultIcon")
+            };
         }
     }
 
@@ -145,17 +156,13 @@ public class UnitStats
     {
         get
         {
-            switch(attackType)
+            return attackType switch
             {
-                case Types.AttackType.SINGLE:
-                    return new AttackOfSingle();
-                case Types.AttackType.AREA_MELEE:
-                    return new AttackOfAreaMelee();
-                case Types.AttackType.AREA_RANGE:
-                    return new AttackOfAreaRange();
-                default:
-                    return null;
-            }
+                Types.AttackType.SINGLE => new AttackOfSingle(),
+                Types.AttackType.AREA_MELEE => new AttackOfAreaMelee(),
+                Types.AttackType.AREA_RANGE => new AttackOfAreaRange(),
+                _ => null
+            };
         }
     }
 
@@ -163,14 +170,36 @@ public class UnitStats
     {
         get
         {
-            switch(moveType)
+            return moveType switch
             {
-                case Types.MoveType.RUN:
-                    return new RunMovement();
-                default:
-                    return null;
-            }
+                Types.MoveType.RUN => new RunMovement(),
+                _ => null
+            };
         }
+    }
+
+    // 現在のレベルの体力の補正値
+    public float GetCurrentLevelMaxHp()
+    {
+        return maxHp * statusScaler[LvIdx].maxHpScaler;
+    }
+
+    // 現在のレベルの攻撃力の補正値
+    public float GetCurrentLevelAtk()
+    {
+        return atk * statusScaler[LvIdx].atkScaler;
+    }
+
+    // 渡されたレベルの体力の補正値
+    public float GetLevelofMaxHp(int lv)
+    {
+        return maxHp * statusScaler[level.ClampLevelIndex(lv)].maxHpScaler;
+    }
+
+    // 渡されたレベルの攻撃力の補正値
+    public float GetLevelofAtk(int lv)
+    {
+        return atk * statusScaler[level.ClampLevelIndex(lv)].atkScaler;
     }
 }
 
@@ -178,4 +207,10 @@ public class UnitStats
 public class UnitStatsData : ScriptableObject
 {
     public UnitStats unitStats;
+
+    private void OnEnable()
+    {
+        if(unitStats.statusScaler != null)
+            unitStats.SetMaxLevel(unitStats.MaxLevel);
+    }
 }

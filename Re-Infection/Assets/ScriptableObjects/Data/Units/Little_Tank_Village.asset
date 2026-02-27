@@ -15,11 +15,11 @@ MonoBehaviour:
   unitStats:
     animatorController: {fileID: 0}
     unitSprite: {fileID: 21300008, guid: f5f1c19ce87450f4b97f8b363746558d, type: 3}
-    outline: {fileID: 2100000, guid: a01f773aa1da9f649851cb36b923d9b7, type: 2}
     attackEffect: {fileID: 0}
     unitName: "\u6751\u306E\u5C0F\u4EBA\u93A7\u5175"
     jobType: 2
     targetType: 0
+    statusScaler: []
     maxHp: 200
     attackType: 0
     hitCnt: 1

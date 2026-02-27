@@ -19,6 +19,7 @@ MonoBehaviour:
     unitName: "\u3055\u3059\u3089\u3044\u306E\u5263\u58EB"
     jobType: 0
     targetType: 0
+    statusScaler: []
     maxHp: 500
     attackType: 0
     hitCnt: 1

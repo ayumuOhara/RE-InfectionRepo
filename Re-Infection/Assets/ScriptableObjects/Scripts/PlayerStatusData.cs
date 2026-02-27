@@ -2,34 +2,66 @@ using JetBrains.Annotations;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem.Layouts;
+using UnityEngine.UI;
+
+[Serializable]
+public class Level
+{
+    private int maxlv;
+
+    [SerializeField] private int _lv = 1;
+    public int lv
+    {
+        get
+        {
+            return _lv;
+        }
+        private set
+        {
+            _lv = ClampLevel(value);
+        }
+    }
+
+    public int LvIdx => ClampLevelIndex(_lv);
+
+    public void SetLevel(int level) => lv = level;
+    public void SetMaxLevel(int maxLevel) => maxlv = maxLevel;
+
+    public int ClampLevel(int level)
+    {
+        return Mathf.Clamp(level, 1, maxlv);
+    }
+
+    public int ClampLevelIndex(int level)
+    {
+        return Mathf.Clamp(level - 1, 0, maxlv - 2);
+    }
+}
 
 [System.Serializable]
 public abstract class BaseUpgrade
 {
-    public int lv { get; private set; }
-    public int MaxLevel => upgradeMoney.Length;
+    private Level level = new Level();
+
+    public int lv => level.lv;
+    public int LvIdx => level.LvIdx;
+    public int MaxLevel => upgradeMoney.Length + 1;
+    public void SetUpgradeLevel(int lv) => level.SetLevel(lv);
+    public void SetMaxlevel() => level.SetMaxLevel(MaxLevel);
+    public int ClampLevel(int lv) => level.ClampLevel(lv);
+    public int ClampLevelIndex(int lv) => level.ClampLevelIndex(lv);
+    public int UpgradeMoney => (int)upgradeMoney[ClampLevelIndex(lv)];
+    public bool canUpgrade => lv < MaxLevel;
 
     [Header("各Lv(0~)のアップグレードのコスト(※最大レベルを除く)")]
     [Tooltip("各Lvからアップグレードする際に必要になるコインの数\nまた、配列のサイズがそのままレベルの最大値になる")]
     [SerializeField]
-    private int[] upgradeMoney;
-    public int UpgradeMoney => upgradeMoney[lv >= MaxLevel ? lv - 1 : lv];
-
-    public void SetUpgradeLevel(int level)
-    {
-        lv = level;
-        ClampLevel(level);
-    }
+    private uint[] upgradeMoney;
 
     // アップグレードの性能を取得
     public virtual object GetLevelofUpgrade(int level)
     {
         return null;
-    }
-
-    protected int ClampLevel(int level)
-    {
-        return Mathf.Clamp(level, 0, MaxLevel - 1);
     }
 }
 
@@ -43,12 +75,11 @@ public class CastleUpgrade : BaseUpgrade
 
     public override object GetLevelofUpgrade(int level)
     {
-        ClampLevel(level);
-        return healths[level];
+        return healths[ClampLevelIndex(level)];
     }
 
     // 現在のレベルに応じた値を返す
-    public int Health => healths[lv];
+    public int Health => healths[LvIdx];
 }
 
 [System.Serializable]
@@ -61,12 +92,11 @@ public class CannonDamageUpgrade : BaseUpgrade
 
     public override object GetLevelofUpgrade(int level)
     {
-        ClampLevel(level);
-        return damages[level];
+        return damages[ClampLevelIndex(level)];
     }
 
     // 現在のレベルに応じた値を返す
-    public int Damage => damages[lv];
+    public int Damage => damages[LvIdx];
 }
 
 [System.Serializable]
@@ -78,11 +108,10 @@ public class CannonCoolTimeUpgrade : BaseUpgrade
 
     public override object GetLevelofUpgrade(int level)
     {
-        ClampLevel(level);
-        return (int)coolTime[level];
+        return (int)coolTime[ClampLevelIndex(level)];
     }
 
-    public int CoolTime => (int)coolTime[lv];
+    public int CoolTime => (int)coolTime[LvIdx];
 }
 
 [System.Serializable]
@@ -95,12 +124,11 @@ public class CostLimitUpgrade : BaseUpgrade
 
     public override object GetLevelofUpgrade(int level)
     {
-        ClampLevel(level);
-        return maxCostCnt[level];
+        return maxCostCnt[ClampLevelIndex(level)];
     }
 
     // 現在のレベルに応じた値を返す
-    public int MaxCost => maxCostCnt[lv];
+    public int MaxCost => maxCostCnt[LvIdx];
 }
 
 [System.Serializable]
@@ -113,12 +141,11 @@ public class CostGenerationSpeedUpgrade : BaseUpgrade
 
     public override object GetLevelofUpgrade(int level)
     {
-        ClampLevel(level);
-        return generateSpeed[level];
+        return generateSpeed[ClampLevelIndex(level)];
     }
 
     // 現在のレベルに応じた値を返す
-    public float GenerateSpeed => generateSpeed[lv];
+    public float GenerateSpeed => generateSpeed[LvIdx];
 }
 
 [System.Serializable]
@@ -133,12 +160,11 @@ public class VirusUpgrade : BaseUpgrade
 
     public override object GetLevelofUpgrade(int level)
     {
-        ClampLevel(level);
-        return reviveHealthRate[level];
+        return reviveHealthRate[ClampLevelIndex(level)];
     }
 
     // 現在のレベルに応じた値を返す
-    public float ReviveHealthRate => reviveHealthRate[lv];
+    public float ReviveHealthRate => reviveHealthRate[LvIdx];
 }
 
 [CreateAssetMenu(fileName = "PlayerStatusData", menuName = "Scriptable Objects/PlayerStatusData")]
@@ -152,14 +178,24 @@ public class PlayerStatusData : ScriptableObject
     public CostGenerationSpeedUpgrade costGenerationSpeedUpgrade;
     public VirusUpgrade virusUpgrade;
 
+    private void OnEnable()
+    {
+        castleUpgrade.SetMaxlevel();
+        cannonDamageUpgrade.SetMaxlevel();
+        cannonCoolTimeUpgrade.SetMaxlevel();
+        costLimitUpgrade.SetMaxlevel();
+        costGenerationSpeedUpgrade.SetMaxlevel();
+        virusUpgrade.SetMaxlevel();
+    }
+
     [ContextMenu("全アビリティのLvをリセット")]
     public void ResetAllLevels()
     {
-        castleUpgrade.SetUpgradeLevel(0);
-        cannonDamageUpgrade.SetUpgradeLevel(0);
-        cannonCoolTimeUpgrade.SetUpgradeLevel(0);
-        costLimitUpgrade.SetUpgradeLevel(0);
-        costGenerationSpeedUpgrade.SetUpgradeLevel(0);
-        virusUpgrade.SetUpgradeLevel(0);
+        castleUpgrade.SetUpgradeLevel(1);
+        cannonDamageUpgrade.SetUpgradeLevel(1);
+        cannonCoolTimeUpgrade.SetUpgradeLevel(1);
+        costLimitUpgrade.SetUpgradeLevel(1);
+        costGenerationSpeedUpgrade.SetUpgradeLevel(1);
+        virusUpgrade.SetUpgradeLevel(1);
     }
 }
