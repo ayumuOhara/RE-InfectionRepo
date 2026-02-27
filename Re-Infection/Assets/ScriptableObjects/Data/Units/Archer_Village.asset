@@ -23,18 +23,6 @@ MonoBehaviour:
     - maxHpScaler: 0
       atkScaler: 0
       levelUpCost: 0
-    - maxHpScaler: 0
-      atkScaler: 0
-      levelUpCost: 0
-    - maxHpScaler: 0
-      atkScaler: 0
-      levelUpCost: 0
-    - maxHpScaler: 0
-      atkScaler: 0
-      levelUpCost: 0
-    - maxHpScaler: 0
-      atkScaler: 0
-      levelUpCost: 0
     maxHp: 30
     attackType: 0
     hitCnt: 1

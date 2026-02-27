@@ -1,216 +1,77 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using UnityEngine.Events;
 
-
-public class DragIconController : MonoBehaviour,
-    IBeginDragHandler, IDragHandler, IEndDragHandler
+public class DragIconController : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private Image unitIcon;
 
-    private RectTransform rectTransform;
-    private Canvas canvas;
     private CanvasGroup canvasGroup;
+
+    public bool isAnimating = false;
 
     public UnitStatsData unitStats;
     public bool isUsedInDropArea = false;
     public GameObject CheckImage;
 
-    public UnitDetailUII detaUI;
-
-    [Header("ユニット購入")]
-    public bool isPaidUnit = false;
-    public int price = 0;
-    public GameObject paidUnitKey;
-    public GameObject notEnoughMoneyObj;
-    public UnitPaidDialog paidDialog;
-    public TextMeshProUGUI price_text;
-    public Wallet wallet;
-
     public TextMeshProUGUI cost_text;
 
-    private Transform originalParent;
-    private Vector2 originalPos;
+    public UnitDetailUII detailUI;
 
-    private DropArea lastHoveredDropArea = null;
-    private GameObject removedClone = null;
-    private DropArea hoveredArea = null;
-    private bool droppedSuccessfully = false;
     void Awake()
     {
-        wallet = Resources.Load<PlayerStatusData>("PlayerStatusData").wallet;
-        rectTransform = GetComponent<RectTransform>();
-        canvas = GetComponentInParent<Canvas>();
         canvasGroup = GetComponent<CanvasGroup>();
+        if (canvasGroup == null) canvasGroup = gameObject.AddComponent<CanvasGroup>();
 
-        originalParent = transform.parent;
         unitIcon.sprite = unitStats.unitStats.unitSprite;
         cost_text.text = $"{unitStats.unitStats.summonCost}";
+    }
 
-        notEnoughMoneyObj.SetActive(false);
-
-        if (isPaidUnit)
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        StartCoroutine(ClickAnimation());
+        // ① 未編成なら編成する（最優先）
+        if (!isUsedInDropArea)
         {
-            paidUnitKey.SetActive(true);
-            price_text.text = price.ToString();
-
-            paidDialog.onClickYes = () =>
+            DropArea empty = DropArea.GetFirstEmptySlot();
+            if (empty != null)
             {
-                if (!wallet.CanBuy(price))
-                {
-                    if (notEnoughMoneyObj != null)
-                        StartCoroutine(NotEnoughMoney());
-                    return;
-                }
-
-                wallet.RemoveMoney(price);
-
-                isPaidUnit = false;
-                paidUnitKey.SetActive(false);
-
-                paidDialog.UnitPaidDialogObj.SetActive(false);
-            };
+                empty.SetUnitFromList(this);
+            }
         }
-        else
+
+        // ② そのあと必ず詳細 UI を開く
+        if (detailUI != null)
         {
-            paidUnitKey.SetActive(false);
+            detailUI.SetUnit(unitStats.unitStats);
         }
-        canvasGroup.blocksRaycasts = true;
     }
 
-  
-    public void SetDraggable(bool canDrag)
+private IEnumerator ClickAnimation()
     {
-        canvasGroup.blocksRaycasts = canDrag;
-        unitIcon.raycastTarget = canDrag;  
-    }
+        if (isAnimating) yield break;
+        isAnimating = true;
 
-    public void OnBeginDrag(PointerEventData eventData)
-    {
-        if (isUsedInDropArea)
-            return; //DropArea に入っているならドラッグ開始禁止
+        RectTransform rt = GetComponent<RectTransform>();
 
-        canvasGroup.ignoreParentGroups = true;
+        //元のスケール
+        Vector3 originalScale = rt.localScale;
 
-        originalParent = transform.parent;
-        originalPos = rectTransform.anchoredPosition;
+        //少し縮む
+        rt.localScale = originalScale * 0.9f;
+        yield return new WaitForSeconds(0.05f);
 
-        CheckImage.SetActive(false);
+        //元に戻る
+        rt.localScale = originalScale;
+        yield return new WaitForSeconds(0.05f);
 
-        transform.SetParent(canvas.transform, true);
-        transform.SetAsLastSibling();
-
-        canvasGroup.blocksRaycasts = false;
-    }
-
-    public void OnDrag(PointerEventData eventData)
-    {
-        if (isUsedInDropArea)
-            return; //DropArea に入っているならドラッグ中も禁止
-
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(
-            canvas.transform as RectTransform,
-            eventData.position,
-            eventData.pressEventCamera,
-            out Vector2 localPoint
-        );
-
-        rectTransform.localPosition = localPoint;
-
-        DetectDropAreaAndClearClone(eventData);
-
-
-    }
-
-    public void OnEndDrag(PointerEventData eventData)
-    {
-        transform.SetParent(originalParent, false);
-        rectTransform.anchoredPosition = originalPos;
-
-        canvasGroup.blocksRaycasts = true;
-
-        //Drop が成功していない場合 → Clone を復元
-        if (!droppedSuccessfully && removedClone != null && hoveredArea != null)
-        {
-           
-            Transform parent = hoveredArea.transform.GetChild(0);
-            removedClone.transform.SetParent(parent);
-            removedClone.SetActive(true);
-        }
-
-        // リセット
-        removedClone = null;
-        hoveredArea = null;
-        droppedSuccessfully = false;
+        isAnimating = false;
     }
 
     public void CheckObj(bool isOn)
     {
         CheckImage.SetActive(isOn);
-    }
-
-    //public void OnClickUnitIcon()
-    //{
-    //    detaUI.SetUnit(unitStats.unitStats);
-    //}
-
-    public IEnumerator NotEnoughMoney()
-    {
-        notEnoughMoneyObj.SetActive(true);
-        yield return new WaitForSeconds(1f);
-        notEnoughMoneyObj.SetActive(false);
-    }
-
-    private void DetectDropAreaAndClearClone(PointerEventData eventData)
-    {
-        var results = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(eventData, results);
-
-        DropArea hitArea = null;
-
-        foreach (var r in results)
-        {
-            hitArea = r.gameObject.GetComponentInParent<DropArea>();
-            if (hitArea != null)
-                break;
-        }
-
-        // DropArea が変わった瞬間
-        if (hitArea != hoveredArea)
-        {
-            // ① 前の DropArea の clone を復元
-            if (hoveredArea != null && removedClone != null)
-            {
-                Transform prevParent = hoveredArea.dropTargetParent;
-                removedClone.transform.SetParent(prevParent);
-                removedClone.SetActive(true);
-            }
-
-            // ② 新しい DropArea に入った場合
-            if (hitArea != null)
-            {
-                Transform newParent = hitArea.dropTargetParent;
-
-                if (newParent.childCount > 0)
-                {
-                    removedClone = newParent.GetChild(0).gameObject;
-                    removedClone.SetActive(false);
-                }
-                else
-                {
-                    removedClone = null;
-                }
-            }
-            else
-            {
-                removedClone = null;
-            }
-
-            hoveredArea = hitArea;
-        }
     }
 }

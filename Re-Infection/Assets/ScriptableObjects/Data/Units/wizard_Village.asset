@@ -19,7 +19,10 @@ MonoBehaviour:
     unitName: "\u9B54\u6CD5\u4F7F\u3044"
     jobType: 4
     targetType: 1
-    statusScaler: []
+    statusScaler:
+    - maxHpScaler: 0
+      atkScaler: 0
+      levelUpCost: 0
     maxHp: 30
     attackType: 0
     hitCnt: 1
