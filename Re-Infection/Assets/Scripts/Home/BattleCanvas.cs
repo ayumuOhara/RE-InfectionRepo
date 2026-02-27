@@ -148,7 +148,7 @@ public class BattleCanvas : MonoBehaviour
     //クリア後に解放されたステージに移る処理
     public void OnChangeStage(int stage)
     {
-        if (stage >= 4) return;
+        if (stage >= 5) return;
         messageCanvas.SetActive(true);
 
 
