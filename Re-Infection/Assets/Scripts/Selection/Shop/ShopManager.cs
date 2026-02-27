@@ -164,9 +164,9 @@ public class ShopManager : MonoBehaviour
     }
 
     // 渡された強化要素のアップグレードを行う
-    private void TryUpgrade<T>(T Upgrade, int money) where T : BaseUpgrade
+    private void TryUpgrade<T>(T upgrade, int money) where T : BaseUpgrade
     {
-        if (Upgrade.lv >= Upgrade.MaxLevel)
+        if (!upgrade.canUpgrade)
         {
             StartCoroutine(WarningLevelText());
             return;
@@ -184,8 +184,8 @@ public class ShopManager : MonoBehaviour
         playerStatusData.wallet.RemoveMoney(money);
         money_text.text = $"{playerStatusData.wallet.CurrentMoney}";
 
-        Upgrade.SetUpgradeLevel(Upgrade.lv + 1);
-        SetUpgradeTextAndButton(Upgrade);
+        upgrade.SetUpgradeLevel(upgrade.lv + 1);
+        SetUpgradeTextAndButton(upgrade);
 
         DialogObj.SetActive(false);
         LayCastObj.SetActive(false);
@@ -195,10 +195,10 @@ public class ShopManager : MonoBehaviour
     // レベルが最大の時、ボタンが触れられなくなる
     private void SetTextAndButton<T>(T upgrade, TextMeshProUGUI lvText, TextMeshProUGUI moneyText, Button button) where T : BaseUpgrade
     {
-        lvText.text = upgrade.lv.ToString();
-        moneyText.text = upgrade.lv >= 3 ? "MAX" : $"<size=40><sprite=0><size=45>{upgrade.UpgradeMoney}";
+        lvText.text = upgrade.canUpgrade ? upgrade.lv.ToString() : "MAX";
+        moneyText.text = upgrade.canUpgrade ? $"<size=40><sprite=0><size=45>{upgrade.UpgradeMoney}" : "MAX";
 
-        if (playerStatusData.wallet.CurrentMoney < upgrade.UpgradeMoney || upgrade.lv >= upgrade.MaxLevel)
+        if (playerStatusData.wallet.CurrentMoney < upgrade.UpgradeMoney || !upgrade.canUpgrade)
         {
             lvText.color = new Color(1f, 0.337f, 0.337f);
             moneyText.color = new Color(1f, 0.337f, 0.337f);
