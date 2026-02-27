@@ -39,18 +39,22 @@ public class Types
 }
 
 [Serializable]
-public struct StatusScaler
+public class StatusScaler
 {
-    [Header("最大HPのLv補正")]
-    [Range(0f, 2f)]
-    public float maxHpScaler;
+    [Header("最大HPのLv補正(%)")]
+    [SerializeField]
+    private float maxHpScaler;
+    public float MaxHPScaler => maxHpScaler / 100;
 
-    [Header("攻撃力のLv補正")]
-    [Range(0f, 2f)]
-    public float atkScaler;
+    [Header("攻撃力のLv補正(%)")]
+    [SerializeField]
+    private float atkScaler;
+    public float AtkScaler => atkScaler / 100;
 
     [Header("次のレベルアップに必要なお金(※最大レベルでは無効)")]
-    public uint levelUpCost;
+    [SerializeField]
+    private uint levelUpCost;
+    public uint LevelUpCost => levelUpCost;
 }
 
 //-----------------------------------------------------------------------------------------------------------
@@ -123,7 +127,7 @@ public class UnitStats
     public void SetLevel(int lv) => level.SetLevel(lv);     // 引数をレベルに設定
     public void SetMaxLevel(int lv) => level.SetMaxLevel(lv);   // 最大レベルを設定
     public void LevelUP() => level.SetLevel(lv + 1);    // 次のレベルへアップ
-    public int GetNextLevelCost() => (int)statusScaler[LvIdx].levelUpCost; // レベルアップに必要なコストを取得
+    public int GetNextLevelCost() => (int)statusScaler[LvIdx].LevelUpCost; // レベルアップに必要なコストを取得
 
     public Material GetOutline(string targetOutline)
     {
@@ -187,25 +191,29 @@ public class UnitStats
     // 現在のレベルの体力の補正値
     public float GetCurrentLevelMaxHp()
     {
-        return maxHp * statusScaler[LvIdx].maxHpScaler;
+        if (statusScaler == null) return maxHp;
+        return maxHp * (1 + statusScaler[LvIdx].MaxHPScaler);
     }
 
     // 現在のレベルの攻撃力の補正値
     public float GetCurrentLevelAtk()
     {
-        return atk * statusScaler[LvIdx].atkScaler;
+        if (statusScaler == null) return atk;
+        return atk * (1 + statusScaler[LvIdx].AtkScaler);
     }
 
     // 渡されたレベルの体力の補正値
     public float GetLevelofMaxHp(int lv)
     {
-        return maxHp * statusScaler[level.ClampLevelIndex(lv)].maxHpScaler;
+        if (statusScaler == null) return maxHp;
+        return maxHp * (1 + statusScaler[level.ClampLevelIndex(lv)].MaxHPScaler);
     }
 
     // 渡されたレベルの攻撃力の補正値
     public float GetLevelofAtk(int lv)
     {
-        return atk * statusScaler[level.ClampLevelIndex(lv)].atkScaler;
+        if (statusScaler == null) return atk;
+        return atk * (1 + statusScaler[level.ClampLevelIndex(lv)].AtkScaler);
     }
 }
 
