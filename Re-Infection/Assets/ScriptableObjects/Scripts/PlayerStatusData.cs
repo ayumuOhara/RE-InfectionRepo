@@ -34,7 +34,7 @@ public class Level
 
     public int ClampLevelIndex(int level)
     {
-        return Mathf.Clamp(level - 1, 0, maxlv - 2);
+        return Mathf.Clamp(level - 1, 0, maxlv - 1);
     }
 }
 
@@ -50,7 +50,8 @@ public abstract class BaseUpgrade
     public void SetMaxlevel() => level.SetMaxLevel(MaxLevel);
     public int ClampLevel(int lv) => level.ClampLevel(lv);
     public int ClampLevelIndex(int lv) => level.ClampLevelIndex(lv);
-    public int UpgradeMoney => (int)upgradeMoney[ClampLevelIndex(lv)];
+    public int UpgradeMoney => (int)upgradeMoney[lv == MaxLevel ? LvIdx - 1 : LvIdx];   // レベルが最大の時は添え字を-1する
+                                                                                        // ※アップグレードのレベルの配列のサイズと費用の配列のサイズが1ずれている為
     public bool canUpgrade => lv < MaxLevel;
 
     [Header("各Lv(0~)のアップグレードのコスト(※最大レベルを除く)")]

@@ -123,7 +123,7 @@ public class UnitStats
     private Level level = new Level();
     public int lv => level.lv;  // ユニットのレベル
     public int LvIdx => level.LvIdx;    // 配列の添え字に使うレベル
-    public int MaxLevel => statusScaler.Length + 1;     // レベルの最大値 
+    public int MaxLevel => statusScaler.Length;     // レベルの最大値 
     public void SetLevel(int lv) => level.SetLevel(lv);     // 引数をレベルに設定
     public void SetMaxLevel(int lv) => level.SetMaxLevel(lv);   // 最大レベルを設定
     public void LevelUP() => level.SetLevel(lv + 1);    // 次のレベルへアップ
