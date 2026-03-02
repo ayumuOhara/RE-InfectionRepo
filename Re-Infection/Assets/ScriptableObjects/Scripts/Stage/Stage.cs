@@ -13,6 +13,8 @@ public class Stage : ScriptableObject
     public int stageClearCoin;
     public int firstClearCoin;
 
+    public Sprite background;       　//背景のsprite
+
     private List<UnitStats> spawnUnits;
     // スポーンするユニットの種類
     public List<UnitStats> SpawnUnits

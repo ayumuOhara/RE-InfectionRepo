@@ -15,6 +15,8 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField] Image castlePoint;
 
     [SerializeField] Stage stage;            // ステージのデータ
+
+    [SerializeField] SpriteRenderer backgroundRenderer;     // 背景表示用のSpriteRenderer
     public Stage CurrentStage => stage;
 
     public int currentWaveIdx { get; private set; } = 0;      // 現在のウェーブ
@@ -32,7 +34,7 @@ public class WaveSpawner : MonoBehaviour
 
     // ウェーブが始まったか
     bool isStartWave = false;
-    public bool IsStartWave => isStartWave && !stage.waveData[currentWaveIdx].tutorial;
+    public bool IsStartWave => isStartWave && !stage.waveData[currentWaveIdx].isTutorial;
 
     // 周回をクリアしたか
     bool isSessionClear = false;
@@ -45,6 +47,8 @@ public class WaveSpawner : MonoBehaviour
         unitManager = GameObject.Find("UnitManager").GetComponent<UnitManager>();
 
         stage = stageData.Stage[stageData.SelectStageNumber];
+
+        backgroundRenderer.sprite = stage.background;       // 選択されたステージの背景画像をSpriteRendererに反映
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

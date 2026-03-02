@@ -437,7 +437,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1548542343388229337, guid: 0e7def79efff5a74b9bd5ccfa50ee410, type: 3}
+  m_Sprite: {fileID: 2649847697073447219, guid: e33e119d78ad3e540a0235168c2c0cd4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -491,7 +491,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   currentHealth: 0
-  corpseSprite: {fileID: 21300120, guid: 5cf1b4629c7cb104e98d369448084abd, type: 3}
+  corpseSprite: {fileID: 2649847697073447219, guid: e33e119d78ad3e540a0235168c2c0cd4, type: 3}
   infecitonInfo: {fileID: 3888767618300647759}
   infectionBar: {fileID: 1120724941087727946}
   defeatedEffect: {fileID: 5409222575132117316, guid: 6fc41f7dfdf9abd408d630c62fdac702, type: 3}

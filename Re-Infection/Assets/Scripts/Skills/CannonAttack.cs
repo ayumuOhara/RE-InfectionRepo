@@ -83,9 +83,9 @@ public class CannonAttack : MonoBehaviour
             }
         }
 
-        OnSkillUsed += cannonSkillPointer.OnSkillUse;
+        OnSkillUsed += cannonSkillPointer.SetSkillCoolTimer;
         OnSkillUsed?.Invoke(playerStatusData.cannonCoolTimeUpgrade.CoolTime);
-        OnSkillUsed -= cannonSkillPointer.OnSkillUse;
+        OnSkillUsed -= cannonSkillPointer.SetSkillCoolTimer;
 
         endSkill = true;
     }
