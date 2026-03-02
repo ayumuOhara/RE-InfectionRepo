@@ -15,5 +15,9 @@ MonoBehaviour:
   waveLevels:
   - {fileID: 11400000, guid: ba68ce09feecb134ba6ddb4e1c2af957, type: 2}
   bossWave: 1
-  tutorial: 1
-  tutorialPrefab: {fileID: 2932148538678551855, guid: bbbdc59dc7826ab4a802f3e3d6d79584, type: 3}
+  isTutorial: 1
+  tutorial:
+  - tutorialType: 2
+    tutorialPrefab: {fileID: 2046327670990165107, guid: c482c476f256dc3418da867911fab181, type: 3}
+  - tutorialType: 4
+    tutorialPrefab: {fileID: 2932148538678551855, guid: bbbdc59dc7826ab4a802f3e3d6d79584, type: 3}

@@ -316,7 +316,6 @@ public class InGameUIManager : MonoBehaviour
     // 取得コイン表示
     public void GetCoinText(TextMeshProUGUI text,int value)
     {
-        Debug.Log("Coin" + value.ToString());
         text.text = $"{coinIconText}{value}";
     }
 
