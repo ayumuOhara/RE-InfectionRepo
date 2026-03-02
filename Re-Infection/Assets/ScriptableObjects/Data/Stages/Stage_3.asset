@@ -22,3 +22,4 @@ MonoBehaviour:
   waveClearCoin: 300
   stageClearCoin: 600
   firstClearCoin: 1500
+  background: {fileID: -8402587691192594126, guid: 3ee0584bd1180214695167b03f8d8ae3, type: 3}
