@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.UI;
 
 namespace CannonPointer
@@ -20,6 +21,10 @@ namespace CannonPointer
 
     public class CannonSkillPointer : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
     {
+        public static CannonSkillPointer Instance {  get; private set; }
+
+        public static bool isEndCannonTutorial;
+
         PlayerStatusData playerStatusData;
 
         [SerializeField] GameObject cannonPrefab;
@@ -32,20 +37,28 @@ namespace CannonPointer
 
         [SerializeField, Range(0, 1f)] private float firstCoolTimeRate;
 
-        bool canUseSkill;
+        private bool canUseSkill;
 
-        bool isDragging = false;    // ドラッグ中フラグ
+        private bool isDragging = false;    // ドラッグ中フラグ
         public bool IsDragging => isDragging;
 
-        bool isDragCancel = false;  // 使用キャンセルフラグ
+        private bool isDragCancel = false;  // 使用キャンセルフラグ
 
         private bool isActive = true;
 
         // ドラッグ終了待機
         public static TaskCompletionSource<PointerEventData> dragEndTcs;
+        
+        private void OnDestroy()
+        {
+            Instance = null;
+        }
 
         void Awake()
         {
+            if(Instance == null)
+                Instance = this;
+
             playerStatusData = Resources.Load<PlayerStatusData>("PlayerStatusData");
             dragEndTcs = new TaskCompletionSource<PointerEventData>();
 
@@ -55,11 +68,18 @@ namespace CannonPointer
             waveSpawner = FindObjectOfType<WaveSpawner>();
             if (unitManager == null)
                 unitManager = GameObject.Find("UnitManager").GetComponent<UnitManager>();
-            
-            StartCoroutine(SkillCoolTimer(playerStatusData.cannonCoolTimeUpgrade.CoolTime * (1 - firstCoolTimeRate)));
+
+            if (isEndCannonTutorial)
+            {
+                SetSkillCoolTimer(playerStatusData.cannonCoolTimeUpgrade.CoolTime * (1 - firstCoolTimeRate));
+            }
+            else
+            {
+                SetSkillActive(false);
+            }
         }
 
-        public void OnSkillUse(float coolTime)
+        public void SetSkillCoolTimer(float coolTime)
         {
             StartCoroutine(SkillCoolTimer(coolTime));
         }

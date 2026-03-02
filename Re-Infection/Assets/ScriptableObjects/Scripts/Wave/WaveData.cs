@@ -4,30 +4,70 @@ using System.Linq;
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using VirusPointer;
+using CannonPointer;
+using Unity.VisualScripting;
+using System;
 
 [CreateAssetMenu(fileName = "Wave", menuName = "Scriptable Objects/Wave")]
 public class WaveData : ScriptableObject
 {
+    public enum TutorialType
+    {
+        Empty,
+        Unit,
+        Virus,
+        Cannon,
+        Boss,
+    }
+
+    [Serializable]
+    public class Tutorial
+    {
+        public TutorialType tutorialType;    // チュートリアルの種類
+        public GameObject tutorialPrefab;// 表示するチュートリアルUI
+    }
+
     public WaveLevel[] waveLevels;   // ウェーブでスポーンさせるレベルのリスト
     public bool bossWave;            // ボスウェーブか
-    public bool tutorial;            // チュートリアルをするか
-    public GameObject tutorialPrefab;// 表示するチュートリアルUI
+    public bool isTutorial;            // チュートリアルをするか
+    public Tutorial[] tutorial;
 
     // レベル生成コルーチン
     public IEnumerator SpawnLevels()
     {
-        if (tutorial)
+        if (isTutorial)
         {
-            Canvas parent = GameObject.Find("TutorialUI").GetComponent<Canvas>();
-            var p = Instantiate(tutorialPrefab, parent.transform, parent).GetComponent<RectTransform>();
-            p.localPosition = new Vector2(0, 200);
+            foreach (var t in tutorial)
+            {
+                Canvas parent = GameObject.Find("TutorialUI").GetComponent<Canvas>();
+                var p = Instantiate(t.tutorialPrefab, parent.transform, parent).GetComponent<RectTransform>();
+                p.localPosition = new Vector2(0, 200);
 
-            yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
-            p.GetComponent<Animator>().SetTrigger("Close");
-            tutorial = false;
+                yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
+                p.GetComponent<Animator>().SetTrigger("Close");
 
-            yield return new WaitForSeconds(1);
-            Destroy(p.gameObject);
+                yield return new WaitForSeconds(1);
+
+                switch (t.tutorialType)
+                {
+                    case TutorialType.Virus:
+                        VirusSkillPointer.isEndVirusTutorial = true;
+                        VirusSkillPointer.Instance.SetSkillActive(true);
+                        break;
+                    case TutorialType.Cannon:
+                        CannonSkillPointer.isEndCannonTutorial = true;
+                        CannonSkillPointer.Instance.gameObject.SetActive(true);
+                        CannonSkillPointer.Instance.SetSkillCoolTimer(0);
+                        break;
+                    default:
+                        break;
+                }
+
+                Destroy(p.gameObject);
+            }
+
+            isTutorial = false;
         }
 
         // ウェーブ内の全てのレベルを生成するまでループ

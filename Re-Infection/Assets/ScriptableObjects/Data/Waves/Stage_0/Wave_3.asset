@@ -17,20 +17,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2132664f79510a047b08bbb66cbd9e52, type: 2}
   - {fileID: 11400000, guid: b27675922126076479b698fba5a37fe1, type: 2}
   bossWave: 0
-  tutorial: 1
-  tutorialPrefab: {fileID: 8763673049865911771, guid: a3d3087a50746cf4097da687c9bd9a64, type: 3}
-  tutorialEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  isTutorial: 1
+  tutorial:
+  - tutorialType: 3
+    tutorialPrefab: {fileID: 8763673049865911771, guid: a3d3087a50746cf4097da687c9bd9a64, type: 3}

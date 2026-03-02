@@ -19,6 +19,10 @@ namespace VirusPointer
 
     public class VirusSkillPointer : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
     {
+        public static VirusSkillPointer Instance { get; private set; }
+
+        public static bool isEndVirusTutorial;
+
         [SerializeField] GameObject virusPrefab;
         UnitManager unitManager;
         WaveSpawner waveSpawner;
@@ -34,13 +38,24 @@ namespace VirusPointer
         // ドラッグ終了待機
         public static TaskCompletionSource<PointerEventData> dragEndTcs;
 
+        private void OnDestroy()
+        {
+            Instance = null;
+        }
+
         void Awake()
         {
+            if (Instance == null)
+                Instance = this;
+
             dragEndTcs = new TaskCompletionSource<PointerEventData>();
 
             waveSpawner = FindObjectOfType<WaveSpawner>();
             if (unitManager == null)
                 unitManager = GameObject.Find("UnitManager").GetComponent<UnitManager>();
+
+            if(!isEndVirusTutorial)
+                gameObject.SetActive(false);
         }
 
         public void OnBeginDrag(PointerEventData eventData)
