@@ -21,6 +21,7 @@ public class Stage : ScriptableObject
             unit.unitStats.SetCanUnLock(true);
         }
     }
+    public Sprite background;       　//背景のsprite
 
     private List<UnitStats> spawnUnits;
     // スポーンするユニットの種類
