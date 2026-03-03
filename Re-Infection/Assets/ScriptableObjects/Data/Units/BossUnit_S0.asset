@@ -23,7 +23,7 @@ MonoBehaviour:
     - maxHpScaler: 0
       atkScaler: 0
       levelUpCost: 0
-    maxHp: 1000
+    maxHp: 5000
     attackType: 0
     hitCnt: 1
     radius: 0
