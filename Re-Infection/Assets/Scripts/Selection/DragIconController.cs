@@ -20,6 +20,11 @@ public class DragIconController : MonoBehaviour, IPointerClickHandler
 
     public UnitDetailUII detailUI;
 
+    private void OnEnable()
+    {
+        
+    }
+
     void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
@@ -31,6 +36,8 @@ public class DragIconController : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (!unitStats.unitStats.isUnlocked) return;
+
         StartCoroutine(ClickAnimation());
         // ① 未編成なら編成する（最優先）
         if (!isUsedInDropArea)

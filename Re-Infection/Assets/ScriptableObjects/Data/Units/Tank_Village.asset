@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Tank_Village
   m_EditorClassIdentifier: Assembly-CSharp::UnitStats
   unitStats:
+    isUnlocked: 1
     animatorController: {fileID: 9100000, guid: 1a564d0e3dc0d3f4f8c7fa6bbc0aa694, type: 2}
     unitSprite: {fileID: 4326872430171513394, guid: b02f0fbf02194364092885bfb7328b4a, type: 3}
     attackEffect: {fileID: 8289740950869842158, guid: fc7ef61e97eaa294d95015217cb240f0, type: 3}

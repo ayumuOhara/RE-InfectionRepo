@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Soldier_Village
   m_EditorClassIdentifier: Assembly-CSharp::UnitStats
   unitStats:
+    isUnlocked: 1
     animatorController: {fileID: 9100000, guid: b5e1e502168df8e4f95c1934827aaf01, type: 2}
     unitSprite: {fileID: 3613407544420638092, guid: 7f5ae49a99a833940abc9ef28f2f9f56, type: 3}
     attackEffect: {fileID: 0}
