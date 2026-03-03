@@ -18,7 +18,7 @@ public class Stage : ScriptableObject
     {
         foreach (var unit in unlockUnits)
         {
-            unit.unitStats.SetCanUnLock(true);
+            unit.unitStats.UnitUnLock();
         }
     }
     public Sprite background;       Å@//îwåiÇÃsprite
