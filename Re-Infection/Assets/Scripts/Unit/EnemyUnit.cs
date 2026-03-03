@@ -1,7 +1,9 @@
+using CannonPointer;
 using NUnit.Framework.Constraints;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using VirusPointer;
 
 public class EnemyUnit : UnitBase, Iinfection
 {
@@ -10,6 +12,7 @@ public class EnemyUnit : UnitBase, Iinfection
     [SerializeField] Canvas infecitonInfo;
     [SerializeField] Image infectionBar;
     [SerializeField] GameObject defeatedEffect;
+
     WaveSpawner waveSpawner;
 
     public bool IsInfectioning { get; set; } = false;

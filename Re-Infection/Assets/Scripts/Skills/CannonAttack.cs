@@ -38,6 +38,7 @@ public class CannonAttack : MonoBehaviour
     async private void OnEnable()
     {
         await WaitEndDrag.WaitDragEndAsync();
+        
         if (!endSkill) return;
         if (unitManager.EnemyCnt <= 0)
         {

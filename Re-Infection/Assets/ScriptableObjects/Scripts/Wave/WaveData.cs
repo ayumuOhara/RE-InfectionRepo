@@ -58,7 +58,7 @@ public class WaveData : ScriptableObject
                     case TutorialType.Cannon:
                         CannonSkillPointer.isEndCannonTutorial = true;
                         CannonSkillPointer.Instance.gameObject.SetActive(true);
-                        CannonSkillPointer.Instance.SetSkillCoolTimer(0);
+                        CannonSkillPointer.Instance.SetSkillCoolTimer(Resources.Load<PlayerStatusData>("PlayerStatusdata").cannonCoolTimeUpgrade.CoolTime * 0.05f);
                         break;
                     default:
                         break;

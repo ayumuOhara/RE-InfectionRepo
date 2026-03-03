@@ -66,6 +66,12 @@ public class StatusScaler
 [System.Serializable]
 public class UnitStats
 {
+    [Header("ユニットが解放可能か")]
+    public bool canUnlock;
+    [Header("ユニットが解放されたか")]
+    public bool isUnlocked;
+    [Header("ユニットを解放するために必要な費用")]
+    public int unitPrice;
     [Header("アニメーター")]
     public RuntimeAnimatorController animatorController;           // ユニットのアニメーター
     [Header("スプライト")]
@@ -129,6 +135,18 @@ public class UnitStats
     public void LevelUP() => level.SetLevel(lv + 1);    // 次のレベルへアップ
     public int GetNextLevelCost() => (int)statusScaler[LvIdx].LevelUpCost; // レベルアップに必要なコストを取得
 
+    public void SetCanUnLock(bool active)
+    {
+        canUnlock = active;
+    }
+
+    public void UnitUnLock(Wallet wallet)
+    {
+        if (!wallet.CanBuy(unitPrice)) return;
+
+        isUnlocked = true;
+    }
+
     public Material GetOutline(string targetOutline)
     {
         return this.unitSprite.name switch
@@ -188,28 +206,28 @@ public class UnitStats
         }
     }
 
-    // 現在のレベルの体力の上昇値
+    // 現在のレベルの体力
     public float GetCurrentLevelMaxHp()
     {
         if (statusScaler == null) return maxHp;
         return maxHp +  statusScaler[LvIdx].MaxHPScaler;
     }
 
-    // 現在のレベルの攻撃力の上昇値
+    // 現在のレベルの攻撃力
     public float GetCurrentLevelAtk()
     {
         if (statusScaler == null) return atk;
         return atk + statusScaler[LvIdx].AtkScaler;
     }
 
-    // 渡されたレベルの体力の上昇値
+    // 渡されたレベルの体力
     public float GetLevelofMaxHp(int lv)
     {
         if (statusScaler == null) return maxHp;
         return maxHp + statusScaler[level.ClampLevelIndex(lv)].MaxHPScaler;
     }
 
-    // 渡されたレベルの攻撃力の上昇値
+    // 渡されたレベルの攻撃力
     public float GetLevelofAtk(int lv)
     {
         if (statusScaler == null) return atk;
