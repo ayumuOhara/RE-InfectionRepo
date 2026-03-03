@@ -2,11 +2,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
+using System.Threading.Tasks;
 public class UpGradeManager : MonoBehaviour
 {
     private enum UnitUpGradeType
     {
-        Solider,
+        Soldier,
         Tank,
         Archer,
         Wizard,
@@ -25,7 +26,7 @@ public class UpGradeManager : MonoBehaviour
 
     //Unit強化ボタン
     [Header("Buttons")]
-    public Button SoliderButton;
+    public Button SoldierButton;
     public Button TankButton;
     public Button ArcherButton;
     public Button WizardButton;
@@ -35,34 +36,42 @@ public class UpGradeManager : MonoBehaviour
     public Button R_WizardButton;
 
     [Header("剣士のレベルとコスト")]
-    public TextMeshProUGUI Solider_text;
-    public TextMeshProUGUI SoliderUpGradeMoney_text;
+    public UnitStatsData SoldierStats;
+    public TextMeshProUGUI Soldier_text;
+    public TextMeshProUGUI SoldierUpGradeMoney_text;
 
     [Header("盾兵のレベルとコスト")]
+    public UnitStatsData TankStats;
     public TextMeshProUGUI Tank_text;
     public TextMeshProUGUI TankUpGradeMoney_text;
 
     [Header("弓使いのレベルとコスト")]
+    public UnitStatsData ArcherStats;
     public TextMeshProUGUI Archer_text;
     public TextMeshProUGUI ArcherUpGradeMoney_text;
 
     [Header("魔法使いのレベルとコスト")]
+    public UnitStatsData WizardStats;
     public TextMeshProUGUI Wizard_text;
     public TextMeshProUGUI WizardUpGradeMoney_text;
 
     [Header("騎馬兵のレベルとコスト")]
+    public UnitStatsData JockeyStats;
     public TextMeshProUGUI Jockey_text;
-    public TextMeshProUGUI JokeyUpGradeMoney_text;
+    public TextMeshProUGUI JockeyUpGradeMoney_text;
 
     [Header("鈍器使いのレベルとコスト")]
+    public UnitStatsData HammerStats;
     public TextMeshProUGUI Hammer_text;
     public TextMeshProUGUI HammerUpGradeMoney_text;
 
     [Header("大弓使いのレベルとコスト")]
+    public UnitStatsData R_ArcherStats;
     public TextMeshProUGUI R_Archer_text;
     public TextMeshProUGUI R_ArcherUpGradeMoney_text;
 
     [Header("上級魔法使いのレベルとコスト")]
+    public UnitStatsData R_WizardStats;
     public TextMeshProUGUI R_Wizard_text;
     public TextMeshProUGUI R_WizardUpGradeMoney_text;
 
@@ -77,16 +86,11 @@ public class UpGradeManager : MonoBehaviour
 
     PlayerStatusData playerStatusData;
 
+    [SerializeField]
+    public UnitDetailUII unitDetailUII;
     private void Awake()
     {
         playerStatusData = Resources.Load<PlayerStatusData>("PlayerStatusData");
-
-        //playerStatusData.castleUpgrade.SetUpgradeLevel(playerStatusData.castleUpgrade.lv);
-        //playerStatusData.cannonDamageUpgrade.SetUpgradeLevel(playerStatusData.cannonDamageUpgrade.lv);
-        //playerStatusData.cannonCoolTimeUpgrade.SetUpgradeLevel(playerStatusData.cannonCoolTimeUpgrade.lv);
-        //playerStatusData.costLimitUpgrade.SetUpgradeLevel(playerStatusData.costLimitUpgrade.lv);
-        //playerStatusData.costGenerationSpeedUpgrade.SetUpgradeLevel(playerStatusData.costGenerationSpeedUpgrade.lv);
-        //playerStatusData.virusUpgrade.SetUpgradeLevel(playerStatusData.virusUpgrade.lv);
     }
 
     private void Start()
@@ -94,204 +98,237 @@ public class UpGradeManager : MonoBehaviour
         DialogObj.SetActive(false);
         money_text.text = ($"{playerStatusData.wallet.CurrentMoney}");
         LayCastObj.SetActive(false);
+        SetRaycastTargets(LayCastObj, false);
 
-        //SetUpgradeTextAndButton(playerStatusData.castleUpgrade);
-        //SetUpgradeTextAndButton(playerStatusData.cannonDamageUpgrade);
-        //SetUpgradeTextAndButton(playerStatusData.cannonCoolTimeUpgrade);
-        //SetUpgradeTextAndButton(playerStatusData.costLimitUpgrade);
-        //SetUpgradeTextAndButton(playerStatusData.costGenerationSpeedUpgrade);
-        //SetUpgradeTextAndButton(playerStatusData.virusUpgrade);
+        UpdateUnitUI(SoldierStats.unitStats, Soldier_text, SoldierUpGradeMoney_text, SoldierButton);
+        UpdateUnitUI(TankStats.unitStats, Tank_text, TankUpGradeMoney_text, TankButton);
+        UpdateUnitUI(ArcherStats.unitStats, Archer_text, ArcherUpGradeMoney_text, ArcherButton);
+        UpdateUnitUI(JockeyStats.unitStats, Jockey_text, JockeyUpGradeMoney_text, JockeyButton);
+        UpdateUnitUI(HammerStats.unitStats, Hammer_text, HammerUpGradeMoney_text, HammerButton);
+        UpdateUnitUI(WizardStats.unitStats, Wizard_text, WizardUpGradeMoney_text, WizardButton);
+        UpdateUnitUI(R_ArcherStats.unitStats, R_Archer_text, R_ArcherUpGradeMoney_text, R_ArcherButton);
+        UpdateUnitUI(R_WizardStats.unitStats, R_Wizard_text, R_WizardUpGradeMoney_text, R_WizardButton);
 
         Warning_text.text = "";
         WarningObj.SetActive(false);
-    }
 
-    // 渡された強化内容によってUI表示を操作
-    private void SetUpgradeTextAndButton<T>(T upgrade) where T : BaseUpgrade
+        SoldierStats.unitStats.SetLevel(1);
+        TankStats.unitStats.SetLevel(1);
+        ArcherStats.unitStats.SetLevel(1);
+        WizardStats.unitStats.SetLevel(1);
+        JockeyStats.unitStats.SetLevel(1);
+        HammerStats.unitStats.SetLevel(1);
+        R_ArcherStats.unitStats.SetLevel(1);
+        R_WizardStats.unitStats.SetLevel(1);
+
+        
+    }
+    private void UpdateUnitUI(UnitStats stats, TextMeshProUGUI lvText, TextMeshProUGUI costText, Button button)
     {
-        switch (upgrade.GetType().ToString())
-        {
-            //case "CastleUpgrade":
-            //    SetTextAndButton(playerStatusData.castleUpgrade, CastleLv_text, CastleUpgradeMoney_text, CastleButton);
-            //    break;
-            //case "CannonDamageUpgrade":
-            //    SetTextAndButton(playerStatusData.cannonDamageUpgrade, CannonDamageLv_text, CannonDamageUpgradeMoney_text, CannonDamageButton);
-            //    break;
-            //case "CannonCoolTimeUpgrade":
-            //    SetTextAndButton(playerStatusData.cannonCoolTimeUpgrade, CannonCoolTimeLv_text, CannonCoolTimeUpgradeMoney_text, CannonCoolTimeButton);
-            //    break;
-            //case "CostLimitUpgrade":
-            //    SetTextAndButton(playerStatusData.costLimitUpgrade, CostLimitLv_text, CostLimitUpgradeMoney_text, CostLimitButton);
-            //    break;
-            //case "CostGenerationSpeedUpgrade":
-            //    SetTextAndButton(playerStatusData.costGenerationSpeedUpgrade, CostGenerationSpeedLv_text, CostGenerationSpeedUpgradeMoney_text, CostGenerationSpeedButton);
-            //    break;
-            //case "VirusUpgrade":
-            //    SetTextAndButton(playerStatusData.virusUpgrade, VirusLv_text, VirusUpgradeMoney_text, VirusButton);
-            //    break;
-            //default:
-            //    break;
-        }
-    }
+        // レベルテキストは常に赤
+        lvText.color = new Color(1f, 0.337f, 0.337f);
 
+        // MAX のとき
+        if (stats.lv >= stats.MaxLevel)
+        {
+            lvText.text = "MAX";
+            costText.text = "MAX";
+            costText.color = new Color(1f, 0.337f, 0.337f);
+            button.interactable = false;
+            return;
+        }
+
+        lvText.text = stats.lv.ToString();
+
+        int nextCost = GetTrueNextCost(stats);
+        costText.text = nextCost.ToString();
+
+        bool canBuy = playerStatusData.wallet.CurrentMoney >= nextCost;
+
+        costText.color = canBuy ? Color.white : new Color(1f, 0.337f, 0.337f);
+        button.interactable = canBuy;
+    }
     // アップグレードを承認するボタンの関数
     public void UndoUpgrade()
     {
-        //switch (upgradeType)
-        //{
-        //    case UpgradeType.Castle:
-        //        TryUpgrade(playerStatusData.castleUpgrade, playerStatusData.castleUpgrade.UpgradeMoney);
-        //        break;
-        //    case UpgradeType.CannonDamage:
-        //        TryUpgrade(playerStatusData.cannonDamageUpgrade, playerStatusData.cannonDamageUpgrade.UpgradeMoney);
-        //        break;
-        //    case UpgradeType.CannonCoolTime:
-        //        TryUpgrade(playerStatusData.cannonCoolTimeUpgrade, playerStatusData.cannonCoolTimeUpgrade.UpgradeMoney);
-        //        break;
-        //    case UpgradeType.CostLimit:
-        //        TryUpgrade(playerStatusData.costLimitUpgrade, playerStatusData.costLimitUpgrade.UpgradeMoney);
-        //        break;
-        //    case UpgradeType.CostGenerationSpeed:
-        //        TryUpgrade(playerStatusData.costGenerationSpeedUpgrade, playerStatusData.costGenerationSpeedUpgrade.UpgradeMoney);
-        //        break;
-        //    case UpgradeType.Virus:
-        //        TryUpgrade(playerStatusData.virusUpgrade, playerStatusData.virusUpgrade.UpgradeMoney);
-        //        break;
-        //    default:
-        //        break;
-        //}
+        switch (unitUpGradeType)
+        {
+            case UnitUpGradeType.Soldier:
+                TryUpgradeUnit(
+                    SoldierStats.unitStats,
+                    Soldier_text,
+                    SoldierUpGradeMoney_text,
+                    SoldierButton
+                    );
+                break;
 
-        //SetUpgradeTextAndButton(playerStatusData.castleUpgrade);
-        //SetUpgradeTextAndButton(playerStatusData.cannonDamageUpgrade);
-        //SetUpgradeTextAndButton(playerStatusData.cannonCoolTimeUpgrade);
-        //SetUpgradeTextAndButton(playerStatusData.costLimitUpgrade);
-        //SetUpgradeTextAndButton(playerStatusData.costGenerationSpeedUpgrade);
-        //SetUpgradeTextAndButton(playerStatusData.virusUpgrade);
+            case UnitUpGradeType.Tank:
+                TryUpgradeUnit(
+                    TankStats.unitStats,
+                    Tank_text,
+                    TankUpGradeMoney_text,
+                    TankButton
+                    );
+                break;
+
+            case UnitUpGradeType.Archer:
+                TryUpgradeUnit(
+                    ArcherStats.unitStats,
+                    Archer_text,
+                    ArcherUpGradeMoney_text,
+                    ArcherButton
+                    );
+                break;
+
+            case UnitUpGradeType.Wizard:
+                TryUpgradeUnit(
+                    WizardStats.unitStats,
+                    Wizard_text,
+                    WizardUpGradeMoney_text,
+                    WizardButton
+                    );
+                break;
+
+            case UnitUpGradeType.Jockey:
+                TryUpgradeUnit(
+                    JockeyStats.unitStats,
+                    Jockey_text,
+                    JockeyUpGradeMoney_text,
+                    JockeyButton
+                    );
+                break;
+
+            case UnitUpGradeType.Hammer:
+                TryUpgradeUnit(
+                    HammerStats.unitStats,
+                    Hammer_text,
+                    HammerUpGradeMoney_text,
+                    HammerButton
+                    );
+                break;
+
+            case UnitUpGradeType.R_Archer:
+                TryUpgradeUnit(
+                    R_ArcherStats.unitStats,
+                    R_Archer_text,
+                    R_ArcherUpGradeMoney_text,
+                    R_ArcherButton
+                    );
+                break;
+
+            case UnitUpGradeType.R_Wizard:
+                TryUpgradeUnit(
+                    R_WizardStats.unitStats,
+                    R_Wizard_text,
+                    R_WizardUpGradeMoney_text,
+                    R_WizardButton
+                    );
+                break;
+        }
     }
 
     public void NoButton()
     {
         DialogObj.SetActive(false);
         LayCastObj.SetActive(false);
+        SetRaycastTargets(LayCastObj, false);
     }
 
     // 渡された強化要素のアップグレードを行う
-    private void TryUpgrade<T>(T upgrade, int money) where T : BaseUpgrade
+    private void TryUpgradeUnit(UnitStats stats, TextMeshProUGUI lvText, TextMeshProUGUI costText, Button button)
     {
-        if (!upgrade.canUpgrade)
+
+        int cost = GetTrueNextCost(stats);
+
+         if (stats.lv >= stats.MaxLevel)
         {
             StartCoroutine(WarningLevelText());
             return;
         }
 
-        if (!playerStatusData.wallet.CanBuy(money))
+        if (!playerStatusData.wallet.CanBuy(cost))
         {
-            Debug.Log("所持金が足りません");
             StartCoroutine(WarningMoneyText());
             return;
         }
 
-        SEManager.Instance.PlaySE(SEManager.SEType.Upgrade);
+        playerStatusData.wallet.RemoveMoney(cost);
+     
+        money_text.text = playerStatusData.wallet.CurrentMoney.ToString();
+        stats.LevelUP();
 
-        playerStatusData.wallet.RemoveMoney(money);
-        money_text.text = $"{playerStatusData.wallet.CurrentMoney}";
+        UpdateUnitUI(stats, lvText, costText, button);
 
-        upgrade.SetUpgradeLevel(upgrade.lv + 1);
-        SetUpgradeTextAndButton(upgrade);
+        unitDetailUII.SetUnit(stats);
 
         DialogObj.SetActive(false);
         LayCastObj.SetActive(false);
-    }
-
-    // 指定の強化内容のLvと必要なお金の表示切替
-    // レベルが最大の時、ボタンが触れられなくなる
-    private void SetTextAndButton<T>(T upgrade, TextMeshProUGUI lvText, TextMeshProUGUI moneyText, Button button) where T : BaseUpgrade
-    {
-        lvText.text = upgrade.canUpgrade ? upgrade.lv.ToString() : "MAX";
-        moneyText.text = upgrade.canUpgrade ? $"<size=40><sprite=0><size=45>{upgrade.UpgradeMoney}" : "MAX";
-
-        if (playerStatusData.wallet.CurrentMoney < upgrade.UpgradeMoney || !upgrade.canUpgrade)
-        {
-            lvText.color = new Color(1f, 0.337f, 0.337f);
-            moneyText.color = new Color(1f, 0.337f, 0.337f);
-
-            //ボタンを押せなくする
-            if (button != null)
-            {
-                button.interactable = false;
-            }
-        }
+        SetRaycastTargets(LayCastObj, false);
     }
 
     // TはBaseUpgradeを継承している必要がある
-    private void SetDialogText<T>(T upgrade, string message, string unitName) where T : BaseUpgrade
+    private void SetDialogTextUnit(UnitStats stats, string message)
     {
         DialogObj.SetActive(true);
         LayCastObj.SetActive(true);
+        SetRaycastTargets(LayCastObj, true);
 
-        // 基本情報の設定
-        DialogLevel_text1.text = upgrade.lv.ToString();
-        DialogLevel_text2.text = (upgrade.lv + 1).ToString();
-        DialogMoney_text.text = upgrade.UpgradeMoney.ToString();
+
+        DialogLevel_text1.text = stats.lv.ToString();
+        DialogLevel_text2.text = (stats.lv + 1).ToString();
+        int nextCost = GetTrueNextCost(stats);
+        DialogMoney_text.text = nextCost.ToString();
         DialogMassege.text = message;
 
-        // 詳細テキストの構築
-        object currentValue = upgrade.GetLevelofUpgrade(upgrade.lv);
-        object nextValue = upgrade.GetLevelofUpgrade(upgrade.lv + 1);
+        float curHp = stats.GetCurrentLevelMaxHp();
+        float nextHp = stats.GetLevelofMaxHp(stats.lv + 1);
 
-        // 感染(Virus)などの割合表示への対応（必要に応じて）
-        if (upgrade is VirusUpgrade)
-        {
-            float cur = (float)currentValue * 100;
-            float nxt = (float)nextValue * 100;
-            Detalise_text.text = $"{unitName} : {cur}%\n強化後の{unitName} : {nxt}%";
-        }
-        else
-        {
-            Detalise_text.text = $"{unitName} : {currentValue}\n強化後の{unitName} : {nextValue}";
-        }
+        Detalise_text.text = $"HP : {curHp}\n強化後のHP : {nextHp}";
     }
 
     public void SoliderEnhancement()
     {
-        unitUpGradeType = UnitUpGradeType.Solider;
-        //SetDialogText(playerStatusData.castleUpgrade, "剣士を強化しますか？", "HP");
+        unitUpGradeType = UnitUpGradeType.Soldier;
+        SetDialogTextUnit(SoldierStats.unitStats, "剣士を強化しますか？");
+        int cost = GetTrueNextCost(SoldierStats.unitStats);
+       
+
     }
 
     public void TankEnhancement()
     {
         unitUpGradeType = UnitUpGradeType.Tank;
-        //SetDialogText(playerStatusData.castleUpgrade, "盾兵を強化しますか？", "HP");
+        SetDialogTextUnit(TankStats.unitStats, "盾兵を強化しますか？");
     }
     public void ArcherEnhancement()
     {
         unitUpGradeType = UnitUpGradeType.Archer;
-        //SetDialogText(playerStatusData.castleUpgrade, "弓使いを強化しますか？", "HP");
+        SetDialogTextUnit(ArcherStats.unitStats, "弓使いを強化しますか？");
     }
     public void WizardEnhancement()
     {
         unitUpGradeType = UnitUpGradeType.Wizard;
-        //SetDialogText(playerStatusData.castleUpgrade, "魔法使いを強化しますか？", "HP");
+        SetDialogTextUnit(WizardStats.unitStats, "魔法使いを強化しますか？");
     }
     public void JockeyEnhancement()
     {
         unitUpGradeType = UnitUpGradeType.Jockey;
-        //SetDialogText(playerStatusData.castleUpgrade, "騎馬兵を強化しますか？", "HP");
+        SetDialogTextUnit(JockeyStats.unitStats, "騎馬兵を強化しますか？");
     }
     public void HammerEnhancement()
     {
         unitUpGradeType = UnitUpGradeType.Hammer;
-        //SetDialogText(playerStatusData.castleUpgrade, "鈍器使いを強化しますか？", "HP");
+        SetDialogTextUnit(HammerStats.unitStats, "鈍器使いを強化しますか？");
     }
     public void R_ArcherEnhancement()
     {
         unitUpGradeType = UnitUpGradeType.R_Archer;
-        //SetDialogText(playerStatusData.castleUpgrade, "大弓使いを強化しますか？", "HP");
+        SetDialogTextUnit(R_ArcherStats.unitStats, "大弓使いを強化しますか？");
     }
     public void R_WizardEnhancement()
     {
         unitUpGradeType = UnitUpGradeType.R_Wizard;
-        //SetDialogText(playerStatusData.castleUpgrade, "上級魔法使いを強化しますか？", "HP");
+        SetDialogTextUnit(R_WizardStats.unitStats, "上級魔法使いを強化しますか？");
     }
 
     public IEnumerator WarningMoneyText()
@@ -310,5 +347,24 @@ public class UpGradeManager : MonoBehaviour
         Warning_text.text = ("レ ベ ル マ ッ ク ス で す ！");
         yield return new WaitForSeconds(1f);
         WarningObj.SetActive(false);
+    }
+    private int GetTrueNextCost(UnitStats stats)
+    {
+        int nextIndex = stats.LvIdx + 1;
+
+        if (nextIndex >= stats.statusScaler.Length)
+            return 0;
+
+        return (int)stats.statusScaler[nextIndex].LevelUpCost;
+    }
+
+    private void SetRaycastTargets(GameObject obj, bool enabled)
+    {
+        var graphics = obj.GetComponentsInChildren<UnityEngine.UI.Graphic>(true);
+
+        foreach (var g in graphics)
+        {
+            g.raycastTarget = enabled;
+        }
     }
 }
