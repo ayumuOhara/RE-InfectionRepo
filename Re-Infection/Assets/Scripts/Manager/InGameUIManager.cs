@@ -139,6 +139,7 @@ public class InGameUIManager : MonoBehaviour
             if (!gameManager.waveSpawner.CurrentStage.isClear)
             {
                 totalCoin += gameManager.waveSpawner.CurrentStage.firstClearCoin;
+                gameManager.waveSpawner.CurrentStage.SetUnitsCanUnLock();
 
                 gameManager.waveSpawner.CurrentStage.isClear = true;
                 firstClearReward.SetActive(true);
