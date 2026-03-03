@@ -16,10 +16,13 @@ public class Stage : ScriptableObject
 
     public void SetUnitsCanUnLock()
     {
-        foreach (var unit in unlockUnits)
+        if (unlockUnits != null || unlockUnits.Length <= 0)
         {
-            unit.unitStats.UnitUnLock();
-        }
+            foreach (var unit in unlockUnits)
+            {
+                unit.unitStats.UnitUnLock();
+            }
+        }       
     }
     public Sprite background;       @//”wŒi‚Ìsprite
 
