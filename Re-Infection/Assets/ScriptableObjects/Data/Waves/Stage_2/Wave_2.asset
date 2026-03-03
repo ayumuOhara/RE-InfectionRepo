@@ -17,3 +17,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9e8d8cf0a4df1f04c88b2d0f4302d6e6, type: 2}
   - {fileID: 11400000, guid: 5fc8212966bcbdb40bc2752e089340a5, type: 2}
   bossWave: 0
+  isTutorial: 0
+  tutorial:
+  - tutorialType: 0
+    tutorialPrefab: {fileID: 2932148538678551855, guid: bbbdc59dc7826ab4a802f3e3d6d79584, type: 3}

@@ -5,14 +5,25 @@ using System.Linq;
 [CreateAssetMenu(fileName = "Stage", menuName = "Scriptable Objects/Stage")]
 public class Stage : ScriptableObject
 {
-    public int stageNum;              // ステージ数
-    public WaveData[] waveData;       // ステージのウェーブデータ
-    public bool isClear;              // ステージクリアフラグ
+    public int stageNum;                // ステージ数
+    public WaveData[] waveData;         // ステージのウェーブデータ
+    public bool isClear;                // ステージクリアフラグ
+    public UnitStatsData[] unlockUnits; // ステージクリアでアンロックされるユニット
 
     public int waveClearCoin;
     public int stageClearCoin;
     public int firstClearCoin;
 
+    public void SetUnitsCanUnLock()
+    {
+        if (unlockUnits != null || unlockUnits.Length <= 0)
+        {
+            foreach (var unit in unlockUnits)
+            {
+                unit.unitStats.UnitUnLock();
+            }
+        }       
+    }
     public Sprite background;       　//背景のsprite
 
     private List<UnitStats> spawnUnits;

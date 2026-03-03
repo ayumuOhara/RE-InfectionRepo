@@ -134,7 +134,7 @@ public abstract class UnitBase : PooledObject, IHealth, IMovable, IAttackable
         StartCoroutine(UsingVirusSkillTransparency());
     }
 
-    public void Update()
+    private void Update()
     {
         if (!IsDead)
         {
@@ -145,7 +145,7 @@ public abstract class UnitBase : PooledObject, IHealth, IMovable, IAttackable
         stateManager.StateMachine.Update();
     }
 
-    void LateUpdate()
+    private void LateUpdate()
     {
         // YÀ•W‚ð -100”{‚µ‚Ä®”‚É•ÏŠ·
         // —á: Y‚ª 1.23 ‚Ìê‡ -> sortingOrder ‚Í -123 ‚É‚È‚é
