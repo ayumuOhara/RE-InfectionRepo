@@ -66,12 +66,8 @@ public class StatusScaler
 [System.Serializable]
 public class UnitStats
 {
-    [Header("ユニットが解放可能か")]
-    public bool canUnlock;
     [Header("ユニットが解放されたか")]
     public bool isUnlocked;
-    [Header("ユニットを解放するために必要な費用")]
-    public int unitPrice;
     [Header("アニメーター")]
     public RuntimeAnimatorController animatorController;           // ユニットのアニメーター
     [Header("スプライト")]
@@ -135,15 +131,8 @@ public class UnitStats
     public void LevelUP() => level.SetLevel(lv + 1);    // 次のレベルへアップ
     public int GetNextLevelCost() => (int)statusScaler[LvIdx].LevelUpCost; // レベルアップに必要なコストを取得
 
-    public void SetCanUnLock(bool active)
+    public void UnitUnLock()
     {
-        canUnlock = active;
-    }
-
-    public void UnitUnLock(Wallet wallet)
-    {
-        if (!wallet.CanBuy(unitPrice)) return;
-
         isUnlocked = true;
     }
 
