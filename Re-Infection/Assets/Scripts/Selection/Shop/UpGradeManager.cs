@@ -123,6 +123,18 @@ public class UpGradeManager : MonoBehaviour
 
         
     }
+
+    private void Update()
+    {
+        UpdateUnitButton(SoldierStats.unitStats, Soldier_text, SoldierUpGradeMoney_text, SoldierButton);
+        UpdateUnitButton(TankStats.unitStats, Tank_text, TankUpGradeMoney_text, TankButton);
+        UpdateUnitButton(ArcherStats.unitStats, Archer_text, ArcherUpGradeMoney_text, ArcherButton);
+        UpdateUnitButton(WizardStats.unitStats, Wizard_text, WizardUpGradeMoney_text, WizardButton);
+        UpdateUnitButton(JockeyStats.unitStats, Jockey_text, JockeyUpGradeMoney_text, JockeyButton);
+        UpdateUnitButton(HammerStats.unitStats, Hammer_text, HammerUpGradeMoney_text, HammerButton);
+        UpdateUnitButton(R_ArcherStats.unitStats, R_Archer_text, R_ArcherUpGradeMoney_text, R_ArcherButton);
+        UpdateUnitButton(R_WizardStats.unitStats, R_Wizard_text, R_WizardUpGradeMoney_text, R_WizardButton);
+    }
     private void UpdateUnitUI(UnitStats stats, TextMeshProUGUI lvText, TextMeshProUGUI costText, Button button)
     {
         // レベルテキストは常に赤
@@ -260,7 +272,7 @@ public class UpGradeManager : MonoBehaviour
         UpdateUnitUI(stats, lvText, costText, button);
 
         unitDetailUII.SetUnit(stats);
-
+     
         DialogObj.SetActive(false);
         LayCastObj.SetActive(false);
         SetRaycastTargets(LayCastObj, false);
@@ -367,4 +379,22 @@ public class UpGradeManager : MonoBehaviour
             g.raycastTarget = enabled;
         }
     }
+
+    private void UpdateUnitButton(UnitStats stats, TextMeshProUGUI lvText, TextMeshProUGUI costText, Button button)
+    {
+        int cost = GetTrueNextCost(stats);
+
+        // お金が足りるかどうか
+        bool canBuy = playerStatusData.wallet.CanBuy(cost);
+
+        // ボタンの状態を更新
+        button.interactable = canBuy;
+
+        costText.color = canBuy ? Color.white : new Color(1f, 0.337f, 0.337f);
+
+        // UI の表示も更新
+        lvText.text = $"{stats.lv}";
+        costText.text = cost.ToString();
+    }
+
 }
