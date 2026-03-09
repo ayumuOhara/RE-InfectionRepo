@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Hammer_Village
   m_EditorClassIdentifier: Assembly-CSharp::UnitStats
   unitStats:
+    isUnlocked: 0
     animatorController: {fileID: 9100000, guid: d4abbc394fe250e4081e90099c69fc42, type: 2}
     unitSprite: {fileID: -8180171696930044909, guid: a465336e46b7ccf45a24b312c97387b6, type: 3}
     attackEffect: {fileID: 368088567968201606, guid: e0e947f3acec72d4ba441c1782bf3036, type: 3}
@@ -33,7 +34,7 @@ MonoBehaviour:
       atkScaler: 3
       levelUpCost: 1200
     - maxHpScaler: 100
-      atkScaler: 4
+      atkScaler: 5
       levelUpCost: 0
     maxHp: 120
     attackType: 2
