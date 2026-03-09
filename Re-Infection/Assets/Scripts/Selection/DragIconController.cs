@@ -22,16 +22,20 @@ public class DragIconController : MonoBehaviour, IPointerClickHandler
 
     private void OnEnable()
     {
-        
+        UnitStats.OnUnlockUnit += SetUnitSlot;
+
+        SetUnitSlot();
+    }
+
+    private void OnDisable()
+    {
+        UnitStats.OnUnlockUnit -= SetUnitSlot;
     }
 
     void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
         if (canvasGroup == null) canvasGroup = gameObject.AddComponent<CanvasGroup>();
-
-        unitIcon.sprite = unitStats.unitStats.unitSprite;
-        cost_text.text = $"{unitStats.unitStats.summonCost}";
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -56,7 +60,23 @@ public class DragIconController : MonoBehaviour, IPointerClickHandler
         }
     }
 
-private IEnumerator ClickAnimation()
+    private void SetUnitSlot()
+    {
+        unitIcon.sprite = unitStats.unitStats.unitSprite;
+
+        if (!unitStats.unitStats.isUnlocked)
+        {
+            unitIcon.color = Color.black;
+            cost_text.text = "?";
+        }
+        else
+        {
+            unitIcon.color = Color.white;
+            cost_text.text = $"{unitStats.unitStats.summonCost}";
+        }
+    }
+
+    private IEnumerator ClickAnimation()
     {
         if (isAnimating) yield break;
         isAnimating = true;

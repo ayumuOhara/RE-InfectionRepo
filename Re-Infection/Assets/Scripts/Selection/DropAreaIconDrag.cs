@@ -15,19 +15,12 @@ public class DropAreaIconDrag : MonoBehaviour, IPointerClickHandler
     {
         originalDropArea = GetComponentInParent<DropArea>();
 
-        Image img = GetComponent<Image>();
-        if (img == null)
-            img = gameObject.AddComponent<Image>();
-
-        img.color = new Color(0, 0, 0, 0); // 完全透明
-        img.raycastTarget = true;
-
         CanvasGroup cg = GetComponent<CanvasGroup>();
         if (cg == null) cg = gameObject.AddComponent<CanvasGroup>();
         cg.blocksRaycasts = true;
         cg.interactable = true;
 
-        GetComponent<RectTransform>().anchoredPosition = new Vector2(50f, -45f);
+        GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
     }
 
 
