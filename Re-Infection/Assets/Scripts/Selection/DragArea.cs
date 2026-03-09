@@ -96,7 +96,7 @@ public class DropArea : MonoBehaviour, IDropHandler
                 Destroy(dropTargetParent.GetChild(0).gameObject);
 
             eventData.pointerDrag.transform.SetParent(dropTargetParent);
-            eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = new Vector2(53, -49);
+            //eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = new Vector2(53, -49);
 
             currentUnitStats = fromDropArea.unitStats;
             UnitDataCarrier.Instance.selectedUnits[slotIndex] = currentUnitStats;
@@ -112,7 +112,8 @@ public class DropArea : MonoBehaviour, IDropHandler
     {
         GameObject clone = Instantiate(original, dropTargetParent);
         RectTransform rt = clone.GetComponent<RectTransform>();
-        rt.anchoredPosition = new Vector2(53f, -49f);
+        rt.localScale = new Vector3(0.75f, 0.75f, 0.75f);
+        //rt.anchoredPosition = new Vector2(53f, -49f);
 
         // DragIconController を削除
         Destroy(clone.GetComponent<DragIconController>());
@@ -125,14 +126,6 @@ public class DropArea : MonoBehaviour, IDropHandler
         cg.blocksRaycasts = true;
         cg.interactable = true;
         cg.alpha = 1f;
-
-        //透明 Image を追加（クリック判定用）
-        Image img = clone.GetComponent<Image>();
-        if (img == null)
-            img = clone.AddComponent<Image>();
-
-        img.color = new Color(0, 0, 0, 0); // 完全透明
-        img.raycastTarget = true;
 
         // DropAreaIconDrag を付ける
         DropAreaIconDrag dragScript = clone.AddComponent<DropAreaIconDrag>();
@@ -175,7 +168,7 @@ public class DropArea : MonoBehaviour, IDropHandler
             Destroy(comp);
 
         RectTransform rt = clone.GetComponent<RectTransform>();
-        rt.anchoredPosition = new Vector2(53f, -49f);
+        //rt.anchoredPosition = new Vector2(53f, -49f);
 
         CanvasGroup cg = clone.GetComponent<CanvasGroup>();
         if (cg == null) cg = clone.AddComponent<CanvasGroup>();

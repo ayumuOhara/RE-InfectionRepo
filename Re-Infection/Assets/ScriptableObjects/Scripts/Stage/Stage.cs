@@ -24,6 +24,7 @@ public class Stage : ScriptableObject
             }
         }       
     }
+
     public Sprite background;       Å@//îwåiÇÃsprite
 
     private List<UnitStats> spawnUnits;

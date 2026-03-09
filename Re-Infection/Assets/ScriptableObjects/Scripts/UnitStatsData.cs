@@ -131,9 +131,13 @@ public class UnitStats
     public void LevelUP() => level.SetLevel(lv + 1);    // 次のレベルへアップ
     public int GetNextLevelCost() => (int)statusScaler[LvIdx].LevelUpCost; // レベルアップに必要なコストを取得
 
+    public static event Action OnUnlockUnit;
+
     public void UnitUnLock()
     {
         isUnlocked = true;
+
+        OnUnlockUnit?.Invoke();
     }
 
     public Material GetOutline(string targetOutline)
