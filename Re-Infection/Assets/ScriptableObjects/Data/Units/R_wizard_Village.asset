@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: R_wizard_Village
   m_EditorClassIdentifier: Assembly-CSharp::UnitStats
   unitStats:
+    isUnlocked: 0
     animatorController: {fileID: 9100000, guid: 4e2a6267e66fb5a4d9cec1b8d34dcf9c, type: 2}
     unitSprite: {fileID: -1548542343388229337, guid: 0e7def79efff5a74b9bd5ccfa50ee410, type: 3}
     attackEffect: {fileID: 9083634734492158199, guid: 1968969ccf1d2f64cb279a59b9297bae, type: 3}
@@ -24,13 +25,13 @@ MonoBehaviour:
       atkScaler: 0
       levelUpCost: 300
     - maxHpScaler: 10
-      atkScaler: 2
+      atkScaler: 1
       levelUpCost: 600
     - maxHpScaler: 20
-      atkScaler: 3
+      atkScaler: 2
       levelUpCost: 900
     - maxHpScaler: 30
-      atkScaler: 4
+      atkScaler: 3
       levelUpCost: 1200
     - maxHpScaler: 40
       atkScaler: 5

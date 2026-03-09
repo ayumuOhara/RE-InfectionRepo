@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Jockey
   m_EditorClassIdentifier: Assembly-CSharp::UnitStats
   unitStats:
+    isUnlocked: 0
     animatorController: {fileID: 9100000, guid: ec837d4df03d5e4489257964b30de201, type: 2}
     unitSprite: {fileID: -7156167969184391016, guid: 3faf693f7e96ed244b275f2e2fdadfe5, type: 3}
     attackEffect: {fileID: 0}
@@ -33,7 +34,7 @@ MonoBehaviour:
       atkScaler: 3
       levelUpCost: 1200
     - maxHpScaler: 50
-      atkScaler: 4
+      atkScaler: 5
       levelUpCost: 0
     maxHp: 80
     attackType: 0
