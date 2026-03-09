@@ -15,4 +15,4 @@ MonoBehaviour:
   levelStats:
   - statsData: {fileID: 11400000, guid: fe15a39c45f5ba945931563260f1ba9f, type: 2}
     spawnCnt: 5
-  spawnInterbal: 15
+  spawnInterbal: 20

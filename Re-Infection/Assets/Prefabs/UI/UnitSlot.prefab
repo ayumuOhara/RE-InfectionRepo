@@ -368,7 +368,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 64105460c44937a4c9f1e3e1d6ed595d, type: 3}
+  m_Sprite: {fileID: -4120535925080400364, guid: decd9f9d258a2a846af4921e94195170, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -759,6 +759,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DragIconController
   unitIcon: {fileID: 1416224280683693564}
+  jobIcon: {fileID: 6048909422697686753}
+  keySprite: {fileID: -4120535925080400364, guid: decd9f9d258a2a846af4921e94195170, type: 3}
   isAnimating: 0
   unitStats: {fileID: 0}
   isUsedInDropArea: 0

@@ -19,10 +19,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9363263f13a085843bae4d1f64bac05e, type: 2}
   - {fileID: 11400000, guid: babf96a213da5254698f5a823b9e37da, type: 2}
   isClear: 0
-  unlockUnits:
-  - {fileID: 11400000, guid: fe15a39c45f5ba945931563260f1ba9f, type: 2}
-  - {fileID: 11400000, guid: e6d3327307b2d5c4c9367da09a7e2d3b, type: 2}
-  - {fileID: 11400000, guid: b92b3387e050d804c96d18a3d08de2a8, type: 2}
+  unlockUnits: []
   waveClearCoin: 50
   stageClearCoin: 150
   firstClearCoin: 200
