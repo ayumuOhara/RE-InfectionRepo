@@ -82,6 +82,7 @@ public class ShopManager : MonoBehaviour
         DialogObj.SetActive(false);
         money_text.text = ($"{playerStatusData.wallet.CurrentMoney}");
         LayCastObj.SetActive(false);
+        SetRaycastTargets(LayCastObj, false);
 
         SetUpgradeTextAndButton(playerStatusData.castleUpgrade);
         SetUpgradeTextAndButton(playerStatusData.cannonDamageUpgrade);
@@ -161,6 +162,7 @@ public class ShopManager : MonoBehaviour
     {
         DialogObj.SetActive(false);
         LayCastObj.SetActive(false);
+        SetRaycastTargets(LayCastObj, false);
     }
 
     // 渡された強化要素のアップグレードを行う
@@ -189,6 +191,7 @@ public class ShopManager : MonoBehaviour
 
         DialogObj.SetActive(false);
         LayCastObj.SetActive(false);
+        SetRaycastTargets(LayCastObj, false);
     }
 
     // 指定の強化内容のLvと必要なお金の表示切替
@@ -216,6 +219,7 @@ public class ShopManager : MonoBehaviour
     {
         DialogObj.SetActive(true);
         LayCastObj.SetActive(true);
+        SetRaycastTargets(LayCastObj, true);
 
         // 基本情報の設定
         DialogLevel_text1.text = upgrade.lv.ToString();
@@ -292,5 +296,15 @@ public class ShopManager : MonoBehaviour
         Warning_text.text = ("レ ベ ル マ ッ ク ス で す ！");
         yield return new WaitForSeconds(1f);
         WarningObj.SetActive(false);
+    }
+
+    private void SetRaycastTargets(GameObject obj, bool enabled)
+    {
+        var graphics = obj.GetComponentsInChildren<UnityEngine.UI.Graphic>(true);
+
+        foreach (var g in graphics)
+        {
+            g.raycastTarget = enabled;
+        }
     }
 }

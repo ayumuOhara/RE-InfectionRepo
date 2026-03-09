@@ -231,7 +231,10 @@ public class UnitStatsData : ScriptableObject
 
     private void OnEnable()
     {
-        if(unitStats.statusScaler != null)
+        if (unitStats.statusScaler != null)
+        {
             unitStats.SetMaxLevel(unitStats.MaxLevel);
+            unitStats.SetLevel(1);
+        }
     }
 }

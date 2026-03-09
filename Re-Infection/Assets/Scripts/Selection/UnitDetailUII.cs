@@ -32,8 +32,8 @@ public class UnitDetailUII : MonoBehaviour
         unitImage.sprite = stats.unitSprite;
 
         unitNameText.text = stats.unitName;
-        unitHpText.text = $"{stats.maxHp}";
-        atkText.text = $"{stats.atk}";
+        unitHpText.text = $"{stats.GetCurrentLevelMaxHp()}";
+        atkText.text = $"{stats.GetCurrentLevelAtk()}";
         rangeText.text = $"{stats.range}";
         atkInterbalText.text = $"{stats.atkInterbal}";
         hitCntText.text = $"{stats.hitCnt}";
