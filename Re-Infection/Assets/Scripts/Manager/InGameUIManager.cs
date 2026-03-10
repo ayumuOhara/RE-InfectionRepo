@@ -142,12 +142,14 @@ public class InGameUIManager : MonoBehaviour
 
             if (!gameManager.waveSpawner.CurrentStage.isClear)
             {
+                gameManager.waveSpawner.stageData.SetStageProgress(gameManager.waveSpawner.CurrentStage.stageNum);
+
                 yield return VisibleUnlockUnits(gameManager.waveSpawner.CurrentStage);
 
                 totalCoin += gameManager.waveSpawner.CurrentStage.firstClearCoin;
                 gameManager.waveSpawner.CurrentStage.SetUnitsCanUnLock();
 
-                gameManager.waveSpawner.CurrentStage.isClear = true;
+                gameManager.waveSpawner.CurrentStage.SetIsClear(true);
                 firstClearReward.SetActive(true);
             }
             else

@@ -10,7 +10,7 @@ public class Level
 {
     private int maxlv;
 
-    [SerializeField] private int lv = 1;
+    private int lv;
 
     public int LvIdx => ClampLevelIndex(lv);
 
@@ -203,9 +203,6 @@ public class PlayerStatusData : ScriptableObject
         virusUpgrade.SetUpgradeLevel(1);
     }
 
-    [ContextMenu("全PlayerPrefsのデータを削除")]
-    public void ClearAllData()
-    {
-        PlayerPrefs.DeleteAll();
-    }
+    [ContextMenu("データリセット")]
+    public void ClearAllData() => PlayerPrefs.DeleteAll();
 }

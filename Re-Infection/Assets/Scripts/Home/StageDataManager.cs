@@ -17,43 +17,14 @@ public class StageDataManager : MonoBehaviour
         StartCoroutine(SceneStart());
     }
 
-
-    private void Update()
-    {
-        //TODO 後で消すデバック用 
-        if (Input.GetKey(KeyCode.X))
-        {
-            for (int i = 0; i < stage.Length; i++)
-            {
-                stageData.isStageOpen[i] = false;
-            }
-        }
-
-        if (Input.GetKey(KeyCode.C))
-        {
-            //ステージのクリア情報を確認
-            for (int i = 0; i < stage.Length; i++)
-            {
-                //解放されたら
-                if (stageData.isStageClear[i] == true && stageData.isStageOpen[i] == false)
-                {
-                    battleCanvas.OnChangeStage(i + 1);
-                    stageData.isStageOpen[i] = true;
-                }
-            }
-        }
-    }
-
     IEnumerator SceneStart()
     {
         StartCoroutine(StartPanel());
 
         for (int i = 0; i < stage.Length; i++)
         {
-            stageData.isStageClear[i] = stage[i].isClear;
-            
             //解放済みステージの処理
-            if (stageData.isStageClear[i] == true && stageData.isStageOpen[i] == true)
+            if (stageData.Stage[i].isClear && i <= stageData.GetStageProgress)
             {
                 battleCanvas.OnClearedStage(i + 1);
             }
@@ -65,10 +36,9 @@ public class StageDataManager : MonoBehaviour
         for (int i = 0; i < stage.Length; i++)
         {
             //解放されたら
-            if (stageData.isStageClear[i] == true && stageData.isStageOpen[i] == false)
+            if (stageData.Stage[i].isClear && i > stageData.GetStageProgress)
             {
                 battleCanvas.OnChangeStage(i + 1);
-                stageData.isStageOpen[i] = true;
             }
         }
     }

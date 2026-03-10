@@ -33,8 +33,8 @@ public class Wallet
         PlayerPrefs.SetInt("Money", currentMoney);
     }
 
-    public bool CanBuy(int amount)
+    public bool CanBuy(int value)
     {
-        return currentMoney >= amount;
+        return CurrentMoney >= value;
     }
 }

@@ -18,6 +18,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4ab16632466d4b84b9e7a62bfcbb2e8c, type: 2}
   - {fileID: 11400000, guid: 0b04561822ae0174e8c528b9844be972, type: 2}
   - {fileID: 11400000, guid: a0043c5581872544b91ade98c3ccb70c, type: 2}
-  isStageClear: 0000000000
-  isStageOpen: 0000000000
   SelectStageNumber: 0

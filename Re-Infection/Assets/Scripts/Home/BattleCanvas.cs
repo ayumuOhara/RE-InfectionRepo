@@ -137,7 +137,7 @@ public class BattleCanvas : MonoBehaviour
     //クリア済みステージの処理
     public void OnClearedStage(int stage)
     {
-        if (stage > 4) return;
+        if (stage >= stageData.Stage.Length) return;
 
         lockAnime[stage].gameObject.SetActive(false);
         stageImage[stage].color = new Color(1f, 1f, 1f, 1f);
@@ -148,7 +148,7 @@ public class BattleCanvas : MonoBehaviour
     //クリア後に解放されたステージに移る処理
     public void OnChangeStage(int stage)
     {
-        if (stage >= 5) return;
+        if (stage >= stageData.Stage.Length + 1) return;
         messageCanvas.SetActive(true);
 
 

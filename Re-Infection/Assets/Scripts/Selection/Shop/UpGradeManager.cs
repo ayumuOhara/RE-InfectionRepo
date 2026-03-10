@@ -137,8 +137,6 @@ public class UpGradeManager : MonoBehaviour
 
         Warning_text.text = "";
         WarningObj.SetActive(false);
-
-        
     }
 
     private void Update()
@@ -152,6 +150,7 @@ public class UpGradeManager : MonoBehaviour
         UpdateUnitButton(R_ArcherStats.unitStats, R_Archer_text, R_ArcherUpGradeMoney_text, R_ArcherButton,R_ArcherName_text,R_Archer_Image);
         UpdateUnitButton(R_WizardStats.unitStats, R_Wizard_text, R_WizardUpGradeMoney_text, R_WizardButton,R_WizardName_text,R_Wizard_Image);
     }
+
     private void UpdateUnitUI(UnitStats stats, TextMeshProUGUI lvText, TextMeshProUGUI costText, Button button,TextMeshProUGUI nameText=null,Image IconImage=null)
     {
         //ロック中の表示
@@ -186,11 +185,10 @@ public class UpGradeManager : MonoBehaviour
         }
 
         lvText.text = stats.lv.ToString();
+        int cost = stats.GetNextLevelCost();
+        costText.text = cost.ToString();
 
-        int nextCost = GetTrueNextCost(stats);
-        costText.text = nextCost.ToString();
-
-        bool canBuy = playerStatusData.wallet.CurrentMoney >= nextCost;
+        bool canBuy = playerStatusData.wallet.CanBuy(cost);
 
         costText.color = canBuy ? Color.white : new Color(1f, 0.337f, 0.337f);
         button.interactable = canBuy;
@@ -205,6 +203,7 @@ public class UpGradeManager : MonoBehaviour
             nameText.text = stats.unitName;
         }
     }
+
     // アップグレードを承認するボタンの関数
     public void UndoUpgrade()
     {
@@ -294,8 +293,7 @@ public class UpGradeManager : MonoBehaviour
     // 渡された強化要素のアップグレードを行う
     private void TryUpgradeUnit(UnitStats stats, TextMeshProUGUI lvText, TextMeshProUGUI costText, Button button)
     {
-
-        int cost = GetTrueNextCost(stats);
+        int cost = stats.GetNextLevelCost();
 
          if (stats.lv >= stats.MaxLevel)
         {
@@ -333,7 +331,7 @@ public class UpGradeManager : MonoBehaviour
 
         DialogLevel_text1.text = stats.lv.ToString();
         DialogLevel_text2.text = (stats.lv + 1).ToString();
-        int nextCost = GetTrueNextCost(stats);
+        int nextCost = stats.GetNextLevelCost();
         DialogMoney_text.text = nextCost.ToString();
         DialogMassege.text = message;
 
@@ -345,9 +343,6 @@ public class UpGradeManager : MonoBehaviour
     {
         unitUpGradeType = UnitUpGradeType.Soldier;
         SetDialogTextUnit(SoldierStats.unitStats, "剣士を強化しますか？");
-        int cost = GetTrueNextCost(SoldierStats.unitStats);
-       
-
     }
 
     public void TankEnhancement()
@@ -355,26 +350,31 @@ public class UpGradeManager : MonoBehaviour
         unitUpGradeType = UnitUpGradeType.Tank;
         SetDialogTextUnit(TankStats.unitStats, "盾兵を強化しますか？");
     }
+
     public void ArcherEnhancement()
     {
         unitUpGradeType = UnitUpGradeType.Archer;
         SetDialogTextUnit(ArcherStats.unitStats, "弓使いを強化しますか？");
     }
+
     public void WizardEnhancement()
     {
         unitUpGradeType = UnitUpGradeType.Wizard;
         SetDialogTextUnit(WizardStats.unitStats, "魔法使いを強化しますか？");
     }
+
     public void JockeyEnhancement()
     {
         unitUpGradeType = UnitUpGradeType.Jockey;
         SetDialogTextUnit(JockeyStats.unitStats, "騎馬兵を強化しますか？");
     }
+
     public void HammerEnhancement()
     {
         unitUpGradeType = UnitUpGradeType.Hammer;
         SetDialogTextUnit(HammerStats.unitStats, "鈍器使いを強化しますか？");
     }
+
     public void R_ArcherEnhancement()
     {
         unitUpGradeType = UnitUpGradeType.R_Archer;
@@ -402,15 +402,6 @@ public class UpGradeManager : MonoBehaviour
         Warning_text.text = ("レ ベ ル マ ッ ク ス で す ！");
         yield return new WaitForSeconds(1f);
         WarningObj.SetActive(false);
-    }
-    private int GetTrueNextCost(UnitStats stats)
-    {
-        int nextIndex = stats.LvIdx + 1;
-
-        if (nextIndex >= stats.statusScaler.Length)
-            return 0;
-
-        return (int)stats.statusScaler[nextIndex].LevelUpCost;
     }
 
     private void SetRaycastTargets(GameObject obj, bool enabled)
@@ -446,7 +437,7 @@ public class UpGradeManager : MonoBehaviour
 
         }
 
-        int cost = GetTrueNextCost(stats);
+        int cost = stats.GetNextLevelCost();
         bool canBuy = playerStatusData.wallet.CanBuy(cost);
 
         lvText.text = stats.lv.ToString();

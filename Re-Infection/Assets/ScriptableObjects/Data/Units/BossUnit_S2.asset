@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: BossUnit_S2
   m_EditorClassIdentifier: Assembly-CSharp::UnitStats
   unitStats:
+    isUnlocked: 0
     animatorController: {fileID: 0}
     unitSprite: {fileID: 21300014, guid: e48ddf4fb7304ce4ab48711eb6617a57, type: 3}
     attackEffect: {fileID: 8289740950869842158, guid: fc7ef61e97eaa294d95015217cb240f0, type: 3}
