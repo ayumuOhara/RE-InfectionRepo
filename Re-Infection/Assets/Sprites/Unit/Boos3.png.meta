@@ -1,0 +1,338 @@
+fileFormatVersion: 2
+guid: 4ffa1f9c62861be4593ff942d9359b59
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1209691482802962784
+    second: Boos3_0
+  - first:
+      213: -8224706978613205789
+    second: Boos3_1
+  - first:
+      213: -8040112656310034052
+    second: Boos3_2
+  - first:
+      213: -6401984750233184127
+    second: Boos3_3
+  - first:
+      213: 6940432771782573786
+    second: Boos3_4
+  - first:
+      213: -921319768958669927
+    second: Boos3_5
+  - first:
+      213: 5847339627501045668
+    second: Boos3_6
+  - first:
+      213: -688280664335505130
+    second: Boos3_7
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 530
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Boos3_0
+      rect:
+        serializedVersion: 2
+        x: 766
+        y: 5518
+        width: 791
+        height: 1134
+      alignment: 9
+      pivot: {x: 0.5264031, y: 0.34740135}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06149409effa9c010800000000000000
+      internalID: 1209691482802962784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos3_1
+      rect:
+        serializedVersion: 2
+        x: 2974
+        y: 5539
+        width: 847
+        height: 1086
+      alignment: 9
+      pivot: {x: 0.5387472, y: 0.34065664}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e4651e4498fbdd80800000000000000
+      internalID: -8224706978613205789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos3_2
+      rect:
+        serializedVersion: 2
+        x: 5358
+        y: 5527
+        width: 832
+        height: 1131
+      alignment: 9
+      pivot: {x: 0.40676352, y: 0.32589298}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c71a48e2328cb6090800000000000000
+      internalID: -8040112656310034052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos3_3
+      rect:
+        serializedVersion: 2
+        x: 727
+        y: 3303
+        width: 854
+        height: 1068
+      alignment: 9
+      pivot: {x: 0.5352862, y: 0.32835406}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18812e0f9c49727a0800000000000000
+      internalID: -6401984750233184127
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos3_4
+      rect:
+        serializedVersion: 2
+        x: 2754
+        y: 3266
+        width: 1010
+        height: 1064
+      alignment: 9
+      pivot: {x: 0.6665847, y: 0.3843524}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ade749d75de515060800000000000000
+      internalID: 6940432771782573786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos3_5
+      rect:
+        serializedVersion: 2
+        x: 5365
+        y: 3278
+        width: 1158
+        height: 1103
+      alignment: 9
+      pivot: {x: 0.28748044, y: 0.3360774}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99b6cae2d80d633f0800000000000000
+      internalID: -921319768958669927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos3_6
+      rect:
+        serializedVersion: 2
+        x: 604
+        y: 802
+        width: 1339
+        height: 877
+      alignment: 9
+      pivot: {x: 0.27307302, y: 0.6660769}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a7c342296ce52150800000000000000
+      internalID: 5847339627501045668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos3_7
+      rect:
+        serializedVersion: 2
+        x: 2854
+        y: 807
+        width: 1334
+        height: 889
+      alignment: 9
+      pivot: {x: 0.27222246, y: 0.6440619}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6192388e16cb276f0800000000000000
+      internalID: -688280664335505130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: e1cb94c934ffa7945874261329daf139
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Boos3_0: 1209691482802962784
+      Boos3_1: -8224706978613205789
+      Boos3_2: -8040112656310034052
+      Boos3_3: -6401984750233184127
+      Boos3_4: 6940432771782573786
+      Boos3_5: -921319768958669927
+      Boos3_6: 5847339627501045668
+      Boos3_7: -688280664335505130
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
