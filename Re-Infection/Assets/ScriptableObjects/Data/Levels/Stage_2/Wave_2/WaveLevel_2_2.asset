@@ -17,4 +17,4 @@ MonoBehaviour:
     spawnCnt: 2
   - statsData: {fileID: 11400000, guid: f02c22218b66c3d46a4373dc16d76277, type: 2}
     spawnCnt: 3
-  spawnInterbal: 12
+  spawnInterbal: 15
