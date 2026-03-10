@@ -1,0 +1,1872 @@
+fileFormatVersion: 2
+guid: 17360c02ca9f05e4f8552dba9a715b92
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6289355669541238697
+    second: Boos2_0
+  - first:
+      213: 6987524257081656482
+    second: Boos2_1
+  - first:
+      213: -8704651356004161608
+    second: Boos2_2
+  - first:
+      213: 5561800494645987151
+    second: Boos2_3
+  - first:
+      213: -1639128987978588691
+    second: Boos2_4
+  - first:
+      213: -351645289123853490
+    second: Boos2_5
+  - first:
+      213: 8677599336635685757
+    second: Boos2_6
+  - first:
+      213: -5521439560779148992
+    second: Boos2_7
+  - first:
+      213: 7873844545328029761
+    second: Boos2_8
+  - first:
+      213: -5364123361543185640
+    second: Boos2_9
+  - first:
+      213: -6814151437710258467
+    second: Boos2_10
+  - first:
+      213: -398454239172712019
+    second: Boos2_11
+  - first:
+      213: -3547656882317537320
+    second: Boos2_12
+  - first:
+      213: 3907239880587104734
+    second: Boos2_13
+  - first:
+      213: -2218195091762599853
+    second: Boos2_14
+  - first:
+      213: 8883870994919916134
+    second: Boos2_15
+  - first:
+      213: -6612655489594812613
+    second: Boos2_16
+  - first:
+      213: -4834693693921934832
+    second: Boos2_17
+  - first:
+      213: 7452126920480872787
+    second: Boos2_18
+  - first:
+      213: -1899016567350238075
+    second: Boos2_19
+  - first:
+      213: 2951513549841230334
+    second: Boos2_20
+  - first:
+      213: 6832869390947223236
+    second: Boos2_21
+  - first:
+      213: 141130383572229030
+    second: Boos2_22
+  - first:
+      213: -3631763841653976787
+    second: Boos2_23
+  - first:
+      213: 869710763645152361
+    second: Boos2_24
+  - first:
+      213: 3142219225549122932
+    second: Boos2_25
+  - first:
+      213: -7184480034525907246
+    second: Boos2_26
+  - first:
+      213: -6049898552116291400
+    second: Boos2_27
+  - first:
+      213: 7162940401263499170
+    second: Boos2_28
+  - first:
+      213: 6830959667586002587
+    second: Boos2_29
+  - first:
+      213: -2896190013341646750
+    second: Boos2_30
+  - first:
+      213: -1460476225137050911
+    second: Boos2_31
+  - first:
+      213: -6308941960789639394
+    second: Boos2_32
+  - first:
+      213: 7545449075394356867
+    second: Boos2_33
+  - first:
+      213: 1717348609022593046
+    second: Boos2_34
+  - first:
+      213: 978321339696083384
+    second: Boos2_35
+  - first:
+      213: -4758860504900832154
+    second: Boos2_36
+  - first:
+      213: 7252794398420939618
+    second: Boos2_37
+  - first:
+      213: 4368563906141325742
+    second: Boos2_38
+  - first:
+      213: -2021390488106641353
+    second: Boos2_39
+  - first:
+      213: 808848621605904072
+    second: Boos2_40
+  - first:
+      213: 3230287862916810047
+    second: Boos2_41
+  - first:
+      213: -3782677396879969431
+    second: Boos2_42
+  - first:
+      213: -4285683348710259283
+    second: Boos2_43
+  - first:
+      213: 2453757274920618638
+    second: Boos2_44
+  - first:
+      213: 7552008359141248538
+    second: Boos2_45
+  - first:
+      213: -8304480425560416038
+    second: Boos2_46
+  - first:
+      213: 1516717575421213490
+    second: Boos2_47
+  - first:
+      213: -5466716018437234064
+    second: Boos2_48
+  - first:
+      213: -3977571050953885169
+    second: Boos2_49
+  - first:
+      213: 4135685511361188440
+    second: Boos2_50
+  - first:
+      213: 9181093001172540321
+    second: Boos2_51
+  - first:
+      213: 2015837802013719308
+    second: Boos2_52
+  - first:
+      213: 2748373293808021517
+    second: Boos2_53
+  - first:
+      213: -3606651427113801420
+    second: Boos2_54
+  - first:
+      213: 6202923831247142302
+    second: Boos2_55
+  - first:
+      213: -3845071715788541368
+    second: Boos2_56
+  - first:
+      213: 4525650270011797392
+    second: Boos2_57
+  - first:
+      213: -8903520309761119300
+    second: Boos2_58
+  - first:
+      213: 3101113377999126935
+    second: Boos2_59
+  - first:
+      213: -8241480403677961479
+    second: Boos2_60
+  - first:
+      213: -1182040268344391603
+    second: Boos2_61
+  - first:
+      213: -2159378305264987647
+    second: Boos2_62
+  - first:
+      213: 3563762168038663917
+    second: Boos2_63
+  - first:
+      213: 7697371766243744786
+    second: Boos2_64
+  - first:
+      213: -9197449833798039290
+    second: Boos2_65
+  - first:
+      213: 3681357445505059
+    second: Boos2_66
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 530
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Boos2_0
+      rect:
+        serializedVersion: 2
+        x: 3537
+        y: 8677
+        width: 147
+        height: 103
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a73815b8a7484750800000000000000
+      internalID: 6289355669541238697
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_1
+      rect:
+        serializedVersion: 2
+        x: 5848
+        y: 8746
+        width: 22
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a407c25a4ca8f060800000000000000
+      internalID: 6987524257081656482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_2
+      rect:
+        serializedVersion: 2
+        x: 5877
+        y: 8752
+        width: 15
+        height: 34
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b7efbff5bdd23780800000000000000
+      internalID: -8704651356004161608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_3
+      rect:
+        serializedVersion: 2
+        x: 8112
+        y: 8703
+        width: 32
+        height: 61
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4747fa051c7f2d40800000000000000
+      internalID: 5561800494645987151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_4
+      rect:
+        serializedVersion: 2
+        x: 8142
+        y: 8743
+        width: 22
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ded9d72bed4a049e0800000000000000
+      internalID: -1639128987978588691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_5
+      rect:
+        serializedVersion: 2
+        x: 3741
+        y: 8726
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e4b45def874be1bf0800000000000000
+      internalID: -351645289123853490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_6
+      rect:
+        serializedVersion: 2
+        x: 5735
+        y: 8516
+        width: 95
+        height: 217
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7bd55bee960d6870800000000000000
+      internalID: 8677599336635685757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_7
+      rect:
+        serializedVersion: 2
+        x: 5842
+        y: 8687
+        width: 66
+        height: 59
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04158fa29f7ef53b0800000000000000
+      internalID: -5521439560779148992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_8
+      rect:
+        serializedVersion: 2
+        x: 5989
+        y: 8726
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 140ace485e3854d60800000000000000
+      internalID: 7873844545328029761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_9
+      rect:
+        serializedVersion: 2
+        x: 8033
+        y: 8718
+        width: 70
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81b18d7193ece85b0800000000000000
+      internalID: -5364123361543185640
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_10
+      rect:
+        serializedVersion: 2
+        x: 8149
+        y: 8722
+        width: 22
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dde009dce554f61a0800000000000000
+      internalID: -6814151437710258467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_11
+      rect:
+        serializedVersion: 2
+        x: 8237
+        y: 8726
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da9acd60bf7687af0800000000000000
+      internalID: -398454239172712019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_12
+      rect:
+        serializedVersion: 2
+        x: 5895
+        y: 8711
+        width: 19
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8df4e70acd034cec0800000000000000
+      internalID: -3547656882317537320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_13
+      rect:
+        serializedVersion: 2
+        x: 8113
+        y: 8686
+        width: 14
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed152ae48fd493630800000000000000
+      internalID: 3907239880587104734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_14
+      rect:
+        serializedVersion: 2
+        x: 877
+        y: 7739
+        width: 653
+        height: 879
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 358a9f801536731e0800000000000000
+      internalID: -2218195091762599853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_15
+      rect:
+        serializedVersion: 2
+        x: 1488
+        y: 8619
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6620992e999d94b70800000000000000
+      internalID: 8883870994919916134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_16
+      rect:
+        serializedVersion: 2
+        x: 3131
+        y: 7798
+        width: 649
+        height: 993
+      alignment: 9
+      pivot: {x: 0.4960358, y: 0.38080972}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b371aa81ed02b34a0800000000000000
+      internalID: -6612655489594812613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_17
+      rect:
+        serializedVersion: 2
+        x: 3487
+        y: 8516
+        width: 95
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 01246ff53b7b7ecb0800000000000000
+      internalID: -4834693693921934832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_18
+      rect:
+        serializedVersion: 2
+        x: 3680
+        y: 8497
+        width: 92
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 359536c73f54b6760800000000000000
+      internalID: 7452126920480872787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_19
+      rect:
+        serializedVersion: 2
+        x: 5358
+        y: 7783
+        width: 670
+        height: 999
+      alignment: 9
+      pivot: {x: 0.5115213, y: 0.39697853}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 584e1805e7655a5e0800000000000000
+      internalID: -1899016567350238075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_20
+      rect:
+        serializedVersion: 2
+        x: 5928
+        y: 8497
+        width: 92
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef9e9009fe1e5f820800000000000000
+      internalID: 2951513549841230334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_21
+      rect:
+        serializedVersion: 2
+        x: 7616
+        y: 7780
+        width: 679
+        height: 993
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3857825}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c68c0c428a33de50800000000000000
+      internalID: 6832869390947223236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_22
+      rect:
+        serializedVersion: 2
+        x: 7983
+        y: 8516
+        width: 95
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ab56db065565f100800000000000000
+      internalID: 141130383572229030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_23
+      rect:
+        serializedVersion: 2
+        x: 8176
+        y: 8497
+        width: 92
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d215b162702699dc0800000000000000
+      internalID: -3631763841653976787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_24
+      rect:
+        serializedVersion: 2
+        x: 1432
+        y: 8390
+        width: 92
+        height: 175
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96c2764e455d11c00800000000000000
+      internalID: 869710763645152361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_25
+      rect:
+        serializedVersion: 2
+        x: 1239
+        y: 6268
+        width: 95
+        height: 217
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 47d2249ccb76b9b20800000000000000
+      internalID: 3142219225549122932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_26
+      rect:
+        serializedVersion: 2
+        x: 1368
+        y: 6463
+        width: 32
+        height: 34
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d6723e39799b4c90800000000000000
+      internalID: -7184480034525907246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_27
+      rect:
+        serializedVersion: 2
+        x: 1493
+        y: 6478
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b855f112517a0ca0800000000000000
+      internalID: -6049898552116291400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_28
+      rect:
+        serializedVersion: 2
+        x: 3537
+        y: 6429
+        width: 188
+        height: 103
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a7da941850e76360800000000000000
+      internalID: 7162940401263499170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_29
+      rect:
+        serializedVersion: 2
+        x: 3741
+        y: 6478
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b9eeb7d20a17cce50800000000000000
+      internalID: 6830959667586002587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_30
+      rect:
+        serializedVersion: 2
+        x: 5379
+        y: 5543
+        width: 680
+        height: 1121
+      alignment: 9
+      pivot: {x: 0.48108125, y: 0.34851435}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 260ccbc078aaec7d0800000000000000
+      internalID: -2896190013341646750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_31
+      rect:
+        serializedVersion: 2
+        x: 8022
+        y: 6434
+        width: 216
+        height: 211
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ea7dc57c985bbbe0800000000000000
+      internalID: -1460476225137050911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_32
+      rect:
+        serializedVersion: 2
+        x: 8237
+        y: 6478
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1fb39e76b22278a0800000000000000
+      internalID: -6308941960789639394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_33
+      rect:
+        serializedVersion: 2
+        x: 887
+        y: 5549
+        width: 658
+        height: 960
+      alignment: 9
+      pivot: {x: 0.4882694, y: 0.4035141}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3862ea1e4f1d6b860800000000000000
+      internalID: 7545449075394356867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_34
+      rect:
+        serializedVersion: 2
+        x: 1432
+        y: 6249
+        width: 92
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6188d44067f35d710800000000000000
+      internalID: 1717348609022593046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_35
+      rect:
+        serializedVersion: 2
+        x: 3121
+        y: 5543
+        width: 659
+        height: 1003
+      alignment: 9
+      pivot: {x: 0.50780916, y: 0.3896937}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b1f4c83312b39d00800000000000000
+      internalID: 978321339696083384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_36
+      rect:
+        serializedVersion: 2
+        x: 3487
+        y: 6268
+        width: 95
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 664ffb5959125fdb0800000000000000
+      internalID: -4758860504900832154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_37
+      rect:
+        serializedVersion: 2
+        x: 3680
+        y: 6249
+        width: 92
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 263b2d2141a17a460800000000000000
+      internalID: 7252794398420939618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_38
+      rect:
+        serializedVersion: 2
+        x: 5928
+        y: 6270
+        width: 92
+        height: 159
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea9852c1ab140ac30800000000000000
+      internalID: 4368563906141325742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_39
+      rect:
+        serializedVersion: 2
+        x: 7622
+        y: 5534
+        width: 670
+        height: 1115
+      alignment: 9
+      pivot: {x: 0.48763046, y: 0.351365}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 738dc049f0492f3e0800000000000000
+      internalID: -2021390488106641353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_40
+      rect:
+        serializedVersion: 2
+        x: 7983
+        y: 6268
+        width: 95
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ce52ef298b993b00800000000000000
+      internalID: 808848621605904072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_41
+      rect:
+        serializedVersion: 2
+        x: 8176
+        y: 6249
+        width: 92
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f35896f42b944dc20800000000000000
+      internalID: 3230287862916810047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_42
+      rect:
+        serializedVersion: 2
+        x: 5735
+        y: 4020
+        width: 95
+        height: 217
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 963f113f2fa318bc0800000000000000
+      internalID: -3782677396879969431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_43
+      rect:
+        serializedVersion: 2
+        x: 5989
+        y: 4230
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da5815c63b13684c0800000000000000
+      internalID: -4285683348710259283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_44
+      rect:
+        serializedVersion: 2
+        x: 7983
+        y: 4020
+        width: 96
+        height: 217
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8a8ca0bd3f7d0220800000000000000
+      internalID: 2453757274920618638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_45
+      rect:
+        serializedVersion: 2
+        x: 8237
+        y: 4230
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1e0563279f1ec860800000000000000
+      internalID: 7552008359141248538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_46
+      rect:
+        serializedVersion: 2
+        x: 1239
+        y: 3939
+        width: 95
+        height: 186
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad0694e4d0f80cc80800000000000000
+      internalID: -8304480425560416038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_47
+      rect:
+        serializedVersion: 2
+        x: 1493
+        y: 4118
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23bb29359967c0510800000000000000
+      internalID: 1516717575421213490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_48
+      rect:
+        serializedVersion: 2
+        x: 3127
+        y: 3224
+        width: 668
+        height: 905
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0726c11ceb25224b0800000000000000
+      internalID: -5466716018437234064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_49
+      rect:
+        serializedVersion: 2
+        x: 3741
+        y: 4118
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0a34070434dcc8c0800000000000000
+      internalID: -3977571050953885169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_50
+      rect:
+        serializedVersion: 2
+        x: 5361
+        y: 3294
+        width: 679
+        height: 915
+      alignment: 9
+      pivot: {x: 0.5037898, y: 0.42126477}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 852d96f8f08e46930800000000000000
+      internalID: 4135685511361188440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_51
+      rect:
+        serializedVersion: 2
+        x: 5928
+        y: 4001
+        width: 92
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1abd6b8e07bc96f70800000000000000
+      internalID: 9181093001172540321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_52
+      rect:
+        serializedVersion: 2
+        x: 7597
+        y: 3291
+        width: 677
+        height: 945
+      alignment: 9
+      pivot: {x: 0.52956086, y: 0.42587814}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0bf4d1fcc1b9fb10800000000000000
+      internalID: 2015837802013719308
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_53
+      rect:
+        serializedVersion: 2
+        x: 8161
+        y: 4001
+        width: 107
+        height: 202
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d00f89ff2fe242620800000000000000
+      internalID: 2748373293808021517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_54
+      rect:
+        serializedVersion: 2
+        x: 867
+        y: 3224
+        width: 682
+        height: 896
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 439e93ac2a992fdc0800000000000000
+      internalID: -3606651427113801420
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_55
+      rect:
+        serializedVersion: 2
+        x: 1432
+        y: 3941
+        width: 92
+        height: 159
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9d7a4a2c56351650800000000000000
+      internalID: 6202923831247142302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_56
+      rect:
+        serializedVersion: 2
+        x: 3684
+        y: 3871
+        width: 92
+        height: 159
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 842b58485af83aac0800000000000000
+      internalID: -3845071715788541368
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_57
+      rect:
+        serializedVersion: 2
+        x: 1239
+        y: 1753
+        width: 285
+        height: 236
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09f24b151f65ece30800000000000000
+      internalID: 4525650270011797392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_58
+      rect:
+        serializedVersion: 2
+        x: 1493
+        y: 1982
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cbb663e7377507480800000000000000
+      internalID: -8903520309761119300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_59
+      rect:
+        serializedVersion: 2
+        x: 3487
+        y: 1753
+        width: 285
+        height: 253
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79189d7df2e590b20800000000000000
+      internalID: 3101113377999126935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_60
+      rect:
+        serializedVersion: 2
+        x: 5735
+        y: 1753
+        width: 285
+        height: 263
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f2ae63fc3160ad80800000000000000
+      internalID: -8241480403677961479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_61
+      rect:
+        serializedVersion: 2
+        x: 7628
+        y: 1055
+        width: 652
+        height: 987
+      alignment: 9
+      pivot: {x: 0.5000008, y: 0.3931187}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d48002f73ac889fe0800000000000000
+      internalID: -1182040268344391603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_62
+      rect:
+        serializedVersion: 2
+        x: 8237
+        y: 1982
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 102defa4fd85802e0800000000000000
+      internalID: -2159378305264987647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_63
+      rect:
+        serializedVersion: 2
+        x: 876
+        y: 1055
+        width: 646
+        height: 945
+      alignment: 9
+      pivot: {x: 0.5119489, y: 0.39925945}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de6abe96fc6057130800000000000000
+      internalID: 3563762168038663917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_64
+      rect:
+        serializedVersion: 2
+        x: 3131
+        y: 1052
+        width: 639
+        height: 963
+      alignment: 9
+      pivot: {x: 0.50000036, y: 0.40114233}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21c5417c6de82da60800000000000000
+      internalID: 7697371766243744786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_65
+      rect:
+        serializedVersion: 2
+        x: 5376
+        y: 1058
+        width: 649
+        height: 960
+      alignment: 9
+      pivot: {x: 0.5000008, y: 0.39279315}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6090ef83b181c5080800000000000000
+      internalID: -9197449833798039290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boos2_66
+      rect:
+        serializedVersion: 2
+        x: 8176
+        y: 1753
+        width: 92
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 320a4d2dc241d0000800000000000000
+      internalID: 3681357445505059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: ca454f5fe9aa1914d814128a3a438973
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Boos2_0: 6289355669541238697
+      Boos2_1: 6987524257081656482
+      Boos2_10: -6814151437710258467
+      Boos2_11: -398454239172712019
+      Boos2_12: -3547656882317537320
+      Boos2_13: 3907239880587104734
+      Boos2_14: -2218195091762599853
+      Boos2_15: 8883870994919916134
+      Boos2_16: -6612655489594812613
+      Boos2_17: -4834693693921934832
+      Boos2_18: 7452126920480872787
+      Boos2_19: -1899016567350238075
+      Boos2_2: -8704651356004161608
+      Boos2_20: 2951513549841230334
+      Boos2_21: 6832869390947223236
+      Boos2_22: 141130383572229030
+      Boos2_23: -3631763841653976787
+      Boos2_24: 869710763645152361
+      Boos2_25: 3142219225549122932
+      Boos2_26: -7184480034525907246
+      Boos2_27: -6049898552116291400
+      Boos2_28: 7162940401263499170
+      Boos2_29: 6830959667586002587
+      Boos2_3: 5561800494645987151
+      Boos2_30: -2896190013341646750
+      Boos2_31: -1460476225137050911
+      Boos2_32: -6308941960789639394
+      Boos2_33: 7545449075394356867
+      Boos2_34: 1717348609022593046
+      Boos2_35: 978321339696083384
+      Boos2_36: -4758860504900832154
+      Boos2_37: 7252794398420939618
+      Boos2_38: 4368563906141325742
+      Boos2_39: -2021390488106641353
+      Boos2_4: -1639128987978588691
+      Boos2_40: 808848621605904072
+      Boos2_41: 3230287862916810047
+      Boos2_42: -3782677396879969431
+      Boos2_43: -4285683348710259283
+      Boos2_44: 2453757274920618638
+      Boos2_45: 7552008359141248538
+      Boos2_46: -8304480425560416038
+      Boos2_47: 1516717575421213490
+      Boos2_48: -5466716018437234064
+      Boos2_49: -3977571050953885169
+      Boos2_5: -351645289123853490
+      Boos2_50: 4135685511361188440
+      Boos2_51: 9181093001172540321
+      Boos2_52: 2015837802013719308
+      Boos2_53: 2748373293808021517
+      Boos2_54: -3606651427113801420
+      Boos2_55: 6202923831247142302
+      Boos2_56: -3845071715788541368
+      Boos2_57: 4525650270011797392
+      Boos2_58: -8903520309761119300
+      Boos2_59: 3101113377999126935
+      Boos2_6: 8677599336635685757
+      Boos2_60: -8241480403677961479
+      Boos2_61: -1182040268344391603
+      Boos2_62: -2159378305264987647
+      Boos2_63: 3563762168038663917
+      Boos2_64: 7697371766243744786
+      Boos2_65: -9197449833798039290
+      Boos2_66: 3681357445505059
+      Boos2_7: -5521439560779148992
+      Boos2_8: 7873844545328029761
+      Boos2_9: -5364123361543185640
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
