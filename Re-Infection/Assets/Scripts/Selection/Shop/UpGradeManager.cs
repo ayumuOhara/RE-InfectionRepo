@@ -39,41 +39,57 @@ public class UpGradeManager : MonoBehaviour
     public UnitStatsData SoldierStats;
     public TextMeshProUGUI Soldier_text;
     public TextMeshProUGUI SoldierUpGradeMoney_text;
+    public TextMeshProUGUI SoldierName_text;
+    public Image Soldier_Image;
 
     [Header("盾兵のレベルとコスト")]
     public UnitStatsData TankStats;
     public TextMeshProUGUI Tank_text;
     public TextMeshProUGUI TankUpGradeMoney_text;
+    public TextMeshProUGUI TankName_text;
+    public Image Tank_Image;
 
     [Header("弓使いのレベルとコスト")]
     public UnitStatsData ArcherStats;
     public TextMeshProUGUI Archer_text;
     public TextMeshProUGUI ArcherUpGradeMoney_text;
+    public TextMeshProUGUI ArcherName_text;
+    public Image Archer_Image;
 
     [Header("魔法使いのレベルとコスト")]
     public UnitStatsData WizardStats;
     public TextMeshProUGUI Wizard_text;
     public TextMeshProUGUI WizardUpGradeMoney_text;
+    public TextMeshProUGUI WizardName_text;
+    public Image Wizard_Image;
 
     [Header("騎馬兵のレベルとコスト")]
     public UnitStatsData JockeyStats;
     public TextMeshProUGUI Jockey_text;
     public TextMeshProUGUI JockeyUpGradeMoney_text;
+    public TextMeshProUGUI JockeyName_text;
+    public Image Jockey_Image;
 
     [Header("鈍器使いのレベルとコスト")]
     public UnitStatsData HammerStats;
     public TextMeshProUGUI Hammer_text;
     public TextMeshProUGUI HammerUpGradeMoney_text;
+    public TextMeshProUGUI HammerName_text;
+    public Image Hammer_Image;
 
     [Header("大弓使いのレベルとコスト")]
     public UnitStatsData R_ArcherStats;
     public TextMeshProUGUI R_Archer_text;
     public TextMeshProUGUI R_ArcherUpGradeMoney_text;
+    public TextMeshProUGUI R_ArcherName_text;
+    public Image R_Archer_Image;
 
     [Header("上級魔法使いのレベルとコスト")]
     public UnitStatsData R_WizardStats;
     public TextMeshProUGUI R_Wizard_text;
     public TextMeshProUGUI R_WizardUpGradeMoney_text;
+    public TextMeshProUGUI R_WizardName_text;
+    public Image R_Wizard_Image;
 
     [Header("ダイアログ表示用")]
     public TextMeshProUGUI DialogMassege;
@@ -100,31 +116,62 @@ public class UpGradeManager : MonoBehaviour
         LayCastObj.SetActive(false);
         SetRaycastTargets(LayCastObj, false);
 
-        UpdateUnitUI(SoldierStats.unitStats, Soldier_text, SoldierUpGradeMoney_text, SoldierButton);
-        UpdateUnitUI(TankStats.unitStats, Tank_text, TankUpGradeMoney_text, TankButton);
-        UpdateUnitUI(ArcherStats.unitStats, Archer_text, ArcherUpGradeMoney_text, ArcherButton);
-        UpdateUnitUI(JockeyStats.unitStats, Jockey_text, JockeyUpGradeMoney_text, JockeyButton);
-        UpdateUnitUI(HammerStats.unitStats, Hammer_text, HammerUpGradeMoney_text, HammerButton);
-        UpdateUnitUI(WizardStats.unitStats, Wizard_text, WizardUpGradeMoney_text, WizardButton);
-        UpdateUnitUI(R_ArcherStats.unitStats, R_Archer_text, R_ArcherUpGradeMoney_text, R_ArcherButton);
-        UpdateUnitUI(R_WizardStats.unitStats, R_Wizard_text, R_WizardUpGradeMoney_text, R_WizardButton);
+        // --- レベル復元 ---
+        SoldierStats.unitStats.SetLevel(PlayerPrefs.GetInt("SoldierLevel", SoldierStats.unitStats.lv));
+        TankStats.unitStats.SetLevel(PlayerPrefs.GetInt("TankLevel", TankStats.unitStats.lv));
+        ArcherStats.unitStats.SetLevel(PlayerPrefs.GetInt("ArcherLevel", ArcherStats.unitStats.lv));
+        WizardStats.unitStats.SetLevel(PlayerPrefs.GetInt("WizardLevel", WizardStats.unitStats.lv));
+        JockeyStats.unitStats.SetLevel(PlayerPrefs.GetInt("JockeyLevel", JockeyStats.unitStats.lv));
+        HammerStats.unitStats.SetLevel(PlayerPrefs.GetInt("HammerLevel", HammerStats.unitStats.lv));
+        R_ArcherStats.unitStats.SetLevel(PlayerPrefs.GetInt("R_ArcherLevel", R_ArcherStats.unitStats.lv));
+        R_WizardStats.unitStats.SetLevel(PlayerPrefs.GetInt("R_WizardLevel", R_WizardStats.unitStats.lv));
+
+        UpdateUnitUI(SoldierStats.unitStats, Soldier_text, SoldierUpGradeMoney_text, SoldierButton,SoldierName_text,Soldier_Image);
+        UpdateUnitUI(TankStats.unitStats, Tank_text, TankUpGradeMoney_text, TankButton,TankName_text,Tank_Image);
+        UpdateUnitUI(ArcherStats.unitStats, Archer_text, ArcherUpGradeMoney_text, ArcherButton,ArcherName_text,Archer_Image);
+        UpdateUnitUI(JockeyStats.unitStats, Jockey_text, JockeyUpGradeMoney_text, JockeyButton,JockeyName_text,Jockey_Image);
+        UpdateUnitUI(HammerStats.unitStats, Hammer_text, HammerUpGradeMoney_text, HammerButton,HammerName_text,Hammer_Image);
+        UpdateUnitUI(WizardStats.unitStats, Wizard_text, WizardUpGradeMoney_text, WizardButton,WizardName_text,Wizard_Image);
+        UpdateUnitUI(R_ArcherStats.unitStats, R_Archer_text, R_ArcherUpGradeMoney_text, R_ArcherButton,R_ArcherName_text,R_Archer_Image);
+        UpdateUnitUI(R_WizardStats.unitStats, R_Wizard_text, R_WizardUpGradeMoney_text, R_WizardButton,R_WizardName_text,R_Wizard_Image);
 
         Warning_text.text = "";
         WarningObj.SetActive(false);
 
-        SoldierStats.unitStats.SetLevel(1);
-        TankStats.unitStats.SetLevel(1);
-        ArcherStats.unitStats.SetLevel(1);
-        WizardStats.unitStats.SetLevel(1);
-        JockeyStats.unitStats.SetLevel(1);
-        HammerStats.unitStats.SetLevel(1);
-        R_ArcherStats.unitStats.SetLevel(1);
-        R_WizardStats.unitStats.SetLevel(1);
-
         
     }
-    private void UpdateUnitUI(UnitStats stats, TextMeshProUGUI lvText, TextMeshProUGUI costText, Button button)
+
+    private void Update()
     {
+        UpdateUnitButton(SoldierStats.unitStats, Soldier_text, SoldierUpGradeMoney_text, SoldierButton,SoldierName_text,Soldier_Image);
+        UpdateUnitButton(TankStats.unitStats, Tank_text, TankUpGradeMoney_text, TankButton,TankName_text,Tank_Image);
+        UpdateUnitButton(ArcherStats.unitStats, Archer_text, ArcherUpGradeMoney_text, ArcherButton,ArcherName_text,Archer_Image);
+        UpdateUnitButton(WizardStats.unitStats, Wizard_text, WizardUpGradeMoney_text, WizardButton,WizardName_text,Wizard_Image);
+        UpdateUnitButton(JockeyStats.unitStats, Jockey_text, JockeyUpGradeMoney_text, JockeyButton,JockeyName_text,Jockey_Image);
+        UpdateUnitButton(HammerStats.unitStats, Hammer_text, HammerUpGradeMoney_text, HammerButton,HammerName_text,Hammer_Image);
+        UpdateUnitButton(R_ArcherStats.unitStats, R_Archer_text, R_ArcherUpGradeMoney_text, R_ArcherButton,R_ArcherName_text,R_Archer_Image);
+        UpdateUnitButton(R_WizardStats.unitStats, R_Wizard_text, R_WizardUpGradeMoney_text, R_WizardButton,R_WizardName_text,R_Wizard_Image);
+    }
+    private void UpdateUnitUI(UnitStats stats, TextMeshProUGUI lvText, TextMeshProUGUI costText, Button button,TextMeshProUGUI nameText=null,Image IconImage=null)
+    {
+        //ロック中の表示
+        if (!stats.isUnlocked)
+        {
+            lvText.color = new Color(1f, 0.337f, 0.337f);
+            lvText.text = "?";
+            costText.text = "???";
+            // ボタン無効
+            button.interactable = false;
+
+            if (IconImage != null)
+                IconImage.color = Color.black;
+
+            if (nameText != null)
+                nameText.text = "？？？";
+
+            return;
+
+        }
         // レベルテキストは常に赤
         lvText.color = new Color(1f, 0.337f, 0.337f);
 
@@ -147,6 +194,16 @@ public class UpGradeManager : MonoBehaviour
 
         costText.color = canBuy ? Color.white : new Color(1f, 0.337f, 0.337f);
         button.interactable = canBuy;
+
+        if (IconImage != null)
+        {
+            IconImage.color = Color.white;
+        }
+
+        if (nameText != null)
+        {
+            nameText.text = stats.unitName;
+        }
     }
     // アップグレードを承認するボタンの関数
     public void UndoUpgrade()
@@ -260,7 +317,7 @@ public class UpGradeManager : MonoBehaviour
         UpdateUnitUI(stats, lvText, costText, button);
 
         unitDetailUII.SetUnit(stats);
-
+     
         DialogObj.SetActive(false);
         LayCastObj.SetActive(false);
         SetRaycastTargets(LayCastObj, false);
@@ -365,4 +422,61 @@ public class UpGradeManager : MonoBehaviour
             g.raycastTarget = enabled;
         }
     }
+
+    private void UpdateUnitButton(UnitStats stats, TextMeshProUGUI lvText, TextMeshProUGUI costText, Button button, TextMeshProUGUI nameText = null, Image iconImage = null)
+    {
+        if (!stats.isUnlocked)
+        {
+            lvText.text = "?";
+            costText.text = "???";
+
+            button.interactable = false;
+
+            if (iconImage != null)
+            {
+                iconImage.color = Color.black;
+            }
+
+            if (nameText != null)
+            {
+                nameText.text = "？？？";
+            }
+
+            return;
+
+        }
+
+        int cost = GetTrueNextCost(stats);
+        bool canBuy = playerStatusData.wallet.CanBuy(cost);
+
+        lvText.text = stats.lv.ToString();
+        costText.text = cost.ToString();
+
+        costText.color = canBuy ? Color.white : new Color(1f, 0.337f, 0.337f);
+
+        // ボタンの状態を更新
+        button.interactable = canBuy;
+
+        costText.color = canBuy ? Color.white : new Color(1f, 0.337f, 0.337f);
+
+        if (stats.lv >= stats.MaxLevel)
+        {
+            lvText.text = "MAX";
+            costText.text = "MAX";
+            costText.color = new Color(1f, 0.337f, 0.337f);
+            button.interactable = false;
+            return;
+        }
+
+        if (iconImage != null)
+            iconImage.color = Color.white;
+
+        if (nameText != null)
+            nameText.text = stats.unitName;
+
+        // UI の表示も更新
+        lvText.text = $"{stats.lv}";
+        costText.text = cost.ToString();
+    }
+
 }

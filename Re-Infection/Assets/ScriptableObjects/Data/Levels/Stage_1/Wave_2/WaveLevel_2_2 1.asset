@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c1f43353db44fa3499be7663471f17c3, type: 3}
-  m_Name: WaveLevel_3_2
+  m_Name: WaveLevel_2_2 1
   m_EditorClassIdentifier: Assembly-CSharp::WaveLevel
   levelStats:
-  - statsData: {fileID: 11400000, guid: fe15a39c45f5ba945931563260f1ba9f, type: 2}
-    spawnCnt: 3
-  spawnInterbal: 15
+  - statsData: {fileID: 11400000, guid: 6b7696a2506e6254898ee43fc57898c2, type: 2}
+    spawnCnt: 2
+  spawnInterbal: 20
