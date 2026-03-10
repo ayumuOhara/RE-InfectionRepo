@@ -14464,7 +14464,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2046600014874807366}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -14502,7 +14502,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &3219588880801477564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14706,7 +14706,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2386929574801964914, guid: 97a6ee6d776820a45afce4acc021a98b, type: 3}
+  m_Sprite: {fileID: 2649847697073447219, guid: e33e119d78ad3e540a0235168c2c0cd4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -14764,7 +14764,6 @@ MonoBehaviour:
   infecitonInfo: {fileID: 3888767618300647759}
   infectionBar: {fileID: 1120724941087727946}
   defeatedEffect: {fileID: 5409222575132117316, guid: 6fc41f7dfdf9abd408d630c62fdac702, type: 3}
-  explosionableEffect: {fileID: 1311531245498970134}
 --- !u!58 &6532507719244782651
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -14835,10 +14834,10 @@ RectTransform:
   - {fileID: 5841453795099203554}
   m_Father: {fileID: 1545638237188656514}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.333}
-  m_SizeDelta: {x: -1.0253, y: -1.0253}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.04, y: 0.3}
+  m_SizeDelta: {x: 0.4153, y: 0.4153}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &517856415589893337
 CanvasRenderer:

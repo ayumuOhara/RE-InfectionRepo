@@ -70,15 +70,15 @@ namespace CannonPointer
 
         private void Start()
         {
-            if (waveSpawner.CurrentStage.stageNum != 0)
+            if (waveSpawner.CurrentStage.stageNum == 0 && waveSpawner.CurrentStage.waveData[waveSpawner.currentWaveIdx].isTutorial)
             {
-                SetSkillActive(true);
-                SetSkillCoolTimer(playerStatusData.cannonCoolTimeUpgrade.CoolTime * (1 - firstCoolTimeRate));
+                SetSkillActive(false);
 
             }
             else
             {
-                SetSkillActive(false);
+                SetSkillActive(true);
+                SetSkillCoolTimer(playerStatusData.cannonCoolTimeUpgrade.CoolTime * (1 - firstCoolTimeRate));
             }
         }
 

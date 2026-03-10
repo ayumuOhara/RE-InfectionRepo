@@ -235,7 +235,7 @@ public abstract class UnitBase : PooledObject, IHealth, IMovable, IAttackable
         else
         {
             yield break;
-        }        
+        }
     }
 
     // エフェクト生成
