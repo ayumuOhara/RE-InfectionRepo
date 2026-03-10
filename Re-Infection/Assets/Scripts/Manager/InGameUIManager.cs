@@ -47,7 +47,6 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] GameObject stageClearReward;
     [SerializeField] TextMeshProUGUI firstCoinText;
     [SerializeField] GameObject firstClearReward;
-    [SerializeField] TextMeshProUGUI totalCoinText;
     [SerializeField] TextMeshProUGUI currentCoinText;
     [SerializeField] GameObject currentCoinLabel;
     [SerializeField] float coinTextElapsedTime;
@@ -66,6 +65,7 @@ public class InGameUIManager : MonoBehaviour
         clearUI.enabled = false;
         failedUI.enabled = false;
         retireUI.enabled = false;
+        unlockUI.enabled = false;
     }
 
     // 全UI表示
@@ -95,7 +95,6 @@ public class InGameUIManager : MonoBehaviour
         var audio = FindObjectOfType<BGMManager>();
         audio.StopBGM();
 
-        resultUI.enabled = true;
         clearUI.enabled = true;
         failedUI.enabled = false;
 
@@ -116,7 +115,6 @@ public class InGameUIManager : MonoBehaviour
         var audio = FindObjectOfType<BGMManager>();
         audio.StopBGM();
 
-        resultUI.enabled = true;
         clearUI.enabled = false;
         failedUI.enabled = true;
 
@@ -131,7 +129,6 @@ public class InGameUIManager : MonoBehaviour
     public IEnumerator SessionReward()
     {
         currentCoinLabel.SetActive(false);
-        rewardUI.enabled = true;
 
         var totalCoin = 0;
         var waveCoin = gameManager.waveSpawner.CurrentStage.waveClearCoin * gameManager.waveSpawner.currentWaveIdx;
@@ -141,12 +138,12 @@ public class InGameUIManager : MonoBehaviour
 
         if (gameManager.waveSpawner.IsSessionClear)
         {
-            yield return VisibleUnlockUnits(gameManager.waveSpawner.CurrentStage);
-
             stageClearReward.SetActive(true);
 
             if (!gameManager.waveSpawner.CurrentStage.isClear)
             {
+                yield return VisibleUnlockUnits(gameManager.waveSpawner.CurrentStage);
+
                 totalCoin += gameManager.waveSpawner.CurrentStage.firstClearCoin;
                 gameManager.waveSpawner.CurrentStage.SetUnitsCanUnLock();
 
@@ -168,15 +165,16 @@ public class InGameUIManager : MonoBehaviour
         GetCoinText(stageCoinText, stageCoin);
         GetCoinText(firstCoinText, gameManager.waveSpawner.CurrentStage.firstClearCoin);
 
-        GetCoinText(totalCoinText, totalCoin);
-
         Wallet wallet = Resources.Load<PlayerStatusData>("PlayerStatusData").wallet;
         float currentCoin = wallet.CurrentMoney;
         wallet.AddMoney(totalCoin);
 
+        resultUI.enabled = true;
+        rewardUI.enabled = true;
+
         rewardUI.transform.Find("Rewards").GetComponent<Animator>().SetTrigger("Reward");
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(3);
 
         currentCoinLabel.SetActive(true);
         float time = 0;

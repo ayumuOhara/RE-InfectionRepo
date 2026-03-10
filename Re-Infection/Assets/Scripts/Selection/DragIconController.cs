@@ -43,7 +43,7 @@ public class DragIconController : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (!unitStats.unitStats.isUnlocked) return;
+        if (!unitStats.unitStats.IsUnitUnlocked()) return;
 
         StartCoroutine(ClickAnimation());
         // ① 未編成なら編成する（最優先）
@@ -67,7 +67,7 @@ public class DragIconController : MonoBehaviour, IPointerClickHandler
     {
         unitIcon.sprite = unitStats.unitStats.unitSprite;
 
-        if (!unitStats.unitStats.isUnlocked)
+        if (!unitStats.unitStats.IsUnitUnlocked())
         {
             unitIcon.color = Color.black;
             jobIcon.sprite = keySprite;

@@ -67,7 +67,7 @@ public class StatusScaler
 public class UnitStats
 {
     [Header("ユニットが解放されたか")]
-    public bool isUnlocked;
+    [SerializeField] private bool isUnlocked;
     [Header("アニメーター")]
     public RuntimeAnimatorController animatorController;           // ユニットのアニメーター
     [Header("スプライト")]
@@ -123,12 +123,12 @@ public class UnitStats
     public AudioClip attackSe;          // 攻撃音
 
     private Level level = new Level();
-    public int lv => level.lv;  // ユニットのレベル
+    public int lv => level.GetLevel("UnitLevel");  // ユニットのレベル
     public int LvIdx => level.LvIdx;    // 配列の添え字に使うレベル
     public int MaxLevel => statusScaler.Length;     // レベルの最大値 
-    public void SetLevel(int lv) => level.SetLevel(lv);     // 引数をレベルに設定
+    public void SetLevel(int lv) => level.SetLevel("UnitLevel", lv);     // 引数をレベルに設定
     public void SetMaxLevel(int lv) => level.SetMaxLevel(lv);   // 最大レベルを設定
-    public void LevelUP() => level.SetLevel(lv + 1);    // 次のレベルへアップ
+    public void LevelUP() => level.SetLevel("UnitLevel", lv + 1);    // 次のレベルへアップ
     public int GetNextLevelCost() => (int)statusScaler[LvIdx].LevelUpCost; // レベルアップに必要なコストを取得
 
     public static event Action OnUnlockUnit;
@@ -137,7 +137,14 @@ public class UnitStats
     {
         isUnlocked = true;
 
+        PlayerPrefs.SetInt(unitName, 1);
+
         OnUnlockUnit?.Invoke();
+    }
+
+    public bool IsUnitUnlocked()
+    {
+        return PlayerPrefs.GetInt(unitName, 0) == 1 || isUnlocked ? true : false;
     }
 
     public Material GetOutline(string targetOutline)

@@ -1,6 +1,7 @@
 using JetBrains.Annotations;
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Layouts;
 using UnityEngine.UI;
 
@@ -9,22 +10,22 @@ public class Level
 {
     private int maxlv;
 
-    [SerializeField] private int _lv = 1;
-    public int lv
+    [SerializeField] private int lv = 1;
+
+    public int LvIdx => ClampLevelIndex(lv);
+
+    public void SetLevel(string key, int level)
     {
-        get
-        {
-            return _lv;
-        }
-        private set
-        {
-            _lv = ClampLevel(value);
-        }
+        lv = level;
+        ClampLevel(lv);
+        PlayerPrefs.SetInt(key, level);
     }
 
-    public int LvIdx => ClampLevelIndex(_lv);
+    public int GetLevel(string key)
+    {
+        return PlayerPrefs.GetInt(key, 1);
+    }
 
-    public void SetLevel(int level) => lv = level;
     public void SetMaxLevel(int maxLevel) => maxlv = maxLevel;
 
     public int ClampLevel(int level)
@@ -43,10 +44,12 @@ public abstract class BaseUpgrade
 {
     private Level level = new Level();
 
-    public int lv => level.lv;
+    [SerializeField] private string levelKey;
+
+    public int lv => level.GetLevel(levelKey);
     public int LvIdx => level.LvIdx;
     public int MaxLevel => upgradeMoney.Length + 1;
-    public void SetUpgradeLevel(int lv) => level.SetLevel(lv);
+    public void SetUpgradeLevel(int lv) => level.SetLevel(levelKey, lv);
     public void SetMaxlevel() => level.SetMaxLevel(MaxLevel);
     public int ClampLevel(int lv) => level.ClampLevel(lv);
     public int ClampLevelIndex(int lv) => level.ClampLevelIndex(lv);
@@ -198,5 +201,11 @@ public class PlayerStatusData : ScriptableObject
         costLimitUpgrade.SetUpgradeLevel(1);
         costGenerationSpeedUpgrade.SetUpgradeLevel(1);
         virusUpgrade.SetUpgradeLevel(1);
+    }
+
+    [ContextMenu("全PlayerPrefsのデータを削除")]
+    public void ClearAllData()
+    {
+        PlayerPrefs.DeleteAll();
     }
 }

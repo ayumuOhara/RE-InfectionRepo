@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Archer_Village
   m_EditorClassIdentifier: Assembly-CSharp::UnitStats
   unitStats:
-    isUnlocked: 1
+    isUnlocked: 0
     animatorController: {fileID: 9100000, guid: fe358768f3d133144a435f4a7a240c4f, type: 2}
     unitSprite: {fileID: -7132172409892320828, guid: 29a8a87d858d9af47a9a1d4d6de9d938, type: 3}
     attackEffect: {fileID: 8549444337655066593, guid: afd28ace7832acf44baffb2dec58157e, type: 3}

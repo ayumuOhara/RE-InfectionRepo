@@ -155,7 +155,7 @@ public class UpGradeManager : MonoBehaviour
     private void UpdateUnitUI(UnitStats stats, TextMeshProUGUI lvText, TextMeshProUGUI costText, Button button,TextMeshProUGUI nameText=null,Image IconImage=null)
     {
         //ÉçÉbÉNíÜÇÃï\é¶
-        if (!stats.isUnlocked)
+        if (!stats.IsUnitUnlocked())
         {
             lvText.color = new Color(1f, 0.337f, 0.337f);
             lvText.text = "?";
@@ -425,7 +425,7 @@ public class UpGradeManager : MonoBehaviour
 
     private void UpdateUnitButton(UnitStats stats, TextMeshProUGUI lvText, TextMeshProUGUI costText, Button button, TextMeshProUGUI nameText = null, Image iconImage = null)
     {
-        if (!stats.isUnlocked)
+        if (!stats.IsUnitUnlocked())
         {
             lvText.text = "?";
             costText.text = "???";

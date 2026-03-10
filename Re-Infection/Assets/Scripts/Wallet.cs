@@ -6,7 +6,7 @@ public class Wallet
     [SerializeField]
     // Š‹à
     private int currentMoney;
-    public int CurrentMoney => currentMoney;
+    public int CurrentMoney => PlayerPrefs.GetInt("Money", 0);
 
     // Š‹àÅ‘å’l
     public static readonly int MAX_HOLD_MONEY = 99999;
@@ -18,6 +18,8 @@ public class Wallet
         {
             currentMoney = MAX_HOLD_MONEY;
         }
+
+        PlayerPrefs.SetInt("Money", currentMoney);
     }
 
     public void RemoveMoney(int amount)
@@ -27,6 +29,8 @@ public class Wallet
         {
             currentMoney = 0;
         }
+
+        PlayerPrefs.SetInt("Money", currentMoney);
     }
 
     public bool CanBuy(int amount)
