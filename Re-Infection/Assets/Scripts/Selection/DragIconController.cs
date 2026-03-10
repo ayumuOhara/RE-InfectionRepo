@@ -7,6 +7,9 @@ using UnityEngine.UI;
 public class DragIconController : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private Image unitIcon;
+    [SerializeField] private Image jobIcon;
+
+    [SerializeField] private Sprite keySprite;
 
     private CanvasGroup canvasGroup;
 
@@ -67,11 +70,13 @@ public class DragIconController : MonoBehaviour, IPointerClickHandler
         if (!unitStats.unitStats.isUnlocked)
         {
             unitIcon.color = Color.black;
+            jobIcon.sprite = keySprite;
             cost_text.text = "?";
         }
         else
         {
             unitIcon.color = Color.white;
+            jobIcon.sprite = unitStats.unitStats.JobSprite;
             cost_text.text = $"{unitStats.unitStats.summonCost}";
         }
     }

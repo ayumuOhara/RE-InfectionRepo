@@ -168,7 +168,7 @@ public class DropArea : MonoBehaviour, IDropHandler
             Destroy(comp);
 
         RectTransform rt = clone.GetComponent<RectTransform>();
-        //rt.anchoredPosition = new Vector2(53f, -49f);
+        rt.localScale = new Vector3(0.75f, 0.75f, 0.75f);
 
         CanvasGroup cg = clone.GetComponent<CanvasGroup>();
         if (cg == null) cg = clone.AddComponent<CanvasGroup>();

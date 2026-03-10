@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerStatusData
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStatusData
   wallet:
-    currentMoney: 0
+    currentMoney: 99999
   castleUpgrade:
     upgradeMoney: 64000000f4010000dc050000
     healths: 640000002c010000f4010000e8030000

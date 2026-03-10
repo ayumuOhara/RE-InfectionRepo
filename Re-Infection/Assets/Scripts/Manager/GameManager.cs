@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
             {
                 StartCoroutine(inGameUIManager.SessionClear());
                 SessionEnd();
-                inGameUIManager.SessionReward();
+                StartCoroutine(inGameUIManager.SessionReward());
                 timeManager.SpeedReset();
                 yield break;
             }
@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
             {
                 StartCoroutine(inGameUIManager.SessionFailed());
                 SessionEnd();
-                inGameUIManager.SessionReward();
+                StartCoroutine(inGameUIManager.SessionReward());
                 timeManager.SpeedReset();
                 yield break;
             }

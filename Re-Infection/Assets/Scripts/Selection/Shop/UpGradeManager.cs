@@ -337,10 +337,8 @@ public class UpGradeManager : MonoBehaviour
         DialogMoney_text.text = nextCost.ToString();
         DialogMassege.text = message;
 
-        float curHp = stats.GetCurrentLevelMaxHp();
-        float nextHp = stats.GetLevelofMaxHp(stats.lv + 1);
-
-        Detalise_text.text = $"HP : {curHp}\n強化後のHP : {nextHp}";
+        Detalise_text.text = $"HP：{stats.GetCurrentLevelMaxHp()}　→　HP：{stats.GetLevelofMaxHp(stats.lv + 1)}\n" +
+                             $"ATK：{stats.GetCurrentLevelAtk()}　→　ATK：{stats.GetLevelofAtk(stats.lv + 1)}";
     }
 
     public void SoliderEnhancement()
