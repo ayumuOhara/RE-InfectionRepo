@@ -23,8 +23,6 @@ namespace CannonPointer
     {
         public static CannonSkillPointer Instance {  get; private set; }
 
-        public static bool isEndCannonTutorial;
-
         PlayerStatusData playerStatusData;
 
         [SerializeField] GameObject cannonPrefab;
@@ -68,10 +66,15 @@ namespace CannonPointer
             waveSpawner = FindObjectOfType<WaveSpawner>();
             if (unitManager == null)
                 unitManager = GameObject.Find("UnitManager").GetComponent<UnitManager>();
+        }
 
-            if (isEndCannonTutorial)
+        private void Start()
+        {
+            if (waveSpawner.CurrentStage.stageNum != 0)
             {
+                SetSkillActive(true);
                 SetSkillCoolTimer(playerStatusData.cannonCoolTimeUpgrade.CoolTime * (1 - firstCoolTimeRate));
+
             }
             else
             {
@@ -91,7 +94,7 @@ namespace CannonPointer
             var time = coolTime;
             coolTimeProgressText.enabled = true;
 
-            while (time > 0)
+            while (time >= 0)
             {
                 CoolTimeProgress(time);
 

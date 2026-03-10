@@ -21,8 +21,6 @@ namespace VirusPointer
     {
         public static VirusSkillPointer Instance { get; private set; }
 
-        public static bool isEndVirusTutorial;
-
         [SerializeField] GameObject virusPrefab;
         UnitManager unitManager;
         WaveSpawner waveSpawner;
@@ -54,8 +52,20 @@ namespace VirusPointer
             if (unitManager == null)
                 unitManager = GameObject.Find("UnitManager").GetComponent<UnitManager>();
 
-            if(!isEndVirusTutorial)
+        }
+
+        private void Start()
+        {
+            if (waveSpawner.CurrentStage.stageNum == 0)
+            {
+                Debug.Log("チュートリアルなので非アクティブ化");
                 gameObject.SetActive(false);
+            }
+            else
+            {
+                Debug.Log("チュートリアルでないのでアクティブ化");
+                gameObject.SetActive(true);
+            }
         }
 
         public void OnBeginDrag(PointerEventData eventData)

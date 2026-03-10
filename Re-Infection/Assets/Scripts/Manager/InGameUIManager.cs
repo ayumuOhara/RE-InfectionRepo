@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -11,11 +12,13 @@ public class InGameUIManager : MonoBehaviour
     GameManager gameManager;
 
     [SerializeField] Canvas transitionUIprefab;
+    [SerializeField] Image unitSpritePrefab;
 
     [SerializeField] Canvas masterUI;
     [SerializeField] Canvas combatUI;
     [SerializeField] Canvas timeUI;
     [SerializeField] Canvas resultUI;
+    [SerializeField] Canvas unlockUI;
     [SerializeField] Canvas clearUI;
     [SerializeField] Canvas failedUI;
     [SerializeField] Canvas rewardUI;
@@ -36,6 +39,7 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] Image holdProgressIcon;
     [SerializeField] Image holdProgressGauge;
 
+    [SerializeField] GameObject unlockUnitsContainer;
     [SerializeField] TextMeshProUGUI clearTimeText;
 
     [SerializeField] TextMeshProUGUI waveCoinText;
@@ -122,7 +126,7 @@ public class InGameUIManager : MonoBehaviour
     }
 
     // 報酬処理
-    public void SessionReward()
+    public IEnumerator SessionReward()
     {
         rewardUI.enabled = true;
 
@@ -134,6 +138,8 @@ public class InGameUIManager : MonoBehaviour
 
         if (gameManager.waveSpawner.IsSessionClear)
         {
+            yield return VisibleUnlockUnits(gameManager.waveSpawner.CurrentStage);
+
             stageClearReward.SetActive(true);
 
             if (!gameManager.waveSpawner.CurrentStage.isClear)
@@ -157,7 +163,7 @@ public class InGameUIManager : MonoBehaviour
 
         GetCoinText(waveCoinText, waveCoin);
         GetCoinText(stageCoinText, stageCoin);
-        GetCoinText(firstCoinText, waveCoin + stageCoin);
+        GetCoinText(firstCoinText, gameManager.waveSpawner.CurrentStage.firstClearCoin);
 
         GetCoinText(totalCoinText, totalCoin);
 
@@ -167,6 +173,25 @@ public class InGameUIManager : MonoBehaviour
         currentCoinText.text = $"{wallet.CurrentMoney}";
 
         rewardUI.transform.Find("Rewards").GetComponent<Animator>().SetTrigger("Reward");
+    }
+
+    // アンロックしたユニット表示
+    public IEnumerator VisibleUnlockUnits(Stage stage)
+    {
+        if(stage.unlockUnits.Length <= 0 || stage.unlockUnits == null)
+            yield break;
+
+        unlockUI.enabled = true;
+
+        foreach (var unit in stage.unlockUnits.ToArray())
+        {
+            Image image = Instantiate(unitSpritePrefab, unlockUnitsContainer.transform);
+            image.sprite = unit.unitStats.unitSprite;
+        }
+
+        yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
+
+        unlockUI.enabled = false;
     }
 
     // 敵の合計数テキスト

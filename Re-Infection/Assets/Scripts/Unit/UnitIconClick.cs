@@ -31,7 +31,8 @@ public class UnitIconClick : MonoBehaviour, IPointerClickHandler
         //インスペクターで設定したサイズを保存
         defaltSize = unitIcon.rectTransform.sizeDelta;
 
-        assertLabel = GameObject.Find("AssertLabel").GetComponent<Image>();
+        if(assertLabel == null)
+            assertLabel = GameObject.Find("AssertLabel").GetComponent<Image>();
     }
 
     void Start()

@@ -52,11 +52,9 @@ public class WaveData : ScriptableObject
                 switch (t.tutorialType)
                 {
                     case TutorialType.Virus:
-                        VirusSkillPointer.isEndVirusTutorial = true;
                         VirusSkillPointer.Instance.SetSkillActive(true);
                         break;
                     case TutorialType.Cannon:
-                        CannonSkillPointer.isEndCannonTutorial = true;
                         CannonSkillPointer.Instance.gameObject.SetActive(true);
                         CannonSkillPointer.Instance.SetSkillCoolTimer(Resources.Load<PlayerStatusData>("PlayerStatusdata").cannonCoolTimeUpgrade.CoolTime * 0.05f);
                         break;
