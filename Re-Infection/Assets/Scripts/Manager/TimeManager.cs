@@ -6,7 +6,7 @@ public class TimeManager : MonoBehaviour
 {
     [SerializeField] WaveSpawner waveSpawner;
     [SerializeField] GameObject gameSpdButton;
-    [SerializeField] Image pauseCover;
+    [SerializeField] Image pauseIcon;
     [SerializeField] Sprite normalSpdIcon;
     [SerializeField] Sprite doubleSpdIcon;
 
@@ -24,7 +24,6 @@ public class TimeManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        pauseCover.enabled = isPause;
         Time.timeScale = timeSpeed;
         gameSpdSprite = gameSpdButton.GetComponent<Image>();
     }
@@ -86,12 +85,17 @@ public class TimeManager : MonoBehaviour
 
     public void GamePause()
     {
-        if (isPause)
-            Time.timeScale = timeSpeed;
-        else
-            Time.timeScale = 0;
-
         isPause = !isPause;
-        pauseCover.enabled = isPause;
+
+        if (isPause)
+        {
+            Time.timeScale = 0;
+            pauseIcon.color = Color.red;
+        }
+        else
+        {
+            Time.timeScale = timeSpeed;
+            pauseIcon.color = Color.white;
+        }
     }
 }
