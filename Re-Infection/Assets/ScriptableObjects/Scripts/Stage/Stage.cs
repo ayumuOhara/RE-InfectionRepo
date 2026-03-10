@@ -7,22 +7,37 @@ public class Stage : ScriptableObject
 {
     public int stageNum;                // ステージ数
     public WaveData[] waveData;         // ステージのウェーブデータ
+    
     private bool _isClear;
     public bool isClear
     {
         get
         {
-            return PlayerPrefs.GetInt(name, 0) == 1;
+            return PlayerPrefs.GetInt(name + "Clear", 0) == 1;
+        }
+    }
+    
+    private bool _isOpened;
+    public bool isOpened
+    {
+        get
+        {
+            return PlayerPrefs.GetInt(name + "Open", 0) == 1;
         }
     }
 
     public void SetIsClear(bool clear)
     {
         _isClear = clear;
-        PlayerPrefs.SetInt(name, _isClear ? 1 : 0);
+        PlayerPrefs.SetInt(name + "Clear", _isClear ? 1 : 0);
     }
     
-    // ステージクリアフラグ
+    public void SetIsOpend(bool open)
+    {
+        _isOpened = open;
+        PlayerPrefs.SetInt(name + "Open", _isOpened ? 1 : 0);
+    }
+
     public UnitStatsData[] unlockUnits; // ステージクリアでアンロックされるユニット
 
     public int waveClearCoin;

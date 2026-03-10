@@ -146,7 +146,8 @@ namespace CannonPointer
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePos.z = 0;
 
-            dragObj.transform.position = mousePos;
+            if(dragObj != null)
+                dragObj.transform.position = mousePos;
 
             isDragging = true;
         }

@@ -76,9 +76,11 @@ public class UnitStats
     public GameObject attackEffect;     // ユニット攻撃時のエフェクト
     [Header("名前")]
     public string unitName;             // ユニット名
+    [Header("ユニットの説明")]
+    [TextArea(3, 5)]
+    public string unitDescription;      // ユニットの詳細
     [Header("役職")]
-    public Types.JobType jobType;       // 役職
-    
+    public Types.JobType jobType;       // 役職    
     [Header("攻撃/移動 目標")]
     public Types.TargetType targetType; // 攻撃または移動対象
 

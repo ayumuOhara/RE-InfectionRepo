@@ -18,6 +18,7 @@ MonoBehaviour:
     unitSprite: {fileID: -7156167969184391016, guid: 3faf693f7e96ed244b275f2e2fdadfe5, type: 3}
     attackEffect: {fileID: 0}
     unitName: "\u9A0E\u99AC\u5175"
+    unitDescription: "\u9A0E\u99AC\u5175\u306F\u81EA\u5206\u304B\u3089\u6700\u3082\u8FD1\u3044\u6575\u3092\u72D9\u3046\u3002\n\u5168\u30E6\u30CB\u30C3\u30C8\u306E\u4E2D\u3067<color=red>\u6700\u3082\u79FB\u52D5\u901F\u5EA6\u304C\u901F\u3044</color>\u3002\n\u524D\u7DDA\u306B<color=red>\u3059\u3050\u306B\u6226\u529B\u3092\u9001\u308A\u305F\u3044</color>\u6642\u306B\u983C\u308A\u306B\u306A\u308B\u3002"
     jobType: 5
     targetType: 0
     statusScaler:

@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections;
 using System.Threading.Tasks;
+using System;
 public class UpGradeManager : MonoBehaviour
 {
     private enum UnitUpGradeType
@@ -102,8 +103,8 @@ public class UpGradeManager : MonoBehaviour
 
     PlayerStatusData playerStatusData;
 
-    [SerializeField]
-    public UnitDetailUII unitDetailUII;
+    public static event Action OnUnitLevelChanged;
+
     private void Awake()
     {
         playerStatusData = Resources.Load<PlayerStatusData>("PlayerStatusData");
@@ -115,16 +116,6 @@ public class UpGradeManager : MonoBehaviour
         money_text.text = ($"{playerStatusData.wallet.CurrentMoney}");
         LayCastObj.SetActive(false);
         SetRaycastTargets(LayCastObj, false);
-
-        // --- ÉåÉxÉãïúå≥ ---
-        SoldierStats.unitStats.SetLevel(PlayerPrefs.GetInt("SoldierLevel", SoldierStats.unitStats.lv));
-        TankStats.unitStats.SetLevel(PlayerPrefs.GetInt("TankLevel", TankStats.unitStats.lv));
-        ArcherStats.unitStats.SetLevel(PlayerPrefs.GetInt("ArcherLevel", ArcherStats.unitStats.lv));
-        WizardStats.unitStats.SetLevel(PlayerPrefs.GetInt("WizardLevel", WizardStats.unitStats.lv));
-        JockeyStats.unitStats.SetLevel(PlayerPrefs.GetInt("JockeyLevel", JockeyStats.unitStats.lv));
-        HammerStats.unitStats.SetLevel(PlayerPrefs.GetInt("HammerLevel", HammerStats.unitStats.lv));
-        R_ArcherStats.unitStats.SetLevel(PlayerPrefs.GetInt("R_ArcherLevel", R_ArcherStats.unitStats.lv));
-        R_WizardStats.unitStats.SetLevel(PlayerPrefs.GetInt("R_WizardLevel", R_WizardStats.unitStats.lv));
 
         UpdateUnitUI(SoldierStats.unitStats, Soldier_text, SoldierUpGradeMoney_text, SoldierButton,SoldierName_text,Soldier_Image);
         UpdateUnitUI(TankStats.unitStats, Tank_text, TankUpGradeMoney_text, TankButton,TankName_text,Tank_Image);
@@ -314,11 +305,11 @@ public class UpGradeManager : MonoBehaviour
 
         UpdateUnitUI(stats, lvText, costText, button);
 
-        unitDetailUII.SetUnit(stats);
-     
         DialogObj.SetActive(false);
         LayCastObj.SetActive(false);
         SetRaycastTargets(LayCastObj, false);
+
+        OnUnitLevelChanged?.Invoke();
     }
 
     // TÇÕBaseUpgradeÇåpè≥ÇµÇƒÇ¢ÇÈïKóvÇ™Ç†ÇÈ
@@ -327,7 +318,6 @@ public class UpGradeManager : MonoBehaviour
         DialogObj.SetActive(true);
         LayCastObj.SetActive(true);
         SetRaycastTargets(LayCastObj, true);
-
 
         DialogLevel_text1.text = stats.lv.ToString();
         DialogLevel_text2.text = (stats.lv + 1).ToString();

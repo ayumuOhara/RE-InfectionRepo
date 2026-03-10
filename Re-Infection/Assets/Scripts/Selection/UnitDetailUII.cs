@@ -15,6 +15,7 @@ public class UnitDetailUII : MonoBehaviour
     public TextMeshProUGUI rangeText; //射程
     public TextMeshProUGUI atkInterbalText; //攻撃速度
     public TextMeshProUGUI hitCntText; //ヒットする数
+    public TextMeshProUGUI descriptionText;
 
     [Header("初期表示するユニット")]
     public UnitStatsData defaltUnit;
@@ -37,7 +38,7 @@ public class UnitDetailUII : MonoBehaviour
         rangeText.text = $"{stats.range}";
         atkInterbalText.text = $"{stats.atkInterbal}";
         hitCntText.text = $"{stats.hitCnt}";
-
+        descriptionText.text = $"{stats.unitDescription}";
     }
 
 }

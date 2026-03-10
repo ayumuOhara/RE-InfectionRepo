@@ -115,6 +115,11 @@ public class DropArea : MonoBehaviour, IDropHandler
         rt.localScale = new Vector3(0.75f, 0.75f, 0.75f);
         //rt.anchoredPosition = new Vector2(53f, -49f);
 
+        var d = clone.GetComponent<DragIconController>();
+
+        Destroy(d.CheckImage);
+        d.levelText.enabled = false;
+
         // DragIconController を削除
         Destroy(clone.GetComponent<DragIconController>());
         foreach (var comp in clone.GetComponentsInChildren<DragIconController>())
@@ -132,13 +137,6 @@ public class DropArea : MonoBehaviour, IDropHandler
         dragScript.slotIndex = slotIndex;
         dragScript.unitStats = currentUnitStats;
         dragScript.originalDropArea = this;
-
-        // CheckImage を非表示
-        foreach (var i in clone.GetComponentsInChildren<Image>(true))
-        {
-            if (i.gameObject.name == "CheckImage")
-                i.enabled = false;
-        }
     }
 
     private void CreateCloneFromExistingIcon(UnitStatsData stats)
@@ -163,6 +161,11 @@ public class DropArea : MonoBehaviour, IDropHandler
 
         GameObject clone = Instantiate(source.gameObject, dropTargetParent);
 
+        var d = clone.GetComponent<DragIconController>();
+
+        Destroy(d.CheckImage);
+        d.levelText.enabled = false;
+
         Destroy(clone.GetComponent<DragIconController>());
         foreach (var comp in clone.GetComponentsInChildren<DragIconController>())
             Destroy(comp);
@@ -179,12 +182,6 @@ public class DropArea : MonoBehaviour, IDropHandler
         dragScript.unitStats = stats;
         dragScript.originalDropArea = this;
         //dragScript.SetOriginalPos();
-
-        foreach (var img in clone.GetComponentsInChildren<Image>(true))
-        {
-            if (img.gameObject.name == "CheckImage")
-                img.enabled = false;
-        }
     }
 
     public static void UpdateAllCheckImage()

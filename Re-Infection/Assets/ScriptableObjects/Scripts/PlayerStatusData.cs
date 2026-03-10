@@ -202,7 +202,4 @@ public class PlayerStatusData : ScriptableObject
         costGenerationSpeedUpgrade.SetUpgradeLevel(1);
         virusUpgrade.SetUpgradeLevel(1);
     }
-
-    [ContextMenu("データリセット")]
-    public void ClearAllData() => PlayerPrefs.DeleteAll();
 }

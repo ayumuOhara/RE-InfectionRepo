@@ -3,7 +3,6 @@ using UnityEngine;
 [System.Serializable]
 public class Wallet
 {
-    [SerializeField]
     // ŠŽ‹à
     private int currentMoney;
     public int CurrentMoney => PlayerPrefs.GetInt("Money", 0);

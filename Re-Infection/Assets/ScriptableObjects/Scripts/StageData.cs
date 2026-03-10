@@ -12,7 +12,7 @@ public class StageData : ScriptableObject
     {
         if (stageProgress >= stageNum) return;
 
-        stageProgress = stageNum;
+        stageProgress = Mathf.Clamp(stageNum, 0, Stage.Length - 1);
 
         PlayerPrefs.SetInt("Progress", stageProgress);
     }

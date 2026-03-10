@@ -14,40 +14,28 @@ public class StageDataManager : MonoBehaviour
     void Start()
     {
         if (SceneManager.GetActiveScene().name != "Home") return;
-        StartCoroutine(SceneStart());
+        SceneStart();
     }
 
-    IEnumerator SceneStart()
+    void SceneStart()
     {
-        StartCoroutine(StartPanel());
-
         for (int i = 0; i < stage.Length; i++)
         {
-            //解放済みステージの処理
-            if (stageData.Stage[i].isClear && i <= stageData.GetStageProgress)
-            {
-                battleCanvas.OnClearedStage(i + 1);
-            }
-        }
+            if (stageData.Stage[i] == null || !stageData.Stage[i].isOpened) continue;
 
-        yield return new WaitForSeconds(1f);
+            battleCanvas.OnClearedStage(i);
+        }
 
         //ステージのクリア情報を確認
-        for (int i = 0; i < stage.Length; i++)
+        for (int i = 1; i < stage.Length; i++)
         {
-            //解放されたら
-            if (stageData.Stage[i].isClear && i > stageData.GetStageProgress)
+            if (stageData.Stage[i] == null || stageData.Stage[i].isOpened) continue;
+
+            if (stageData.Stage[Mathf.Max(i - 1, 0)].isClear && i == stageData.GetStageProgress)
             {
-                battleCanvas.OnChangeStage(i + 1);
+                battleCanvas.OnChangeStage(i);
+                stageData.Stage[i].SetIsOpend(true);
             }
         }
-    }
-
-    //ステージクリアの処理が終わるまで表示する
-    private IEnumerator StartPanel()
-    {
-        battleCanvas.responsePanel.SetActive(true);
-        yield return new WaitForSeconds(1.5f);
-        battleCanvas.responsePanel.SetActive(false);
     }
 }

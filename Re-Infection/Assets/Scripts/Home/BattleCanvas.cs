@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Net;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,9 +12,8 @@ public class BattleCanvas : MonoBehaviour
     public StageDataManager stageDataManager;
     public ScrollChecker scrollChecker;
     public StageData stageData;
-    public EnemyAppearsSpace enemyAppearsSpace;
 
-    public Image[] stageImage; //ステートの画像スプライト配列
+    public Image[] stageSilhouette; //ステートの画像スプライト配列
     public Animator[] lockAnime; //ステージのロック中の表示にスプライト
     public GameObject messageBox; //ステージ解放時のメッセージボックス
     public GameObject messageCanvas;
@@ -43,23 +43,16 @@ public class BattleCanvas : MonoBehaviour
         messageCanvas.SetActive(false);
         messageBox.SetActive(false);
 
-        //最初は全てのステージを暗くする
-        for (int i = 0; i < stageImage.Length; i++)
-        {
-            stageImage[i].color = new Color(0.1f, 0.1f, 0.1f, 0.9803922f);
-        }
-
-        scrollChecker.scrollSnap.GoToPanel(stageNumber);
+        foreach (var image in stageSilhouette)
+            image.color = Color.black;
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        //最後にクリアしたステージを表示するようにする
-        if (isInitialization == false)
+        if (!isInitialization)
         {
-            Debug.Log("ああ" + stageData.SelectStageNumber);
             scrollChecker.scrollSnap.GoToPanel(stageData.SelectStageNumber);
             isInitialization = true;
         }
@@ -102,7 +95,7 @@ public class BattleCanvas : MonoBehaviour
         if (stageNumber == 0)
         {
             lockAnime[stageNumber].gameObject.SetActive(false);
-            stageImage[stageNumber].color = new Color(1f, 1f, 1f, 1f);
+            stageSilhouette[stageNumber].color = new Color(1f, 1f, 1f, 0f);
             conditionsText.gameObject.SetActive(false);
             sortieButton.interactable = true;
         }
@@ -140,7 +133,7 @@ public class BattleCanvas : MonoBehaviour
         if (stage >= stageData.Stage.Length) return;
 
         lockAnime[stage].gameObject.SetActive(false);
-        stageImage[stage].color = new Color(1f, 1f, 1f, 1f);
+        stageSilhouette[stage].color = new Color(1f, 1f, 1f, 0f);
         conditionsText.gameObject.SetActive(false);
         sortieButton.interactable = true;
     }
@@ -148,7 +141,7 @@ public class BattleCanvas : MonoBehaviour
     //クリア後に解放されたステージに移る処理
     public void OnChangeStage(int stage)
     {
-        if (stage >= stageData.Stage.Length + 1) return;
+        if (stage >= stageData.Stage.Length) return;
         messageCanvas.SetActive(true);
 
 
@@ -158,6 +151,12 @@ public class BattleCanvas : MonoBehaviour
     //鍵が外れるアニメーション
     private IEnumerator PlayAnimetion(int openStage)
     {
+        scrollChecker.scrollSnap.StartingPanel = openStage;
+
+        responsePanel.SetActive(true);
+
+        isInitialization = true;
+
         scrollChecker.scrollSnap.GoToPanel(openStage);
 
 
@@ -167,14 +166,14 @@ public class BattleCanvas : MonoBehaviour
 
         yield return new WaitForSeconds(0.7f);
         lockAnime[stageNumber].gameObject.SetActive(false);
-        stageImage[openStage].color = new Color(1f, 1f, 1f, 1f);
+        stageSilhouette[openStage].color = new Color(1f, 1f, 1f, 0f);
 
         yield return new WaitForSeconds(0.5f);
         Debug.Log($"{openStage + 1}ステージ解放");
         messageBox.SetActive(true);
         releaseText.text = $"ステージ{openStage}が解放された!";
-        Time.timeScale = 0f;
 
+        responsePanel.SetActive(false);
     }
 
     //OKボタン
@@ -183,6 +182,5 @@ public class BattleCanvas : MonoBehaviour
         messageBox.SetActive(false);
 
         messageCanvas.SetActive(false);
-        Time.timeScale = 1f;
     }
 }

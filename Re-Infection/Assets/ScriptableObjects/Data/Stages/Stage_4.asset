@@ -12,13 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d65f76e4a54ddcc46a23298e0df2c4ac, type: 3}
   m_Name: Stage_4
   m_EditorClassIdentifier: Assembly-CSharp::Stage
-  stageNum: 3
+  stageNum: 4
   waveData:
   - {fileID: 11400000, guid: 43d7cdc0603e6a34096c5ad3a7981c6f, type: 2}
   - {fileID: 11400000, guid: 266f4f85ce1b7ae4a8a6614e7714668e, type: 2}
   - {fileID: 11400000, guid: 48c4a63fd40540143944a5bac900df27, type: 2}
   - {fileID: 11400000, guid: 2aa76ed0d3cd3d2458b4fd8f3ec8d620, type: 2}
-  isClear: 0
   unlockUnits: []
   waveClearCoin: 400
   stageClearCoin: 800

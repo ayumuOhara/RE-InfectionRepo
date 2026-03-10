@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class DragIconController : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private Image unitIcon;
+    [SerializeField] private Image unitSilhouette;
     [SerializeField] private Image jobIcon;
 
     [SerializeField] private Sprite keySprite;
@@ -20,12 +21,14 @@ public class DragIconController : MonoBehaviour, IPointerClickHandler
     public GameObject CheckImage;
 
     public TextMeshProUGUI cost_text;
+    public TextMeshProUGUI levelText;
 
     public UnitDetailUII detailUI;
 
     private void OnEnable()
     {
         UnitStats.OnUnlockUnit += SetUnitSlot;
+        UpGradeManager.OnUnitLevelChanged += UnitLevelChanged;
 
         SetUnitSlot();
     }
@@ -33,6 +36,7 @@ public class DragIconController : MonoBehaviour, IPointerClickHandler
     private void OnDisable()
     {
         UnitStats.OnUnlockUnit -= SetUnitSlot;
+        UpGradeManager.OnUnitLevelChanged -= UnitLevelChanged;
     }
 
     void Awake()
@@ -69,16 +73,27 @@ public class DragIconController : MonoBehaviour, IPointerClickHandler
 
         if (!unitStats.unitStats.IsUnitUnlocked())
         {
-            unitIcon.color = Color.black;
+            unitSilhouette.color = Color.black;
             jobIcon.sprite = keySprite;
             cost_text.text = "?";
+            levelText.text = $"???";
         }
         else
         {
-            unitIcon.color = Color.white;
+            unitSilhouette.color = new Color(0, 0, 0, 0);
             jobIcon.sprite = unitStats.unitStats.JobSprite;
             cost_text.text = $"{unitStats.unitStats.summonCost}";
+
+            UnitLevelChanged();
         }
+    }
+
+    private void UnitLevelChanged()
+    {
+        if (unitStats.unitStats.lv != unitStats.unitStats.MaxLevel)
+            levelText.text = $"Lv.<size=40>{unitStats.unitStats.lv}</size>";
+        else
+            levelText.text = $"<sprite=0>";
     }
 
     private IEnumerator ClickAnimation()
