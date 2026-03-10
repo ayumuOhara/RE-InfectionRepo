@@ -22174,6 +22174,8 @@ MonoBehaviour:
   firstClearReward: {fileID: 412758408}
   totalCoinText: {fileID: 336447289}
   currentCoinText: {fileID: 69321663}
+  currentCoinLabel: {fileID: 786289533}
+  coinTextElapsedTime: 1
 --- !u!1 &1541332756
 GameObject:
   m_ObjectHideFlags: 0

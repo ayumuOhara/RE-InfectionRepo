@@ -49,6 +49,8 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] GameObject firstClearReward;
     [SerializeField] TextMeshProUGUI totalCoinText;
     [SerializeField] TextMeshProUGUI currentCoinText;
+    [SerializeField] GameObject currentCoinLabel;
+    [SerializeField] float coinTextElapsedTime;
 
     private SEManager seManager;
 
@@ -128,6 +130,7 @@ public class InGameUIManager : MonoBehaviour
     // 報酬処理
     public IEnumerator SessionReward()
     {
+        currentCoinLabel.SetActive(false);
         rewardUI.enabled = true;
 
         var totalCoin = 0;
@@ -168,11 +171,27 @@ public class InGameUIManager : MonoBehaviour
         GetCoinText(totalCoinText, totalCoin);
 
         Wallet wallet = Resources.Load<PlayerStatusData>("PlayerStatusData").wallet;
+        float currentCoin = wallet.CurrentMoney;
         wallet.AddMoney(totalCoin);
 
-        currentCoinText.text = $"{wallet.CurrentMoney}";
-
         rewardUI.transform.Find("Rewards").GetComponent<Animator>().SetTrigger("Reward");
+
+        yield return new WaitForSeconds(0.5f);
+
+        currentCoinLabel.SetActive(true);
+        float time = 0;
+        while (time < coinTextElapsedTime)
+        {
+            time += Time.deltaTime;
+            float t = time / coinTextElapsedTime;
+
+            float coin = Mathf.Lerp(currentCoin, wallet.CurrentMoney, t);
+
+            currentCoinText.text = $"{(int)coin}";
+
+            yield return null;
+        }
+
     }
 
     // アンロックしたユニット表示
