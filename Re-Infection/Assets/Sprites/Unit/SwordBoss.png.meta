@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: fbe90326dbf1c7140aa865dc28ecab15
+guid: d7927cb3b015e884ba3a5d6d2b089c6c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2692255588494810933
-    second: Boos3-1_0
+      213: -8404009618902771312
+    second: SwordBoss_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 530
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Boos3-1_0
+      name: SwordBoss_0
       rect:
         serializedVersion: 2
-        x: 697
-        y: 969
-        width: 726
-        height: 1042
+        x: 833
+        y: 965
+        width: 780
+        height: 968
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bc0e4337ecf23aad0800000000000000
-      internalID: -2692255588494810933
+      spriteID: 099955827c5fe5b80800000000000000
+      internalID: -8404009618902771312
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Boos3-1_0: -2692255588494810933
+      SwordBoss_0: -8404009618902771312
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
