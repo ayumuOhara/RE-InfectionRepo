@@ -56,7 +56,7 @@ namespace VirusPointer
 
         private void Start()
         {
-            if (waveSpawner.CurrentStage.stageNum == 0 && waveSpawner.CurrentStage.waveData[waveSpawner.currentWaveIdx].isTutorial)
+            if (waveSpawner.CurrentStage.stageNum == 0 && !waveSpawner.CurrentStage.waveData[waveSpawner.currentWaveIdx].IsTutorial(WaveData.TutorialType.Virus))
             {
                 Debug.Log("チュートリアルなので非アクティブ化");
                 gameObject.SetActive(false);

@@ -62,6 +62,7 @@ public class InGameUIManager : MonoBehaviour
         seManager = FindObjectOfType<SEManager>();
 
         resultUI.enabled = false;
+        tutorialUI.enabled = false;
         clearUI.enabled = false;
         failedUI.enabled = false;
         retireUI.enabled = false;
