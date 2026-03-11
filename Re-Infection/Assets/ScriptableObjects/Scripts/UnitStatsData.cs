@@ -159,6 +159,9 @@ public class UnitStats
             "Tank_0" => Resources.Load<Material>($"Materials/{targetOutline}/Tank"),
             "Clergyman_0" => Resources.Load<Material>($"Materials/{targetOutline}/Clergyman"),
             "Jockey_0" => Resources.Load<Material>($"Materials/{targetOutline}/Jockey"),
+            "SwordBoss_0" => Resources.Load<Material>($"Materials/{targetOutline}/SwordBoss"),
+            "HammerBoss_0" => Resources.Load<Material>($"Materials/{targetOutline}/HammerBoss"),
+            "MagicBoss_0" => Resources.Load<Material>($"Materials/{targetOutline}/MagicBoss"),
             _ => null
         };
     }
