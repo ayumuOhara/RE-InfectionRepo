@@ -26,16 +26,16 @@ MonoBehaviour:
       atkScaler: 0
       levelUpCost: 500
     - maxHpScaler: 10
-      atkScaler: 1
+      atkScaler: 0.5
       levelUpCost: 1000
     - maxHpScaler: 20
-      atkScaler: 2
+      atkScaler: 1
       levelUpCost: 1500
     - maxHpScaler: 30
-      atkScaler: 3
+      atkScaler: 1.5
       levelUpCost: 2000
     - maxHpScaler: 50
-      atkScaler: 5
+      atkScaler: 2
       levelUpCost: 0
     maxHp: 100
     attackType: 0
