@@ -58,6 +58,7 @@ public class SEManager : MonoBehaviour
         CanExplosion,  // 爆弾が使用可能
         BossDefeat,    // ボス撃破
         Upgrade,       // 強化
+        UnlockUnit,    // ユニットアンロック音
     }
 
     // SE再生メソッド

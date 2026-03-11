@@ -12,10 +12,8 @@ public class TimeManager : MonoBehaviour
 
     Image gameSpdSprite;
 
-    float seconds = 0;
-    public int Seconds => (int)seconds;
-    int minutes = 0;
-    public int Minutes => minutes;
+    public float sessionTimer { get; private set; } = 0;
+    public float sessionClearTime { get; private set; }
 
     public bool isPause { get; private set; } = false;
     bool isAcceleration = false;
@@ -47,18 +45,27 @@ public class TimeManager : MonoBehaviour
     // セッションのクリア時間を計る
     public IEnumerator SessionTimer()
     {
+        sessionTimer = 0;
+
         while (true)
         {
             yield return new WaitUntil(() => waveSpawner.IsStartWave);
 
-            seconds += Time.deltaTime;
-
-            if (seconds >= 60)
-            {
-                minutes++;
-                seconds = 0;
-            }
+            sessionTimer += Time.deltaTime;
         }
+    }
+
+    public void SetSessionClearTime()
+    {
+        sessionClearTime = sessionTimer;
+    }
+
+    public string GetSessionClearTimeText()
+    {
+        int minutes = (int)(sessionClearTime / 60f);
+        int secondes = (int)sessionClearTime - (minutes * 60);
+
+        return minutes.ToString("D2") + ":" + secondes.ToString("D2");
     }
 
     // 停止

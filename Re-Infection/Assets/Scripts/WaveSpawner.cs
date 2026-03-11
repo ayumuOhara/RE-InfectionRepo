@@ -10,6 +10,7 @@ public class WaveSpawner : MonoBehaviour
     InGameUIManager gameUIManager; // UI管理マネージャ
     CostManager costManager;
     UnitManager unitManager;
+    TimeManager timeManager;
     public StageData stageData;
 
     [SerializeField] Image castlePoint;
@@ -45,6 +46,7 @@ public class WaveSpawner : MonoBehaviour
         gameUIManager = GameObject.Find("InGameUI").GetComponent<InGameUIManager>();
         costManager = GameObject.Find("CostManager").GetComponent<CostManager>();
         unitManager = GameObject.Find("UnitManager").GetComponent<UnitManager>();
+        timeManager = GameObject.Find("TimeManager").GetComponent<TimeManager>();
 
         stage = stageData.Stage[stageData.SelectStageNumber];
 
@@ -89,6 +91,9 @@ public class WaveSpawner : MonoBehaviour
             // 最終ウェーブの場合、即終了する
             if (currentWave.bossWave)
             {
+                timeManager.SetSessionClearTime();
+                CurrentStage.SetStageBestClearTime(timeManager.sessionClearTime);
+
                 StartCoroutine(StageClear());
                 yield break;
             }

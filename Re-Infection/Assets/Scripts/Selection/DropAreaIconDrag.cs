@@ -62,7 +62,7 @@ public class DropAreaIconDrag : MonoBehaviour, IPointerClickHandler
 
         // ③ DropArea のデータを空にする
         originalDropArea.currentUnitStats = null;
-        UnitDataCarrier.Instance.selectedUnits[slotIndex] = null;
+        UnitDataCarrier.Instance.SetUnitofSlotIndex(null, slotIndex);
 
         // ④ リスト側の DragIconController を復活
         foreach (var icon in FindObjectsOfType<DragIconController>())

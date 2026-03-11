@@ -1,11 +1,12 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 public class UnitDataCarrier : MonoBehaviour
 {
     public static UnitDataCarrier Instance;
 
-    public List<UnitStatsData> selectedUnits = new List<UnitStatsData>(); // 複数ユニット保持
+    [SerializeField] private List<UnitStatsData> playableUnits;
 
     private void Awake()
     {
@@ -20,18 +21,34 @@ public class UnitDataCarrier : MonoBehaviour
         }
     }
 
-    // ユニット追加用メソッド
-    public void AddUnit(UnitStatsData unit)
+    // アンロック時に再生するユニットのアニメーションのキーを取得
+    public void SetUnitofSlotIndex(UnitStatsData data, int slotIdx)
     {
-        if (unit != null && !selectedUnits.Contains(unit))
+        if (data == null)
         {
-            selectedUnits.Add(unit);
+            PlayerPrefs.DeleteKey($"UnitSlot{slotIdx}");
+            return;
         }
+
+        if(data?.unitStats == null || !data.unitStats.IsUnitUnlocked()) return;
+
+        PlayerPrefs.SetString($"UnitSlot{slotIdx}", data.unitStats.unitName);
     }
 
-    // ユニットリストをクリア
-    public void ClearUnits()
+    public UnitStatsData GetUnitofSlotIndex(int slotIdx)
     {
-        selectedUnits.Clear();
+        string unitName = PlayerPrefs.GetString($"UnitSlot{slotIdx}");
+
+        if (string.IsNullOrEmpty(unitName)) return null;
+
+        var unit = playableUnits.Where(u => u.unitStats.unitName == unitName)?.FirstOrDefault();
+
+        if(unit == null) return null;
+
+        // アンロック済みでなければnullを返す
+        if(unit.unitStats.IsUnitUnlocked())
+            return unit;
+        else
+            return null;
     }
 }

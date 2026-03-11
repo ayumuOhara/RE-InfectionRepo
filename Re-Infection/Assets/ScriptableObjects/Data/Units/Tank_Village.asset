@@ -18,24 +18,24 @@ MonoBehaviour:
     unitSprite: {fileID: 4326872430171513394, guid: b02f0fbf02194364092885bfb7328b4a, type: 3}
     attackEffect: {fileID: 8289740950869842158, guid: fc7ef61e97eaa294d95015217cb240f0, type: 3}
     unitName: "\u76FE\u5175"
-    unitDescription: "\u30BF\u30F3\u30AF\u306F\u81EA\u5206\u304B\u3089\u6700\u3082\u8FD1\u3044\u6575\u3092\u72D9\u3046\u3002\n\u653B\u6483\u6027\u80FD\u304C\u4F4E\u3044\u4EE3\u308F\u308A\u306B\u3001<color=red>\u9AD8\u3044HP\u3092\u8A87\u308B</color>\u3002\n<color=red>\u30E6\u30CB\u30C3\u30C8\u306E\u524D\u306B\u3044\u308B\u3068</color>\u983C\u3082\u3057\u3044\u76FE\u3068\u306A\u308B\u3002"
+    unitDescription: "\u76FE\u5175\u306F\u81EA\u5206\u304B\u3089\u6700\u3082\u8FD1\u3044\u6575\u3092\u72D9\u3046\u3002\n\u653B\u6483\u6027\u80FD\u304C\u4F4E\u3044\u4EE3\u308F\u308A\u306B\u3001<color=red>\u9AD8\u3044HP\u3092\u8A87\u308B</color>\u3002\n<color=red>\u30E6\u30CB\u30C3\u30C8\u306E\u524D\u306B\u3044\u308B\u3068</color>\u983C\u3082\u3057\u3044\u76FE\u3068\u306A\u308B\u3002"
     jobType: 2
     targetType: 0
     statusScaler:
     - maxHpScaler: 0
       atkScaler: 0
-      levelUpCost: 500
+      levelUpCost: 600
     - maxHpScaler: 50
-      atkScaler: 0.5
-      levelUpCost: 1000
-    - maxHpScaler: 80
-      atkScaler: 1
-      levelUpCost: 1500
-    - maxHpScaler: 110
-      atkScaler: 1.5
-      levelUpCost: 2000
-    - maxHpScaler: 150
-      atkScaler: 2
+      atkScaler: 0
+      levelUpCost: 1100
+    - maxHpScaler: 70
+      atkScaler: 0
+      levelUpCost: 1600
+    - maxHpScaler: 100
+      atkScaler: 0
+      levelUpCost: 2100
+    - maxHpScaler: 200
+      atkScaler: 0
       levelUpCost: 0
     maxHp: 300
     attackType: 0

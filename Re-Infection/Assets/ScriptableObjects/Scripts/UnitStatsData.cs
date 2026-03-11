@@ -126,7 +126,7 @@ public class UnitStats
 
     private Level level = new Level();
     public int lv => level.GetLevel(unitName + "Level");  // ユニットのレベル
-    public int LvIdx => level.LvIdx;    // 配列の添え字に使うレベル
+    public int LvIdx => level.ClampLevelIndex(lv);    // 配列の添え字に使うレベル
     public int MaxLevel => statusScaler.Length;     // レベルの最大値 
     public void SetLevel(int lv) => level.SetLevel(unitName + "Level", lv);     // 引数をレベルに設定
     public void SetMaxLevel(int lv) => level.SetMaxLevel(lv);   // 最大レベルを設定
@@ -145,7 +145,7 @@ public class UnitStats
 
     public bool IsUnitUnlocked()
     {
-        return PlayerPrefs.GetInt(unitName + "Unlock", 0) == 1 || isUnlocked ? true : false;
+        return isUnlocked || PlayerPrefs.GetInt(unitName + "Unlock", 0) == 1 ? true : false;
     }
 
     public Material GetOutline(string targetOutline)

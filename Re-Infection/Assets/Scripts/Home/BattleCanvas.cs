@@ -18,6 +18,8 @@ public class BattleCanvas : MonoBehaviour
     public GameObject messageBox; //ステージ解放時のメッセージボックス
     public GameObject messageCanvas;
     public GameObject responsePanel; //ステージクリアの判別の処理が終わるまで表示するパネル
+    public GameObject clearedUIElements;
+    public TextMeshProUGUI bestClearTimeText;
 
     public TextMeshProUGUI stageTitleText; //ステージのタイトルを表示するテキスト
     public TextMeshProUGUI conditionsText; //ステージの解放条件を表示するテキスト
@@ -114,6 +116,23 @@ public class BattleCanvas : MonoBehaviour
         {
             conditionsText.gameObject.SetActive(false);
             sortieButton.interactable = true;
+        }
+
+        SetBestClearTimeText();
+    }
+
+    private void SetBestClearTimeText()
+    {
+        if (stageData.Stage[scrollChecker.stagePage].isClear)
+        {
+            clearedUIElements.GetComponent<CanvasGroup>().alpha = 1f;
+            Debug.Log(stageData.Stage[scrollChecker.stagePage].GetStageClearTimeText());
+            bestClearTimeText.text = "<size=40>最速クリアタイム</size>\n" + stageData.Stage[scrollChecker.stagePage].GetStageClearTimeText();
+
+        }
+        else
+        {
+            clearedUIElements.GetComponent<CanvasGroup>().alpha = 0;
         }
     }
 

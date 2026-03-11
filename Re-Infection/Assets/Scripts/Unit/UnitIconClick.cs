@@ -41,12 +41,12 @@ public class UnitIconClick : MonoBehaviour, IPointerClickHandler
 
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
+        var unit = UnitDataCarrier.Instance.GetUnitofSlotIndex(slotIndex);
+
         //slotIndexが有効ならUnitDataCarrierから該当ユニットを取得
-        if (UnitDataCarrier.Instance != null &&
-    UnitDataCarrier.Instance.selectedUnits.Count > slotIndex &&
-    UnitDataCarrier.Instance.selectedUnits[slotIndex] != null)
+        if(unit != null)
         {
-            unitData = UnitDataCarrier.Instance.selectedUnits[slotIndex];
+            unitData = unit;
 
             Debug.Log($"Slot{slotIndex} に選択されたユニット: {unitData.unitStats.unitName}");
         }

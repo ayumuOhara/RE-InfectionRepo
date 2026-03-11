@@ -12,10 +12,7 @@ public class DropArea : MonoBehaviour, IDropHandler
 
     private void Start()
     {
-        while (UnitDataCarrier.Instance.selectedUnits.Count <= slotIndex)
-            UnitDataCarrier.Instance.selectedUnits.Add(null);
-
-        UnitStatsData saved = UnitDataCarrier.Instance.selectedUnits[slotIndex];
+        UnitStatsData saved = UnitDataCarrier.Instance.GetUnitofSlotIndex(slotIndex);
 
         if (saved != null)
         {
@@ -28,7 +25,7 @@ public class DropArea : MonoBehaviour, IDropHandler
         if (defaultUnit != null)
         {
             currentUnitStats = defaultUnit;
-            UnitDataCarrier.Instance.selectedUnits[slotIndex] = defaultUnit;
+            UnitDataCarrier.Instance.SetUnitofSlotIndex(defaultUnit, slotIndex);
 
             CreateCloneFromExistingIcon(defaultUnit);
             UpdateAllCheckImage();
@@ -45,7 +42,7 @@ public class DropArea : MonoBehaviour, IDropHandler
         fromList.isUsedInDropArea = true;
         //fromList.SetDraggable(false);
 
-        UnitDataCarrier.Instance.selectedUnits[slotIndex] = currentUnitStats;
+        UnitDataCarrier.Instance.SetUnitofSlotIndex(currentUnitStats, slotIndex);
 
         CreateClone(fromList.gameObject);
         UpdateAllCheckImage();
@@ -89,7 +86,7 @@ public class DropArea : MonoBehaviour, IDropHandler
             if (oldArea != null && oldArea != this)
             {
                 oldArea.currentUnitStats = null;
-                UnitDataCarrier.Instance.selectedUnits[fromDropArea.slotIndex] = null;
+                UnitDataCarrier.Instance.SetUnitofSlotIndex(null, fromDropArea.slotIndex);
             }
 
             if (dropTargetParent.childCount > 0)
@@ -99,7 +96,7 @@ public class DropArea : MonoBehaviour, IDropHandler
             //eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = new Vector2(53, -49);
 
             currentUnitStats = fromDropArea.unitStats;
-            UnitDataCarrier.Instance.selectedUnits[slotIndex] = currentUnitStats;
+            UnitDataCarrier.Instance.SetUnitofSlotIndex(currentUnitStats, slotIndex);
 
             fromDropArea.originalDropArea = this;
             fromDropArea.slotIndex = slotIndex;

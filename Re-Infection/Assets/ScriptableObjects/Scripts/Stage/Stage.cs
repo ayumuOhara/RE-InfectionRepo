@@ -40,6 +40,27 @@ public class Stage : ScriptableObject
         PlayerPrefs.Save();
     }
 
+    public void SetStageBestClearTime(float time)
+    {
+        PlayerPrefs.SetFloat(name + "Time", time < GetStageClearTime() ? time : GetStageClearTime());
+        PlayerPrefs.Save();
+    }
+
+    public float GetStageClearTime()
+    {
+        return PlayerPrefs.GetFloat(name + "Time", 999999);
+    }
+
+    public string GetStageClearTimeText()
+    {
+        float time = GetStageClearTime();
+
+        int minutes = (int)(time / 60f);
+        int secondes = (int)time - (minutes * 60);
+
+        return minutes.ToString("D2") + ":" + secondes.ToString("D2");
+    }
+
     public UnitStatsData[] unlockUnits; // ステージクリアでアンロックされるユニット
 
     public int waveClearCoin;

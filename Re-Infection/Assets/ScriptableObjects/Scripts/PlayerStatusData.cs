@@ -10,14 +10,9 @@ public class Level
 {
     private int maxlv;
 
-    private int lv;
-
-    public int LvIdx => ClampLevelIndex(lv);
-
     public void SetLevel(string key, int level)
     {
-        lv = level;
-        ClampLevel(lv);
+        ClampLevel(level);
         PlayerPrefs.SetInt(key, level);
         PlayerPrefs.Save();
     }
@@ -48,7 +43,7 @@ public abstract class BaseUpgrade
     [SerializeField] private string levelKey;
 
     public int lv => level.GetLevel(levelKey);
-    public int LvIdx => level.LvIdx;
+    public int LvIdx => level.ClampLevelIndex(lv);
     public int MaxLevel => upgradeMoney.Length + 1;
     public void SetUpgradeLevel(int lv) => level.SetLevel(levelKey, lv);
     public void SetMaxlevel() => level.SetMaxLevel(MaxLevel);

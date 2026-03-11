@@ -16,8 +16,8 @@ MonoBehaviour:
     isUnlocked: 0
     animatorController: {fileID: 9100000, guid: 9dc3c8662c36b82449a70e65f25ee410, type: 2}
     unitSprite: {fileID: 9112742296165906606, guid: e24d42d93173d7240bfe7f531c46a362, type: 3}
-    attackEffect: {fileID: 8289740950869842158, guid: fc7ef61e97eaa294d95015217cb240f0, type: 3}
-    unitName: "\u920D\u91CD\u306A\u30CF\u30F3\u30DE\u30FC\u30DE\u30B9\u30BF\u30FC"
+    attackEffect: {fileID: 2801927539567327742, guid: 05197b2d52ad21f40aca91f1d9710f84, type: 3}
+    unitName: "\u5CA9\u3092\u3082\u7815\u304F\u5927\u69CC\u4F7F\u3044"
     unitDescription: 
     jobType: 1
     targetType: 0

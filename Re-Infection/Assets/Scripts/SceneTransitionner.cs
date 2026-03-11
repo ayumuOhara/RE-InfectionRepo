@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class SceneTransitionner : MonoBehaviour
 {
-    [SerializeField] Transitions transitionData;
+    [SerializeField] Image transitioniAnim;
     [SerializeField] Transform transitionTransform;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -32,13 +32,7 @@ public class SceneTransitionner : MonoBehaviour
     // ローディング処理
     IEnumerator LoadAsyncScene(string name)
     {
-        EventSystem eventSystem = EventSystem.current;
-        Button button = eventSystem.currentSelectedGameObject.GetComponent<Button>();
-        button.enabled = false;
-
-        var rndIdx = Random.Range(0, transitionData.transitionList.Count);
-
-        Image obj = Instantiate(transitionData.transitionList[rndIdx], transitionTransform);
+        Image obj = Instantiate(transitioniAnim, transitionTransform);
         obj.rectTransform.localPosition = Vector3.zero;
 
         yield return new WaitForSeconds(1.0f);

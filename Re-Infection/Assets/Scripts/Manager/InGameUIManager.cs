@@ -12,7 +12,6 @@ public class InGameUIManager : MonoBehaviour
     GameManager gameManager;
 
     [SerializeField] Canvas transitionUIprefab;
-    [SerializeField] Image unitSpritePrefab;
 
     [SerializeField] Canvas masterUI;
     [SerializeField] Canvas combatUI;
@@ -39,7 +38,11 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] Image holdProgressIcon;
     [SerializeField] Image holdProgressGauge;
 
-    [SerializeField] GameObject unlockUnitsContainer;
+    [SerializeField] Animator unlockBackgroundAnimator;
+    [SerializeField] Animator unlockUnitAnimator;
+    [SerializeField] TextMeshProUGUI unlockTitleText;
+    [SerializeField] TextMeshProUGUI tapCloseText;
+
     [SerializeField] TextMeshProUGUI clearTimeText;
 
     [SerializeField] TextMeshProUGUI waveCoinText;
@@ -50,6 +53,9 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI currentCoinText;
     [SerializeField] GameObject currentCoinLabel;
     [SerializeField] float coinTextElapsedTime;
+
+    [SerializeField] Button returnToHomeButton;
+    [SerializeField] Button replayButton;
 
     private SEManager seManager;
 
@@ -91,7 +97,7 @@ public class InGameUIManager : MonoBehaviour
         timeUI.enabled = false;
         combatUI.enabled = false;
 
-        clearTimeText.text = gameManager.timeManager.Minutes.ToString("D2") + ":" + gameManager.timeManager.Seconds.ToString("D2");
+        clearTimeText.text = gameManager.timeManager.GetSessionClearTimeText();
 
         var audio = FindObjectOfType<BGMManager>();
         audio.StopBGM();
@@ -129,6 +135,9 @@ public class InGameUIManager : MonoBehaviour
     // 報酬処理
     public IEnumerator SessionReward()
     {
+        resultUI.enabled = true;
+        rewardUI.enabled = true;
+
         currentCoinLabel.SetActive(false);
 
         var totalCoin = 0;
@@ -137,19 +146,29 @@ public class InGameUIManager : MonoBehaviour
 
         totalCoin = gameManager.waveSpawner.IsSessionClear ? waveCoin + stageCoin : waveCoin;
 
+        bool unitUnlock = false;    // ユニットのアンロック処理を行うか
+
         if (gameManager.waveSpawner.IsSessionClear)
         {
             stageClearReward.SetActive(true);
 
             if (!gameManager.waveSpawner.CurrentStage.isClear)
             {
+                // 初回クリアの場合、アンロック処理のフラグを真
+                unitUnlock = true;
+
+                // アンロック処理を行う場合、ホームへ戻るボタンともう一度プレイするボタンを非表示にする
+                if (unitUnlock)
+                {
+                    returnToHomeButton.gameObject.SetActive(false);
+                    replayButton.gameObject.SetActive(false);
+                }
+
+                // クリア済みフラグを真 & ステージの進行度を進める
                 gameManager.waveSpawner.CurrentStage.SetIsClear(true);
                 gameManager.waveSpawner.stageData.SetStageProgress(gameManager.waveSpawner.CurrentStage.stageNum + 1);
 
-                yield return VisibleUnlockUnits(gameManager.waveSpawner.CurrentStage);
-
                 totalCoin += gameManager.waveSpawner.CurrentStage.firstClearCoin;
-                gameManager.waveSpawner.CurrentStage.SetUnitsCanUnLock();
 
                 firstClearReward.SetActive(true);
             }
@@ -164,21 +183,22 @@ public class InGameUIManager : MonoBehaviour
             firstClearReward.SetActive(false);
         }
 
+        // ウェーブ、ステージクリア、初回クリアで取得したコインをテキストに表示
         GetCoinText(waveCoinText, waveCoin);
         GetCoinText(stageCoinText, stageCoin);
         GetCoinText(firstCoinText, gameManager.waveSpawner.CurrentStage.firstClearCoin);
 
+        // 合計コインを所持金に追加
         Wallet wallet = Resources.Load<PlayerStatusData>("PlayerStatusData").wallet;
         float currentCoin = wallet.CurrentMoney;
         wallet.AddMoney(totalCoin);
 
-        resultUI.enabled = true;
-        rewardUI.enabled = true;
-
+        // 報酬アニメーション再生
         rewardUI.transform.Find("Rewards").GetComponent<Animator>().SetTrigger("Reward");
 
         yield return new WaitForSeconds(3);
 
+        // 所持金のカウントアップ表示
         currentCoinLabel.SetActive(true);
         float time = 0;
         while (time < coinTextElapsedTime)
@@ -193,25 +213,73 @@ public class InGameUIManager : MonoBehaviour
             yield return null;
         }
 
+        // ユニットがアンロックされる場合、それを表示するアニメーションを再生
+        if(unitUnlock)
+            yield return VisibleUnlockUnits(gameManager.waveSpawner.CurrentStage);
+
+        // アンロック処理終了後、ボタンを再び表示
+        returnToHomeButton.gameObject.SetActive(true);
+        replayButton.gameObject.SetActive(true);
     }
 
     // アンロックしたユニット表示
     public IEnumerator VisibleUnlockUnits(Stage stage)
     {
+        // アンロックするユニットがいない場合、コルーチンを停止
         if(stage.unlockUnits.Length <= 0 || stage.unlockUnits == null)
             yield break;
 
         unlockUI.enabled = true;
 
+        // アンロックされるユニット全てのアンロック処理
         foreach (var unit in stage.unlockUnits.ToArray())
         {
-            Image image = Instantiate(unitSpritePrefab, unlockUnitsContainer.transform);
-            image.sprite = unit.unitStats.unitSprite;
+            unlockTitleText.enabled = false;
+            tapCloseText.enabled = false;
+
+            unit.unitStats.UnitUnLock();
+
+            string key = GetAnimationKey(unit.unitStats);
+            Debug.Log(key);
+
+            if (key != string.Empty)
+                unlockUnitAnimator.SetBool(key, true);
+            else
+                continue;
+
+            unlockBackgroundAnimator.SetTrigger("Unlock");
+
+            yield return new WaitForSeconds(0.5f);
+
+            seManager.PlaySE(SEManager.SEType.UnlockUnit);
+
+            yield return new WaitForSeconds(1f);
+
+            unlockTitleText.enabled = true;
+            tapCloseText.enabled = true;
+
+            yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
+
+            unlockUnitAnimator.SetBool(key, false);
         }
 
-        yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
-
         unlockUI.enabled = false;
+    }
+
+    // アンロック時に再生するユニットのアニメーションのキーを取得
+    private string GetAnimationKey(UnitStats stats)
+    {
+        return stats.unitName switch
+        {
+            "弓使い" => "Archer",
+            "盾兵" => "Tank",
+            "騎馬兵" => "Jockey",
+            "鈍器使い" => "Warrior",
+            "魔法使い" => "Clergyman",
+            "上魔法使い" => "Witch",
+            "大弓使い" => "Bow",
+            _ => string.Empty,
+        };
     }
 
     // 敵の合計数テキスト

@@ -616,7 +616,7 @@ GameObject:
   - component: {fileID: 4144175641669143686}
   - component: {fileID: 3343177112857283782}
   m_Layer: 5
-  m_Name: UnitTutorial
+  m_Name: UnitTutorial_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

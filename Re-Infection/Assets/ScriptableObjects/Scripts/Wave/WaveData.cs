@@ -15,10 +15,13 @@ public class WaveData : ScriptableObject
     public enum TutorialType
     {
         Empty,
-        Unit,
+        Summon,
+        WaveEnd,
         Virus,
         Cannon,
         Boss,
+        AoEUnit,
+        MagicUnit,
     }
 
     [Serializable]
@@ -35,10 +38,13 @@ public class WaveData : ScriptableObject
     {
         switch(type)
         {
-            case TutorialType.Unit:   PlayerPrefs.SetInt("UnitTutorial", 1); break;
+            case TutorialType.Summon:   PlayerPrefs.SetInt("SummonTutorial", 1); break;
+            case TutorialType.WaveEnd:   PlayerPrefs.SetInt("WaveEndTutorial", 1); break;
             case TutorialType.Virus:  PlayerPrefs.SetInt("VirusTutorial", 1); break;
             case TutorialType.Cannon: PlayerPrefs.SetInt("CannonTutorial", 1); break;
             case TutorialType.Boss:   PlayerPrefs.SetInt("BossTutorial", 1); break;
+            case TutorialType.AoEUnit:   PlayerPrefs.SetInt("AoEUnitTutorial", 1); break;
+            case TutorialType.MagicUnit:   PlayerPrefs.SetInt("MagicUnitTutorial", 1); break;
             default: break;
         };
 
@@ -47,12 +53,17 @@ public class WaveData : ScriptableObject
 
     public bool IsTutorial(TutorialType type)
     {
+        if(PlayerPrefs.GetInt("Stage_Tutorial" + "Clear", 0) != 1) return false;
+
         return type switch
         {
-            TutorialType.Unit => PlayerPrefs.GetInt("UnitTutorial", 0) == 1 && PlayerPrefs.GetInt("Stage_Tutorial" + "Clear", 0) == 1,
-            TutorialType.Virus => PlayerPrefs.GetInt("VirusTutorial", 0) == 1 && PlayerPrefs.GetInt("Stage_Tutorial" + "Clear", 0) == 1,
-            TutorialType.Cannon => PlayerPrefs.GetInt("CannonTutorial", 0) == 1 && PlayerPrefs.GetInt("Stage_Tutorial" + "Clear", 0) == 1,
-            TutorialType.Boss => PlayerPrefs.GetInt("BossTutorial", 0) == 1 && PlayerPrefs.GetInt("Stage_Tutorial" + "Clear", 0) == 1,
+            TutorialType.Summon => PlayerPrefs.GetInt("SummonTutorial", 0) == 1,
+            TutorialType.WaveEnd => PlayerPrefs.GetInt("WaveEndTutorial", 0) == 1,
+            TutorialType.Virus => PlayerPrefs.GetInt("VirusTutorial", 0) == 1,
+            TutorialType.Cannon => PlayerPrefs.GetInt("CannonTutorial", 0) == 1,
+            TutorialType.Boss => PlayerPrefs.GetInt("BossTutorial", 0) == 1,
+            TutorialType.AoEUnit => PlayerPrefs.GetInt("AoEUnitTutorial", 0) == 1,
+            TutorialType.MagicUnit => PlayerPrefs.GetInt("MagicUnitTutorial", 0) == 1,
             _ => false,
         };
     }
@@ -64,9 +75,31 @@ public class WaveData : ScriptableObject
     // レベル生成コルーチン
     public IEnumerator SpawnLevels()
     {
+        if(tutorial != null)
+            yield return StartTutorial();
+
+        // ウェーブ内の全てのレベルを生成するまでループ
+        for (int level = 0; level < waveLevels.Length; level++)
+        {
+            if (level != 0)
+                yield return new WaitForSeconds(waveLevels[level].spawnInterbal);
+
+            var currentLevel = waveLevels[level];  // 現在のレベルのデータ取得
+
+            // レベル内のユニットを全て生成
+            yield return currentLevel.SpawnLevel();
+        }
+
+        yield break;
+    }
+
+    private IEnumerator StartTutorial()
+    {
+        if (tutorial == null) yield break;
+
         foreach (var t in tutorial)
         {
-            if (IsTutorial(t.tutorialType)) continue;
+            if (t == null || IsTutorial(t.tutorialType)) continue;
 
             yield return new WaitForEndOfFrame();
 
@@ -74,18 +107,18 @@ public class WaveData : ScriptableObject
 
             Canvas parent = GameObject.Find("TutorialUI").GetComponent<Canvas>();
             parent.enabled = true;
-            
+
             var p = Instantiate(t.tutorialPrefab, parent.transform, parent).GetComponent<RectTransform>();
             p.localPosition = new Vector2(0, 200);
 
             yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
             p.GetComponent<Animator>().SetTrigger("Close");
-            
-            parent.enabled = false;
 
             OnStopTime?.Invoke();
 
-            yield return new WaitForSecondsRealtime(0.5f);
+            yield return new WaitForSeconds(1);
+
+            parent.enabled = false;
 
             switch (t.tutorialType)
             {
@@ -103,20 +136,6 @@ public class WaveData : ScriptableObject
             SetTutorial(t.tutorialType);
             Destroy(p.gameObject);
         }
-
-        // ウェーブ内の全てのレベルを生成するまでループ
-        for (int level = 0; level < waveLevels.Length; level++)
-        {
-            if (level != 0)
-                yield return new WaitForSeconds(waveLevels[level].spawnInterbal);
-
-            var currentLevel = waveLevels[level];  // 現在のレベルのデータ取得
-
-            // レベル内のユニットを全て生成
-            yield return currentLevel.SpawnLevel();
-        }
-
-        yield break;
     }
 
     private List<UnitStats> spawnUnitsList;

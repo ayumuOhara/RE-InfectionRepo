@@ -17,25 +17,25 @@ MonoBehaviour:
     animatorController: {fileID: 9100000, guid: 4e2a6267e66fb5a4d9cec1b8d34dcf9c, type: 2}
     unitSprite: {fileID: -1548542343388229337, guid: 0e7def79efff5a74b9bd5ccfa50ee410, type: 3}
     attackEffect: {fileID: 9083634734492158199, guid: 1968969ccf1d2f64cb279a59b9297bae, type: 3}
-    unitName: "\u4E0A\u7D1A\u9B54\u6CD5\u4F7F\u3044"
+    unitName: "\u4E0A\u9B54\u6CD5\u4F7F\u3044"
     unitDescription: "\u4E0A\u9B54\u6CD5\u4F7F\u3044\u306F\u81EA\u5206\u304B\u3089\u6700\u3082\u9060\u3044\u6575\u3092\u72D9\u3046\u3002\u6271\u3046\u306B\u306F<color=red>\u30D7\u30EC\u30A4\u30E4\u30FC\u306E\u30C6\u30AF\u30CB\u30C3\u30AF</color>\u304C\u5FC5\u8981\u3002\u3057\u304B\u3057\u3001\u4E0A\u624B\u304F\u6271\u3046\u3053\u3068\u304C\u51FA\u6765\u308C\u3070\u3001<color=red>\u6575\u3092\u4E00\u6383\u3067\u304D\u308B</color>\u3002"
     jobType: 4
     targetType: 1
     statusScaler:
     - maxHpScaler: 0
       atkScaler: 0
-      levelUpCost: 500
-    - maxHpScaler: 10
+      levelUpCost: 700
+    - maxHpScaler: 0
       atkScaler: 0.5
-      levelUpCost: 1000
-    - maxHpScaler: 15
-      atkScaler: 0.6
-      levelUpCost: 1500
-    - maxHpScaler: 20
-      atkScaler: 0.8
-      levelUpCost: 2000
-    - maxHpScaler: 30
+      levelUpCost: 1200
+    - maxHpScaler: 0
       atkScaler: 1
+      levelUpCost: 2000
+    - maxHpScaler: 0
+      atkScaler: 2
+      levelUpCost: 3000
+    - maxHpScaler: 0
+      atkScaler: 4
       levelUpCost: 0
     maxHp: 40
     attackType: 2

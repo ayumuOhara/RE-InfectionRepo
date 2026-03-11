@@ -160,16 +160,14 @@ public class UpGradeManager : MonoBehaviour
                 nameText.text = "？？？";
 
             return;
-
         }
-        // レベルテキストは常に赤
-        lvText.color = new Color(1f, 0.337f, 0.337f);
 
         // MAX のとき
         if (stats.lv >= stats.MaxLevel)
         {
             lvText.text = "MAX";
             costText.text = "MAX";
+            lvText.color = new Color(1f, 0.337f, 0.337f);
             costText.color = new Color(1f, 0.337f, 0.337f);
             button.interactable = false;
             return;
@@ -177,7 +175,7 @@ public class UpGradeManager : MonoBehaviour
 
         lvText.text = stats.lv.ToString();
         int cost = stats.GetNextLevelCost();
-        costText.text = cost.ToString();
+        costText.text = $"<sprite=0>{cost.ToString()}";
 
         bool canBuy = playerStatusData.wallet.CanBuy(cost);
 
@@ -433,7 +431,7 @@ public class UpGradeManager : MonoBehaviour
         bool canBuy = playerStatusData.wallet.CanBuy(cost);
 
         lvText.text = stats.lv.ToString();
-        costText.text = cost.ToString();
+        costText.text = $"<sprite=0>{cost.ToString()}";
 
         costText.color = canBuy ? Color.white : new Color(1f, 0.337f, 0.337f);
 
@@ -446,6 +444,7 @@ public class UpGradeManager : MonoBehaviour
         {
             lvText.text = "MAX";
             costText.text = "MAX";
+            lvText.color = new Color(1f, 0.337f, 0.337f);
             costText.color = new Color(1f, 0.337f, 0.337f);
             button.interactable = false;
             return;
@@ -459,7 +458,7 @@ public class UpGradeManager : MonoBehaviour
 
         // UI の表示も更新
         lvText.text = $"{stats.lv}";
-        costText.text = cost.ToString();
+        costText.text = $"<sprite=0>{cost.ToString()}";
     }
 
 }

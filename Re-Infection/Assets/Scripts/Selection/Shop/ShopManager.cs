@@ -97,12 +97,12 @@ public class ShopManager : MonoBehaviour
 
     private void Update()
     {
-        UpdateUpgradeButtonState(playerStatusData.castleUpgrade, CastleButton, CastleUpgradeMoney_text);
-        UpdateUpgradeButtonState(playerStatusData.cannonDamageUpgrade, CannonDamageButton, CannonDamageUpgradeMoney_text);
-        UpdateUpgradeButtonState(playerStatusData.cannonCoolTimeUpgrade, CannonCoolTimeButton, CannonCoolTimeUpgradeMoney_text);
-        UpdateUpgradeButtonState(playerStatusData.costLimitUpgrade, CostLimitButton, CostLimitUpgradeMoney_text);
-        UpdateUpgradeButtonState(playerStatusData.costGenerationSpeedUpgrade, CostGenerationSpeedButton, CostGenerationSpeedUpgradeMoney_text);
-        UpdateUpgradeButtonState(playerStatusData.virusUpgrade, VirusButton, VirusUpgradeMoney_text);
+        UpdateUpgradeButtonState(playerStatusData.castleUpgrade, CastleButton, CastleLv_text, CastleUpgradeMoney_text);
+        UpdateUpgradeButtonState(playerStatusData.cannonDamageUpgrade, CannonDamageButton, CannonDamageLv_text, CannonDamageUpgradeMoney_text);
+        UpdateUpgradeButtonState(playerStatusData.cannonCoolTimeUpgrade, CannonCoolTimeButton, CannonCoolTimeLv_text, CannonCoolTimeUpgradeMoney_text);
+        UpdateUpgradeButtonState(playerStatusData.costLimitUpgrade, CostLimitButton, CostLimitLv_text, CostLimitUpgradeMoney_text);
+        UpdateUpgradeButtonState(playerStatusData.costGenerationSpeedUpgrade, CostGenerationSpeedButton, CostGenerationSpeedLv_text, CostGenerationSpeedUpgradeMoney_text);
+        UpdateUpgradeButtonState(playerStatusData.virusUpgrade, VirusButton, VirusLv_text, VirusUpgradeMoney_text);
     }
 
     // 渡された強化内容によってUI表示を操作
@@ -209,11 +209,13 @@ public class ShopManager : MonoBehaviour
     private void SetTextAndButton<T>(T upgrade, TextMeshProUGUI lvText, TextMeshProUGUI moneyText, Button button) where T : BaseUpgrade
     {
         lvText.text = upgrade.canUpgrade ? upgrade.lv.ToString() : "MAX";
-        moneyText.text = upgrade.canUpgrade ? $"<size=40><sprite=0><size=45>{upgrade.UpgradeMoney}" : "MAX";
+        moneyText.text = upgrade.canUpgrade ? $"<sprite=0>{upgrade.UpgradeMoney}" : "MAX";
+
+        if(upgrade.lv >= upgrade.MaxLevel)
+            lvText.color = new Color(1f, 0.337f, 0.337f);
 
         if (playerStatusData.wallet.CurrentMoney < upgrade.UpgradeMoney || !upgrade.canUpgrade)
         {
-            lvText.color = new Color(1f, 0.337f, 0.337f);
             moneyText.color = new Color(1f, 0.337f, 0.337f);
 
             //ボタンを押せなくする
@@ -291,8 +293,7 @@ public class ShopManager : MonoBehaviour
     }
 
     public IEnumerator WarningMoneyText()
-    {
-       
+    {       
         WarningObj.SetActive(true);
         Warning_text.text = ("お 金 が 足 り ま せ ん ！");
         yield return new WaitForSeconds(1f);
@@ -317,13 +318,14 @@ public class ShopManager : MonoBehaviour
             g.raycastTarget = enabled;
         }
     }
-    private void UpdateUpgradeButtonState(BaseUpgrade upgrade, Button button, TextMeshProUGUI costText)
+    private void UpdateUpgradeButtonState(BaseUpgrade upgrade, Button button, TextMeshProUGUI lvText, TextMeshProUGUI costText)
     {
-         if (upgrade.lv >= upgrade.MaxLevel)
+        if (upgrade.lv >= upgrade.MaxLevel)
         {
             button.interactable = false;
             costText.text = "MAX";
-            costText.color =new Color(1f, 0.337f, 0.337f);
+            lvText.color = new Color(1f, 0.337f, 0.337f);
+            costText.color = new Color(1f, 0.337f, 0.337f);
             return;
         }
 
@@ -340,6 +342,6 @@ public class ShopManager : MonoBehaviour
         costText.color = canBuy ? Color.white : new Color(1f, 0.337f, 0.337f);
 
         // コスト表示
-        costText.text = cost.ToString();
+        costText.text = $"<sprite=0>{cost.ToString()}";
     }
 }

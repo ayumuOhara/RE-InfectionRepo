@@ -150,5 +150,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a102c49f81860745b509439d05ae61d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneTransitionner
-  transitionData: {fileID: 11400000, guid: f5925a211ee247449ada504d083879d4, type: 2}
+  transitioniAnim: {fileID: 3036700777567189904, guid: bb4e0d62ff27bc541ba7b51cfe6e7fb1, type: 3}
   transitionTransform: {fileID: 4710159641715591861}
