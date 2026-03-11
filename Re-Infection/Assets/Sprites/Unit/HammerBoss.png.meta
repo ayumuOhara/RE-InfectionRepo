@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 9690c15c06ca2e34484ef801d4e519e2
+guid: e24d42d93173d7240bfe7f531c46a362
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6102731379703392581
-    second: Boos1-0_0
+      213: 9112742296165906606
+    second: HammerBoss_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 530
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Boos1-0_0
+      name: HammerBoss_0
       rect:
         serializedVersion: 2
-        x: 833
-        y: 965
-        width: 780
-        height: 968
+        x: 697
+        y: 969
+        width: 726
+        height: 1042
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bb65621d42ebe4ba0800000000000000
-      internalID: -6102731379703392581
+      spriteID: ea875a446d6f67e70800000000000000
+      internalID: 9112742296165906606
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Boos1-0_0: -6102731379703392581
+      HammerBoss_0: 9112742296165906606
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
