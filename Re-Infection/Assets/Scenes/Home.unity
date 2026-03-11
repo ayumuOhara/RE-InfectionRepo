@@ -8900,8 +8900,8 @@ MonoBehaviour:
   R_WizardName_text: {fileID: 128123778}
   R_Wizard_Image: {fileID: 1667606844}
   DialogMassege: {fileID: 1528292879}
-  DialogLevel_text1: {fileID: 827587579}
-  DialogLevel_text2: {fileID: 426448072}
+  DialogLevel_text1: {fileID: 1590988097}
+  DialogLevel_text2: {fileID: 1090876797}
   DialogMoney_text: {fileID: 1296798458}
   Warning_text: {fileID: 370851828}
   Detalise_text: {fileID: 1198549819}
@@ -33543,7 +33543,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1625081757
 Transform:
   m_ObjectHideFlags: 0
