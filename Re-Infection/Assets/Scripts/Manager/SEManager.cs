@@ -1,7 +1,6 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
-using UnityEngine.SceneManagement;
 
 public class SEManager : MonoBehaviour
 {
@@ -10,23 +9,27 @@ public class SEManager : MonoBehaviour
     [SerializeField] private Slider seSlider;
     [SerializeField] private SESetting seSetting;
 
-    public static SEManager Instance;
+    // åŒä¸€SEã®é€£ç¶šå†ç”Ÿã‚’åˆ¶é™ã™ã‚‹æ™‚é–“ï¼ˆç§’ï¼‰
+    // 0.05ç§’ã€œ0.1ç§’ç¨‹åº¦ã«è¨­å®šã™ã‚‹ã¨ã€è‡ªç„¶ã«èã“ãˆã¤ã¤è² è·ã‚’æŠ‘ãˆã‚‰ã‚Œã¾ã™
+    [SerializeField] private float minPlayInterval = 0.05f;
 
-    private void Start()
-    {
-        if (seSlider != null)
-        {
-            seSlider.value = seSetting.volume;
-            seSlider.onValueChanged.AddListener(OnVolumeChenged);
-        }
-    }
+    // å„SEã‚¿ã‚¤ãƒ—ã”ã¨ã®æœ€çµ‚å†ç”Ÿæ™‚é–“ã‚’è¨˜éŒ²ã™ã‚‹è¾æ›¸
+    private Dictionary<SEType, float> lastPlayTimes = new Dictionary<SEType, float>();
+
+    public static SEManager Instance;
 
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // ƒV[ƒ“Œ×‚¬‚½‚¢‚È‚ç
+            DontDestroyOnLoad(gameObject);
+
+            // è¾æ›¸ã®åˆæœŸåŒ–
+            foreach (SEType type in System.Enum.GetValues(typeof(SEType)))
+            {
+                lastPlayTimes[type] = -10f; // æœ€åˆã¯å³åº§ã«é³´ã‚‹ã‚ˆã†ã«è² ã®å€¤ã‚’è¨­å®š
+            }
         }
         else
         {
@@ -34,50 +37,72 @@ public class SEManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        if (seSlider != null)
+        {
+            seSlider.value = seSetting.volume;
+            seSlider.onValueChanged.AddListener(OnVolumeChanged);
+        }
+    }
+
     private void Update()
     {
+        // æ¯ãƒ•ãƒ¬ãƒ¼ãƒ ä»£å…¥ã™ã‚‹ã®ã¯è² è·ã«ãªã‚‹ãŸã‚ã€
+        // æœ¬æ¥ã¯OnVolumeChangedå†…ã§ã®ã¿æ›´æ–°ã™ã‚‹ã®ãŒç†æƒ³çš„ã§ã™
         seAudioSource.volume = seSetting.volume;
     }
 
-    void OnVolumeChenged(float value)
+    void OnVolumeChanged(float value)
     {
         seSetting.volume = value;
     }
 
-    // Enum‚É‚æ‚éSEŠÇ—
     public enum SEType
     {
-        Button_Click,  // ƒ{ƒ^ƒ“‚ğƒNƒŠƒbƒN‚µ‚½‚Æ‚«‚Ì‰¹
-        Lord,          // ƒV[ƒ“ƒ[ƒh
-        StageClear,    // ƒXƒe[ƒWƒNƒŠƒA
-        StageFailed,   // ƒXƒe[ƒW¸”s
-        Summon,        // ƒ†ƒjƒbƒg¢Š«
-        SummonFailed,  // ƒ†ƒjƒbƒg¢Š«¸”s
-        Damage,        // ƒ†ƒjƒbƒg‚ªƒ_ƒ[ƒW‚ğó‚¯‚½
-        Explosion,     // ”š’e
-        CanExplosion,  // ”š’e‚ªg—p‰Â”\
-        BossDefeat,    // ƒ{ƒXŒ‚”j
-        Upgrade,       // ‹­‰»
-        UnlockUnit,    // ƒ†ƒjƒbƒgƒAƒ“ƒƒbƒN‰¹
+        Button_Click,
+        Lord,
+        StageClear,
+        StageFailed,
+        Summon,
+        SummonFailed,
+        Damage,
+        Explosion,
+        CanExplosion,
+        BossDefeat,
+        Upgrade,
+        UnlockUnit,
     }
 
-    // SEÄ¶ƒƒ\ƒbƒh
+    /// <summary>
+    /// SEã‚’å†ç”Ÿã—ã¾ã™ã€‚çŸ­æ™‚é–“ã®éå‰°ãªé€£æ‰“ã¯è‡ªå‹•ã§ã‚¹ã‚­ãƒƒãƒ—ã•ã‚Œã¾ã™ã€‚
+    /// </summary>
     public void PlaySE(SEType seType)
     {
-        int index = (int)seType;  // Enum‚©‚çƒCƒ“ƒfƒbƒNƒX‚Ö•ÏŠ·
-        PlaySEFromList(index);
-    }
+        // 1. é‡è¦ãªéŸ³ã¯åˆ¶é™ã‚’ã‚¹ãƒ«ãƒ¼ã•ã›ã‚‹ï¼ˆå¿…è¦ã«å¿œã˜ã¦ï¼‰
+        bool isImportant = (seType == SEType.StageClear || seType == SEType.StageFailed || seType == SEType.BossDefeat);
 
-    // ƒŠƒXƒg‚©‚çSE‚ğÄ¶
-    private void PlaySEFromList(int index)
-    {
+        // 2. å†ç”Ÿé–“éš”ã®ãƒã‚§ãƒƒã‚¯
+        if (!isImportant)
+        {
+            if (Time.time - lastPlayTimes[seType] < minPlayInterval)
+            {
+                // å‰å›ã®å†ç”Ÿã‹ã‚‰æ™‚é–“ãŒçµŒã£ã¦ã„ãªã„ãªã‚‰ä½•ã‚‚ã—ãªã„
+                return;
+            }
+        }
+
+        // 3. å†ç”Ÿå‡¦ç†
+        int index = (int)seType;
         if (index >= 0 && index < seClips.Count)
         {
             seAudioSource.PlayOneShot(seClips[index]);
+            // å†ç”Ÿæ™‚é–“ã‚’è¨˜éŒ²
+            lastPlayTimes[seType] = Time.time;
         }
         else
         {
-            // Debug.LogWarning("w’è‚³‚ê‚½ƒCƒ“ƒfƒbƒNƒX‚ÉŠY“–‚·‚éSE‚ª‚ ‚è‚Ü‚¹‚ñ");
+            Debug.LogWarning($"SEType {seType} ã«å¯¾å¿œã™ã‚‹ã‚¯ãƒªãƒƒãƒ—ãŒãƒªã‚¹ãƒˆã«ã‚ã‚Šã¾ã›ã‚“ã€‚");
         }
     }
 }
