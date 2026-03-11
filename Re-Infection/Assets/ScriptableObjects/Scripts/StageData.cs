@@ -15,6 +15,7 @@ public class StageData : ScriptableObject
         stageProgress = Mathf.Clamp(stageNum, 0, Stage.Length - 1);
 
         PlayerPrefs.SetInt("Progress", stageProgress);
+        PlayerPrefs.Save();
     }
 
     public int SelectStageNumber;

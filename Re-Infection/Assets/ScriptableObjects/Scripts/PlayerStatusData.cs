@@ -19,6 +19,7 @@ public class Level
         lv = level;
         ClampLevel(lv);
         PlayerPrefs.SetInt(key, level);
+        PlayerPrefs.Save();
     }
 
     public int GetLevel(string key)

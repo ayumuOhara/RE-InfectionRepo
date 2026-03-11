@@ -30,12 +30,14 @@ public class Stage : ScriptableObject
     {
         _isClear = clear;
         PlayerPrefs.SetInt(name + "Clear", _isClear ? 1 : 0);
+        PlayerPrefs.Save();
     }
     
     public void SetIsOpend(bool open)
     {
         _isOpened = open;
         PlayerPrefs.SetInt(name + "Open", _isOpened ? 1 : 0);
+        PlayerPrefs.Save();
     }
 
     public UnitStatsData[] unlockUnits; // ステージクリアでアンロックされるユニット

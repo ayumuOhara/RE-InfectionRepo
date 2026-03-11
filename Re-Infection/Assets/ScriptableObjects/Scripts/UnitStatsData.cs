@@ -138,6 +138,7 @@ public class UnitStats
     public void UnitUnLock()
     {
         PlayerPrefs.SetInt(unitName + "Unlock", 1);
+        PlayerPrefs.Save();
 
         OnUnlockUnit?.Invoke();
     }
