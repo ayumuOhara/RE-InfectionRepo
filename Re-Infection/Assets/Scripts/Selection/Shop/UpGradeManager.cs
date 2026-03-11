@@ -298,6 +298,8 @@ public class UpGradeManager : MonoBehaviour
             return;
         }
 
+        SEManager.Instance.PlaySE(SEManager.SEType.Upgrade);
+
         playerStatusData.wallet.RemoveMoney(cost);
      
         money_text.text = playerStatusData.wallet.CurrentMoney.ToString();
