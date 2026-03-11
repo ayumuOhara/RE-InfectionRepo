@@ -17,9 +17,9 @@ MonoBehaviour:
     animatorController: {fileID: 9100000, guid: 9dc3c8662c36b82449a70e65f25ee410, type: 2}
     unitSprite: {fileID: 9112742296165906606, guid: e24d42d93173d7240bfe7f531c46a362, type: 3}
     attackEffect: {fileID: 8289740950869842158, guid: fc7ef61e97eaa294d95015217cb240f0, type: 3}
-    unitName: "\u5149\u306E\u9A0E\u99AC\u5175"
+    unitName: "\u920D\u91CD\u306A\u30CF\u30F3\u30DE\u30FC\u30DE\u30B9\u30BF\u30FC"
     unitDescription: 
-    jobType: 0
+    jobType: 1
     targetType: 0
     statusScaler:
     - maxHpScaler: 0
@@ -27,13 +27,13 @@ MonoBehaviour:
       levelUpCost: 0
     maxHp: 4000
     attackType: 2
-    hitCnt: 2
+    hitCnt: 3
     radius: 0.05
-    atk: 40
+    atk: 30
     atkInterbal: 1
     range: 0.3
     moveType: 0
-    moveSpeed: 5
+    moveSpeed: 2
     summonCost: 0
     bossUnit: 1
     attackSe: {fileID: 8300000, guid: dab120b7a12444d42b8454c3420e7830, type: 3}
