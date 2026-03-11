@@ -21,6 +21,16 @@ public class TimeManager : MonoBehaviour
     bool isAcceleration = false;
     float timeSpeed = 1.0f;
 
+    private void OnEnable()
+    {
+        WaveData.OnStopTime += GamePause;
+    }
+
+    private void OnDisable()
+    {
+        WaveData.OnStopTime -= GamePause;
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

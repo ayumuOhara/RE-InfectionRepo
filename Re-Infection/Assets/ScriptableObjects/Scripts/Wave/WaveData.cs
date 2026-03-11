@@ -30,42 +30,78 @@ public class WaveData : ScriptableObject
 
     public WaveLevel[] waveLevels;   // ウェーブでスポーンさせるレベルのリスト
     public bool bossWave;            // ボスウェーブか
-    public bool isTutorial;            // チュートリアルをするか
+
+    public void SetTutorial(TutorialType type)
+    {
+        switch(type)
+        {
+            case TutorialType.Unit:   PlayerPrefs.SetInt("UnitTutorial", 1); break;
+            case TutorialType.Virus:  PlayerPrefs.SetInt("VirusTutorial", 1); break;
+            case TutorialType.Cannon: PlayerPrefs.SetInt("CannonTutorial", 1); break;
+            case TutorialType.Boss:   PlayerPrefs.SetInt("BossTutorial", 1); break;
+            default: break;
+        };
+
+        PlayerPrefs.Save();
+    }
+
+    public bool IsTutorial(TutorialType type)
+    {
+        return type switch
+        {
+            TutorialType.Unit => PlayerPrefs.GetInt("UnitTutorial", 0) == 1 && PlayerPrefs.GetInt("Stage_Tutorial" + "Clear", 0) == 1,
+            TutorialType.Virus => PlayerPrefs.GetInt("VirusTutorial", 0) == 1 && PlayerPrefs.GetInt("Stage_Tutorial" + "Clear", 0) == 1,
+            TutorialType.Cannon => PlayerPrefs.GetInt("CannonTutorial", 0) == 1 && PlayerPrefs.GetInt("Stage_Tutorial" + "Clear", 0) == 1,
+            TutorialType.Boss => PlayerPrefs.GetInt("BossTutorial", 0) == 1 && PlayerPrefs.GetInt("Stage_Tutorial" + "Clear", 0) == 1,
+            _ => false,
+        };
+    }
+
     public Tutorial[] tutorial;
+
+    public static event Action OnStopTime;
 
     // レベル生成コルーチン
     public IEnumerator SpawnLevels()
     {
-        if (isTutorial)
+        foreach (var t in tutorial)
         {
-            foreach (var t in tutorial)
+            if (IsTutorial(t.tutorialType)) continue;
+
+            yield return new WaitForEndOfFrame();
+
+            OnStopTime?.Invoke();
+
+            Canvas parent = GameObject.Find("TutorialUI").GetComponent<Canvas>();
+            parent.enabled = true;
+            
+            var p = Instantiate(t.tutorialPrefab, parent.transform, parent).GetComponent<RectTransform>();
+            p.localPosition = new Vector2(0, 200);
+
+            yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
+            p.GetComponent<Animator>().SetTrigger("Close");
+            
+            parent.enabled = false;
+
+            OnStopTime?.Invoke();
+
+            yield return new WaitForSecondsRealtime(0.5f);
+
+            switch (t.tutorialType)
             {
-                Canvas parent = GameObject.Find("TutorialUI").GetComponent<Canvas>();
-                var p = Instantiate(t.tutorialPrefab, parent.transform, parent).GetComponent<RectTransform>();
-                p.localPosition = new Vector2(0, 200);
-
-                yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
-                p.GetComponent<Animator>().SetTrigger("Close");
-
-                yield return new WaitForSeconds(1);
-
-                switch (t.tutorialType)
-                {
-                    case TutorialType.Virus:
-                        VirusSkillPointer.Instance.SetSkillActive(true);
-                        break;
-                    case TutorialType.Cannon:
-                        CannonSkillPointer.Instance.gameObject.SetActive(true);
-                        CannonSkillPointer.Instance.SetSkillCoolTimer(Resources.Load<PlayerStatusData>("PlayerStatusdata").cannonCoolTimeUpgrade.CoolTime * 0.05f);
-                        break;
-                    default:
-                        break;
-                }
-
-                Destroy(p.gameObject);
+                case TutorialType.Virus:
+                    VirusSkillPointer.Instance.SetSkillActive(true);
+                    break;
+                case TutorialType.Cannon:
+                    CannonSkillPointer.Instance.gameObject.SetActive(true);
+                    CannonSkillPointer.Instance.SetSkillCoolTimer(Resources.Load<PlayerStatusData>("PlayerStatusdata").cannonCoolTimeUpgrade.CoolTime * 0.05f);
+                    break;
+                default:
+                    break;
             }
 
-            isTutorial = false;
+            SetTutorial(t.tutorialType);
+            Destroy(p.gameObject);
         }
 
         // ウェーブ内の全てのレベルを生成するまでループ

@@ -70,7 +70,7 @@ namespace CannonPointer
 
         private void Start()
         {
-            if (waveSpawner.CurrentStage.stageNum == 0 && waveSpawner.CurrentStage.waveData[waveSpawner.currentWaveIdx].isTutorial)
+            if (waveSpawner.CurrentStage.stageNum == 0 && !waveSpawner.CurrentStage.waveData[waveSpawner.currentWaveIdx].IsTutorial(WaveData.TutorialType.Cannon))
             {
                 SetSkillActive(false);
 

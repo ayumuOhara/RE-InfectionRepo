@@ -34,7 +34,7 @@ public class WaveSpawner : MonoBehaviour
 
     // ウェーブが始まったか
     bool isStartWave = false;
-    public bool IsStartWave => isStartWave && !stage.waveData[currentWaveIdx].isTutorial;
+    public bool IsStartWave => isStartWave;
 
     // 周回をクリアしたか
     bool isSessionClear = false;
