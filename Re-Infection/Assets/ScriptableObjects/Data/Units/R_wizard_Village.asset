@@ -35,7 +35,7 @@ MonoBehaviour:
       atkScaler: 2
       levelUpCost: 3000
     - maxHpScaler: 0
-      atkScaler: 4
+      atkScaler: 2.5
       levelUpCost: 0
     maxHp: 40
     attackType: 2
