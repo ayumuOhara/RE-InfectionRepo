@@ -95,6 +95,16 @@ public class ShopManager : MonoBehaviour
         WarningObj.SetActive(false);
     }
 
+    private void Update()
+    {
+        UpdateUpgradeButtonState(playerStatusData.castleUpgrade, CastleButton, CastleUpgradeMoney_text);
+        UpdateUpgradeButtonState(playerStatusData.cannonDamageUpgrade, CannonDamageButton, CannonDamageUpgradeMoney_text);
+        UpdateUpgradeButtonState(playerStatusData.cannonCoolTimeUpgrade, CannonCoolTimeButton, CannonCoolTimeUpgradeMoney_text);
+        UpdateUpgradeButtonState(playerStatusData.costLimitUpgrade, CostLimitButton, CostLimitUpgradeMoney_text);
+        UpdateUpgradeButtonState(playerStatusData.costGenerationSpeedUpgrade, CostGenerationSpeedButton, CostGenerationSpeedUpgradeMoney_text);
+        UpdateUpgradeButtonState(playerStatusData.virusUpgrade, VirusButton, VirusUpgradeMoney_text);
+    }
+
     // 渡された強化内容によってUI表示を操作
     private void SetUpgradeTextAndButton<T>(T upgrade) where T : BaseUpgrade
     {
@@ -306,5 +316,30 @@ public class ShopManager : MonoBehaviour
         {
             g.raycastTarget = enabled;
         }
+    }
+    private void UpdateUpgradeButtonState(BaseUpgrade upgrade, Button button, TextMeshProUGUI costText)
+    {
+         if (upgrade.lv >= upgrade.MaxLevel)
+        {
+            button.interactable = false;
+            costText.text = "MAX";
+            costText.color =new Color(1f, 0.337f, 0.337f);
+            return;
+        }
+
+        // 次のレベルのコスト
+        int cost = upgrade.UpgradeMoney;
+
+        // お金が足りるかどうか
+        bool canBuy = playerStatusData.wallet.CanBuy(cost);
+
+        // ボタンの状態
+        button.interactable = canBuy;
+
+        // コストの色
+        costText.color = canBuy ? Color.white : new Color(1f, 0.337f, 0.337f);
+
+        // コスト表示
+        costText.text = cost.ToString();
     }
 }
