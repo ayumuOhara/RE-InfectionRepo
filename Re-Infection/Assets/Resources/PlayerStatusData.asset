@@ -12,19 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f5147572aec5af4fba6d9ac57615b32, type: 3}
   m_Name: PlayerStatusData
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStatusData
-  wallet:
-    currentMoney: 0
   castleUpgrade:
     levelKey: Castle
     upgradeMoney: 64000000f4010000dc050000
     healths: 640000002c010000f4010000e8030000
   cannonDamageUpgrade:
     levelKey: CannonDamage
-    upgradeMoney: 64000000f4010000dc050000
-    damages: 28000000460000005a00000064000000
+    upgradeMoney: 96000000bc02000008070000
+    damages: 32000000500000005a00000064000000
   cannonCoolTimeUpgrade:
     levelKey: CannonCoolTime
-    upgradeMoney: 64000000f4010000dc050000
+    upgradeMoney: c800000020030000d0070000
     coolTime:
     - 220
     - 180
@@ -32,11 +30,11 @@ MonoBehaviour:
     - 120
   costLimitUpgrade:
     levelKey: CostLimit
-    upgradeMoney: 64000000f4010000dc050000
+    upgradeMoney: 96000000bc02000008070000
     maxCostCnt: 1e00000028000000320000003c000000
   costGenerationSpeedUpgrade:
     levelKey: CostGeneration
-    upgradeMoney: 64000000f4010000dc050000
+    upgradeMoney: c800000020030000d0070000
     generateSpeed:
     - 1.8
     - 1.6
@@ -44,7 +42,7 @@ MonoBehaviour:
     - 1.2
   virusUpgrade:
     levelKey: Virus
-    upgradeMoney: 64000000f4010000dc050000
+    upgradeMoney: c800000020030000d0070000
     reviveHealthRate:
     - 0.3
     - 0.5
